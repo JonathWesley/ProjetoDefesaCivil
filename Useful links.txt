@@ -1,0 +1,14 @@
+http://www.devshed.com/c/a/php/html5-client-side-cache-in-php/  
+ `->local storage php
+
+https://www.devmedia.com.br/web-services/2873
+ `->introducao a webservices
+
+https://www.w3schools.com
+ `->some basics
+
+https://vueschool.io/courses
+ `->cursos basico de vue
+
+https://www.devmedia.com.br/guia/bootstrap/38150
+ `->curso basico de bootstrap
