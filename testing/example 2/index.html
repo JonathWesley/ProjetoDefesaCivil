@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <title>Example 2</title>
+</head>
+<body>
+    <header>
+        <nav class="navbar navbar-inverse navbar-fixed-top">
+            <div class="container-fluid">
+                <div class="navbar-header">
+                    <a class="navbar-brand" href="#">Defesa Civil</a>
+                </div>
+                <ul class="navbar navbar-nav">
+                    <li class="active"><a href="#">Home</a></li>
+                </ul>
+                <ul class="navbar navbar-nav navbar-right">
+                    <li>
+                        <a id="login" data-toggle="modal" data-target="#loginModal" href="#">
+                            <span class="glyphicon glyphicon-log-in">Entrar</span>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+
+        <h1 id="tituloCidade" class="text-center container-fluid jumbotron" 
+            style="font-family: Arial, Helvetica, sans-serif; color: orangered;">
+            Defesa Civil - {{cidade}}
+        </h1>
+    </header>
+
+    <div class="modal fade" id="loginModal" role="dialog">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button class="close" type="button" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title text-center">Entrar</h4>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-sm-9 col-md-7 col-lg-5 mix-auto">
+                            <div class="card card-singin my-5" id="loginInputs">
+                                <div class="card-body">
+                                    <form class="form-singin">
+                                        <label for="inputEmail">Endereço de email</label>
+                                        <input v-model="email" type="email" id="inputEmail" class="form-control" placeholder="Endereço de email" requiredfocus>
+                                    </form>
+                                </div>
+                                <div class="form-label-group">
+                                    <label for="inputPassword">Senha</label> 
+                                    <input v-model="password" type="password" id="inputPassword" class="form-control" placeholder="Senha" required>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button class="btn btn-lg btn-primary text-upercase" type="submit" id="loginBtn" @click="login">Entrar</button>
+                    <a id="cadastrar" data-toggle="modal" data-target="#cadastrarModal" class="text-center sm" href="#" style="color: gray">Cadastrar-se</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal fade" id="cadastrarModal" role="dialog">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button class="close" type="button" data-dismiss="modal">&times;</button>
+                        <h4 class="modal-title text-center">Cadastrar</h4>
+                    </div>
+                    <div class="modal-body">
+                        <div class="row">
+                            <div class="col-sm-9 col-md-7 col-lg-5 mix-auto">
+                                <div class="card card-singin my-5" id="logonInputs">
+                                    <div class="form-label-group">
+                                        <label for="inputName">Nome</label>
+                                        <input v-model="name" class="form-control" type="text" placeholder="Nome" required>
+                                    </div>
+                                    <div class="card-body">
+                                        <form class="form-singin">
+                                            <label for="inputEmail">Endereço de email</label>
+                                            <input v-model="email" type="email" id="inputEmail" class="form-control" placeholder="Endereço de email" required>
+                                        </form>
+                                    </div>
+                                    <div class="form-label-group">
+                                        <label for="inputPassword">Senha</label> 
+                                        <input v-model="password" type="password" id="inputPassword" class="form-control" placeholder="Senha" required>
+                                    </div>
+                                    <div class="form-label-group">
+                                        <label for="inputPassword">Confirmar Senha</label> 
+                                        <input v-model="password" type="password" id="inputPassword" class="form-control" placeholder="Senha" required>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button class="btn btn-lg btn-primary text-upercase" type="submit" id="logonBtn" @click="cadastrar">Cadastrar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    <div class="row">
+       <div class="col-md-4">
+            <div class="thumbnail">    
+                <a href="home1.jpg" target="_blank">
+                    <img src="home1.jpg" alt="imagem 1" style="width: 75%";>
+                    <div class="caption">
+                        <p>ALguma noticia sobre desmoronamento com uma breve descricao e um link para acesso</p>
+                    </div>
+                </a>
+            </div>
+       </div>
+       <div class="col-md-4">
+            <div class="thumbnail">    
+                <a href="home2.jpg" target="_blank">
+                    <img src="home2.jpg" alt="imagem 2" style="width: 100%";>
+                    <div class="caption">
+                        <p>ALguma noticia sobre incendio com uma breve descricao e um link para acesso</p>
+                    </div>
+                </a>
+            </div>
+       </div>
+       <div class="col-md-4">
+            <div class="thumbnail">    
+                <a href="home3.jpg" target="_blank">
+                    <img src="home3.jpg" alt="imagem 3" style="width: 100%";>
+                    <div class="caption">
+                        <p>ALguma noticia sobre alagamento com uma breve descricao e um link para acesso</p>
+                    </div>
+                </a>
+            </div>
+       </div>
+    </div>
+
+    <footer class="small text-center" style="color: gray;">alguma coisa para ser o footer</footer>
+        
+    <script src="https://unpkg.com/vue@2.5.17/dist/vue.js"></script>
+    <script>
+        var logins = [];
+        var tituloCidade = new Vue({
+            el: "#tituloCidade",
+            data: {
+                cidade: "Balneario Camburiu"
+            }
+        });
+        var loginInputs = new Vue({
+            el: "#loginInputs",
+            data: {
+                email: null,
+                senha: null
+            },
+            methods: {
+                checkForm: function(){
+                    if(this.email!=null && this.senha!=null){
+                        return true;
+                    }
+                    return false;
+                }
+            }
+        });
+        var loginBtn = new Vue({
+            el: "#loginBtn",
+            methods: {
+                login: function(){
+                    if(loginInputs.checkForm == true){
+                        logins = window.localStorage.getItem("logins");
+                        var pos=-1;
+                        for(var i=0; i<logins.length; i++){
+                            if(logins[i].email == loginInputs.email && logins[i].senha == loginInputs.senha){
+                                pos = i;
+                            }
+                        }
+                        if(pos>=0){
+                            alert("logado com sucesso");
+                            //muda de tela;
+                        }else{
+                            alert("email ou senha nao reconhecido.");
+                        }
+                    }
+                    window.alert("deu ruim");
+                }
+            }
+        });
+        var logonInputs = new Vue({
+            el: "#logonInputs",
+            data: {
+                nome: null,
+                email: null,
+                senha: null,
+                confimaSenha: null
+            },
+            methods: {
+                checkFormLogon: function(){
+                    if(this.email!=null && this.senha!=null && this.nome!=null && this.confirmaSenha!=null){
+                        return true;
+                    }
+                    return false;
+                }
+            }
+        });
+        var logonBtn = new Vue({
+            el: "#logonBtn",
+            methods: {
+                logon: function(){
+                    if(loginInputs.checkForm == true){
+                        if(logonInputs.senha != logonInputs.confimaSenha){
+                            return false;
+                        }
+                        var login = {nome: logonInputs.nome, email: logonInputs.email, senha: logonInputs.senha};
+                        logins.push(login);
+                        window.localStorage.setItem("logins", logins);
+                    }
+                    window.alert("deu ruim");
+                }
+            }
+        });
+    </script>
+</body>
+</html>
