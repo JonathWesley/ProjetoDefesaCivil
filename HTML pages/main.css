@@ -1,0 +1,65 @@
+body{
+    background-color: #ffe;
+}
+
+.img-box{
+    position: absolute;
+    top: 0px;
+    left: 40px;
+    width: 230px;
+    height: 500px;
+    padding: 0px;
+    border: 10px;
+}
+
+.corner-img{
+    position: absolute; 
+    left: 40px; 
+    top: 10px; 
+    width: 150px;  
+    padding: 0px;
+    border: 0px;
+}
+
+.page-title{
+    position: absolute;
+    top: 30px;
+    left: 40%;
+    font-size: 60px;
+    color: gray;
+}
+
+.login-box{
+    position: relative;
+    top: 200px;
+    float: center;
+    width: 50%;
+}
+
+.input-group{
+    padding: 10px;
+    width: 100%;
+}
+
+.btn{
+    position: relative;
+    left: 45%;
+    top: 10px;
+    font-size: 15px;
+    padding: 10px;
+}
+
+.small{
+    position: relative;
+    top: 175px;
+}
+
+footer{
+    position: relative;
+    top: 100px;
+}
+
+.footer{
+    display: inline;
+    padding: 0px 400px 0px 0px;
+}

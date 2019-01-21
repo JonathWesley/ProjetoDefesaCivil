@@ -12,21 +12,19 @@
     <header>
         <nav class="navbar navbar-inverse navbar-fixed-top">
             <div class="container-fluid">
-                <div class="navbar-header">
-                    <a class="navbar-brand" href="#">Defesa Civil</a>
-                </div>
-                <ul class="navbar navbar-nav">
-                    <li class="active"><a href="#">Home</a></li>
-                </ul>
-                <ul class="navbar navbar-nav navbar-right">
-                    <li>
-                        <a id="login" data-toggle="modal" data-target="#loginModal" href="#">
-                            <span class="glyphicon glyphicon-log-in">Entrar</span>
-                        </a>
-                    </li>
-                </ul>
+              <div class="navbar-header">
+                <a class="navbar-brand" href="#">Defesa Civil</a>
+              </div>
+              <ul class="nav navbar-nav">
+                <li class="active"><a href="#">Home</a></li>
+                <li class="float-right">
+                    <a href="#" data-toggle="modal" data-target="#loginModal" id="login">
+                        <span class="glyphicon glyphicon-log-in"> Entrar</span>
+                    </a>
+                </li>
+              </ul>
             </div>
-        </nav>
+          </nav>
 
         <h1 id="tituloCidade" class="text-center container-fluid jumbotron" 
             style="font-family: Arial, Helvetica, sans-serif; color: orangered;">
@@ -143,6 +141,19 @@
         
     <script src="https://unpkg.com/vue@2.5.17/dist/vue.js"></script>
     <script>
+        var url = 'https://newsapi.org/v2/everything?' +
+          'q=Apple&' +
+          'from=2018-11-19&' +
+          'sortBy=popularity&' +
+          'apiKey=a9382baaf8694b1584734949d5d1161a';
+
+        var req = new Request(url);
+
+        fetch(req)
+            .then(function(response) {
+                console.log(response.json());
+        })
+
         var logins = [];
         var tituloCidade = new Vue({
             el: "#tituloCidade",
