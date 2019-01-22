@@ -104,3 +104,40 @@ iframe{
     width: 100%;
     height: 600px;
 }
+
+.positioning{
+    position: absolute;
+    top: 100px;
+    left: 300px;
+    width: 60%;
+}
+
+.box{
+    background-color: white;
+    font-size: 14px;
+    color: black;
+    padding: 10px;
+    border: 10px;
+    text-align: center;
+}
+
+.box-question{
+    position: relative;
+    top: 0px;
+    width: 200px;
+}
+
+.box-question nav{
+    padding: 12px;
+}
+
+.box-answer{
+    position: relative;
+    top: -220px;
+    left: 230px;
+    width: 300px;
+}
+
+.box-first{
+    
+}

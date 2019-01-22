@@ -12,9 +12,164 @@
 <body>
     <iframe src="main.html" name="targetframe" allowTransparency="true" scrolling="no" frameborder="0"></iframe>
 
-    <div class="container">
+    <div class="container positioning">
     <div class="jumbotron">
+        <div class="box box-question box-first">
+            <nav>Endereço principal:</nav>
+            <nav>Coordenada principal:</nav>
+            <nav>Endereço numeral:</nav>
+            <nav>Endereço referência:</nav>
+        </div>
+        <div class="box box-answer">
+            <div class="form-group">
+                <label for="sel1"></label>
+                <select name="endereco_principal" id="sel1" class="form-control">
+                    <option>Coordenada</option>
+                    <option>Logradouro</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <input type="text" class="form-control">
+            </div>
+            <div class="form-group">
+                <input type="text" class="form-control">
+            </div>
+            <div class="form-group">
+                <input type="text" class="form-control">
+            </div>
+        </div>
+
+        <div class="box box-question">
+            <nav>Agente principal:</nav>
+            <nav>Agente de apoio 1:</nav>
+            <nav>Agente de apoio 2:</nav>
+        </div>
+        <div class="box box-answer">
+            <div class="form-group">
+                <input type="text" class="form-control">
+            </div>
+            <div class="form-group">
+                <input type="text" class="form-control">
+            </div>
+            <div class="form-group">
+                <input type="text" class="form-control">
+            </div>
+        </div>
+
+        <div class="box box-question">
+            <nav>Ocorrência retorno:</nav>
+            <nav>Código de referência:</nav>
+            <nav>Data de lançamento:</nav>
+            <nav>Data de ocorrência:</nav>
+            <nav>Descrição:</nav>
+        </div>
+        <div class="box box-answer">
+            <form>
+                <label class="checkbox-inline">
+                    <input type="checkbox">SIM
+                </label>
+                <label class="checkbox-inline">
+                    <input type="checkbox">NÃO
+                </label>
+            </form>
+            <div class="form-group">
+                <input type="text" class="form-control">
+            </div>
+            <div class="form-group">
+                <input type="date" class="form-control">
+            </div>
+            <div class="form-group">
+                <input type="date" class="form-control">
+            </div>
+            <form>
+                <div class="form-group">
+                    <textarea class="form-control" cols="30" rows="5"></textarea>
+                </div>
+            </form>
+            <div class="form-group">
+                <input type="date" class="form-control">
+            </div>
+        </div>
         
+        <div class="box box-question box-unique1">
+            <nav>Origem:</nav>
+        </div>
+
+        <div class="box box-question">
+            <nav>Pessoa atendida 1:</nav>
+            <nav>Pessoa atendida 2:</nav>
+        </div>
+        <div class="box box-answer">
+            <div class="form-group">
+                <input type="text" class="form-control">
+            </div>
+            <div class="form-group">
+                <input type="text" class="form-control">
+            </div>
+        </div>
+
+        <div class="box box-question">
+            <nav>Cobrade:</nav>
+            <nav>Natureza da ocorrência:</nav>
+            <nav>Possui fotos:</nav>
+        </div>
+        <div class="box box-answer">
+            <div class="form-group">
+                <input type="text" class="form-control">
+            </div>
+            <div class="form-group">
+                <input type="text" class="form-control">
+            </div>
+            <form>
+                <label class="checkbox-inline">
+                    <input type="checkbox">SIM
+                </label>
+                <label class="checkbox-inline">
+                    <input type="checkbox">NÃO
+                </label>
+            </form>
+        </div>
+
+        <div class="box box-question">
+            <nav>Prioridade:</nav>
+            <nav>Analisado:</nav>
+            <nav>Congelado:</nav>
+            <nav>Encerrado:</nav>
+        </div>
+        <div class="box box-answer">
+            <div class="form-group">
+                <label for="sel1"></label>
+                <select name="endereco_principal" id="sel1" class="form-control">
+                    <option>Baixa</option>
+                    <option>Média</option>
+                    <option>Alta</option>
+                </select>
+            </div>
+            <form>
+                <label class="checkbox-inline">
+                    <input type="checkbox">SIM
+                </label>
+                <label class="checkbox-inline">
+                    <input type="checkbox">NÃO
+                </label>
+            </form>
+            <form>
+                <label class="checkbox-inline">
+                    <input type="checkbox">SIM
+                </label>
+                <label class="checkbox-inline">
+                    <input type="checkbox">NÃO
+                </label>
+            </form>
+            <form>
+                <label class="checkbox-inline">
+                    <input type="checkbox">SIM
+                </label>
+                <label class="checkbox-inline">
+                    <input type="checkbox">NÃO
+                </label>
+            </form>
+        </div>
     </div>
     </div>
 </body>
