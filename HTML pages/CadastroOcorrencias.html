@@ -14,162 +14,188 @@
 
     <div class="container positioning">
     <div class="jumbotron">
-        <div class="box box-question box-first">
-            <nav>Endereço principal:</nav>
-            <nav>Coordenada principal:</nav>
-            <nav>Endereço numeral:</nav>
-            <nav>Endereço referência:</nav>
-        </div>
-        <div class="box box-answer">
-            <div class="form-group">
-                <label for="sel1"></label>
-                <select name="endereco_principal" id="sel1" class="form-control">
-                    <option>Coordenada</option>
-                    <option>Logradouro</option>
-                </select>
-            </div>
-            <div class="form-group">
-                <input type="text" class="form-control">
-            </div>
-            <div class="form-group">
-                <input type="text" class="form-control">
-            </div>
-            <div class="form-group">
-                <input type="text" class="form-control">
-            </div>
-        </div>
-
-        <div class="box box-question">
-            <nav>Agente principal:</nav>
-            <nav>Agente de apoio 1:</nav>
-            <nav>Agente de apoio 2:</nav>
-        </div>
-        <div class="box box-answer">
-            <div class="form-group">
-                <input type="text" class="form-control">
-            </div>
-            <div class="form-group">
-                <input type="text" class="form-control">
-            </div>
-            <div class="form-group">
-                <input type="text" class="form-control">
-            </div>
-        </div>
-
-        <div class="box box-question">
-            <nav>Ocorrência retorno:</nav>
-            <nav>Código de referência:</nav>
-            <nav>Data de lançamento:</nav>
-            <nav>Data de ocorrência:</nav>
-            <nav>Descrição:</nav>
-        </div>
-        <div class="box box-answer">
-            <form>
-                <label class="checkbox-inline">
-                    <input type="checkbox">SIM
-                </label>
-                <label class="checkbox-inline">
-                    <input type="checkbox">NÃO
-                </label>
-            </form>
-            <div class="form-group">
-                <input type="text" class="form-control">
-            </div>
-            <div class="form-group">
-                <input type="date" class="form-control">
-            </div>
-            <div class="form-group">
-                <input type="date" class="form-control">
-            </div>
-            <form>
-                <div class="form-group">
-                    <textarea class="form-control" cols="30" rows="5"></textarea>
+        <div class="box">
+            <nav>
+                <span>Endereço principal:</span>
+                <div class="form-group inline">
+                    <label for="sel1"></label>
+                    <select name="endereco_principal" id="sel1" class="form-control">
+                        <option>Coordenada</option>
+                        <option>Logradouro</option>
+                    </select>
                 </div>
-            </form>
-            <div class="form-group">
-                <input type="date" class="form-control">
-            </div>
-        </div>
-        
-        <div class="box box-question box-unique1">
-            <nav>Origem:</nav>
-        </div>
-
-        <div class="box box-question">
-            <nav>Pessoa atendida 1:</nav>
-            <nav>Pessoa atendida 2:</nav>
-        </div>
-        <div class="box box-answer">
-            <div class="form-group">
-                <input type="text" class="form-control">
-            </div>
-            <div class="form-group">
-                <input type="text" class="form-control">
-            </div>
+            </nav>
+            <nav>
+                <span>Coordenada principal:</span>
+                <div class="form-group inline">
+                    <input type="text" class="form-control">
+                </div>
+            </nav>
+            <nav>
+                <span>Endereço numeral:</span>
+                <div class="form-group inline">
+                    <input type="text" class="form-control">
+                </div>
+            </nav>
+            <nav>
+                <span>Endereço referência:</span>
+                <div class="form-group inline">
+                    <input type="text" class="form-control">
+                </div>
+            </nav>
         </div>
 
-        <div class="box box-question">
-            <nav>Cobrade:</nav>
-            <nav>Natureza da ocorrência:</nav>
-            <nav>Possui fotos:</nav>
+        <div class="box">
+            <nav>
+                <span>Agente principal:</span>
+                <div class="form-group inline">
+                    <input type="text" class="form-control">
+                </div>
+            </nav>
+            <nav>
+                <span>Agente de apoio 1:</span>
+                <div class="form-group inline">
+                    <input type="text" class="form-control">
+                </div>
+            </nav>
+            <nav>
+                <span>Agente de apoio 2:</span>
+                <div class="form-group inline">
+                    <input type="text" class="form-control">
+                </div>
+            </nav>
         </div>
-        <div class="box box-answer">
-            <div class="form-group">
-                <input type="text" class="form-control">
-            </div>
-            <div class="form-group">
-                <input type="text" class="form-control">
-            </div>
-            <form>
-                <label class="checkbox-inline">
-                    <input type="checkbox">SIM
-                </label>
-                <label class="checkbox-inline">
-                    <input type="checkbox">NÃO
-                </label>
-            </form>
+        <div class="box">
+            <nav>
+                <span>Ocorrência retorno:</span>
+                <form class="inline">
+                    <label class="radio-inline">
+                        <input type="radio">Sim
+                    </label>
+                    <label class="radio-inline">
+                        <input type="radio" checked>Não
+                    </label>
+                </form>
+            </nav>
+            <nav>
+                <span>Código de referência:</span>
+                <div class="form-group inline">
+                    <input type="text" class="form-control">
+                </div>
+            </nav>
+            <nav>
+                <span>Data de lançamento:</span>
+                <div class="form-group inline">
+                    <input type="date" class="form-control">
+                </div>
+            </nav>
+            <nav>
+                <span>Data de ocorrência:</span>
+                <div class="form-group inline">
+                    <input type="date" class="form-control">
+                </div>
+            </nav>
+            <nav>
+                <span>Descrição:</span>
+                <form class="inline">
+                    <div class="form-group">
+                        <textarea class="form-control" cols="30" rows="5"></textarea>
+                    </div>
+                </form>
+            </nav>
+            <nav>
+                <span>Origem:</span>
+                <div class="form-group inline">
+                    <input type="text" class="form-control">
+                </div>
+            </nav>
         </div>
-
-        <div class="box box-question">
-            <nav>Prioridade:</nav>
-            <nav>Analisado:</nav>
-            <nav>Congelado:</nav>
-            <nav>Encerrado:</nav>
+        <div class="box">
+            <nav>
+                <span>Pessoa atendida 1:</span>
+                <div class="form-group inline">
+                    <input type="text" class="form-control">
+                </div>
+            </nav>
+            <nav>
+                <span>Pessoa atendida 2:</span>
+                <div class="form-group inline">
+                    <input type="text" class="form-control">
+                </div>
+            </nav>
         </div>
-        <div class="box box-answer">
-            <div class="form-group">
-                <label for="sel1"></label>
-                <select name="endereco_principal" id="sel1" class="form-control">
-                    <option>Baixa</option>
-                    <option>Média</option>
-                    <option>Alta</option>
-                </select>
-            </div>
-            <form>
-                <label class="checkbox-inline">
-                    <input type="checkbox">SIM
-                </label>
-                <label class="checkbox-inline">
-                    <input type="checkbox">NÃO
-                </label>
-            </form>
-            <form>
-                <label class="checkbox-inline">
-                    <input type="checkbox">SIM
-                </label>
-                <label class="checkbox-inline">
-                    <input type="checkbox">NÃO
-                </label>
-            </form>
-            <form>
-                <label class="checkbox-inline">
-                    <input type="checkbox">SIM
-                </label>
-                <label class="checkbox-inline">
-                    <input type="checkbox">NÃO
-                </label>
-            </form>
+        <div class="box">
+            <nav>
+                <span>Cobrade:</span> 
+                <div class="form-group inline">
+                    <input type="text" class="form-control">
+                </div>
+            </nav>
+            <nav>
+                <span>Natureza da ocorrência:</span> 
+                <div class="form-group inline">
+                    <input type="text" class="form-control">
+                </div>
+            </nav>
+            <nav>
+                <span>Possui fotos:</span>
+                <form class="inline">
+                    <label class="radio-inline">
+                        <input type="radio">Sim
+                    </label>
+                    <label class="radio-inline">
+                        <input type="radio" checked>Não
+                    </label>
+                </form>
+            </nav>
         </div>
+        <div class="box">
+            <nav>
+                <span>Prioridade:</span>
+                <div class="form-group inline">
+                    <label for="sel1"></label>
+                    <select name="endereco_principal" id="sel1" class="form-control">
+                        <option>Baixa</option>
+                        <option>Média</option>
+                        <option>Alta</option>
+                    </select>
+                </div>
+            </nav>
+            <nav>
+                <span>Analisado:</span>
+                <form class="inline">
+                    <label class="radio-inline">
+                        <input type="radio">Sim
+                    </label>
+                    <label class="radio-inline">
+                        <input type="radio" checked>Não
+                    </label>
+                </form>
+            </nav>
+            <nav>
+                <span>Congelado:</span>
+                <form class="inline">
+                    <label class="radio-inline">
+                        <input type="radio">Sim
+                    </label>
+                    <label class="radio-inline">
+                        <input type="radio" checked>Não
+                    </label>
+                </form>
+            </nav>
+            <nav>
+                <span>Encerrado:</span>
+                <form class="inline">
+                    <label class="radio-inline">
+                        <input type="radio">Sim
+                    </label>
+                    <label class="radio-inline">
+                        <input type="radio" checked>Não
+                    </label>
+                </form>
+            </nav>
+        </div>
+        <button class="btn btn-default btn-md">Cadastrar</button>
     </div>
     </div>
 </body>

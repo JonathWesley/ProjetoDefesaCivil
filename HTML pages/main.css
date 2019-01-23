@@ -9,7 +9,7 @@ body{
     width: 230px;
     height: 500px;
     padding: 0px;
-    border: 10px;
+    margin: 10px;
 }
 
 .corner-img{
@@ -18,7 +18,7 @@ body{
     top: 10px; 
     width: 150px;  
     padding: 0px;
-    border: 0px;
+    margin: 0px;
 }
 
 .page-title{
@@ -116,28 +116,16 @@ iframe{
     background-color: white;
     font-size: 14px;
     color: black;
-    padding: 10px;
-    border: 10px;
-    text-align: center;
+    padding: 5px 15px 5px 15px;
+    margin: 10px;
+    text-align: left;
+    width: 100%;
 }
 
-.box-question{
-    position: relative;
-    top: 0px;
-    width: 200px;
+.inline{
+    display: inline-block;
 }
 
-.box-question nav{
-    padding: 12px;
-}
-
-.box-answer{
-    position: relative;
-    top: -220px;
-    left: 230px;
+.form-control{
     width: 300px;
-}
-
-.box-first{
-    
 }
