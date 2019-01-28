@@ -1,13 +1,13 @@
 <!DOCTYPE html>
-<html lang="pt-br">
+<html ng-app lang="pt-br">
 <head>
 <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.0.7/angular.min.js"></script>
     <link rel="stylesheet" type="text/css" href="main.css">
-    <script type="text/javascript" src="vue.js"></script>
     <title>Defesa Civil</title>
 </head>
 <body>
@@ -46,17 +46,5 @@
         </div>
         </div>
     </footer>
-
-    <script>
-        var a = new Vue({
-            el: '#loginButton',
-            methods: {
-                login: function(event) {
-                    alert('click')
-                    this.$router.push('main.html')
-                } 
-            }
-        })
-    </script>
 </body>
 </html>
