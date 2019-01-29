@@ -6,7 +6,7 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-    <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.0.7/angular.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
     <link rel="stylesheet" type="text/css" href="main.css">
     <title>Defesa Civil</title>
 </head>
@@ -38,13 +38,21 @@
         <u>Esqueceu a senha?</u>
     </div>
 
-    <footer>
+    <footer ng-app="myApp" ng-controller="myCtrl">
         <div class="container">
         <div class="small">
-            <span class="text-left footer">Telefone:(47)3268-3133 </span>
-            <span class="footer">Endereço: R. Pardal, 111 - Ariribá, Balneário Camboriú - SC</span>
+            <span class="text-left footer">Telefone: {{telefone}} </span>
+            <span class="footer">Endereço: {{endereco}}</span>
         </div>
         </div>
     </footer>
+
+    <script>
+        var app = angular.module('myApp', []);
+        app.controller('myCtrl', function($scope){
+            $scope.telefone = "(47)3268-3133";
+            $scope.endereco = "R. Pardal, 111 - Ariribá, Balneário Camboriú - SC";
+        })
+    </script>
 </body>
 </html>

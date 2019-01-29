@@ -14,4 +14,7 @@ https://www.devmedia.com.br/guia/bootstrap/38150
  `->curso basico de bootstrap
 
 http://webcache.googleusercontent.com/search?q=cache:http://www.funpar.ufpr.br:8080/rup/wordtmpl/rup_wd_tmpl/mgmnt/rup_sdpln_sp.dot
- `-> documenteçao do projeto
+ `->documenteçao do projeto
+
+https://www.w3schools.com/angular/default.asp
+ `->curso de angular
