@@ -10,19 +10,22 @@
     <title>Defesa Civil</title>
 </head>
 <body>
+    <div ng-app="myApp" ng-controller="myCtrl">
     <header>
         <nav class="navbar navbar-default">
         <div class="container-fluid">
             <div class="navbar-header">
-                <a href="#" class="navbar-brand" style="font-size: 30px;">Defesa Civil</a>
+                <a href="main.html" class="navbar-brand" style="font-size: 30px;">Defesa Civil</a>
             </div>
             <ul class="nav navbar-nav navbar-right">
-                <li><a href="#"><u style="font-size:20px;">Sair</u></a></li>
+                <li><a href="index.html"><u style="font-size:20px;">Sair</u></a></li>
                 <li><img src="logo.jpg" alt="DefesaCivil" class="img-circle img-perfil"></li>
             </ul>
         </div>
         </nav>
-        <h4 class="navegation"><u>Home</u></h4>
+        <ul>
+        <h4 class="navegation" ng-repeat="x in caminho"><a><u>{{x}}</u></a></h4>
+    </ul>
     </header>
 
     <div class="side-menu">
@@ -46,4 +49,7 @@
         </div>
         </div>
     </div>
+    </div>
+
+    <script src="angular.js"></script>
 </body>

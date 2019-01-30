@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html ng-app lang="pt-br">
+<html lang="pt-br">
 <head>
 <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -11,6 +11,7 @@
     <title>Defesa Civil</title>
 </head>
 <body>
+    <div ng-app="myApp" ng-controller="myCtrl">
     <header>
         <div class="container img-box">
         <div class="jumbotron">
@@ -31,28 +32,23 @@
             <input id="password" type="password" class="form-control" name="password" placeholder="Senha">
         </div>
         </form>
-        <button class="btn btn-default btn-md" id="loginButton" v-on:click="login" >Entrar</button>
+        <button class="btn btn-default btn-md" id="loginButton" ng-click="login()">Entrar</button>
     </div>
     </div>
     <div class="text-center small">
-        <u>Esqueceu a senha?</u>
+        <a href="#" ng-click="changePassword()"><u>Esqueceu a senha?</u></a>
     </div>
 
-    <footer ng-app="myApp" ng-controller="myCtrl">
+    <footer>
         <div class="container">
         <div class="small">
-            <span class="text-left footer">Telefone: {{telefone}} </span>
+            <span class="text-left footer">Telefone: {{telefone}}</span>
             <span class="footer">Endereço: {{endereco}}</span>
         </div>
         </div>
     </footer>
+    </div>
 
-    <script>
-        var app = angular.module('myApp', []);
-        app.controller('myCtrl', function($scope){
-            $scope.telefone = "(47)3268-3133";
-            $scope.endereco = "R. Pardal, 111 - Ariribá, Balneário Camboriú - SC";
-        })
-    </script>
+    <script src="angular.js"></script>
 </body>
 </html>
