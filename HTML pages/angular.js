@@ -3,7 +3,7 @@ var app = angular.module("myApp", []);
 app.controller("myCtrl", function($scope){
     $scope.telefone = "(47) 3268-3133";
     $scope.endereco = "R. Pardal, 111 - Ariribá, Balneário Camboriú - SC";
-    $scope.caminho = ['Home'];
+    $scope.caminho = [{name:"Home", route:"main.html"}];
 
     $scope.login = function(){
         window.location = "main.html";
@@ -11,7 +11,8 @@ app.controller("myCtrl", function($scope){
     $scope.changePassword = function(){
         alert('trocar a senha!');
     };
-    $scope.addWay = function(x){
-        $scope.caminho.push(x);
-    }
+    $scope.addWay = function(x, y){
+        var a = [{name: x, route: y}];
+        $scope.caminho.push(a);
+    };
 });
