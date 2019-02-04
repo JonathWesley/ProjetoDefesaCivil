@@ -15,4 +15,7 @@ app.controller("myCtrl", function($scope){
         var a = [{name: x, route: y}];
         $scope.caminho.push(a);
     };
+    $scope.perfil = function(){
+        window.location = "perfil.html";
+    }
 });
