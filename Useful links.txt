@@ -18,3 +18,6 @@ http://webcache.googleusercontent.com/search?q=cache:http://www.funpar.ufpr.br:8
 
 https://www.w3schools.com/angular/default.asp
  `->curso de angular
+
+https://www.youtube.com/watch?v=Ofktsne-utM
+ `->curso banco de dados
