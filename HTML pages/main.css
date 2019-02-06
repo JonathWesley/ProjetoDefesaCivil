@@ -123,6 +123,11 @@ iframe{
     width: 100%;
 }
 
+.box p{
+    margin: 0px;
+    padding: 10px 0px 10px 0px;
+}
+
 .inline{
     display: inline-block;
 }
