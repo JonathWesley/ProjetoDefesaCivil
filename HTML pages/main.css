@@ -135,3 +135,7 @@ iframe{
 .form-control{
     width: 300px;
 }
+
+.edit{
+    float: right;
+}

@@ -26,10 +26,10 @@
     <div class="jumbotron">
         <form>
         <div class="input-group">
-            <input id="email" type="text" class="form-control" name="email" placeholder="Email">
+            <input id="email" type="text" class="form-control" name="email" placeholder="Email" ng-model="usuario">
         </div>
         <div class="input-group">
-            <input id="password" type="password" class="form-control" name="password" placeholder="Senha">
+            <input id="password" type="password" class="form-control" name="password" placeholder="Senha" ng-model="senha">
         </div>
         </form>
         <button class="btn btn-default btn-md" id="loginButton" ng-click="login()">Entrar</button>
