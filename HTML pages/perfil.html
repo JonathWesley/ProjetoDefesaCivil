@@ -32,14 +32,13 @@
         <div class="jumbotron">
             <h4 class="text-center">Ocorrências</h4>
             <ul class="menu-ul">
-                <li><a href="cadastroOcorrencias.html">Cadastrar</a></li>
+                <li ng-if="verificaNivel()=='admin'"><a href="cadastroOcorrencias.html">Cadastrar</a></li>
                 <li><a href="consultarOcorrencia.html">Consultar</a></li>
-                <li><a href="listarOcorrencias.html">Listar</a></li>
             </ul>
         </div>
         </div>
     
-        <div class="container">
+        <div class="container" ng-if="verificaNivel()=='admin'">
         <div class="jumbotron">
             <h4 class="text-center">Usuários</h4>
             <ul class="menu-ul">
@@ -52,10 +51,11 @@
     <div class="container positioning">
     <div class="jumbotron text-center">
         <img src="logo.jpg" alt="DefesaCivil" class="img-circle">
+        <p>Nome: </p>
         <p>RG: </p>
         <p>CPF: </p>
-        <p>...</p>
-        <p>...</p>
+        <p>Cargo: </p>
+        <p>Nivel de acesso: {{nivel}}</p>
     </div>
     </div>
     </div>

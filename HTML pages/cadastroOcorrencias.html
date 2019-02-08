@@ -64,19 +64,19 @@
             <nav>
                 <span>Coordenada principal:</span>
                 <div class="form-group inline">
-                    <input type="text" class="form-control">
+                    <input type="text" class="form-control" ng-model="ocorrencia.coordPrin">
                 </div>
             </nav>
             <nav>
                 <span>Endereço numeral:</span>
                 <div class="form-group inline">
-                    <input type="text" class="form-control">
+                    <input type="text" class="form-control" ng-model="ocorrencia.endNum">
                 </div>
             </nav>
             <nav>
                 <span>Endereço referência:</span>
                 <div class="form-group inline">
-                    <input type="text" class="form-control">
+                    <input type="text" class="form-control" ng-model="ocorrencia.endRef">
                 </div>
             </nav>
         </div>
@@ -85,19 +85,19 @@
             <nav>
                 <span>Agente principal:</span>
                 <div class="form-group inline">
-                    <input type="text" class="form-control">
+                    <input type="text" class="form-control" ng-model="ocorrencia.agtPrin">
                 </div>
             </nav>
             <nav>
                 <span>Agente de apoio 1:</span>
                 <div class="form-group inline">
-                    <input type="text" class="form-control">
+                    <input type="text" class="form-control" ng-model="ocorrencia.agtApoio1">
                 </div>
             </nav>
             <nav>
                 <span>Agente de apoio 2:</span>
                 <div class="form-group inline">
-                    <input type="text" class="form-control">
+                    <input type="text" class="form-control" ng-model="ocorrencia.agtApoio2">
                 </div>
             </nav>
         </div>
@@ -116,33 +116,33 @@
             <nav>
                 <span>Código de referência:</span>
                 <div class="form-group inline">
-                    <input type="text" class="form-control">
+                    <input type="text" class="form-control" ng-model="ocorrencia.codRef">
                 </div>
             </nav>
             <nav>
                 <span>Data de lançamento:</span>
                 <div class="form-group inline">
-                    <input type="date" class="form-control">
+                    <input type="date" class="form-control" ng-model="ocorrencia.dataLan">
                 </div>
             </nav>
             <nav>
                 <span>Data de ocorrência:</span>
                 <div class="form-group inline">
-                    <input type="date" class="form-control">
+                    <input type="date" class="form-control" ng-model="ocorrencia.dataOcor">
                 </div>
             </nav>
             <nav>
-                <span>Descrição:</span>
+                <span class="descricao">Descrição:</span>
                 <form class="inline">
                     <div class="form-group">
-                        <textarea class="form-control" cols="30" rows="5"></textarea>
+                        <textarea class="form-control" cols="30" rows="5" maxlength = "120" ng-model="ocorrencia.descricao"></textarea>
                     </div>
                 </form>
             </nav>
             <nav>
                 <span>Origem:</span>
                 <div class="form-group inline">
-                    <input type="text" class="form-control">
+                    <input type="text" class="form-control" ng-model="ocorrencia.origem">
                 </div>
             </nav>
         </div>
@@ -150,13 +150,13 @@
             <nav>
                 <span>Pessoa atendida 1:</span>
                 <div class="form-group inline">
-                    <input type="text" class="form-control">
+                    <input type="text" class="form-control" ng-model="ocorrencia.pessoaAtd1">
                 </div>
             </nav>
             <nav>
                 <span>Pessoa atendida 2:</span>
                 <div class="form-group inline">
-                    <input type="text" class="form-control">
+                    <input type="text" class="form-control" ng-model="ocorrencia.pessoaAtd2">
                 </div>
             </nav>
         </div>
@@ -164,13 +164,13 @@
             <nav>
                 <span>Cobrade:</span> 
                 <div class="form-group inline">
-                    <input type="text" class="form-control">
+                    <input type="text" class="form-control" ng-model="ocorrencia.cobrade">
                 </div>
             </nav>
             <nav>
                 <span>Natureza da ocorrência:</span> 
                 <div class="form-group inline">
-                    <input type="text" class="form-control">
+                    <input type="text" class="form-control" ng-model="ocorrencia.naturezaOcor">
                 </div>
             </nav>
             <nav>
@@ -231,7 +231,7 @@
                 </form>
             </nav>
         </div>
-        <button class="btn btn-default btn-md">Cadastrar</button>
+        <button class="btn btn-default btn-md" ng-click="cadastrarOcorrencia()">Cadastrar</button>
     </div>
     </div>
     </div>

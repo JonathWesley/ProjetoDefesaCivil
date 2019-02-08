@@ -32,13 +32,13 @@
     <div class="jumbotron">
         <h4 class="text-center">Ocorrências</h4>
         <ul class="menu-ul">
-            <li><a href="cadastroOcorrencias.html">Cadastrar</a></li>
+            <li ng-if="verificaNivel()=='admin'"><a href="cadastroOcorrencias.html">Cadastrar</a></li>
             <li><a href="consultarOcorrencia.html">Consultar</a></li>
         </ul>
     </div>
     </div>
             
-    <div class="container">
+    <div class="container" ng-if="verificaNivel()=='admin'">
     <div class="jumbotron">
         <h4 class="text-center">Usuários</h4>
         <ul class="menu-ul">
@@ -51,7 +51,7 @@
     <div class="container positioning">
     <div class="jumbotron">
         <div class="box">
-            <p>Endereços</p>
+            <p>Endereços <span class="glyphicon glyphicon-pencil small" ng-click="edit()" ng-if="verificaNivel()=='admin'"></span></p>
             <nav>
                 <span>Endereço principal:</span>
                 <span>Logradouro</span>
@@ -71,7 +71,7 @@
         </div>
 
         <div class="box">
-            <p>Agentes</p>
+            <p>Agentes <span class="glyphicon glyphicon-pencil small" ng-click="edit()" ng-if="verificaNivel()=='admin'"></span></p>
             <nav>
                 <span>Agente principal:</span>
                 <span>João</span>
@@ -86,7 +86,7 @@
             </nav>
         </div>
         <div class="box">
-            <p>Ocorrencia</p>
+            <p>Ocorrencia <span class="glyphicon glyphicon-pencil small" ng-click="edit()" ng-if="verificaNivel()=='admin'"></span></p>
             <nav>
                 <span>Ocorrência retorno:</span>
                 <span>Não</span>
@@ -113,7 +113,7 @@
             </nav>
         </div>
         <div class="box">
-            <p>Atentidos</p>
+            <p>Atentidos <span class="glyphicon glyphicon-pencil small" ng-click="edit()" ng-if="verificaNivel()=='admin'"></span></p>
             <nav>
                 <span>Pessoa atendida 1:</span>
                 <span>Maria</span>
@@ -124,7 +124,7 @@
             </nav>
         </div>
         <div class="box">
-            <p>Tipo</p>
+            <p>Tipo <span class="glyphicon glyphicon-pencil small" ng-click="edit()" ng-if="verificaNivel()=='admin'"></span></p>
             <nav>
                 <span>Cobrade:</span> 
                 <span>Enchente</span>
@@ -139,7 +139,7 @@
             </nav>
         </div>
         <div class="box">
-            <p>Status</p>
+            <p>Status <span class="glyphicon glyphicon-pencil small" ng-click="edit()" ng-if="verificaNivel()=='admin'"></span></p>
             <nav>
                 <span>Prioridade:</span>
                 <span>Média</span>
