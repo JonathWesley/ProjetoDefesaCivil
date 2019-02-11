@@ -8,11 +8,12 @@ app.controller("myCtrl", function($scope){
     $scope.endereco = "R. Pardal, 111 - Ariribá, Balneário Camboriú - SC";
     $scope.pesquisa = "";
     $scope.caminho = [{name:"Home", route:"main.html"}];
-    //$scope.ocorrencias = [{id:int,cobrade:string, prioridade:string}];
     $scope.ocorrencia = {id:"", endPrin:"", coordPrin:"", endNum:"", endRef:"", agtPrin:"", 
     agtApoio1:"", agtApoio2:"", ocorRet:"", codRef:"", dataLan:"", dataOcor:"", descricao:"",
     origem:"", pessoaAtd1:"", pessoaAtd2:"", cobrade:"", naturezaOcor:"", fotos:"", 
     prioridade:"", analisado:"", congelado:"", encerrado:""};
+    $scope.ocorrencias = [{id:"1111", cobrade:"Enchente", prioridade:"Alta"}, {id:"2222", cobrade:"Deslizamento", prioridade:"Média"}];
+    $scope.usuarios = [{codPessoa:"1111", nome:"João da Silva"}, {codPessoa:"2222", nome:"Maria Cunha"}];
 
     $scope.login = function(){
         if($scope.usuario=="admin" && $scope.senha=="senha"){
@@ -24,11 +25,16 @@ app.controller("myCtrl", function($scope){
             window.location = "main.html";
             localStorage.setItem('nivel', $scope.nivel);
         }else{
+            alert(localStorage.length);
             alert("Usuário ou senha errados");
         }
     };
-    $scope.changePassword = function(){
-        alert('trocar a senha!');
+    $scope.esqueceuSenha = function(){
+        window.location = "esqueceuSenha.html";
+    };
+    $scope.trocarSenha = function(){
+        alert("Solicitação foi enviada ao seu email!");
+        window.location = "index.html";
     };
     $scope.addWay = function(x, y){
         var a = [{name: x, route: y}];
@@ -40,22 +46,25 @@ app.controller("myCtrl", function($scope){
     $scope.exibirOcorrencia = function(){
         window.location = "exibirOcorrencia.html";
     };
+    $scope.exibirUsuario = function(){
+        window.location = "exibirUsuario.html";
+    };
     $scope.verificaNivel = function(){
         $scope.nivel = localStorage.getItem('nivel');
         return $scope.nivel;
     };
     $scope.cadastrarOcorrencia = function(){
-        alert(localStorage.length);
-        var ocorrencias = [];
-        if(localStorage.length > 0){
-            ocorrencias = localStorage.getItem('ocorrencias');
+        if(typeof(Storage) !== undefined){
+            $scope.ocorrencias = sessionStorage.getItem('ocorrencias');
         }
-        ocorrencias[ocorrencias.length] = $scope.ocorrencia;
-        localStorage.setItem('ocorrencias', ocorrencias);
-        alert(ocorrencias.length);
+        $scope.ocorrencias.push($scope.ocorrencia);
+        sessionStorage.setItem('ocorrencias', $scope.ocorrencias);
+        alert(sessionStorage.getItem(ocorrencias));
     };
     $scope.carregarOcorrencias = function(){
-        
+        if(typeof(Storage) !== undefined){
+            $scope.ocorrencias = sessionStorage.getItem('ocorrencias');
+        }
     };
     $scope.edit = function(){
         alert('editando');

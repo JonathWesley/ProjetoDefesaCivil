@@ -17,39 +17,21 @@
         <div class="jumbotron">
             <img src="logo.jpg" alt="DefesaCivil" class="img-rounded corner-img">
         </div>
-        </div>
-                    
+        </div>             
         <h1 class="text-center page-title">Defesa Civil</h1>
     </header>
-    
     <div class="container login-box">
-    <div class="jumbotron">
-        <form>
-        <div class="input-group">
-            <input id="email" type="text" class="form-control" name="email" placeholder="Email" ng-model="usuario">
+        <div class="jumbotron">
+            <h4>Digite seu email:</h4>
+            <form>
+            <div class="input-group">
+                <input id="email" type="text" class="form-control" name="email" placeholder="Email" ng-model="usuario">
+            </div>
+            <button class="btn btn-default btn-md" id="loginButton" ng-click="trocarSenha()">Entrar</button>
+            </form>
         </div>
-        <div class="input-group">
-            <input id="password" type="password" class="form-control" name="password" placeholder="Senha" ng-model="senha">
-        </div>
-        <button class="btn btn-default btn-md" id="loginButton" ng-click="login()">Entrar</button>
-        </form>
-        
     </div>
     </div>
-    <div class="text-center smalll">
-        <a href="#" ng-click="esqueceuSenha()"><u>Esqueceu a senha?</u></a>
-    </div>
-
-    <footer>
-        <div class="container">
-        <div class="smalll">
-            <span class="text-left footer">Telefone: {{telefone}}</span>
-            <span class="footer">Endereço: {{endereco}}</span>
-        </div>
-        </div>
-    </footer>
-    </div>
-
     <script src="angular.js"></script>
 </body>
 </html>
