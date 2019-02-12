@@ -21,3 +21,5 @@ https://www.w3schools.com/angular/default.asp
 
 https://www.youtube.com/watch?v=Ofktsne-utM
  `->curso banco de dados
+
+https://www.webdevbr.com.br/paginacao-no-angularjs
