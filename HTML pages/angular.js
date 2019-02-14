@@ -36,6 +36,9 @@ app.controller("myCtrl", function($scope){
         alert("Solicitação foi enviada ao seu email!");
         window.location = "index.html";
     };
+    $scope.sair = function(){
+       
+    };
     $scope.addWay = function(x, y){
         var a = [{name: x, route: y}];
         $scope.caminho.push(a);
