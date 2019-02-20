@@ -139,3 +139,12 @@ div h4{
 .edit{
     float: right;
 }
+
+.btn-sm{
+    position: relative;
+    top: 0px;
+    left: 10px;
+    font-size: 10px;
+    padding: 5px;
+    margin: 0px;
+}
