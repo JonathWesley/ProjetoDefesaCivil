@@ -31,4 +31,5 @@ https://www.ateomomento.com.br/diagrama-de-sequencia-uml/
 zend framewokr - php
 mysql workbench mer
 
-
+http://www.postgresqltutorial.com/postgresql-php/
+ `-> php with sql
