@@ -12,7 +12,7 @@ export class AppComponent {
   constructor(public dialog: MatDialog) {}
 
   openDialog() {
-    const dialogRef = this.dialog.open(DialogContentExampleDialog, {
+    const dialogRef = this.dialog.open(AppComponent, {
       height: '350px'
     });
 
