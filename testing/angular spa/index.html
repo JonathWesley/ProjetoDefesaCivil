@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" ng-app="scotchApp">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -11,7 +11,7 @@
     <script src="script.js"></script>
     <title>Document</title>
 </head>
-<body>
+<body ng-controller="mainController">
     <header>
         <nav class="navbar navbar-default">
         <div class="container">
@@ -28,7 +28,7 @@
     </header>
 
     <div id="main">
-        
+        <div ng-view></div>
     </div>
 </body>
 </html>
