@@ -1,0 +1,150 @@
+body{
+    background-color: #ffe;
+}
+
+.img-box{
+    position: absolute;
+    top: 0px;
+    left: 40px;
+    width: 230px;
+    padding: 0px;
+}
+
+.corner-img{
+    position: absolute; 
+    left: 40px; 
+    top: 0px; 
+    width: 150px;  
+    padding: 0px;
+    margin: 0px;
+}
+
+.page-title{
+    position: absolute;
+    top: 30px;
+    left: 40%;
+    font-size: 60px;
+    color: gray;
+}
+
+.login-box{
+    position: relative;
+    top: 200px;
+    float: center;
+    width: 50%;
+}
+
+.input-group{
+    padding: 10px;
+    width: 100%;
+}
+
+.btn{
+    position: relative;
+    left: 45%;
+    top: 10px;
+    font-size: 15px;
+    padding: 10px;
+}
+
+.smalll{
+    position: relative;
+    top: 175px;
+}
+
+footer{
+    position: relative;
+    top: 100px;
+}
+
+.footer{
+    display: inline;
+    padding: 0px 300px 0px 0px;
+}
+
+.navegation{
+    position: relative;
+    top: 0px;
+    left: 15px;
+    font-size: 14px;
+    padding: 0px 0px 0px 10px;
+}
+
+.side-menu{
+    position: absolute;
+    top: 100px;
+    left: 20px;
+    width: 230px;
+    padding: 15px 0px 0px 0px;
+    background-color: #ccc;
+    border-radius: 10px;
+}
+
+.side-menu .jumbotron{
+    width: 200px;
+
+}
+
+div h4{
+    position: relative;
+    top: -40px;
+}
+
+.menu-ul{
+    position: relative;
+    top: -25px;
+    left: -70px;
+    list-style-type: none;
+}
+
+.img-perfil{
+    width: 50px;
+}
+
+.positioning{
+    position: absolute;
+    top: 100px;
+    left: 300px;
+    width: 60%;
+}
+
+.box{
+    background-color: white;
+    font-size: 14px;
+    color: black;
+    padding: 5px 15px 5px 15px;
+    margin: 10px;
+    text-align: left;
+    width: 100%;
+}
+
+.box p{
+    margin: 0px;
+    padding: 10px 0px 10px 0px;
+}
+
+.inline{
+    display: inline-block;
+}
+
+.form-control{
+    width: 300px;
+}
+
+.descricao{
+    position: relative;
+    bottom: 110px;
+}
+
+.edit{
+    float: right;
+}
+
+.btn-sm{
+    position: relative;
+    top: 0px;
+    left: 10px;
+    font-size: 10px;
+    padding: 5px;
+    margin: 0px;
+}
