@@ -33,3 +33,5 @@ mysql workbench mer
 
 http://www.postgresqltutorial.com/postgresql-php/
  `-> php with sql
+
+https://www.dirceuresende.com/blog/sql-server-como-criar-um-historico-de-alteracoes-de-dados-para-suas-tabelas-logs-auditoria/
