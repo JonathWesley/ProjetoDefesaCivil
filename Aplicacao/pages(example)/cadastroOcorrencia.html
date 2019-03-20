@@ -151,13 +151,89 @@
             <nav>
                 <span>Pessoa atendida 1:</span>
                 <div class="form-group inline">
-                    <input type="text" class="form-control" ng-model="ocorrencia.pessoaAtd1">
+                    <input type="text" class="form-control inline" ng-model="ocorrencia.pessoaAtd1">
+                    <button class="btn-default btn-small" data-toggle="modal" data-target="#pessoasModal"><span class="glyphicon glyphicon-plus"></span></button>
+                    <div class="modal fade" id="pessoasModal" role="dialog">
+                        <div class="modal-dialog modal-lg">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                    <h5 class="modal-title">Cadastrar pessoa</h5>
+                                </div>
+                                <div class="modal-body">
+                                    <nav>
+                                        <span>Nome:</span>
+                                        <div class="form-group inline">
+                                            <input type="text" class="form-control">
+                                        </div><br>
+                                        <span>CPF:</span>
+                                        <div class="form-group inline">
+                                            <input type="text" class="form-control">
+                                        </div><br>
+                                        <span>Passaporte:</span>
+                                        <div class="form-group inline">
+                                            <input type="text" class="form-control">
+                                        </div><br>
+                                        <span>Telefone:</span>
+                                        <div class="form-group inline">
+                                            <input type="text" class="form-control">
+                                        </div><br>
+                                        <span>Email:</span>
+                                        <div class="form-group inline">
+                                            <input type="text" class="form-control">
+                                        </div>
+                                    </nav>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" data-dismiss="modal">Cadastrar</button>
+                                </div>
+                          </div>
+                        </div>
+                    </div>
                 </div>
             </nav>
             <nav>
                 <span>Pessoa atendida 2:</span>
                 <div class="form-group inline">
-                    <input type="text" class="form-control" ng-model="ocorrencia.pessoaAtd2">
+                    <input type="text" class="form-control inline" ng-model="ocorrencia.pessoaAtd2">
+                    <button class="btn-default btn-small" data-toggle="modal" data-target="#pessoasModal"><span class="glyphicon glyphicon-plus"></span></button>
+                    <div class="modal fade" id="pessoasModal" role="dialog">
+                        <div class="modal-dialog modal-lg">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                    <h5 class="modal-title">Cadastrar pessoa</h5>
+                                </div>
+                                <div class="modal-body">
+                                    <nav>
+                                        <span>Nome:</span>
+                                        <div class="form-group inline">
+                                            <input type="text" class="form-control">
+                                        </div><br>
+                                        <span>CPF:</span>
+                                        <div class="form-group inline">
+                                            <input type="text" class="form-control">
+                                        </div><br>
+                                        <span>Passaporte:</span>
+                                        <div class="form-group inline">
+                                            <input type="text" class="form-control">
+                                        </div><br>
+                                        <span>Telefone:</span>
+                                        <div class="form-group inline">
+                                            <input type="text" class="form-control">
+                                        </div><br>
+                                        <span>Email:</span>
+                                        <div class="form-group inline">
+                                            <input type="text" class="form-control">
+                                        </div>
+                                    </nav>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" data-dismiss="modal">Cadastrar</button>
+                                </div>
+                          </div>
+                        </div>
+                    </div>
                 </div>
             </nav>
         </div>
