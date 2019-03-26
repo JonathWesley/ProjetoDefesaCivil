@@ -1,0 +1,268 @@
+-- Table: public.cobrade
+
+-- DROP TABLE public.cobrade;
+
+CREATE TABLE public.cobrade
+(
+  codigo bigint NOT NULL,
+  ativa boolean NOT NULL,
+  grupo character varying(50) NOT NULL,
+  sub_grupo character varying(50) NOT NULL,
+  tipo character varying(50) NOT NULL,
+  sub_tipo character varying(50),
+  CONSTRAINT cobrade_pkey PRIMARY KEY (codigo)
+)
+WITH (
+  OIDS=FALSE
+);
+ALTER TABLE public.cobrade
+  OWNER TO db_user;
+
+--------------------------
+
+-- Table: public.endereco
+
+-- DROP TABLE public.endereco;
+
+CREATE TABLE public.endereco
+(
+  id integer NOT NULL DEFAULT nextval('endereco_id_seq'::regclass),
+  logradouro character varying(100) NOT NULL,
+  numero integer,
+  referencia character varying(100),
+  CONSTRAINT endereco_pkey PRIMARY KEY (id)
+)
+WITH (
+  OIDS=FALSE
+);
+ALTER TABLE public.endereco
+  OWNER TO db_user;
+
+---------------------------
+
+-- Table: public.log_alteracao_ocorrencia
+
+-- DROP TABLE public.log_alteracao_ocorrencia;
+
+CREATE TABLE public.log_alteracao_ocorrencia
+(
+  id_ocorrencia_alterada integer NOT NULL,
+  id_usuario_efetuou_alteracao integer NOT NULL,
+  data_alteracao date NOT NULL,
+  horario_alteracao time with time zone NOT NULL,
+  ocorr_endereco_principal character varying(30),
+  coord_geografica bigint,
+  agente_principal bigint,
+  agente_apoio_1 integer,
+  agente_apoio_2 integer,
+  ocorr_retorno boolean,
+  ocorr_referencia integer,
+  ocorr_data_lancamento date,
+  ocorr_data_ocorrencia date,
+  ocorr_descricao character varying(100),
+  ocorr_origem character varying(100),
+  ocorr_atendido_1 integer,
+  ocorr_atendido_2 integer,
+  ocorr_natureza character varying(100),
+  ocorr_tem_fotos boolean,
+  ocorr_prioridade character varying(20),
+  ocorr_analisado boolean,
+  ocorr_congelado boolean,
+  ocorr_encerrado boolean,
+  ocorr_endereco integer,
+  CONSTRAINT log_alteracao_ocorrencia_pkey PRIMARY KEY (id_ocorrencia_alterada)
+)
+WITH (
+  OIDS=FALSE
+);
+ALTER TABLE public.log_alteracao_ocorrencia
+  OWNER TO db_user;
+
+----------------------------------------
+
+-- Table: public.log_cadastro_ocorrencia
+
+-- DROP TABLE public.log_cadastro_ocorrencia;
+
+CREATE TABLE public.log_cadastro_ocorrencia
+(
+  id_ocorrencia_cadastrada integer NOT NULL,
+  id_usuario_efetuou_cadastro integer NOT NULL,
+  data_cadastro date NOT NULL,
+  horario_cadastro time with time zone,
+  CONSTRAINT log_cadastro_ocorrencia_pkey PRIMARY KEY (id_ocorrencia_cadastrada)
+)
+WITH (
+  OIDS=FALSE
+);
+ALTER TABLE public.log_cadastro_ocorrencia
+  OWNER TO db_user;
+
+-------------------------------------------
+
+-- Table: public.log_cadastro_usuario
+
+-- DROP TABLE public.log_cadastro_usuario;
+
+CREATE TABLE public.log_cadastro_usuario
+(
+  id_usuario_cadastrado integer NOT NULL,
+  id_usuario_efetuou_cadastro integer NOT NULL,
+  data_cadastro date NOT NULL,
+  horario_cadastro time with time zone NOT NULL,
+  CONSTRAINT log_cadastro_usuario_pkey PRIMARY KEY (id_usuario_cadastrado)
+)
+WITH (
+  OIDS=FALSE
+);
+ALTER TABLE public.log_cadastro_usuario
+  OWNER TO db_user;
+
+-------------------------------------------------
+
+-- Table: public.log_login
+
+-- DROP TABLE public.log_login;
+
+CREATE TABLE public.log_login
+(
+  id_usuario integer NOT NULL,
+  data_login date NOT NULL,
+  horario_login time with time zone NOT NULL,
+  CONSTRAINT log_login_pkey PRIMARY KEY (id_usuario)
+)
+WITH (
+  OIDS=FALSE
+);
+ALTER TABLE public.log_login
+  OWNER TO db_user;
+
+------------------------------------------------------
+
+-- Table: public.login
+
+-- DROP TABLE public.login;
+
+CREATE TABLE public.login
+(
+  id integer NOT NULL DEFAULT nextval('login_id_seq'::regclass),
+  email character varying(50) NOT NULL,
+  senha character varying(40) NOT NULL,
+  CONSTRAINT login_pkey PRIMARY KEY (id)
+)
+WITH (
+  OIDS=FALSE
+);
+ALTER TABLE public.login
+  OWNER TO db_user;
+
+--------------------------------------------------------
+
+-- Table: public.ocorrencia
+
+-- DROP TABLE public.ocorrencia;
+
+CREATE TABLE public.ocorrencia
+(
+  id integer NOT NULL DEFAULT nextval('ocorrencia_id_seq'::regclass),
+  ocorr_endereco_principal character varying(30) NOT NULL,
+  coord_geografica bigint[],
+  agente_principal bigint NOT NULL,
+  agente_apoio_1 integer,
+  agente_apoio_2 integer,
+  ocorr_retorno boolean NOT NULL,
+  ocorr_referencia integer,
+  ocorr_data_lancamento date NOT NULL,
+  ocorr_data_ocorrencia date NOT NULL,
+  ocorr_descricao character varying(100) NOT NULL,
+  ocorr_origem character varying(100) NOT NULL,
+  ocorr_atentido_1 integer,
+  ocorr_atendido_2 integer,
+  ocorr_cobrade bigint NOT NULL,
+  ocorr_natureza character varying(100) NOT NULL,
+  ocorr_tem_fotos boolean NOT NULL,
+  ocorr_prioridade character varying(20) NOT NULL,
+  ocorr_analisado boolean NOT NULL,
+  ocorr_congelado boolean NOT NULL,
+  ocorr_encerrado boolean NOT NULL,
+  ocorr_endereco integer,
+  CONSTRAINT ocorrencia_pkey PRIMARY KEY (id),
+  CONSTRAINT ocorrencia_agente_apoio_1_fkey FOREIGN KEY (agente_apoio_1)
+      REFERENCES public.usuario (cpf) MATCH SIMPLE
+      ON UPDATE NO ACTION ON DELETE NO ACTION,
+  CONSTRAINT ocorrencia_agente_apoio_2_fkey FOREIGN KEY (agente_apoio_2)
+      REFERENCES public.usuario (cpf) MATCH SIMPLE
+      ON UPDATE NO ACTION ON DELETE NO ACTION,
+  CONSTRAINT ocorrencia_agente_principal_fkey FOREIGN KEY (agente_principal)
+      REFERENCES public.usuario (cpf) MATCH SIMPLE
+      ON UPDATE NO ACTION ON DELETE NO ACTION,
+  CONSTRAINT ocorrencia_ocorr_atendido_2_fkey FOREIGN KEY (ocorr_atendido_2)
+      REFERENCES public.pessoa (id) MATCH SIMPLE
+      ON UPDATE NO ACTION ON DELETE NO ACTION,
+  CONSTRAINT ocorrencia_ocorr_atentido_1_fkey FOREIGN KEY (ocorr_atentido_1)
+      REFERENCES public.pessoa (id) MATCH SIMPLE
+      ON UPDATE NO ACTION ON DELETE NO ACTION,
+  CONSTRAINT ocorrencia_ocorr_cobrade_fkey FOREIGN KEY (ocorr_cobrade)
+      REFERENCES public.cobrade (codigo) MATCH SIMPLE
+      ON UPDATE NO ACTION ON DELETE NO ACTION,
+  CONSTRAINT ocorrencia_ocorr_endereco_fkey FOREIGN KEY (ocorr_endereco)
+      REFERENCES public.endereco (id) MATCH SIMPLE
+      ON UPDATE NO ACTION ON DELETE NO ACTION,
+  CONSTRAINT ocorrencia_ocorr_referencia_fkey FOREIGN KEY (ocorr_referencia)
+      REFERENCES public.ocorrencia (id) MATCH SIMPLE
+      ON UPDATE NO ACTION ON DELETE NO ACTION
+)
+WITH (
+  OIDS=FALSE
+);
+ALTER TABLE public.ocorrencia
+  OWNER TO db_user;
+
+
+-------------------------------------------------------------
+
+-- Table: public.pessoa
+
+-- DROP TABLE public.pessoa;
+
+CREATE TABLE public.pessoa
+(
+  id integer NOT NULL DEFAULT nextval('pessoa_id_seq'::regclass),
+  cpf bigint,
+  passaporte bigint,
+  telefone bigint,
+  email character varying(50),
+  nome character varying(50),
+  CONSTRAINT pessoa_pkey PRIMARY KEY (id)
+)
+WITH (
+  OIDS=FALSE
+);
+ALTER TABLE public.pessoa
+  OWNER TO db_user;
+
+------------------------------------------------------------
+
+-- Table: public.usuario
+
+-- DROP TABLE public.usuario;
+
+CREATE TABLE public.usuario
+(
+  id integer NOT NULL,
+  cpf bigint NOT NULL,
+  nome character varying(50) NOT NULL,
+  telefone bigint,
+  nivel_acesso character varying(20) NOT NULL,
+  CONSTRAINT usuario_pkey PRIMARY KEY (cpf),
+  CONSTRAINT usuario_id_fkey FOREIGN KEY (id)
+      REFERENCES public.login (id) MATCH SIMPLE
+      ON UPDATE NO ACTION ON DELETE NO ACTION
+)
+WITH (
+  OIDS=FALSE
+);
+ALTER TABLE public.usuario
+  OWNER TO db_user;
+
+---------------------------------------------------------
