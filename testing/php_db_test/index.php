@@ -1,27 +1,24 @@
 <?php
 
-$db_connection = pg_connect("host=localhost dbname=dbTeste user=testuser password=123");
+include 'db.php';
 
-echo 'testando: ';
+include 'header.php';
 
-if(!$db_connection){
-    echo 'nao foi!';
+if(isset($_GET['pagina'])){
+    $pagina = $_GET['pagina'];
 }else{
-    echo 'foi';
+    $pagina = 'home';
 }
 
-$result = pg_query($db_connection, "SELECT * FROM aluno WHERE id_aluno=1");
 
-if(!$result){
-    echo ', nao foi!' . pg_last_error();
+if($pagina == 'cursos'){
+    include 'view/cursos.php';
+}elseif($pagina == 'alunos'){
+    include 'view/alunos.php';
+}elseif($pagina == 'matriculas'){
+    include 'view/matriculas.php';
 }else{
-    echo ', foi';
+    include 'view/home.php';
 }
 
-$row = pg_fetch_row($result);
-
-if($row[0] == null){
-    echo '<br/>usuario nao encontrado';
-}else{
-    echo '<br/>id: '.$row[0].' - nome: '.$row[1].' - data_nascimento: '.$row[2];
-}
+include 'footer.php';
