@@ -2,10 +2,9 @@
 
 include 'db.php';
 
-$nome_curso = $_POST['nome_curso'];
-$carga_horaria = $_POST['carga_horaria'];
+$id_curso = $_GET['id_curso'];
 
-$query = "INSERT INTO curso(nome_curso, carga_horaria) VALUES('$nome_curso', '$carga_horaria')";
+$query = "DELETE FROM curso WHERE id_curso = $id_curso";
 
 $success = pg_query($connection, $query);
 
@@ -13,5 +12,4 @@ if($success){
     header('location:index.php?pagina=cursos');
 }else{
     echo 'Falha na conexão'.pg_last_error();
-};
-
+}

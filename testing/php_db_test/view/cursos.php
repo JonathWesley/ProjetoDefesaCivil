@@ -3,13 +3,17 @@
     <tr>
         <th>Nome curso</th>
         <th>Carga horária</th>
+        <th>Deletar</th>
     </tr>
     <?php
         $i = 0;
         while($linha = pg_fetch_array($result_curso, $i)){
             echo '<tr><td>'.$linha['nome_curso'].'</td>';
-            echo '<td>'.$linha['carga_horaria'].'</td></tr>';
+            echo '<td>'.$linha['carga_horaria'].'</td>';
             $i += 1;
+    ?>
+        <td><a href="deleta_curso.php?id_curso=<?php echo $linha['id_curso'];?>">Deletar</a></td></tr>
+    <?php
         }
     ?>
 </table>

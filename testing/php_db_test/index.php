@@ -10,17 +10,14 @@ if(isset($_GET['pagina'])){
     $pagina = 'home';
 }
 
-
-if($pagina == 'cursos'){
-    include 'view/cursos.php';
-}elseif($pagina == 'alunos'){
-    include 'view/alunos.php';
-}elseif($pagina == 'matriculas'){
-    include 'view/matriculas.php';
-}elseif($pagina == 'inserir_curso'){
-    include 'view/inserir_curso.php';
-}else{
-    include 'view/home.php';
+switch($pagina){
+    case 'cursos': include 'view/cursos.php'; break;
+    case 'alunos': include 'view/alunos.php'; break;
+    case 'matriculas': include 'view/matriculas.php'; break;
+    case 'inserir_curso': include 'view/inserir_curso.php'; break;
+    case 'inserir_aluno': include 'view/inserir_aluno.php'; break;
+    case 'inserir_matricula': include 'view/inserir_matricula.php'; break;
+    default: include 'view/home.php'; break;
 }
 
 include 'footer.php';
