@@ -4,11 +4,17 @@ include 'db.php';
 
 include 'header.php';
 
-if(isset($_GET['pagina'])){
-    $pagina = $_GET['pagina'];
+if($_SESSION['login']){
+    if(isset($_GET['pagina'])){
+        $pagina = $_GET['pagina'];
+    }else{
+        $pagina = 'cursos';
+    }
 }else{
     $pagina = 'home';
 }
+
+
 
 switch($pagina){
     case 'cursos': include 'view/cursos.php'; break;
