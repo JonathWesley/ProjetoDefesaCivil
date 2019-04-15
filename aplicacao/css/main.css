@@ -54,7 +54,7 @@ body{
 
 footer{
     position: relative;
-    top: 100px;
+    bottom: 0px;
 }
 
 .footer{
