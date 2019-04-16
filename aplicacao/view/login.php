@@ -31,14 +31,16 @@
             <div class="input-group">
                 <input type="password" class="form-control" name="senha" placeholder="Senha">
             </div>
-            <input type="submit" value="Entrar" class="btn btn-default btn-md">
             <?php 
                 if(isset($_GET['erro'])){
             ?>
-                    <div>erro</div>
+                    <div class="alert alert-danger" role="alert">
+                        Email e/ou  senha errados.
+                    </div>
             <?php 
                 }
             ?>
+            <input type="submit" value="Entrar" class="btn btn-default btn-md">
         </form>
     </div>
     </div>
