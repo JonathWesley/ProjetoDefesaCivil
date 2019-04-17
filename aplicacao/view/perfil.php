@@ -8,11 +8,11 @@
             echo '<p>Telefone: '.$linha['telefone'].'</p>';
             $nivel_acesso='';
             if($linha['nivel_acesso']==1)
-                $nivel_acesso = 'administrador';
+                $nivel_acesso = 'Administrador';
             else if($linha['nivel_acesso']==2)
-                $nivel_acesso = 'usuario 1';
+                $nivel_acesso = 'Usuário 1';
             else
-                $nivel_acesso = 'usuario 2';
+                $nivel_acesso = 'Usuário 2';
             echo '<p>Nivel de acesso: '.$nivel_acesso.'</p>';
         ?>
     </div>

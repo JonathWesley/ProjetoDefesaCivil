@@ -24,16 +24,10 @@
 
             <div class="box">
                 <nav>
-                    <span>Cargo (defesa civil):</span>
-                    <div class="form-group inline">
-                        <input name="cargo" type="text" class="form-control">
-                    </div>
-                </nav>
-                <nav>
                     <span>Nível de acesso:</span>
                     <div class="form-group inline">
                         <label for="sel1"></label>
-                        <select name="endereco_principal" id="sel1" class="form-control">
+                        <select name="nivel_acesso" id="sel1" class="form-control">
                             <option>Usuário 1</option>
                             <option>Usuário 2</option>
                             <option>Administrador</option>
@@ -46,19 +40,19 @@
                 <nav>
                     <span>Email:</span>
                     <div class="form-group inline">
-                        <input name="email" type="email" class="form-control">
+                        <input name="email_cadastro" type="email" class="form-control">
                     </div>
                 </nav>
                 <nav>
                     <span>Senha:</span>
                     <div class="form-group inline">
-                        <input name="senha" type="password" class="form-control">
+                        <input name="senha_cadastro" type="password" class="form-control">
                     </div>
                 </nav>
                 <nav>
                     <span>Confirmar Senha:</span>
                     <div class="form-group inline">
-                        <input name="senha_confirma" type="password" class="form-control">
+                        <input name="senha_cadastro_confirma" type="password" class="form-control">
                     </div>
                 </nav>
             </div>
@@ -66,7 +60,7 @@
             <div class="box">
                 <nav>
                     <span>Foto:</span>
-                    <button class="btn btn-default btn-sm inline">Carregar foto</button>
+                    <button type="btn" class="btn btn-default btn-sm inline">Carregar foto</button>
                 </nav>
             </div>
             
