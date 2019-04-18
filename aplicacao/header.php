@@ -33,7 +33,7 @@
         <div class="jumbotron">
             <h4 class="text-center">Ocorrências</h4>
             <ul class="menu-ul">
-                <li ng-if="verificaNivel()=='admin'"><a href="?pagina=cadastrarOcorrencia">Cadastrar</a></li>
+                <li><a href="?pagina=cadastrarOcorrencia">Cadastrar</a></li>
                 <li><a href="?pagina=consultarOcorrencia">Consultar</a></li>
             </ul>
         </div>
@@ -43,7 +43,7 @@
         <div class="jumbotron">
             <h4 class="text-center">Usuários</h4>
             <ul class="menu-ul">
-                <li ng-if="verificaNivel()=='admin'"><a href="?pagina=cadastrarUsuario">Cadastrar</a></li>
+                <li><a href="?pagina=cadastrarUsuario">Cadastrar</a></li>
                 <li><a href="?pagina=consultarUsuario">Consultar</a></li>
             </ul>
         </div>

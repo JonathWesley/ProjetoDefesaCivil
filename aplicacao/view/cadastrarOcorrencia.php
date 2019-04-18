@@ -1,60 +1,74 @@
     <div class="container positioning">
-    <div class="jumbotron">
+    <div class="jumbotron campo_cadastro">
         <div class="box">
+            <form method="post" action="processa_cadastrar_ocorrencia.php">
             <nav>
-                <span>Endereço principal:</span>
-                <div class="form-group inline">
-                    <label for="sel1"></label>
-                    <select name="endereco_principal" id="sel1" class="form-control">
-                        <option>Coordenada</option>
-                        <option>Logradouro</option>
+                <div class="form-group">
+                    Endereço principal:
+                    <label for="sel_endereco"></label>
+                    <select name="sel_endereco" class="form-control" ng-model="sel_endereco.singleSelect">
+                        <option value="Coordenada">Coordenada</option>
+                        <option value="Logradouro">Logradouro</option>
                     </select>
                 </div>
             </nav>
             <nav>
-                <span>Coordenada principal:</span>
-                <div class="form-group inline">
-                    <input type="text" class="form-control">
+                Longitude:
+                <div class="form-group">
+                    <input name="longitude" type="text" class="form-control">
                 </div>
             </nav>
             <nav>
-                <span>Endereço numeral:</span>
-                <div class="form-group inline">
-                    <input type="text" class="form-control">
+                Latitude:
+                <div class="form-group">
+                    <input name="latitude" type="text" class="form-control">
                 </div>
             </nav>
             <nav>
-                <span>Endereço referência:</span>
-                <div class="form-group inline">
-                    <input type="text" class="form-control">
+                Logradouro:
+                <div class="form-group">
+                    <input name="logradouro" type="text" class="form-control">
+                </div>
+            </nav>
+            <nav>
+                Número:
+                <div class="form-group">
+                    <input name="numero" type="text" class="form-control">
+                </div>
+            </nav>
+            <nav>
+                Referência:
+                <div class="form-group">
+                    <input name="referencia" type="text" class="form-control">
                 </div>
             </nav>
         </div>
 
         <div class="box">
             <nav>
-                <span>Agente principal:</span>
-                <div class="form-group inline">
-                    <input type="text" class="form-control">
+                Agente principal:
+                <div class="form-group">
+                    <input name="agente_principal" type="text" class="form-control">
                 </div>
             </nav>
             <nav>
-                <span>Agente de apoio 1:</span>
-                <div class="form-group inline">
-                    <input type="text" class="form-control">
+                Agente de apoio 1:
+                <div class="form-group">
+                    <input name="agente_apoio_1" type="text" class="form-control">
                 </div>
             </nav>
             <nav>
-                <span>Agente de apoio 2:</span>
-                <div class="form-group inline">
-                    <input type="text" class="form-control">
+                Agente de apoio 2:
+                <div class="form-group">
+                    <input name="agente_apoio_2" type="text" class="form-control">
                 </div>
             </nav>
         </div>
         <div class="box">
             <nav>
-                <span>Ocorrência retorno:</span>
-                <form class="inline">
+                Ocorrência retorno:
+                <br>
+                <form name="ocorr_retorno">
                     <label class="radio-inline">
                         <input type="radio" value="1" name="ocorr_retorno_rb">Sim
                     </label>
@@ -63,45 +77,47 @@
                     </label>
                 </form>
             </nav>
+            <br>
             <nav>
-                <span>Código de referência:</span>
-                <div class="form-group inline">
-                    <input type="text" class="form-control">
+                Código de referência:
+                <div class="form-group">
+                    <input name="ocorr_referencia" type="text" class="form-control">
                 </div>
             </nav>
             <nav>
-                <span>Data de lançamento:</span>
-                <div class="form-group inline">
-                    <input type="date" placeholder="DD/MM/YYYY" class="form-control">
+                Data de lançamento:
+                <div class="form-group">
+                    <input name="data_lancamento" type="date" placeholder="DD/MM/YYYY" class="form-control">
                 </div>
             </nav>
             <nav>
-                <span>Data de ocorrência:</span>
-                <div class="form-group inline">
-                    <input type="date" class="form-control">
+                Data de ocorrência:
+                <div class="form-group">
+                    <input name="data_ocorrencia" type="date" class="form-control">
                 </div>
             </nav>
             <nav>
-                <span class="descricao">Descrição:</span>
-                <form class="inline">
+                Descrição:
+                <form>
                     <div class="form-group">
-                        <textarea class="form-control" cols="30" rows="5" maxlength = "120"></textarea>
+                        <textarea name="data_descricao" class="form-control" cols="30" rows="5" maxlength = "120"></textarea>
                     </div>
                 </form>
             </nav>
             <nav>
-                <span>Origem:</span>
-                <div class="form-group inline">
-                    <input type="text" class="form-control">
+                Origem:
+                <div class="form-group">
+                    <input name="ocorr_origem" type="text" class="form-control">
                 </div>
             </nav>
         </div>
         <div class="box">
             <nav>
-                <span>Pessoa atendida 1:</span>
-                <div class="form-group inline">
-                    <input type="text" class="form-control inline" ng-model="ocorrencia.pessoaAtd1">
-                    <button class="btn-default btn-small" data-toggle="modal" data-target="#pessoasModal"><span class="glyphicon glyphicon-plus"></span></button>
+                <div class="form-group">
+                    Pessoa atendida 1: 
+                    <br>
+                    <input name="pessoa_atendida_1" type="text" class="form-control inline" ng-model="ocorrencia.pessoaAtd1">
+                    <button class="btn-default btn-small inline" data-toggle="modal" data-target="#pessoasModal"><span class="glyphicon glyphicon-plus"></span></button>
                     <div class="modal fade" id="pessoasModal" role="dialog">
                         <div class="modal-dialog modal-lg">
                             <div class="modal-content">
@@ -111,24 +127,24 @@
                                 </div>
                                 <div class="modal-body">
                                     <nav>
-                                        <span>Nome:</span>
-                                        <div class="form-group inline">
+                                        <div class="form-group">
+                                            Nome:
                                             <input type="text" class="form-control">
-                                        </div><br>
-                                        <span>CPF:</span>
-                                        <div class="form-group inline">
+                                        </div>   
+                                        <div class="form-group">
+                                            CPF:
                                             <input type="text" class="form-control">
-                                        </div><br>
-                                        <span>Passaporte:</span>
-                                        <div class="form-group inline">
+                                        </div>
+                                        <div class="form-group">
+                                            Passaporte:
                                             <input type="text" class="form-control">
-                                        </div><br>
-                                        <span>Telefone:</span>
-                                        <div class="form-group inline">
+                                        </div>
+                                        <div class="form-group">
+                                            Telefone: 
                                             <input type="text" class="form-control">
-                                        </div><br>
-                                        <span>Email:</span>
-                                        <div class="form-group inline">
+                                        </div>
+                                        <div class="form-group">
+                                            Email:
                                             <input type="text" class="form-control">
                                         </div>
                                     </nav>
@@ -142,10 +158,11 @@
                 </div>
             </nav>
             <nav>
-                <span>Pessoa atendida 2:</span>
-                <div class="form-group inline">
-                    <input type="text" class="form-control inline">
-                    <button class="btn-default btn-small" data-toggle="modal" data-target="#pessoasModal"><span class="glyphicon glyphicon-plus"></span></button>
+                <div class="form-group">
+                    Pessoa atendida 2:
+                    <br>
+                    <input name="pessoa_atendida_2" type="text" class="form-control inline">
+                    <button class="btn-default btn-small inline" data-toggle="modal" data-target="#pessoasModal"><span class="glyphicon glyphicon-plus"></span></button>
                     <div class="modal fade" id="pessoasModal" role="dialog">
                         <div class="modal-dialog modal-lg">
                             <div class="modal-content">
@@ -155,24 +172,24 @@
                                 </div>
                                 <div class="modal-body">
                                     <nav>
-                                        <span>Nome:</span>
-                                        <div class="form-group inline">
+                                        <div class="form-group">
+                                            Nome:
                                             <input type="text" class="form-control">
-                                        </div><br>
-                                        <span>CPF:</span>
-                                        <div class="form-group inline">
+                                        </div>   
+                                        <div class="form-group">
+                                            CPF:
                                             <input type="text" class="form-control">
-                                        </div><br>
-                                        <span>Passaporte:</span>
-                                        <div class="form-group inline">
+                                        </div>
+                                        <div class="form-group">
+                                            Passaporte:
                                             <input type="text" class="form-control">
-                                        </div><br>
-                                        <span>Telefone:</span>
-                                        <div class="form-group inline">
+                                        </div>
+                                        <div class="form-group">
+                                            Telefone: 
                                             <input type="text" class="form-control">
-                                        </div><br>
-                                        <span>Email:</span>
-                                        <div class="form-group inline">
+                                        </div>
+                                        <div class="form-group">
+                                            Email:
                                             <input type="text" class="form-control">
                                         </div>
                                     </nav>
@@ -188,20 +205,20 @@
         </div>
         <div class="box">
             <nav>
-                <span>Cobrade:</span> 
-                <div class="form-group inline">
-                    <input type="text" class="form-control">
+                Cobrade:
+                <div class="form-group">
+                    <input name="cobrade" type="text" class="form-control">
                 </div>
             </nav>
             <nav>
-                <span>Natureza da ocorrência:</span> 
-                <div class="form-group inline">
-                    <input type="text" class="form-control">
+                Natureza da ocorrência:
+                <div class="form-group">
+                    <input name="natureza" type="text" class="form-control">
                 </div>
             </nav>
             <nav>
-                <span>Possui fotos:</span>
-                <form class="inline">
+                Possui fotos:
+                <form name="possui_fotos">
                     <label class="radio-inline">
                         <input type="radio" value="1" name="fotos_rb">Sim
                     </label>
@@ -210,13 +227,18 @@
                     </label>
                 </form>
             </nav>
+            <br>
+            <nav>
+                Fotos:
+                <button type="btn" class="btn btn-default btn-sm inline">Carregar fotos</button>
+            </nav>
         </div>
         <div class="box">
             <nav>
-                <span>Prioridade:</span>
-                <div class="form-group inline">
+                <div class="form-group">
+                    Prioridade:
                     <label for="sel1"></label>
-                    <select name="endereco_principal" id="sel1" class="form-control">
+                    <select name="prioridade" id="sel1" class="form-control">
                         <option>Baixa</option>
                         <option>Média</option>
                         <option>Alta</option>
@@ -224,8 +246,8 @@
                 </div>
             </nav>
             <nav>
-                <span>Analisado:</span>
-                <form class="inline">
+                Analisado:
+                <form name="analisado">
                     <label class="radio-inline">
                         <input type="radio" value="1" name="analisado_rb">Sim
                     </label>
@@ -234,9 +256,10 @@
                     </label>
                 </form>
             </nav>
+            <br>
             <nav>
-                <span>Congelado:</span>
-                <form class="inline">
+                Congelado:
+                <form name="congelado">
                     <label class="radio-inline">
                         <input type="radio" value="1" name="congelado_rb">Sim
                     </label>
@@ -245,9 +268,10 @@
                     </label>
                 </form>
             </nav>
+            <br>
             <nav>
-                <span>Encerrado:</span>
-                <form class="inline">
+                Encerrado:
+                <form name="encerrado">
                     <label class="radio-inline">
                         <input type="radio" value="1" name="encerrado_rb">Sim
                     </label>
@@ -257,6 +281,7 @@
                 </form>
             </nav>
         </div>
-        <button class="btn btn-default btn-md">Cadastrar</button>
+        <input type="submit" class="btn btn-default btn-md" value="Cadastrar"></button>
+        </form>
     </div>
     </div>

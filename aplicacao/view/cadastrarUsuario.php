@@ -3,20 +3,20 @@
         <div class="box">
             <form method="post" action="processa_cadastrar_usuario.php">
                 <nav>
-                    <span>Nome completo:</span>
-                    <div class="form-group inline">
+                    Nome completo:
+                    <div class="form-group">
                         <input name="nome" type="text" class="form-control">
                     </div>
                 </nav>
                 <nav>
-                    <span>CPF:</span>
-                    <div class="form-group inline">
+                    CPF:
+                    <div class="form-group">
                         <input name="cpf" type="text" class="form-control">
                     </div>
                 </nav>
                 <nav>
-                    <span>Telefone:</span>
-                    <div class="form-group inline">
+                    Telefone:
+                    <div class="form-group">
                         <input name="telefone" type="text" class="form-control">
                     </div>
                 </nav>
@@ -24,8 +24,8 @@
 
             <div class="box">
                 <nav>
-                    <span>Nível de acesso:</span>
-                    <div class="form-group inline">
+                    <div class="form-group">
+                        Nível de acesso:
                         <label for="sel1"></label>
                         <select name="nivel_acesso" id="sel1" class="form-control">
                             <option>Usuário 1</option>
@@ -38,20 +38,20 @@
 
             <div class="box">
                 <nav>
-                    <span>Email:</span>
-                    <div class="form-group inline">
+                    Email:
+                    <div class="form-group">
                         <input name="email_cadastro" type="email" class="form-control">
                     </div>
                 </nav>
                 <nav>
-                    <span>Senha:</span>
-                    <div class="form-group inline">
+                    Senha:
+                    <div class="form-group">
                         <input name="senha_cadastro" type="password" class="form-control">
                     </div>
                 </nav>
                 <nav>
-                    <span>Confirmar Senha:</span>
-                    <div class="form-group inline">
+                    Confirmar Senha:
+                    <div class="form-group">
                         <input name="senha_cadastro_confirma" type="password" class="form-control">
                     </div>
                 </nav>
@@ -59,8 +59,8 @@
 
             <div class="box">
                 <nav>
-                    <span>Foto:</span>
-                    <button type="btn" class="btn btn-default btn-sm inline">Carregar foto</button>
+                    Foto:
+                    <button type="btn" class="btn btn-default btn-sm">Carregar foto</button>
                 </nav>
             </div>
             
