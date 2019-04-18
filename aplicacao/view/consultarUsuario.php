@@ -10,7 +10,7 @@
                 $i = 0;
                 while($linha = pg_fetch_array($consulta_usuarios, $i)){
                     echo '<div class="box">';
-                    echo '<nav><span>ID: '.$linha['id'].'</span></nav>';
+                    echo '<nav><span>ID: '.$linha['id_usuario'].'</span></nav>';
                     echo '<nav><span>Nome: '.$linha['nome'].'</span></nav>';
                     echo '</div>';
                     $i += 1;

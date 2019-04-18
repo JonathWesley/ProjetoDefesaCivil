@@ -2,9 +2,13 @@
 include 'database.php';
 
 $email = addslashes($_POST['email']);
-$senha = md5($_POST['senha']);
+$senha = $_POST['senha'];
 
-$query = "SELECT * FROM log_in WHERE email = '$email' AND senha = '$senha'";
+$custo = '08';
+$salt = 'Cf1f11ePArKlBJomM0F6aJ';
+$hash = crypt($senha, '$2a$' . $custo . '$' . $salt . '$');
+
+$query = "SELECT * FROM dados_login WHERE email = '$email' AND senha = '$hash'";
 $result = pg_query($connection, $query);
 
 session_start();
