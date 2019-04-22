@@ -1,7 +1,8 @@
     <div class="container positioning">
     <div class="jumbotron">
+    <form method="post" action="processa_cadastrar_usuario.php">
         <div class="box">
-            <form method="post" action="processa_cadastrar_usuario.php">
+            
                 <nav>
                     Nome completo:
                     <div class="form-group">

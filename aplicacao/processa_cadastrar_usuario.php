@@ -13,11 +13,11 @@ $custo = '08';
 $salt = 'Cf1f11ePArKlBJomM0F6aJ';
 $hash = crypt($senha, '$2a$' . $custo . '$' . $salt . '$');
 
-$result = pg_query("INSERT INTO dados_login (email, senha) VALUES ('$email', '$hash')");
+$result = pg_query($connection, "INSERT INTO dados_login (email, senha) VALUES ('$email', '$hash')");
 if(!$result)
 	echo 'Erro: '.pg_last_error();
 
-$result = pg_query("SELECT * FROM dados_login WHERE email = '$email'");
+$result = pg_query($connection, "SELECT * FROM dados_login WHERE email = '$email'");
 if(!$result)
 	echo 'Erro: '.pg_last_error();
 
@@ -32,8 +32,9 @@ if($nivel_acesso == 'Administrador'){
     $acesso = 3;
 }
 
-$result = pg_query($connection, 
-"INSERT INTO usuario (id_usuario, nome, cpf, telefone, nivel_acesso) VALUES ($id, '$nome', '$cpf', '$telefone', $acesso)");
+$result = pg_query($connection, "INSERT INTO usuario 
+					(id_usuario, nome, cpf, telefone, nivel_acesso) 
+					VALUES ($id, '$nome', '$cpf', '$telefone', $acesso)");
 if(!$result)
 	echo 'Erro: '.pg_last_error();
 else
