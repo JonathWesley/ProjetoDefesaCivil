@@ -2,6 +2,7 @@
 <div class="jumbotron campo_cadastro">
     <form method="post" action="processa_cadastrar_ocorrencia.php">
         <div class="box">
+            <!--
             <div>
                 Endereço principal:
                 <label for="endereco_principal"></label>
@@ -20,19 +21,30 @@
                     <input name="latitude" type="text" class="form-control">
                 </div>
             </div>
-            <div ng-if="sel_endereco === 'Logradouro'">
-                <div>
-                    Logradouro:
-                    <input name="logradouro" type="text" class="form-control">
-                </div>
-                <div>
-                    Número:
-                    <input name="numero" type="text" class="form-control">
-                </div>
-                <div>
-                    Referência:
-                    <input name="referencia" type="text" class="form-control">
-                </div>
+            -->
+            <div>
+                CEP:
+                <input id="cep" name="cep" type="text" class="form-control">
+            </div>
+            <div>
+                Logradouro:
+                <input id="logradouro" name="logradouro" type="text" class="form-control">
+            </div>
+            <div>
+                Complemento:
+                <input id="complemento" name="complemento" type="text" class="form-control">
+            </div>
+            <div>
+                Bairro:
+                <input id="bairro" name="bairro" type="text" class="form-control">
+            </div>
+            <div>
+                Cidade:
+                <input id="cidade" name="cidade" type="text" class="form-control">
+            </div>
+            <div>
+                Referência:
+                <input name="referencia" type="text" class="form-control">
             </div>
         </div>
         <div class="box">
@@ -75,7 +87,7 @@
             </div>
             <div>
                 Descrição:
-                <textarea name="descricao" class="form-control" cols="30" rows="5" maxlength = "120"></textarea>
+                <textarea name="descricao" class="form-control" cols="30" rows="5" maxlength = "100"></textarea>
             </div>
             <div>
                 Origem:
