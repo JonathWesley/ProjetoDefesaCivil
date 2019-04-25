@@ -34,7 +34,7 @@
             <h4 class="text-center">Ocorrências</h4>
             <ul class="menu-ul">
                 <li><a href="?pagina=cadastrarOcorrencia">Cadastrar</a></li>
-                <li><a href="?pagina=consultarOcorrencia">Consultar</a></li>
+                <li><a href="?pagina=consultarOcorrencia&n=0">Consultar</a></li>
             </ul>
         </div>
         </div>
@@ -44,7 +44,7 @@
             <h4 class="text-center">Usuários</h4>
             <ul class="menu-ul">
                 <li><a href="?pagina=cadastrarUsuario">Cadastrar</a></li>
-                <li><a href="?pagina=consultarUsuario">Consultar</a></li>
+                <li><a href="?pagina=consultarUsuario&n=0">Consultar</a></li>
             </ul>
         </div>
         </div>
