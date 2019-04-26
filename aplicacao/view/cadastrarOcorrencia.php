@@ -2,7 +2,7 @@
 <div class="jumbotron campo_cadastro">
     <form method="post" action="processa_cadastrar_ocorrencia.php">
         <div class="box">
-            <!--
+            
             <div>
                 Endereço principal:
                 <label for="endereco_principal"></label>
@@ -21,17 +21,16 @@
                     <input name="latitude" type="text" class="form-control">
                 </div>
             </div>
-            -->
             <div>
                 CEP:
-                <input id="cep" name="cep" type="text" class="form-control">
+                <input id="cep" name="cep" type="text" class="form-control" ng-model="cep">
             </div>
             <div>
                 Logradouro:
                 <input id="logradouro" name="logradouro" type="text" class="form-control">
             </div>
             <div>
-                Complemento:
+                Número:
                 <input id="complemento" name="complemento" type="text" class="form-control">
             </div>
             <div>
@@ -105,48 +104,8 @@
                 Pessoa atendida 2:
                 <br>
                 <input name="pessoa_atendida_2" type="text" class="form-control inline">
-                <button type="button" class="btn-default btn-small inline" data-toggle="modal" data-target="#pessoasModal"><span class="glyphicon glyphicon-plus"></span></button>
             </div>
-            <div class="modal fade" id="pessoasModal" role="dialog">
-                <div class="modal-dialog modal-lg">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <button type="button" class="close" data-dismiss="modal">&times;</button>
-                            <h5 class="modal-title">Cadastrar pessoa</h5>
-                        </div>
-                        <form method="post" action="processa_cadastrar_pessoa.php">
-                        <div class="modal-body">
-                            <nav>
-                                <div class="form-group">
-                                    Nome:
-                                    <input name="nome_pessoa" type="text" class="form-control">
-                                </div>   
-                                <div class="form-group">
-                                    CPF:
-                                    <input name="cpf_pessoa" type="text" class="form-control">
-                                </div>
-                                <div class="form-group">
-                                    Passaporte:
-                                    <input name="passaporte_pessoa" type="text" class="form-control">
-                                </div>
-                                <div class="form-group">
-                                    Telefone: 
-                                    <input name="telefone_pessoa" type="text" class="form-control">
-                                </div>
-                                <div class="form-group">
-                                    Email:
-                                    <input name="email_pessoa" type="text" class="form-control">
-                                </div>
-                            </nav>
-                        </div>
-                        <div class="modal-footer">
-                            <button type="submit" data-dismiss="modal">Cadastrar</button>
-                        </div>
-                        </form>
-                        
-                    </div>
-                </div>
-            </div>
+            
         </div>
         <div class="box">
             <div>
@@ -219,5 +178,45 @@
         </div>
         <input type="submit" class="btn btn-default btn-md" value="Cadastrar">
     </form>
+
+    <div class="modal fade" id="pessoasModal" role="dialog">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h5 class="modal-title">Cadastrar pessoa</h5>
+                </div>
+                <form method="post" action="processa_cadastrar_pessoa.php">
+                    <div class="modal-body">
+                        <nav>
+                            <div class="form-group">
+                                Nome:
+                                <input name="nome_pessoa" type="text" class="form-control">
+                            </div>   
+                            <div class="form-group">
+                                CPF:
+                                <input name="cpf_pessoa" type="text" class="form-control">
+                            </div>
+                            <div class="form-group">
+                                Passaporte:
+                                <input name="passaporte_pessoa" type="text" class="form-control">
+                            </div>
+                            <div class="form-group">
+                                Telefone: 
+                                <input name="telefone_pessoa" type="text" class="form-control">
+                            </div>
+                            <div class="form-group">
+                                Email:
+                                <input name="email_pessoa" type="email" class="form-control">
+                            </div>
+                        </nav>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="submit">Cadastrar</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
 </div>
 </div>

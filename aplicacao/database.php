@@ -9,4 +9,3 @@ $connection = pg_connect("host=$host dbname=$dbname user=$user password=$passwor
 
 $id = (int)$_SESSION['id_usuario'];
 $consulta_login = pg_query($connection, "SELECT * FROM usuario WHERE id_usuario = $id");
-

@@ -61,7 +61,6 @@
             <a href="index.php?pagina=consultarOcorrencia&n=<?php echo $numero_de_paginas-1 ?>">
                 <span>Fim</span>
             </a>
-            
             </li>
         </ul>
     </nav>

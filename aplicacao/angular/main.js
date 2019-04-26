@@ -6,6 +6,7 @@ app.controller("myCtrl", function($scope){
     $scope.pesquisa = "";
     
     $("#cep").focusout(function(){
+        $(this).val().replace('-', '');
         $.ajax({
             url: 'https://viacep.com.br/ws/'+$(this).val()+'/json/unicode/',
             dataType: 'json',
@@ -19,4 +20,6 @@ app.controller("myCtrl", function($scope){
             }
         });	
     });
+
+    $scope.cep = "";
 });
