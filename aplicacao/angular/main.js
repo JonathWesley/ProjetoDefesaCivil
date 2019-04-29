@@ -21,5 +21,21 @@ app.controller("myCtrl", function($scope){
         });	
     });
 
+    function SubmitFormData() {
+        var nome_pessoa = $("#nome_pessoa").val();
+        var email_pessoa = $("#email_pessoa").val();
+        var telefone_pessoa = $("#telefone_pessoa").val();
+        var cpf_pessoa = $("#cpf_pessoa").val();
+        var pass_pessoa = $("#pass_pessoa").val();
+        
+        $.post("processa_cadastrar_pessoa.php", { nome_pessoa: nome_pessoa, email_pessoa: email_pessoa,
+            telefone_pessoa: telefone_pessoa, cpf_pessoa: cpf_pessoa, pass_pessoa:pass_pessoa },
+        function(data) {
+         //$('#results').html(data);
+         //$('#myForm')[0].reset();
+        });
+    }
+
+    //Variaveis para salvar no cadastramento de ocorrencias
     $scope.cep = "";
 });

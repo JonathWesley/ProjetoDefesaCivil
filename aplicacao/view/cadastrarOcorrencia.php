@@ -4,15 +4,15 @@
         <div class="box">
             
             <div>
-                Endereço principal:
+                Endereço principal: <span style="color:red;">*</span>
                 <label for="endereco_principal"></label>
                 <select name="endereco_principal" class="form-control" ng-model="sel_endereco">
                     <option value="Coordenada">Coordenada</option>
                     <option value="Logradouro">Logradouro</option>
                 </select>
             </div>
-            <div ng-if="sel_endereco === 'Coordenada'">
-                <div>
+            <div>
+                <div ng-disable=true>
                     Longitude:
                     <input name="longitude" type="text" class="form-control">
                 </div>
@@ -48,7 +48,7 @@
         </div>
         <div class="box">
             <div>
-                Agente principal:
+                Agente principal: <span style="color:red;">*</span>
                 <input name="agente_principal" type="text" class="form-control">
             </div>
             <div>
@@ -61,7 +61,7 @@
             </div>
         </div>
         <div class="box">
-            Ocorrência retorno:
+            Ocorrência retorno: <span style="color:red;">*</span>
             <br>
             <nav>
                 <label class="radio-inline">
@@ -77,11 +77,11 @@
                 <input name="ocorr_referencia" type="text" class="form-control">
             </div>
             <div>
-                Data de lançamento:
+                Data de lançamento: <span style="color:red;">*</span>
                 <input name="data_lancamento" type="date" placeholder="DD/MM/YYYY" class="form-control">
             </div>
             <div>
-                Data de ocorrência:
+                Data de ocorrência: <span style="color:red;">*</span>
                 <input name="data_ocorrencia" type="date" placeholder="DD/MM/YYYY" class="form-control">
             </div>
             <div>
@@ -109,7 +109,7 @@
         </div>
         <div class="box">
             <div>
-                Cobrade:
+                Cobrade: <span style="color:red;">*</span>
                 <input name="cobrade" type="text" class="form-control">
             </div>
             <div>
@@ -134,7 +134,7 @@
         </div>
         <div class="box">
             <div>
-                Prioridade:
+                Prioridade: <span style="color:red;">*</span>
                 <label for="prioridade"></label>
                 <select name="prioridade" class="form-control">
                     <option value="Baixa">Baixa</option>
@@ -142,7 +142,7 @@
                     <option value="Alta">Alta</option>
                 </select>
             </div>
-            Analisado:
+            Analisado: <span style="color:red;">*</span>
             <br>
             <nav>
                 <label class="radio-inline">
@@ -153,7 +153,7 @@
                 </label>
             </nav>
             <br>
-            Congelado:
+            Congelado: <span style="color:red;">*</span>
             <br>
             <nav>
                 <label class="radio-inline">
@@ -164,7 +164,7 @@
                 </label>
             </nav>
             <br>
-            Encerrado:
+            Encerrado: <span style="color:red;">*</span>
             <br>
             <nav>
                 <label class="radio-inline">
@@ -186,33 +186,33 @@
                     <button type="button" class="close" data-dismiss="modal">&times;</button>
                     <h5 class="modal-title">Cadastrar pessoa</h5>
                 </div>
-                <form method="post" action="processa_cadastrar_pessoa.php">
+                <form method="post">
                     <div class="modal-body">
                         <nav>
                             <div class="form-group">
                                 Nome:
-                                <input name="nome_pessoa" type="text" class="form-control">
+                                <input id="nome_pessoa" name="nome_pessoa" type="text" class="form-control">
                             </div>   
                             <div class="form-group">
                                 CPF:
-                                <input name="cpf_pessoa" type="text" class="form-control">
+                                <input id="cpf_pessoa" name="cpf_pessoa" type="text" class="form-control">
                             </div>
                             <div class="form-group">
                                 Passaporte:
-                                <input name="passaporte_pessoa" type="text" class="form-control">
+                                <input id="pass_pessoa" name="pass_pessoa" type="text" class="form-control">
                             </div>
                             <div class="form-group">
                                 Telefone: 
-                                <input name="telefone_pessoa" type="text" class="form-control">
+                                <input id="telefone_pessoa" name="telefone_pessoa" type="text" class="form-control">
                             </div>
                             <div class="form-group">
                                 Email:
-                                <input name="email_pessoa" type="email" class="form-control">
+                                <input id="email_pessoa" name="email_pessoa" type="email" class="form-control">
                             </div>
                         </nav>
                     </div>
                     <div class="modal-footer">
-                        <button type="submit">Cadastrar</button>
+                        <button type="button" id="submitFormData" onclick="SubmitFormData();">Cadastrar</button>
                     </div>
                 </form>
             </div>
