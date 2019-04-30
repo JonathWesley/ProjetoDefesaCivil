@@ -2,7 +2,25 @@
 <div class="jumbotron campo_cadastro">
     <form method="post" action="processa_cadastrar_ocorrencia.php">
         <div class="box">
-            
+            <?php 
+                if(isset($_GET['sucesso'])){
+            ?>
+            <div class="alert alert-success" role="alert">
+                Ocorrencia cadastrada com sucesso.
+            </div>
+            <?php 
+                }
+            ?>
+            <?php 
+                if(isset($_GET['erroDB'])){
+            ?>
+            <div class="alert alert-danger" role="alert">
+                Falha ao cadastrar ocorrencia. <br>
+                <?php echo 'a'.pg_last_error(); ?>
+            </div>
+            <?php 
+                }
+            ?>
             <div>
                 Endereço principal: <span style="color:red;">*</span>
                 <label for="endereco_principal"></label>
@@ -12,12 +30,12 @@
                 </select>
             </div>
             <div>
-                <div ng-disable=true>
-                    Longitude:
+                <div>
+                    Longitude: <span style="color:red;">*</span>
                     <input name="longitude" type="text" class="form-control">
                 </div>
                 <div>
-                    Latitude:
+                    Latitude: <span style="color:red;">*</span>
                     <input name="latitude" type="text" class="form-control">
                 </div>
             </div>
@@ -26,7 +44,7 @@
                 <input id="cep" name="cep" type="text" class="form-control" ng-model="cep">
             </div>
             <div>
-                Logradouro:
+                Logradouro: <span style="color:red;">*</span>
                 <input id="logradouro" name="logradouro" type="text" class="form-control">
             </div>
             <div>
@@ -212,11 +230,43 @@
                         </nav>
                     </div>
                     <div class="modal-footer">
-                        <button type="button" id="submitFormData" onclick="SubmitFormData();">Cadastrar</button>
+                        <button type="button" id="submitFormData" onclick="SubmitFormData()" data-dismiss="modal">Cadastrar</button>
                     </div>
                 </form>
             </div>
         </div>
     </div>
+
+    <script>
+    var input = document.getElementById("submitFormData");
+
+    // Execute a function when the user releases a key on the keyboard
+    input.addEventListener("keydown", function(event) {
+    // Number 13 is the "Enter" key on the keyboard
+    if (event.keyCode === 13) {
+        // Cancel the default action, if needed
+        event.preventDefault();
+        // Trigger the button element with a click
+        document.getElementById("submitFormData").click();
+    }
+    });
+
+    function SubmitFormData() {
+        var nome_pessoa = $("#nome_pessoa").val();
+        var email_pessoa = $("#email_pessoa").val();
+        var telefone_pessoa = $("#telefone_pessoa").val();
+        var cpf_pessoa = $("#cpf_pessoa").val();
+        var pass_pessoa = $("#pass_pessoa").val();
+        
+        $.post("processa_cadastrar_pessoa.php", { nome_pessoa: nome_pessoa, email_pessoa: email_pessoa,
+            telefone_pessoa: telefone_pessoa, cpf_pessoa: cpf_pessoa, pass_pessoa:pass_pessoa },
+        function(data) {
+         //$('#results').html(data);
+         //$('#myForm')[0].reset();
+        });
+    }
+    </script>
+
+
 </div>
 </div>

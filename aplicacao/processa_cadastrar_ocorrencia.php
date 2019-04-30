@@ -5,7 +5,7 @@ $endereco_principal = addslashes($_POST['endereco_principal']);
 $longitude = addslashes($_POST['longitude']);
 $latitude = addslashes($_POST['latitude']);
 $logradouro = addslashes($_POST['logradouro']);
-$numero = addslashes($_POST['numero']);
+$numero = addslashes($_POST['complemento']);
 $referencia = addslashes($_POST['referencia']);
 $agente_principal = addslashes($_POST['agente_principal']);
 $agente_apoio_1 = addslashes($_POST['agente_apoio_1']);
@@ -29,14 +29,14 @@ $encerrado = addslashes($_POST['encerrado']);
 $logradouro_id = 'null';
 if($endereco_principal == "Logradouro"){
 	$result = pg_query($connection, "SELECT * FROM endereco_logradouro
-									WHERE logradouro = '$logradouro' AND numero = $numero");
+									WHERE logradouro = '$logradouro' AND numero = '$numero'");
 	if(pg_num_rows($result) == 0){
 		$result = pg_query($connection, "INSERT INTO endereco_logradouro(logradouro,numero,referencia)
-										VALUES ('$logradouro',$numero,'$referencia')");
+										VALUES ('$logradouro','$numero','$referencia')");
 		if(!$result)
 			echo 'Erro: '.pg_last_error();
 		$result = pg_query($connection, "SELECT * FROM endereco_logradouro
-										WHERE logradouro = '$logradouro' AND numero = $numero");
+										WHERE logradouro = '$logradouro' AND numero = '$numero'");
 		if(!$result)
 			echo 'Erro: '.pg_last_error();
 	}
@@ -104,5 +104,6 @@ $query = "INSERT INTO ocorrencia
 $result = pg_query($connection, $query);
 if(!$result)
 	echo 'Erro: '.pg_last_error();
+	//header('location:index.php?pagina=cadastrarOcorrencia&erroDB');
 else
-	header('location:index.php');
+	header('location:index.php?pagina=cadastrarOcorrencia&sucesso');

@@ -5,7 +5,7 @@
                 <nav>
                     Nome completo:
                     <div class="form-group">
-                        <input name="nome" type="text" class="form-control" value="" required>
+                        <input name="nome" type="text" class="form-control" ng-model="nome_completo" required>
                     </div>
                 </nav>
                 <?php 

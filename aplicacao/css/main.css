@@ -60,6 +60,8 @@ footer{
 .footer{
     display: inline;
     padding: 0px 300px 0px 0px;
+    position: relative;
+    top: 80px;
 }
 
 .navegation{

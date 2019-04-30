@@ -5,7 +5,7 @@
     if(isset($_POST['pesquisa_usuario']))
         $pesquisa_usuario = $_POST['pesquisa_usuario'];
 
-    $items_por_pagina = 10;
+    $items_por_pagina = 5;
     $pagina = intval($_GET['n']);
 
     $consulta_usuarios = pg_query($connection, 

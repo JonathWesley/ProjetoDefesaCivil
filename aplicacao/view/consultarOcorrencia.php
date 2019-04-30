@@ -3,7 +3,7 @@
     
     $pesquisa_ocorrencia = intval($_POST['pesquisa_ocorrencia']);
 
-    $items_por_pagina = 10;
+    $items_por_pagina = 5;
     $pagina = intval($_GET['n']);
 
     if(isset($_POST['pesquisa_ocorrencia']) && $pesquisa_ocorrencia != null){
