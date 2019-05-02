@@ -131,6 +131,11 @@ div h4{
     padding: 10px 0px 10px 0px;
 }
 
+.cobrade{
+    position: relative;
+    left: 50px;
+}
+
 .inline{
     display: inline-block;
 }

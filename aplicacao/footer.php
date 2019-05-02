@@ -10,6 +10,7 @@
     </footer>
     
     </div>
+    </div>
     <!--<script src="angular/angular.js"></script>-->
     <script src="angular/main.js"></script>
 </body>

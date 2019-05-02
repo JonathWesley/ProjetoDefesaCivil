@@ -1,9 +1,13 @@
-var app = angular.module("myApp", []);
-
-app.controller("myCtrl", function($scope){
+angular.module("myApp", []).controller("myCtrl", function($scope){
     $scope.telefone = "(47) 3268-3133";
     $scope.endereco = "R. Pardal, 111 - Ariribá, Balneário Camboriú - SC";
     $scope.pesquisa = "";
+    $scope.sel_endereco = "Coordenada";
+    $scope.categoria = 0;
+    $scope.grupo = 0;
+    $scope.subgrupo = 0;
+    $scope.tipo = 0;
+    $scope.subtipo = 0;
     
     $("#cep").focusout(function(){
         $(this).val().replace('-', '');
@@ -20,9 +24,4 @@ app.controller("myCtrl", function($scope){
             }
         });	
     });
-
-    
-
-    //Variaveis para salvar no cadastramento de ocorrencias
-    $scope.nome_completo = "";
 });

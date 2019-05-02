@@ -29,7 +29,7 @@
                     <option value="Logradouro">Logradouro</option>
                 </select>
             </div>
-            <div>
+            <div ng-show="sel_endereco == 'Coordenada'">
                 <div>
                     Longitude: <span style="color:red;">*</span>
                     <input name="longitude" type="text" class="form-control">
@@ -39,29 +39,31 @@
                     <input name="latitude" type="text" class="form-control">
                 </div>
             </div>
-            <div>
-                CEP:
-                <input id="cep" name="cep" type="text" class="form-control" ng-model="cep">
-            </div>
-            <div>
-                Logradouro: <span style="color:red;">*</span>
-                <input id="logradouro" name="logradouro" type="text" class="form-control">
-            </div>
-            <div>
-                Número:
-                <input id="complemento" name="complemento" type="text" class="form-control">
-            </div>
-            <div>
-                Bairro:
-                <input id="bairro" name="bairro" type="text" class="form-control">
-            </div>
-            <div>
-                Cidade:
-                <input id="cidade" name="cidade" type="text" class="form-control">
-            </div>
-            <div>
-                Referência:
-                <input name="referencia" type="text" class="form-control">
+            <div ng-show="sel_endereco == 'Logradouro'">
+                <div>
+                    CEP:
+                    <input id="cep" name="cep" type="text" class="form-control" ng-model="cep">
+                </div>
+                <div>
+                    Logradouro: <span style="color:red;">*</span>
+                    <input id="logradouro" name="logradouro" type="text" class="form-control">
+                </div>
+                <div>
+                    Número:
+                    <input id="complemento" name="complemento" type="text" class="form-control">
+                </div>
+                <div>
+                    Bairro:
+                    <input id="bairro" name="bairro" type="text" class="form-control">
+                </div>
+                <div>
+                    Cidade:
+                    <input id="cidade" name="cidade" type="text" class="form-control">
+                </div>
+                <div>
+                    Referência:
+                    <input name="referencia" type="text" class="form-control">
+                </div>
             </div>
         </div>
         <div class="box">
@@ -127,9 +129,110 @@
         </div>
         <div class="box">
             <div>
-                Cobrade: <span style="color:red;">*</span>
-                <input name="cobrade" type="text" class="form-control">
+                Cobrade: <span style="color:red;">*</span><br>
+                <div class="cobrade">
+                    Categoria:
+                    <select name="cobrade_categoria" class="form-control" ng-model="categoria">
+                        <option value="1">Naturais</option>
+                        <option value="2">Tecnológicos</option>
+                    </select>
+                    Grupo:
+                    <select name="cobrade_grupo" class="form-control" ng-model="grupo" ng-disabled="categoria == 0">
+                        <option ng-if="categoria==1" value="1">Geológico</option>
+                        <option ng-if="categoria==1" value="2">Hidrológico</option>
+                        <option ng-if="categoria==1" value="3">Meteorológico</option>
+                        <option ng-if="categoria==1" value="4">Climatólogo</option>
+                        <option ng-if="categoria==1" value="5">Biológico</option>
+                        <option ng-if="categoria==2" value="1">Desastres Relacionados a Substâncias radioativas</option>
+                        <option ng-if="categoria==2" value="2">Desastres Relacionados a Produtos Perigosos</option>
+                        <option ng-if="categoria==2" value="3">Desastres Relacionados a Incêndios Urbanos</option>
+                        <option ng-if="categoria==2" value="4">Desastres relacionados a obras civis</option>
+                        <option ng-if="categoria==2" value="5">Desastres relacionados a transporte de passageiros e cargas não perigosas</option>
+                    </select>
+                    Subgrupo:
+                    <select name="cobrade_subgrupo" class="form-control" ng-model="subgrupo" ng-disabled="grupo == 0">
+                        <option ng-if="grupo==1&&categoria==1" value="1">Terremoto</option>
+                        <option ng-if="grupo==1&&categoria==1" value="2">Emanação vulcânica</option>
+                        <option ng-if="grupo==1&&categoria==1" value="3">Movimento de massa</option>
+                        <option ng-if="grupo==1&&categoria==1" value="4">Erosão</option>
+                        <option ng-if="grupo==2&&categoria==1" value="1">Inundações</option>
+                        <option ng-if="grupo==2&&categoria==1" value="2">Enxurradas</option>
+                        <option ng-if="grupo==2&&categoria==1" value="3">Alagamentos</option>
+                        <option ng-if="grupo==3&&categoria==1" value="1">Sistemas de Grande Escala/Escala Regional</option>
+                        <option ng-if="grupo==3&&categoria==1" value="2">Tempestades</option>
+                        <option ng-if="grupo==3&&categoria==1" value="3">Temperaturas Extremas</option>
+                        <option ng-if="grupo==4&&categoria==1" value="1">Seca</option>
+                        <option ng-if="grupo==5&&categoria==1" value="1">Epidemias</option>
+                        <option ng-if="grupo==5&&categoria==1" value="2">Infestações/Pragas</option>
+                        <option ng-if="grupo==1&&categoria==2" value="1">Desastres siderais com riscos radioativos</option>
+                        <option ng-if="grupo==1&&categoria==2" value="2">Desastres com substâncias e equipamentos radioativos de uso em pesquisas, indústrias e usinas nucleares</option>
+                        <option ng-if="grupo==1&&categoria==2" value="3">Desastres relacionados com riscos de intensa poluição ambiental provocada por resíduos radioativos</option>
+                        <option ng-if="grupo==2&&categoria==2" value="1">Desastres em plantas e distritos industriais, parques e armazenamentos com extravasamento de produtos perigosos</option>
+                        <option ng-if="grupo==2&&categoria==2" value="2">Desastres relacionados à contaminação da água</option>
+                        <option ng-if="grupo==2&&categoria==2" value="3">Desastres Relacionados a Conflitos Bélicos</option>
+                        <option ng-if="grupo==2&&categoria==2" value="4">Desastres relacionados a transporte de produtos perigosos</option>
+                        <option ng-if="grupo==3&&categoria==2" value="1">Incêndios urbanos</option>
+                        <option ng-if="grupo==4&&categoria==2" value="1">Colapso de edificações</option>
+                        <option ng-if="grupo==4&&categoria==2" value="2">Rompimento/colapso de barragens</option>
+                        <option ng-if="grupo==5&&categoria==2" value="1">Transporte rodoviário</option>
+                        <option ng-if="grupo==5&&categoria==2" value="2">Transporte ferroviário</option>
+                        <option ng-if="grupo==5&&categoria==2" value="3">Transporte aéreo</option>
+                        <option ng-if="grupo==5&&categoria==2" value="4">Transporte marítimo</option>
+                        <option ng-if="grupo==5&&categoria==2" value="5">Transporte aquaviário</option>
+                    </select>
+                    Tipo:
+                    <select name="cobrade_tipo" class="form-control" ng-model="tipo" ng-disabled="subgrupo==0||subgrupo==2">
+                        <option ng-if="subgrupo==1&&grupo==1&&categoria==1" value="1">Tremor de terra</option>
+                        <option ng-if="subgrupo==1&&grupo==1&&categoria==1" value="2">Tsunami</option>
+                        <option ng-if="subgrupo==2&&grupo==1&&categoria==1" value="0"></option>
+                        <option ng-if="subgrupo==4&&grupo==1&&categoria==1" value="1"></option>
+                        <option ng-if="subgrupo==5&&grupo==1&&categoria==1" value="1"></option>
+                        <option ng-if="subgrupo==1&&grupo==1&&categoria==1" value="1"></option>
+                        <option ng-if="subgrupo==1&&grupo==1&&categoria==1" value="1"></option>
+                        <option ng-if="subgrupo==1&&grupo==1&&categoria==1" value="1"></option>
+                        <option ng-if="subgrupo==1&&grupo==1&&categoria==1" value="1"></option>
+                        <option ng-if="subgrupo==1&&grupo==1&&categoria==1" value="1"></option>
+                        <option ng-if="subgrupo==1&&grupo==1&&categoria==1" value="1"></option>
+                        <option ng-if="subgrupo==1&&grupo==1&&categoria==1" value="1"></option>
+                        <option ng-if="subgrupo==1&&grupo==1&&categoria==1" value="1"></option>
+                        <option ng-if="subgrupo==1&&grupo==1&&categoria==1" value="1"></option>
+                        <option ng-if="subgrupo==1&&grupo==1&&categoria==1" value="1"></option>
+                        <option ng-if="subgrupo==1&&grupo==1&&categoria==1" value="1"></option>
+                        <option ng-if="subgrupo==1&&grupo==1&&categoria==1" value="1"></option>
+                        <option ng-if="subgrupo==1&&grupo==1&&categoria==1" value="1"></option>
+                        <option ng-if="subgrupo==1&&grupo==1&&categoria==1" value="1"></option>
+                        <option ng-if="subgrupo==1&&grupo==1&&categoria==1" value="1"></option>
+                        <option ng-if="subgrupo==1&&grupo==1&&categoria==1" value="1"></option>
+                        <option ng-if="subgrupo==1&&grupo==1&&categoria==1" value="1"></option>
+                        <option ng-if="subgrupo==1&&grupo==1&&categoria==1" value="1"></option>
+                        <option ng-if="subgrupo==1&&grupo==1&&categoria==1" value="1"></option>
+                        <option ng-if="subgrupo==1&&grupo==1&&categoria==1" value="1"></option>
+                        <option ng-if="subgrupo==1&&grupo==1&&categoria==1" value="1"></option>
+                        <option ng-if="subgrupo==1&&grupo==1&&categoria==1" value="1"></option>
+                        <option ng-if="subgrupo==1&&grupo==1&&categoria==1" value="1"></option>
+                        <option ng-if="subgrupo==1&&grupo==1&&categoria==1" value="1"></option>
+                        <option ng-if="subgrupo==1&&grupo==1&&categoria==1" value="1"></option>
+                        <option ng-if="subgrupo==1&&grupo==1&&categoria==1" value="1"></option>
+                        <option ng-if="subgrupo==1&&grupo==1&&categoria==1" value="1"></option>
+                        <option ng-if="subgrupo==1&&grupo==1&&categoria==1" value="1"></option>
+                        <option ng-if="subgrupo==1&&grupo==1&&categoria==1" value="1"></option>
+                        <option ng-if="subgrupo==1&&grupo==1&&categoria==1" value="1"></option>
+                        <option ng-if="subgrupo==1&&grupo==1&&categoria==1" value="1"></option>
+                        <option ng-if="subgrupo==1&&grupo==1&&categoria==1" value="1"></option>
+                        <option ng-if="subgrupo==1&&grupo==1&&categoria==1" value="1"></option>
+                        <option ng-if="subgrupo==1&&grupo==1&&categoria==1" value="1"></option>
+                        <option ng-if="subgrupo==1&&grupo==1&&categoria==1" value="1"></option>
+                        <option ng-if="subgrupo==1&&grupo==1&&categoria==1" value="1"></option>
+
+                    </select>
+                    Subtipo:
+                    <select name="cobrade_subtipo" class="form-control" ng-model="subtipo" ng-disabled="tipo == 0">
+                        <option value="1">Naturais</option>
+                        <option value="2">Tecnológicos</option>
+                    </select>
+                </div>
             </div>
+            <br>
             <div>
                 Natureza da ocorrência:
                 <input name="natureza" type="text" class="form-control">
