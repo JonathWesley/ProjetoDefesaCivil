@@ -18,13 +18,30 @@ $descricao = addslashes($_POST['descricao']);
 $ocorr_origem = addslashes($_POST['ocorr_origem']);
 $pessoa_atendida_1 = addslashes($_POST['pessoa_atendida_1']);
 $pessoa_atendida_2 = addslashes($_POST['pessoa_atendida_2']);
-$cobrade = addslashes($_POST['cobrade']);
+$cobrade_categoria = $_POST['cobrade_categoria'];
+$cobrade_grupo = $_POST['cobrade_grupo'];
+$cobrade_subgrupo = $_POST['cobrade_subgrupo'];
+$cobrade_tipo = $_POST['cobrade_tipo'];
+$cobrade_subtipo = $_POST['cobrade_subtipo'];
 $natureza = addslashes($_POST['natureza']);
 $possui_fotos = addslashes($_POST['possui_fotos']);
 $prioridade = addslashes($_POST['prioridade']);
 $analisado = addslashes($_POST['analisado']);
 $congelado = addslashes($_POST['congelado']);
 $encerrado = addslashes($_POST['encerrado']);
+
+if(!preg_match("/^[0-5]$/", $cobrade_categoria))
+	$cobrade_categoria = 0;
+if(!preg_match("/^[0-5]$/", $cobrade_grupo))
+	$cobrade_grupo = 0;
+if(!preg_match("/^[0-5]$/", $cobrade_subgrupo))
+	$cobrade_subgrupo = 0;
+if(!preg_match("/^[0-5]$/", $cobrade_tipo))
+	$cobrade_tipo = 0;
+if(!preg_match("/^[0-5]$/", $cobrade_subtipo))
+	$cobrade_subtipo = 0;
+
+$cobrade = $cobrade_categoria.$cobrade_grupo.$cobrade_subgrupo.$cobrade_tipo.$cobrade_subtipo;
 
 $logradouro_id = 'null';
 if($endereco_principal == "Logradouro"){
@@ -99,11 +116,14 @@ $query = "INSERT INTO ocorrencia
 		('$endereco_principal',$latitude,$longitude,$logradouro_id,$agente_principal,
 		$agente_apoio_1,$agente_apoio_2,$ocorr_retorno,$ocorr_referencia,'$data_lancamento',
 		'$data_ocorrencia','$descricao','$ocorr_origem',$pessoa_atendida_1,$pessoa_atendida_2,
-		$cobrade,'$natureza',$possui_fotos,'$prioridade',$analisado,$congelado,$encerrado)";
+		'$cobrade','$natureza',$possui_fotos,'$prioridade',$analisado,$congelado,$encerrado)";
 
 $result = pg_query($connection, $query);
-if(!$result)
-	echo 'Erro: '.pg_last_error();
-	//header('location:index.php?pagina=cadastrarOcorrencia&erroDB');
+if(!$result){
+	//echo 'cobrade: '.$cobrade.'<br>';
+	//echo 'Erro: '.pg_last_error();
+	$erro = pg_last_error();
+	header('location:index.php?pagina=cadastrarOcorrencia&erroDB');
+}
 else
 	header('location:index.php?pagina=cadastrarOcorrencia&sucesso');

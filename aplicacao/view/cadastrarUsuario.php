@@ -2,6 +2,25 @@
     <div class="jumbotron">
     <form method="post" action="processa_cadastrar_usuario.php">
         <div class="box">
+                <?php 
+                    if(isset($_GET['sucesso'])){
+                ?>
+                <div class="alert alert-success" role="alert">
+                    Ocorrencia cadastrada com sucesso.
+                </div>
+                <?php 
+                    }
+                ?>
+                <?php 
+                    if(isset($_GET['erroDB'])){
+                ?>
+                <div class="alert alert-danger" role="alert">
+                    Falha ao cadastrar ocorrencia. <br>
+                    <?php echo $_GET['erroDB']; ?>
+                </div>
+                <?php 
+                    }
+                ?>
                 <nav>
                     Nome completo:
                     <div class="form-group">

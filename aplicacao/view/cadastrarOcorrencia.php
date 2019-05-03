@@ -16,7 +16,7 @@
             ?>
             <div class="alert alert-danger" role="alert">
                 Falha ao cadastrar ocorrencia. <br>
-                <?php echo 'a'.pg_last_error(); ?>
+                <?php echo $_GET['erroDB']; ?>
             </div>
             <?php 
                 }
@@ -129,14 +129,14 @@
         </div>
         <div class="box">
             <div>
-                Cobrade: <span style="color:red;">*</span><br>
+                Cobrade: 
                 <div class="cobrade">
-                    Categoria:
+                    Categoria: <span style="color:red;">*</span><br>
                     <select name="cobrade_categoria" class="form-control" ng-model="categoria">
                         <option value="1">Naturais</option>
                         <option value="2">Tecnológicos</option>
                     </select>
-                    Grupo:
+                    Grupo: <span style="color:red;" ng-hide="categoria == 0">*</span><br>
                     <select name="cobrade_grupo" class="form-control" ng-model="grupo" ng-disabled="categoria == 0">
                         <option ng-if="categoria==1" value="1">Geológico</option>
                         <option ng-if="categoria==1" value="2">Hidrológico</option>
@@ -149,7 +149,7 @@
                         <option ng-if="categoria==2" value="4">Desastres relacionados a obras civis</option>
                         <option ng-if="categoria==2" value="5">Desastres relacionados a transporte de passageiros e cargas não perigosas</option>
                     </select>
-                    Subgrupo:
+                    Subgrupo: <span style="color:red;" ng-hide="grupo == 0">*</span><br>
                     <select name="cobrade_subgrupo" class="form-control" ng-model="subgrupo" ng-disabled="grupo == 0">
                         <option ng-if="grupo==1&&categoria==1" value="1">Terremoto</option>
                         <option ng-if="grupo==1&&categoria==1" value="2">Emanação vulcânica</option>
@@ -180,55 +180,93 @@
                         <option ng-if="grupo==5&&categoria==2" value="4">Transporte marítimo</option>
                         <option ng-if="grupo==5&&categoria==2" value="5">Transporte aquaviário</option>
                     </select>
-                    Tipo:
-                    <select name="cobrade_tipo" class="form-control" ng-model="tipo" ng-disabled="subgrupo==0||subgrupo==2">
+                    Tipo: <span style="color:red;" ng-hide="subgrupo == 0">*</span><br>
+                    <select name="cobrade_tipo" class="form-control" ng-model="tipo" ng-disabled="subgrupo==0">
                         <option ng-if="subgrupo==1&&grupo==1&&categoria==1" value="1">Tremor de terra</option>
                         <option ng-if="subgrupo==1&&grupo==1&&categoria==1" value="2">Tsunami</option>
                         <option ng-if="subgrupo==2&&grupo==1&&categoria==1" value="0"></option>
-                        <option ng-if="subgrupo==4&&grupo==1&&categoria==1" value="1"></option>
-                        <option ng-if="subgrupo==5&&grupo==1&&categoria==1" value="1"></option>
-                        <option ng-if="subgrupo==1&&grupo==1&&categoria==1" value="1"></option>
-                        <option ng-if="subgrupo==1&&grupo==1&&categoria==1" value="1"></option>
-                        <option ng-if="subgrupo==1&&grupo==1&&categoria==1" value="1"></option>
-                        <option ng-if="subgrupo==1&&grupo==1&&categoria==1" value="1"></option>
-                        <option ng-if="subgrupo==1&&grupo==1&&categoria==1" value="1"></option>
-                        <option ng-if="subgrupo==1&&grupo==1&&categoria==1" value="1"></option>
-                        <option ng-if="subgrupo==1&&grupo==1&&categoria==1" value="1"></option>
-                        <option ng-if="subgrupo==1&&grupo==1&&categoria==1" value="1"></option>
-                        <option ng-if="subgrupo==1&&grupo==1&&categoria==1" value="1"></option>
-                        <option ng-if="subgrupo==1&&grupo==1&&categoria==1" value="1"></option>
-                        <option ng-if="subgrupo==1&&grupo==1&&categoria==1" value="1"></option>
-                        <option ng-if="subgrupo==1&&grupo==1&&categoria==1" value="1"></option>
-                        <option ng-if="subgrupo==1&&grupo==1&&categoria==1" value="1"></option>
-                        <option ng-if="subgrupo==1&&grupo==1&&categoria==1" value="1"></option>
-                        <option ng-if="subgrupo==1&&grupo==1&&categoria==1" value="1"></option>
-                        <option ng-if="subgrupo==1&&grupo==1&&categoria==1" value="1"></option>
-                        <option ng-if="subgrupo==1&&grupo==1&&categoria==1" value="1"></option>
-                        <option ng-if="subgrupo==1&&grupo==1&&categoria==1" value="1"></option>
-                        <option ng-if="subgrupo==1&&grupo==1&&categoria==1" value="1"></option>
-                        <option ng-if="subgrupo==1&&grupo==1&&categoria==1" value="1"></option>
-                        <option ng-if="subgrupo==1&&grupo==1&&categoria==1" value="1"></option>
-                        <option ng-if="subgrupo==1&&grupo==1&&categoria==1" value="1"></option>
-                        <option ng-if="subgrupo==1&&grupo==1&&categoria==1" value="1"></option>
-                        <option ng-if="subgrupo==1&&grupo==1&&categoria==1" value="1"></option>
-                        <option ng-if="subgrupo==1&&grupo==1&&categoria==1" value="1"></option>
-                        <option ng-if="subgrupo==1&&grupo==1&&categoria==1" value="1"></option>
-                        <option ng-if="subgrupo==1&&grupo==1&&categoria==1" value="1"></option>
-                        <option ng-if="subgrupo==1&&grupo==1&&categoria==1" value="1"></option>
-                        <option ng-if="subgrupo==1&&grupo==1&&categoria==1" value="1"></option>
-                        <option ng-if="subgrupo==1&&grupo==1&&categoria==1" value="1"></option>
-                        <option ng-if="subgrupo==1&&grupo==1&&categoria==1" value="1"></option>
-                        <option ng-if="subgrupo==1&&grupo==1&&categoria==1" value="1"></option>
-                        <option ng-if="subgrupo==1&&grupo==1&&categoria==1" value="1"></option>
-                        <option ng-if="subgrupo==1&&grupo==1&&categoria==1" value="1"></option>
-                        <option ng-if="subgrupo==1&&grupo==1&&categoria==1" value="1"></option>
-                        <option ng-if="subgrupo==1&&grupo==1&&categoria==1" value="1"></option>
-
+                        <option ng-if="subgrupo==3&&grupo==1&&categoria==1" value="1">Quedas, Tombamentos e rolamentos</option>
+                        <option ng-if="subgrupo==3&&grupo==1&&categoria==1" value="2">Deslizamentos</option>
+                        <option ng-if="subgrupo==3&&grupo==1&&categoria==1" value="3">Corridas de Massa</option>
+                        <option ng-if="subgrupo==3&&grupo==1&&categoria==1" value="4">Subsidências e colapsos</option>
+                        <option ng-if="subgrupo==4&&grupo==1&&categoria==1" value="1">Erosão Costeira/Marinha</option>
+                        <option ng-if="subgrupo==4&&grupo==1&&categoria==1" value="2">Erosão de Margem Fluvial</option>
+                        <option ng-if="subgrupo==4&&grupo==1&&categoria==1" value="3">Erosão Continental</option>
+                        <option ng-if="grupo==2&&categoria==1" value="0"></option>
+                        <option ng-if="subgrupo==1&&grupo==3&&categoria==1" value="1">Ciclones</option>
+                        <option ng-if="subgrupo==1&&grupo==3&&categoria==1" value="2">Frentes Frias/Zonas de Convergência</option>
+                        <option ng-if="subgrupo==2&&grupo==3&&categoria==1" value="1">Tempestade Local/Convectiva</option>
+                        <option ng-if="subgrupo==3&&grupo==3&&categoria==1" value="1">Onda de Calor</option>
+                        <option ng-if="subgrupo==3&&grupo==3&&categoria==1" value="2">Onda de Frio</option>
+                        <option ng-if="subgrupo==1&&grupo==4&&categoria==1" value="1">Estiagem</option>
+                        <option ng-if="subgrupo==1&&grupo==4&&categoria==1" value="2">Seca</option>
+                        <option ng-if="subgrupo==1&&grupo==4&&categoria==1" value="3">Incêndio Florestal</option>
+                        <option ng-if="subgrupo==1&&grupo==4&&categoria==1" value="4">Baixa Humidade do Ar</option>
+                        <option ng-if="subgrupo==1&&grupo==5&&categoria==1" value="1">Doenças infecciosas virais </option>
+                        <option ng-if="subgrupo==1&&grupo==5&&categoria==1" value="2">Doenças infecciosas bacterianas</option>
+                        <option ng-if="subgrupo==1&&grupo==5&&categoria==1" value="3">Doenças infecciosas parasíticas</option>
+                        <option ng-if="subgrupo==1&&grupo==5&&categoria==1" value="4">Doenças infecciosas fúngicas</option>
+                        <option ng-if="subgrupo==2&&grupo==5&&categoria==1" value="1">Infestações de animais</option>
+                        <option ng-if="subgrupo==2&&grupo==5&&categoria==1" value="2"> Infestações de algas</option>
+                        <option ng-if="subgrupo==2&&grupo==5&&categoria==1" value="3">Outras Infestações</option>
+                        <option ng-if="subgrupo==1&&grupo==1&&categoria==2" value="1">Queda de satélite (radionuclídeos)</option>
+                        <option ng-if="subgrupo==2&&grupo==1&&categoria==2" value="1">ontes radioativas em processos de produção</option>
+                        <option ng-if="subgrupo==3&&grupo==1&&categoria==2" value="1">Outras fontes de liberação de radionuclídeos para o meio ambiente</option>
+                        <option ng-if="subgrupo==1&&grupo==2&&categoria==2" value="1">Liberação de produtos químicos para a atmosfera causada por explosão ou incêndio</option>
+                        <option ng-if="subgrupo==2&&grupo==2&&categoria==2" value="1">Liberação de produtos químicos nos sistemas de água potável</option>
+                        <option ng-if="subgrupo==2&&grupo==2&&categoria==2" value="2">Derramamento de produtos químicos em ambiente lacustre, fluvial, marinho e aquíferos</option>
+                        <option ng-if="subgrupo==3&&grupo==2&&categoria==2" value="1">Liberação produtos químicos e contaminação como conseqüência de ações militares.</option>
+                        <option ng-if="subgrupo==4&&grupo==2&&categoria==2" value="1">Transporte rodoviário</option>
+                        <option ng-if="subgrupo==4&&grupo==2&&categoria==2" value="2">Transporte ferroviário</option>
+                        <option ng-if="subgrupo==4&&grupo==2&&categoria==2" value="3">Transporte aéreo</option>
+                        <option ng-if="subgrupo==4&&grupo==2&&categoria==2" value="4">Transporte dutoviário</option>
+                        <option ng-if="subgrupo==4&&grupo==2&&categoria==2" value="5">Transporte marítimo</option>
+                        <option ng-if="subgrupo==4&&grupo==2&&categoria==2" value="6">Transporte aquaviário</option>
+                        <option ng-if="subgrupo==1&&grupo==3&&categoria==2" value="1">Incêndios em plantas e distritos industriais, parques e depósitos</option>
+                        <option ng-if="subgrupo==1&&grupo==3&&categoria==2" value="2">Incêndios em aglomerados residenciais</option>
+                        <option ng-if="grupo==4&&categoria==2" value="0"></option>
+                        <option ng-if="grupo==5&&categoria==2" value="0"></option>
                     </select>
-                    Subtipo:
-                    <select name="cobrade_subtipo" class="form-control" ng-model="subtipo" ng-disabled="tipo == 0">
-                        <option value="1">Naturais</option>
-                        <option value="2">Tecnológicos</option>
+                    Subtipo: <span style="color:red;" ng-hide="tipo==0 || categoria==2">*</span><br>
+                    <select name="cobrade_subtipo" class="form-control" ng-model="subtipo" ng-disabled="tipo==0 || categoria==2">
+                        <option ng-if="subgrupo==1&&grupo==1&&categoria==1" value="0"></option>
+                        <option ng-if="subgrupo==2&&grupo==1&&categoria==1" value="0"></option>
+                        <option ng-if="tipo==1&&subgrupo==3&&grupo==1&&categoria==1" value="1">Blocos</option>
+                        <option ng-if="tipo==1&&subgrupo==3&&grupo==1&&categoria==1" value="2">Lascas</option>
+                        <option ng-if="tipo==1&&subgrupo==3&&grupo==1&&categoria==1" value="3">Matacões</option>
+                        <option ng-if="tipo==1&&subgrupo==3&&grupo==1&&categoria==1" value="4">Lajes</option>
+                        <option ng-if="tipo==2&&subgrupo==3&&grupo==1&&categoria==1" value="1">Deslizamentos de solo e ou rocha</option>
+                        <option ng-if="tipo==3&&subgrupo==3&&grupo==1&&categoria==1" value="1">Solo/Lama</option>
+                        <option ng-if="tipo==3&&subgrupo==3&&grupo==1&&categoria==1" value="2">Rocha/Detrito</option>
+                        <option ng-if="tipo==4&&subgrupo==3&&grupo==1&&categoria==1" value="0"></option>
+                        <option ng-if="tipo==1&&subgrupo==4&&grupo==1&&categoria==1" value="0"></option>
+                        <option ng-if="tipo==2&&subgrupo==4&&grupo==1&&categoria==1" value="0"></option>
+                        <option ng-if="tipo==3&&subgrupo==4&&grupo==1&&categoria==1" value="1">Laminar</option>
+                        <option ng-if="tipo==3&&subgrupo==4&&grupo==1&&categoria==1" value="2">Ravinas</option>
+                        <option ng-if="tipo==3&&subgrupo==4&&grupo==1&&categoria==1" value="3">Boçorocas</option>
+                        <option ng-if="grupo==2&&categoria==1" value="0"></option>
+                        <option ng-if="tipo==1&&subgrupo==1&&grupo==3&&categoria==1" value="1">Ventos Costeiros (Mobilidade de Dunas)</option>
+                        <option ng-if="tipo==1&&subgrupo==1&&grupo==3&&categoria==1" value="2">Marés de Tempestade (Ressacas)</option>
+                        <option ng-if="tipo==2&&subgrupo==1&&grupo==3&&categoria==1" value="0"></option>
+                        <option ng-if="tipo==1&&subgrupo==2&&grupo==3&&categoria==1" value="1">Tornados</option>
+                        <option ng-if="tipo==1&&subgrupo==2&&grupo==3&&categoria==1" value="2">Tempestade de Raios</option>
+                        <option ng-if="tipo==1&&subgrupo==2&&grupo==3&&categoria==1" value="3">Granizo</option>
+                        <option ng-if="tipo==1&&subgrupo==2&&grupo==3&&categoria==1" value="4">Chuvas Intensas</option>
+                        <option ng-if="tipo==1&&subgrupo==2&&grupo==3&&categoria==1" value="5">Vendaval</option>
+                        <option ng-if="tipo==1&&subgrupo==3&&grupo==3&&categoria==1" value="0"></option>
+                        <option ng-if="tipo==2&&subgrupo==3&&grupo==3&&categoria==1" value="1">Friagem</option>
+                        <option ng-if="tipo==2&&subgrupo==3&&grupo==3&&categoria==1" value="2">Geadas</option>
+                        <option ng-if="tipo==1&&subgrupo==1&&grupo==4&&categoria==1" value="0"></option>
+                        <option ng-if="tipo==2&&subgrupo==1&&grupo==4&&categoria==1" value="0"></option>
+                        <option ng-if="tipo==3&&subgrupo==1&&grupo==4&&categoria==1" value="1">Incêndios em Parques, Áreas de Proteção Ambiental e Áreas de Preservação Permanente Nacionais, Estaduais ou Municipais</option>
+                        <option ng-if="tipo==3&&subgrupo==1&&grupo==4&&categoria==1" value="2">Incêndios em áreas não protegidas, com reflexos na qualidade do ar</option>
+                        <option ng-if="tipo==4&&subgrupo==1&&grupo==4&&categoria==1" value="0"></option>
+                        <option ng-if="subgrupo==1&&grupo==5&&categoria==1" value="0"></option>
+                        <option ng-if="tipo==1&&subgrupo==2&&grupo==5&&categoria==1" value="0"></option>
+                        <option ng-if="tipo==2&&subgrupo==2&&grupo==5&&categoria==1" value="1">Marés vermelhas</option>
+                        <option ng-if="tipo==2&&subgrupo==2&&grupo==5&&categoria==1" value="2">Ciano bactérias em reservatórios</option>
+                        <option ng-if="tipo==3&&subgrupo==2&&grupo==5&&categoria==1" value="0"></option>
+                        <option ng-if="categoria==2" value="0"></option>
                     </select>
                 </div>
             </div>

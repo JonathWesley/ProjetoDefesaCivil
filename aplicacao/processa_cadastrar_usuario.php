@@ -101,8 +101,9 @@ if(strlen($erros) > 0){
 						(id_usuario, nome, cpf, telefone, nivel_acesso) 
 						VALUES ($id, '$nome', '$cpf', '$telefone', $acesso)");
 	if(!$result)
-		echo 'Erro: '.pg_last_error();
+		header('location:index.php?pagina=cadastrarUsuario&erroDB');
+		//echo 'Erro: '.pg_last_error();
 	else
-		header('location:index.php');
+		header('location:index.php?pagina=cadastrarUsuario&sucesso');
 }
 
