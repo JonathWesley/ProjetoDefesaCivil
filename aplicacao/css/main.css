@@ -160,3 +160,11 @@ div h4{
     padding: 5px;
     margin: 0px;
 }
+
+.char-count{
+    color:#ccc;
+    font-size:12px;
+    position: relative;
+    bottom:20px;
+    left:410px;
+}

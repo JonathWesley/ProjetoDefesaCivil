@@ -24,7 +24,7 @@
             <div>
                 Endereço principal: <span style="color:red;">*</span>
                 <label for="endereco_principal"></label>
-                <select name="endereco_principal" class="form-control" ng-model="sel_endereco">
+                <select name="endereco_principal" class="form-control" ng-model="sel_endereco" required>
                     <option value="Coordenada">Coordenada</option>
                     <option value="Logradouro">Logradouro</option>
                 </select>
@@ -69,7 +69,7 @@
         <div class="box">
             <div>
                 Agente principal: <span style="color:red;">*</span>
-                <input name="agente_principal" type="text" class="form-control">
+                <input name="agente_principal" type="text" class="form-control" required>
             </div>
             <div>
                 Agente de apoio 1:
@@ -85,28 +85,29 @@
             <br>
             <nav>
                 <label class="radio-inline">
-                    <input type="radio" value="true" name="ocorr_retorno">Sim
+                    <input type="radio" id="ocorr_retorno" ng-model="retorno" ng-value="true" value="true" name="ocorr_retorno">Sim
                 </label>
                 <label class="radio-inline">
-                    <input type="radio" value="false" name="ocorr_retorno" checked>Não
+                    <input type="radio" ng-model="retorno" ng-value="false" value="false" name="ocorr_retorno" checked>Não
                 </label>
             </nav>
             <br>
-            <div>
-                Código de referência:
-                <input name="ocorr_referencia" type="text" class="form-control">
+            <div ng-switch="retorno">
+                Código de referência: <span style="color:red;" ng-switch-when="true">*</span>
+                <input id="ocorr_referencia" name="ocorr_referencia" type="text" class="form-control">
             </div>
             <div>
                 Data de lançamento: <span style="color:red;">*</span>
-                <input name="data_lancamento" type="date" placeholder="DD/MM/YYYY" class="form-control">
+                <input name="data_lancamento" type="date" placeholder="DD/MM/YYYY" class="form-control" required>
             </div>
             <div>
                 Data de ocorrência: <span style="color:red;">*</span>
-                <input name="data_ocorrencia" type="date" placeholder="DD/MM/YYYY" class="form-control">
+                <input name="data_ocorrencia" type="date" placeholder="DD/MM/YYYY" class="form-control" required>
             </div>
             <div>
                 Descrição:
-                <textarea name="descricao" class="form-control" cols="30" rows="5" maxlength = "100"></textarea>
+                <textarea id="descricao" name="descricao" class="form-control" cols="30" rows="2" maxlength = "100" ng-model="descricaoVal"></textarea>
+                <span class="char-count">{{descricaoVal.length || 0}}/100</span>
             </div>
             <div>
                 Origem:
@@ -117,7 +118,7 @@
             <div>
                 Pessoa atendida 1:
                 <br>
-                <input name="pessoa_atendida_1" type="text" class="form-control inline">
+                <input name="pessoa_atendida_1" type="text" class="form-control inline" value="<?php if(isset($_POST['nome_pessoa'])){echo "a".$_POST['nome_pessoa'];} ?>">
                 <button type="button" class="btn-default btn-small inline" data-toggle="modal" data-target="#pessoasModal"><span class="glyphicon glyphicon-plus"></span></button>
             </div>
             <div>
@@ -295,7 +296,7 @@
             <div>
                 Prioridade: <span style="color:red;">*</span>
                 <label for="prioridade"></label>
-                <select name="prioridade" class="form-control">
+                <select name="prioridade" class="form-control" required>
                     <option value="Baixa">Baixa</option>
                     <option value="Média">Média</option>
                     <option value="Alta">Alta</option>

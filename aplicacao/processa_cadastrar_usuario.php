@@ -1,6 +1,8 @@
 <?php
 include 'database.php';
 
+//funcoes de validacao do preenchimento dos campos
+
 function validaCPF($cpf) {
     // Extrai somente os números
     $cpf = preg_replace( '/[^0-9]/is', '', $cpf );
@@ -47,27 +49,25 @@ $senha_confirma = ($_POST['senha_cadastro_confirma']);
 
 $erros = '';
 
-if(!preg_match("/^([a-zA-Z' ]+)$/",$nome)){
+//validacao dos campos
+if(!preg_match("/^([a-zA-Z' ]+)$/",$nome)) //aceita apenas letras e espaço em branco
 	$erros = $erros.'&nome';
-}
-if(!validaCPF($cpf)){
+if(!validaCPF($cpf)) //envia para a funcao de validacao do cpf
 	$erros = $erros.'&cpf';
-}
-if(!validaCelular($telefone)){
+if(!validaCelular($telefone)) //envia para a funcao de validacao do telefone
 	$erros = $erros.'&telefone';
-}
-if(!filter_var($email, FILTER_VALIDATE_EMAIL)){
+if(!filter_var($email, FILTER_VALIDATE_EMAIL)) //valida em formato de email
     $erros = $erros.'&email';
-}
-if(strlen($senha<6 || !preg_match("#[0-9]+#",$senha)) || !preg_match("#[A-Z]+#",$senha) || !preg_match("#[a-z]+#",$senha)){
+//aceita apenas senhas que tenhas mais de 5 digitos, com pelo menos 1 numero, 1 letra maiuscula e 1 letra minuscula
+if(strlen($senha<6 || !preg_match("#[0-9]+#",$senha)) || !preg_match("#[A-Z]+#",$senha) || !preg_match("#[a-z]+#",$senha))
 	$erros = $erros.'&senha';
-}
-if($senha != $senha_confirma){
+if($senha != $senha_confirma) //compara as senhas
 	$erro = $erros.'$confirma_senha';
-}
 
+//caso ocorra algum erro na validacao, entao volta para a pagina e indica onde esta o erro
 if(strlen($erros) > 0){
 	header('location:index.php?pagina=cadastrarUsuario'.$erros);
+//caso esteja tudo certo, procede com a inserção no banco de dados
 }else{
 	$custo = '08';
 	$string = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';

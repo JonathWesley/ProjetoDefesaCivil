@@ -25,7 +25,7 @@
             </ul>
         </div>
         </nav>
-        <h4 class="navegation"><a href="?pagina=home"><u ng-repeat="x in caminho">{{x.name + " > "}}</u></a></h4>
+        <!--<h4 class="navegation"><a href="?pagina=home"><u ng-repeat="x in caminho">{{x.name + " > "}}</u></a></h4>-->
     </header>
 
     <div class="side-menu">

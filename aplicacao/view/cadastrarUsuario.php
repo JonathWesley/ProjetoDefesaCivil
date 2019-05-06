@@ -22,7 +22,7 @@
                     }
                 ?>
                 <nav>
-                    Nome completo:
+                    Nome completo: <span style="color:red;">*</span>
                     <div class="form-group">
                         <input name="nome" type="text" class="form-control" ng-model="nome_completo" required>
                     </div>
@@ -37,7 +37,7 @@
                     }
                 ?>
                 <nav>
-                    CPF:
+                    CPF: <span style="color:red;">*</span>
                     <div class="form-group">
                         <input name="cpf" type="text" class="form-control" maxlength="11" required>
                     </div>
@@ -52,7 +52,7 @@
                     }
                 ?>
                 <nav>
-                    Telefone:
+                    Telefone: <span style="color:red;">*</span>
                     <div class="form-group">
                         <input name="telefone" type="text" class="form-control" maxlength="11" required>
                     </div>
@@ -71,7 +71,7 @@
             <div class="box">
                 <nav>
                     <div class="form-group">
-                        Nível de acesso:
+                        Nível de acesso: <span style="color:red;">*</span>
                         <label for="sel1"></label>
                         <select name="nivel_acesso" id="sel1" class="form-control">
                             <option>Usuário 1</option>
@@ -84,7 +84,7 @@
 
             <div class="box">
                 <nav>
-                    Email:
+                    Email: <span style="color:red;">*</span>
                     <div class="form-group">
                         <input name="email_cadastro" type="email" class="form-control" required>
                     </div>
@@ -99,7 +99,7 @@
                     }
                 ?>
                 <nav>
-                    Senha:
+                    Senha: <span style="color:red;">*</span>
                     <div class="form-group">
                         <input name="senha_cadastro" type="password" class="form-control" required>
                     </div>
@@ -114,7 +114,7 @@
                     }
                 ?>
                 <nav>
-                    Confirmar Senha:
+                    Confirmar Senha: <span style="color:red;">*</span>
                     <div class="form-group">
                         <input name="senha_cadastro_confirma" type="password" class="form-control" required>
                     </div>

@@ -30,6 +30,9 @@ $analisado = addslashes($_POST['analisado']);
 $congelado = addslashes($_POST['congelado']);
 $encerrado = addslashes($_POST['encerrado']);
 
+$erros = '';
+
+//verifica se os valores para formar o codigo do cobrade estao de acordo
 if(!preg_match("/^[0-5]$/", $cobrade_categoria))
 	$cobrade_categoria = 0;
 if(!preg_match("/^[0-5]$/", $cobrade_grupo))
@@ -40,7 +43,6 @@ if(!preg_match("/^[0-5]$/", $cobrade_tipo))
 	$cobrade_tipo = 0;
 if(!preg_match("/^[0-5]$/", $cobrade_subtipo))
 	$cobrade_subtipo = 0;
-
 $cobrade = $cobrade_categoria.$cobrade_grupo.$cobrade_subgrupo.$cobrade_tipo.$cobrade_subtipo;
 
 $logradouro_id = 'null';
@@ -62,13 +64,33 @@ if($endereco_principal == "Logradouro"){
 
 	$longitude = 'null';
 	$latitude = 'null';
+}else{
+	if(!preg_match("^[-+]?\d*\.?\d*$", $longitude) || $longitude == '')
+		$erros = $erros.'&longitude';
+	if(!preg_match("^[-+]?\d*\.?\d*$", $latitude) || $latitude == '')
+		$erros = $erros.'&latitude';
+}
+if(!preg_match("/^([a-zA-Z' ]+)$/",$agente_principal)) //aceita apenas letras e espaço em branco
+	$erros = $erros.'&agente_principal';
+if(!preg_match("/^([a-zA-Z' ]+)$/",$agente_apoio_1)) //aceita apenas letras e espaço em branco
+	$erros = $erros.'&agente_apoio_1';
+if(!preg_match("/^([a-zA-Z' ]+)$/",$agente_apoio_2)) //aceita apenas letras e espaço em branco
+	$erros = $erros.'&agente_apoio_2';
+if($ocorr_retorno){ //caso seja retorno de ocorrencia, verifica se nao esta vazio e soh aceita numeros
+	if(!preg_match("/^[0-9]$/", $ocorr_referencia) || $ocorr_referencia='')
+		$erros = $erros.'&ocorr_referencia';
+}else{ //caso nao for retorno, seta a variavel como null
+	$ocorr_referencia = 'null';
 }
 
 $result = pg_query($connection, "SELECT * FROM usuario WHERE nome = '$agente_principal'");
-if(!$result)
-	echo 'Erro: '.pg_last_error();
-$linha = pg_fetch_array($result, 0);
-$agente_principal = $linha['id_usuario'];
+if($result){
+	$linha = pg_fetch_array($result, 0);
+	$agente_principal = $linha['id_usuario'];
+}else{
+	$erros = $erros.'&agente_principal';
+}
+
 if($agente_apoio_1){
 	$result = pg_query($connection, "SELECT * FROM usuario WHERE nome = '$agente_apoio_1'");
 	if(!$result)
