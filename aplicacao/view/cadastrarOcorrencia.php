@@ -88,7 +88,7 @@
                     <input type="radio" id="ocorr_retorno" ng-model="retorno" ng-value="true" value="true" name="ocorr_retorno">Sim
                 </label>
                 <label class="radio-inline">
-                    <input type="radio" ng-model="retorno" ng-value="false" value="false" name="ocorr_retorno" checked>Não
+                    <input type="radio" ng-model="retorno" ng-value="false" value="false" name="ocorr_retorno">Não
                 </label>
             </nav>
             <br>
