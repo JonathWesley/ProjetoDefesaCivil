@@ -2,25 +2,16 @@
 <div class="jumbotron campo_cadastro">
     <form method="post" action="processa_cadastrar_ocorrencia.php">
         <div class="box">
-            <?php 
-                if(isset($_GET['sucesso'])){
-            ?>
+            <?php if(isset($_GET['sucesso'])){ ?>
             <div class="alert alert-success" role="alert">
                 Ocorrencia cadastrada com sucesso.
             </div>
-            <?php 
-                }
-            ?>
-            <?php 
-                if(isset($_GET['erroDB'])){
-            ?>
+            <?php } ?>
+            <?php if(isset($_GET['erroDB'])){ ?>
             <div class="alert alert-danger" role="alert">
-                Falha ao cadastrar ocorrencia. <br>
-                <?php echo $_GET['erroDB']; ?>
+                Falha ao cadastrar ocorrencia.
             </div>
-            <?php 
-                }
-            ?>
+            <?php } ?>
             <div>
                 Endereço principal: <span style="color:red;">*</span>
                 <label for="endereco_principal"></label>
@@ -29,15 +20,30 @@
                     <option value="Logradouro">Logradouro</option>
                 </select>
             </div>
+            <?php if(isset($_GET['endereco_principal'])){ ?>
+                <span class="alertErro">
+                    Opção de endereço desconhecida.
+                </span>
+            <?php } ?>
             <div ng-show="sel_endereco == 'Coordenada'">
                 <div>
                     Longitude: <span style="color:red;">*</span>
                     <input name="longitude" type="text" class="form-control">
                 </div>
+                <?php if(isset($_GET['longitude'])){ ?>
+                    <span class="alertErro">
+                        Longitude informada incorretamente.
+                    </span>
+                <?php } ?>
                 <div>
                     Latitude: <span style="color:red;">*</span>
                     <input name="latitude" type="text" class="form-control">
                 </div>
+                <?php if(isset($_GET['latitude'])){ ?>
+                    <span class="alertErro">
+                        Latitude informada incorretamente.
+                    </span>
+                <?php } ?>
             </div>
             <div ng-show="sel_endereco == 'Logradouro'">
                 <div>
@@ -48,6 +54,11 @@
                     Logradouro: <span style="color:red;">*</span>
                     <input id="logradouro" name="logradouro" type="text" class="form-control">
                 </div>
+                <?php if(isset($_GET['logradouro'])){ ?>
+                    <span class="alertErro">
+                        Logradouro informado incorretamente.
+                    </span>
+                <?php } ?>
                 <div>
                     Número:
                     <input id="complemento" name="complemento" type="text" class="form-control">
@@ -71,14 +82,31 @@
                 Agente principal: <span style="color:red;">*</span>
                 <input name="agente_principal" type="text" class="form-control" required>
             </div>
+            <?php if(isset($_GET['agente_principal'])){ ?>
+                    <span class="alertErro">
+                        Agente não encontrado ou informado incorretamente.
+                    </span>
+                <?php } ?>
             <div>
                 Agente de apoio 1:
                 <input name="agente_apoio_1" type="text" class="form-control">
             </div>
+            <?php if(isset($_GET['agente_apoio_1'])){ ?>
+                    <span class="alertErro">
+                        Agente não encontrado ou informado incorretamente.
+                    </span>
+                <?php } ?>
+            <div>
             <div>
                 Agente de apoio 2:
                 <input name="agente_apoio_2" type="text" class="form-control">
             </div>
+            <?php if(isset($_GET['agente_apoio_2'])){ ?>
+                    <span class="alertErro">
+                        Agente não encontrado ou informado incorretamente.
+                    </span>
+                <?php } ?>
+            <div>
         </div>
         <div class="box">
             Ocorrência retorno: <span style="color:red;">*</span>
@@ -96,14 +124,36 @@
                 Código de referência: <span style="color:red;" ng-switch-when="true">*</span>
                 <input id="ocorr_referencia" name="ocorr_referencia" type="text" class="form-control">
             </div>
+            <?php if(isset($_GET['ocorr_referencia'])){ ?>
+                    <span class="alertErro">
+                        Referencia incorreta.
+                    </span>
+                <?php } ?>
+            <div>
             <div>
                 Data de lançamento: <span style="color:red;">*</span>
                 <input name="data_lancamento" type="date" placeholder="DD/MM/YYYY" class="form-control" required>
             </div>
+            <?php if(isset($_GET['data_lancamento'])){ ?>
+                <span class="alertErro">
+                    Data incorreta.
+                </span>
+            <?php } ?>
+            <?php if(isset($_GET['data_ocorrencia_lancamento'])){ ?>
+                    <span class="alertErro">
+                        Data de lançamento não pode ser maior que a data da ocorrência.
+                    </span>
+                <?php } ?>
+            <div>
             <div>
                 Data de ocorrência: <span style="color:red;">*</span>
                 <input name="data_ocorrencia" type="date" placeholder="DD/MM/YYYY" class="form-control" required>
             </div>
+            <?php if(isset($_GET['data_ocorrencia'])){ ?>
+                <span class="alertErro">
+                    Data incorreta.
+                </span>
+            <?php } ?>
             <div>
                 Descrição:
                 <textarea id="descricao" name="descricao" class="form-control" cols="30" rows="2" maxlength = "100" ng-model="descricaoVal"></textarea>
@@ -121,16 +171,30 @@
                 <input name="pessoa_atendida_1" type="text" class="form-control inline" value="<?php if(isset($_POST['nome_pessoa'])){echo "a".$_POST['nome_pessoa'];} ?>">
                 <button type="button" class="btn-default btn-small inline" data-toggle="modal" data-target="#pessoasModal"><span class="glyphicon glyphicon-plus"></span></button>
             </div>
+            <?php if(isset($_GET['pessoa_atendida_1'])){ ?>
+                <span class="alertErro">
+                    Pessoa não encontrada ou informada incorretamente.
+                </span>
+            <?php } ?>
             <div>
                 Pessoa atendida 2:
                 <br>
                 <input name="pessoa_atendida_2" type="text" class="form-control inline">
             </div>
-            
+            <?php if(isset($_GET['pessoa_atendida_2'])){ ?>
+                <span class="alertErro">
+                    Pessoa não encontrada ou informada incorretamente.
+                </span>
+            <?php } ?>
         </div>
         <div class="box">
             <div>
                 Cobrade: 
+                <?php if(isset($_GET['cobrade'])){ ?>
+                    <br><span class="alertErro">
+                        Cobrade incorreto.
+                    </span>
+                <?php } ?>
                 <div class="cobrade">
                     Categoria: <span style="color:red;">*</span><br>
                     <select name="cobrade_categoria" class="form-control" ng-model="categoria">
@@ -302,6 +366,11 @@
                     <option value="Alta">Alta</option>
                 </select>
             </div>
+            <?php if(isset($_GET['prioridade'])){ ?>
+                <span class="alertErro">
+                    Prioridade informada incorretamente.
+                </span><br>
+            <?php } ?>
             Analisado: <span style="color:red;">*</span>
             <br>
             <nav>

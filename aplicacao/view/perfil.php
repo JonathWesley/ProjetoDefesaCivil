@@ -2,6 +2,12 @@
     <div class="jumbotron text-center">
         <img src="images/logo.jpg" alt="DefesaCivil" class="img-circle">
         <?php 
+            include 'database.php';
+
+            session_start();
+            $id = (int)$_SESSION['id_usuario'];
+            $consulta_login = pg_query($connection, "SELECT * FROM usuario WHERE id_usuario = $id");
+
             $linha = pg_fetch_array($consulta_login, 0);
             $cpf = $linha['cpf'];
             $telefone = $linha['telefone'];

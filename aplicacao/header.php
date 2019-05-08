@@ -33,7 +33,9 @@
         <div class="jumbotron">
             <h4 class="text-center">Ocorrências</h4>
             <ul class="menu-ul">
+                <?php if($_SESSION['nivel_acesso'] == 1){ ?>
                 <li><a href="?pagina=cadastrarOcorrencia">Cadastrar</a></li>
+                <?php } ?>
                 <li><a href="?pagina=consultarOcorrencia&n=0">Consultar</a></li>
             </ul>
         </div>
@@ -43,7 +45,9 @@
         <div class="jumbotron">
             <h4 class="text-center">Usuários</h4>
             <ul class="menu-ul">
+                <?php if($_SESSION['nivel_acesso'] == 1){ ?>
                 <li><a href="?pagina=cadastrarUsuario">Cadastrar</a></li>
+                <?php } ?>
                 <li><a href="?pagina=consultarUsuario&n=0">Consultar</a></li>
             </ul>
         </div>

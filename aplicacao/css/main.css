@@ -168,3 +168,8 @@ div h4{
     bottom:20px;
     left:410px;
 }
+
+.alertErro{
+    color:#f22a1f;
+    font-size:14px;
+}

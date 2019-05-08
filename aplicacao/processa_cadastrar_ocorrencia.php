@@ -47,6 +47,8 @@ if(!preg_match("/^[0-5]$/", $cobrade_tipo))
 if(!preg_match("/^[0-5]$/", $cobrade_subtipo))
 	$cobrade_subtipo = 0;
 $cobrade = $cobrade_categoria.$cobrade_grupo.$cobrade_subgrupo.$cobrade_tipo.$cobrade_subtipo;
+if(strlen($cobrade) > 5 || substr($cobrade, 0, 1) == '0' || substr($cobrade, 1, 2) == '0' || substr($cobrade, 2, 3) == '0')
+	$erros = $erros.'&cobrade';
 
 //garante que o valor do endereço seja apenas igual a Logradouro ou Coordenada
 if($endereco_principal != "Logradouro" && $endereco_principal != "Coordenada")
@@ -72,10 +74,10 @@ if($endereco_principal == "Logradouro"){
 
 	$longitude = 'null';
 	$latitude = 'null';
-}else{ //valida os dados de latitude e longitude     ^[-+]?\d*\.?\d*$ -> regex
-	if(/*!preg_match("/^[0-9]$/", $longitude) || */strlen($longitude) <= 0)
+}else{ //valida os dados de latitude e longitude
+	if(!preg_match("/^[-+]?\d*\.?\d*$/", $longitude) || strlen($longitude) <= 0)
 		$erros = $erros.'&longitude';
-	if(/*!preg_match("/^[0-9]$/", $latitude) || */strlen($latitude) <= 0)
+	if(!preg_match("/^[-+]?\d*\.?\d*$/", $latitude) || strlen($latitude) <= 0)
 		$erros = $erros.'&latitude';
 }
 

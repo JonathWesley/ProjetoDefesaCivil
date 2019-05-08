@@ -4,7 +4,7 @@ include 'database.php';
 $email = addslashes($_POST['email']);
 $senha = $_POST['senha'];
 
-$query = "SELECT senha FROM dados_login WHERE email = '$email'";
+$query = "SELECT * FROM dados_login WHERE email = '$email'";
 $result = pg_query($connection, $query);
 
 if(!$result){
@@ -15,7 +15,10 @@ if(!$result){
         $hash = $linha['senha'];
         if(crypt($senha, $hash) === $hash){
             session_start();
-            $_SESSION['id_usuario'] = pg_fetch_array($result, 0)['id_usuario'];
+            $id = pg_fetch_array($result, 0)['id_usuario'];
+            $_SESSION['id_usuario'] = $id;
+            $consulta_login = pg_query($connection, "SELECT nivel_acesso FROM usuario WHERE id_usuario = $id");
+            $_SESSION['nivel_acesso'] = pg_fetch_array($consulta_login, 0)['nivel_acesso'];
             $_SESSION['login'] = true;
             header('location:index.php');
         }else{
