@@ -66,7 +66,7 @@ footer{
 
 .navegation{
     position: relative;
-    top: 0px;
+    top: -11px;
     left: 15px;
     font-size: 14px;
     padding: 0px 0px 0px 10px;
@@ -172,4 +172,18 @@ div h4{
 .alertErro{
     color:#f22a1f;
     font-size:14px;
+}
+
+.navbar-nav > li > a, .navbar-brand {
+    padding-top:10px !important; padding-bottom:10px;
+    height: 70px;
+}
+
+.navbar {
+    min-height:70px;
+}
+
+.box-search{
+    position: relative;
+    top: -30px;
 }

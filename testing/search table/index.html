@@ -1,0 +1,57 @@
+<table id = 'tableReembolso' class = "tableReembolso">
+    <thead>
+        <tr>
+              <th style="width: 4%;">STUR</th>
+              <th id="tdEF">FORNECEDOR</th>
+              <th style="width: 4%;">IATA</th>
+              <th id="tdEF">DATA DA CADASTRO</th> 
+              <th>ALTERAR</th>  
+          </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <!--<?php
+                $lSQLConsultaFornecedor = "
+                SELECT id,
+                       codigo_stur, 
+                       fornecedor, 
+                       iata, 
+                       data_cadastro 
+                FROM reembolso_fornecedor";
+                $lResultadoConsultaFornecedor = $lMySQLI->query($lSQLConsultaFornecedor);
+                while ($lRowConsultaFornecedor = mysqli_fetch_array($lResultadoConsultaFornecedor, MYSQLI_ASSOC)):
+                    $id = $lRowConsultaFornecedor['id'];
+                    echo '-->
+                        <tr>
+                            <td>' . $lRowConsultaFornecedor['codigo_stur'] . ' </td>
+                            <td>' . $lRowConsultaFornecedor['fornecedor'] . ' </td>
+                            <td>' . $lRowConsultaFornecedor['iata'] . ' </td>
+                            <td>' . $lRowConsultaFornecedor['data_cadastro'] . ' </td>
+                            <td id= "tdER">
+                                <i onclick="xesq('.$id.')" class="fas fa-edit"></i>
+                                <a href=""><i class="fas fa-trash-alt"></i></a>
+                            </td>
+                        </tr>
+                    <!--';
+                endwhile;
+            ?>-->
+        </tr>
+        <tr>
+            <td> 
+                <input onfocus="this.placeholder = '', this.style.backgroundColor='#FFFFFF'" onblur="this.placeholder = 'COD', this.style.backgroundColor='#A9A9A9'" type="text" name="codigo_stur" required placeholder="COD">								
+            </td>
+            <td> 
+                <input onfocus="this.placeholder = '', this.style.backgroundColor='#FFFFFF'" onblur="this.placeholder = 'NOME DO FORNECEDOR', this.style.backgroundColor='#A9A9A9'" type="text" name="fornecedor" required placeholder="NOME DO FORNECEDOR">								
+            </td>
+            <td> 
+                <input onfocus="this.placeholder = '', this.style.backgroundColor='#FFFFFF'" onblur="this.placeholder = 'IATA', this.style.backgroundColor='#A9A9A9'" type="text" name="iata" required placeholder="IATA">								
+            </td>
+            <td>						
+                <b>ALTERAR</b>
+            </td>
+            <td id="tdER">
+                <a href=""><i class="fas fa-plus-square"></i></a>
+            </td>
+        </tr>
+    </tbody>
+</table>

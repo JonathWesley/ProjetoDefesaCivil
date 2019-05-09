@@ -1,5 +1,5 @@
 <div class="container positioning">
-<div class="jumbotron">
+<div class="jumbotron campo_cadastro">
     <form method="post" action="processa_cadastrar_usuario.php">
         <div class="box">
             <?php if(isset($_GET['sucesso'])){ ?>

@@ -25,7 +25,27 @@
             </ul>
         </div>
         </nav>
-        <!--<h4 class="navegation"><a href="?pagina=home"><u ng-repeat="x in caminho">{{x.name + " > "}}</u></a></h4>-->
+        <h4 class="navegation">
+            <?php 
+                session_start();
+                $array = $_SESSION['navegacao'];
+                $i = 0;
+                $j = 0;
+                if(sizeof($array) > 8){
+                    $j = sizeof($array) - 8;
+                }
+                while($j < sizeof($array)){
+                    if($i > 0){
+                        echo '>';
+                    }
+            ?>
+                    <a href="?pagina=<?php echo $array[$j+1]; ?>"><?php echo $array[$j]; ?></a>
+            <?php
+                    $i += 1;
+                    $j += 2;
+                }
+            ?>
+        </h4>
     </header>
 
     <div class="side-menu">

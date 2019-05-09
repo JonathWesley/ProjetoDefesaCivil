@@ -20,6 +20,7 @@ if(!$result){
             $consulta_login = pg_query($connection, "SELECT nivel_acesso FROM usuario WHERE id_usuario = $id");
             $_SESSION['nivel_acesso'] = pg_fetch_array($consulta_login, 0)['nivel_acesso'];
             $_SESSION['login'] = true;
+            //$_SESSION['navegacao'] = ['home','home'];
             header('location:index.php');
         }else{
             header('location:index.php?erro');

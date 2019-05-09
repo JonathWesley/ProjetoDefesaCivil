@@ -5,20 +5,21 @@
     if(isset($_POST['pesquisa_usuario']))
         $pesquisa_usuario = $_POST['pesquisa_usuario'];
 
-    $items_por_pagina = 5;
+    $items_por_pagina = 4;
     $pagina = intval($_GET['n']);
+    $offset = $pagina * $items_por_pagina;
 
     $consulta_usuarios = pg_query($connection, 
     "SELECT id_usuario,nome FROM usuario WHERE nome LIKE '%$pesquisa_usuario%' 
-    LIMIT $items_por_pagina OFFSET $pagina") or die(preg_last_error());
+    LIMIT $items_por_pagina OFFSET $offset") or die(preg_last_error());
     
     $numero_total = pg_num_rows(pg_query($connection, "SELECT id_usuario,nome FROM usuario"));
     $numero_de_paginas = ceil($numero_total / $items_por_pagina);
 ?>
 <div class="container positioning">
-    <div class="jumbotron">
+    <div class="jumbotron campo_cadastro">
         <div class="box">
-            <form class="input-group" method="post">
+            <form class="input-group" method="post" action="index.php?pagina=consultarUsuario&n=0">
                 <input type="text" class="form-control" name="pesquisa_usuario" placeholder="Pesquisa" value="<?php echo $_POST['pesquisa_usuario']; ?>">
                 <span class="input-group-addon"><i class="glyphicon glyphicon-search"></i></span>
             </form>

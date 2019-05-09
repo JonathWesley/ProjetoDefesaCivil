@@ -3,19 +3,20 @@
     
     $pesquisa_ocorrencia = intval($_POST['pesquisa_ocorrencia']);
 
-    $items_por_pagina = 5;
+    $items_por_pagina = 4;
     $pagina = intval($_GET['n']);
+    $offset = $pagina * $items_por_pagina;
 
     if(isset($_POST['pesquisa_ocorrencia']) && $pesquisa_ocorrencia != null){
         $consulta_ocorrencias = pg_query($connection, 
         "SELECT id_ocorrencia,ocorr_cobrade,ocorr_prioridade 
-        FROM ocorrencia WHERE id_ocorrencia = $pesquisa_ocorrencia 
-        LIMIT $items_por_pagina OFFSET $pagina") or die(preg_last_error());
+        FROM ocorrencia WHERE CAST(id_ocorrencia AS TEXT) LIKE '$pesquisa_ocorrencia%'
+        LIMIT $items_por_pagina OFFSET $offset") or die(preg_last_error());
     }else{
         $consulta_ocorrencias = pg_query($connection, 
         "SELECT id_ocorrencia,ocorr_cobrade,ocorr_prioridade 
         FROM ocorrencia
-        LIMIT $items_por_pagina OFFSET $pagina") or die(preg_last_error());
+        LIMIT $items_por_pagina OFFSET $offset") or die(preg_last_error());
     }
 
     $numero_total = pg_num_rows(pg_query($connection, 
@@ -24,13 +25,13 @@
     $numero_de_paginas = ceil($numero_total / $items_por_pagina);
 ?>
 <div class="container positioning">
-<div class="jumbotron">
+<div class="jumbotron campo_cadastro">
     <div class="box">
-            <form class="input-group" method="post">
+            <form class="input-group" method="post" action="index.php?pagina=consultarOcorrencia&n=0">
                 <input type="text" class="form-control" name="pesquisa_ocorrencia" placeholder="Pesquisa" value="<?php echo $_POST['pesquisa_ocorrencia']; ?>">
                 <span class="input-group-addon"><i class="glyphicon glyphicon-search"></i></span>
             </form>
-        </div>  
+    </div>  
     <?php
         $i = 0;
         while($linha = pg_fetch_array($consulta_ocorrencias, $i)){

@@ -1,0 +1,124 @@
+#box-background{
+
+    margin: auto;
+    padding: auto;
+    font: bold 12px arial, verdana, helvetica, sans-serif;  
+    width:  70%;
+    height: calc(100% - 50px);
+    color: white;
+}
+
+ .tableReembolso {
+   border-collapse: collapse;
+    width: 100.1%;
+    display:block; 
+}
+
+
+.tableReembolso td, .tableReembolso th {
+    border: 2.5px solid white; 
+    padding: 6px;
+    margin: 0;
+    text-align: center;
+} 
+.tableReembolso td input , .tableReembolso td select{
+
+    border-radius: 5px;
+    width: 80%;
+    padding: 1%;
+    background: darkgrey;
+    text-align: center;
+
+}
+
+input::-webkit-input-placeholder { /* WebKit, Blink, Edge */
+    color: black;
+    font: bold 12px arial, verdana, helvetica, sans-serif;  
+}
+
+#tableReembolso tr:nth-child(even){background-color: grey;} 
+
+.tableReembolso th {
+
+    background-color: rgb(0, 0, 0);
+    color: white;
+}
+
+#tdDiv
+{
+    margin-top: 0%;
+    background-color: dimgray; 
+    justify-content: center;
+}
+
+#tdER
+{ 
+    width: 12%;
+    background: darkgrey;
+}
+#tdER i
+{
+    padding: 5px;
+    font-size: 23px;
+    color: black;
+}#tdERS
+{ 
+	background: darkgrey;
+}
+#tdERS i
+{
+    padding: 5px;
+    font-size: 23px;
+    color: black;
+}
+
+tr #id
+{
+    width: 7%;
+}
+
+
+#tdEF
+{
+    width: 18%; 
+}
+
+#tdIA
+{
+    width: 8%;
+}
+
+#tdNU
+{
+    width: 20%;
+}
+
+#tdTB
+{
+    width: 18%;
+}
+
+#tdFP
+{
+    width: 30%;
+}
+ 
+#DIVLightbox
+{
+    position: absolute;
+    top:0; 
+    left: 0; 
+    width: 100%;
+}
+
+#close
+{   
+    text-align: right;
+}
+
+#close a
+{
+    text-decoration: none;
+    font: bold 20px arial, verdana, helvetica, sans-serif; 
+    color: white;
+}

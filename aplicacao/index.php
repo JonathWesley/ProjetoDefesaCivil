@@ -9,14 +9,20 @@ if($_SESSION['login']){
         $pagina = 'home';
     }
 }else{
-    if(isset($_GET['pagina'])){
-        $pagina = $_GET['pagina'];
-    }else{
+    // if(isset($_GET['pagina'])){
+    //     $pagina = $_GET['pagina'];
+    // }else{
         $pagina = 'login';
-    }
+    // }
 }
 
 if($pagina != 'login' && $pagina != 'esqueceuSenha'){
+    if(isset($_SESSION['navegacao'])){
+        array_push($_SESSION['navegacao'],$pagina,$pagina);
+    }else{
+        $_SESSION['navegacao'] = ['home','home'];
+    }
+
     include 'header.php';
 }
 
