@@ -9,18 +9,32 @@ if($_SESSION['login']){
         $pagina = 'home';
     }
 }else{
-    // if(isset($_GET['pagina'])){
-    //     $pagina = $_GET['pagina'];
-    // }else{
-        $pagina = 'login';
-    // }
+    $pagina = 'login';
+}
+
+$nomePagina = '';
+switch($pagina){
+    case 'cadastrarOcorrencia': $nomePagina = 'Cadastrar Ocorrencia'; break; 
+    case 'consultarOcorrencia': $nomePagina = 'Consultar Ocorrencia'; break; 
+    case 'cadastrarUsuario': $nomePagina = 'Cadastrar Usuario'; break; 
+    case 'consultarUsuario': $nomePagina = 'Consultar Usuario'; break; 
+    case 'perfil': $nomePagina = 'Perfil'; break;
+    default: $nomePagina = 'Home'; break;
 }
 
 if($pagina != 'login' && $pagina != 'esqueceuSenha'){
     if(isset($_SESSION['navegacao'])){
-        array_push($_SESSION['navegacao'],$pagina,$pagina);
+        if(array_search($nomePagina, $_SESSION['navegacao']) != false){
+            $i = array_search($nomePagina, $_SESSION['navegacao']);
+            array_splice($_SESSION['navegacao'], $i, 2);
+        }
+        while(sizeof($_SESSION['navegacao']) > 8){
+            array_shift($_SESSION['navegacao']);
+            array_shift($_SESSION['navegacao']);
+        }
+        array_push($_SESSION['navegacao'],$nomePagina,$pagina);
     }else{
-        $_SESSION['navegacao'] = ['home','home'];
+        $_SESSION['navegacao'] = ['Home','home'];
     }
 
     include 'header.php';
