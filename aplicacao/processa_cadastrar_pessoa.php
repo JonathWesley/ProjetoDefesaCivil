@@ -41,28 +41,32 @@ function validaCelular($telefone){
 
     $nome = addslashes($_POST['nome_pessoa']);
     $cpf = addslashes($_POST['cpf_pessoa']);
-    $pass = addslashes($_POST['pass_pessoa']);
+    $outros_documentos = addslashes($_POST['outros_documentos']);
     $telefone = addslashes($_POST['telefone_pessoa']);
     $email = addslashes($_POST['email_pessoa']);
 
     $erros = '';
 
-    //validacao dos campos
-    if(!preg_match("/^([a-zA-Z' ]+)$/",$nome)) //aceita apenas letras e espaço em branco
-        $erros = $erros.'&nome';
-    if(!validaCPF($cpf)) //envia para a funcao de validacao do cpf
-        $erros = $erros.'&cpf';
-    if(!validaCelular($telefone)) //envia para a funcao de validacao do telefone
-        $erros = $erros.'&telefone';
-    if(!filter_var($email, FILTER_VALIDATE_EMAIL)) //valida em formato de email
-        $erros = $erros.'&email';
+    
 
     if($nome != null){
-        $result = pg_query($connection, 
-        "INSERT INTO pessoa (nome,cpf,outros_documentos,telefone,email) 
-        VALUES ('$nome','$cpf','$pass','$telefone','$email')")
-        or die(pg_last_error());
+        //validacao dos campos
+        if(!preg_match("/^([a-zA-Z' ]+)$/",$nome)) //aceita apenas letras e espaço em branco
+            $erros = $erros.'&nome';
+        if(!validaCPF($cpf) && strlen($cpf) > 0) //envia para a funcao de validacao do cpf
+            $erros = $erros.'&cpf';
+        if(!validaCelular($telefone) && strlen($telefone) > 0) //envia para a funcao de validacao do telefone
+            $erros = $erros.'&telefone';
+        if(!filter_var($email, FILTER_VALIDATE_EMAIL) && strlen($email) > 0) //valida em formato de email
+            $erros = $erros.'&email';
 
+        if(strlen($erros) > 0){
+            $result = pg_query($connection, 
+            "INSERT INTO pessoa (nome,cpf,outros_documentos,telefone,email) 
+            VALUES ('$nome','$cpf','$pass','$telefone','$email')")
+            or die(pg_last_error());
+    
+        }
         // if(!$result)
 		//     echo 'Erro: '.pg_last_error();
 	    // else

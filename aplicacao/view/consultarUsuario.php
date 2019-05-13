@@ -27,12 +27,12 @@
             </form>
         </div>
         <div class="box">
-            <table class="table table-striped table-bordered" style="width:100%">
+            <table id="tabela" class="table table-striped table-bordered" style="width:100%">
             <thead><tr>
-                <th>ID</th>
-                <th>Nome</th>
-                <th>Email</th>
-                <th>Telefone</th>
+                <th onclick="sortTable(0)">ID<span class="glyphicon glyphicon-sort sort-icon"></th>
+                <th onclick="sortTable(1)">Nome<span class="glyphicon glyphicon-sort sort-icon"></th>
+                <th onclick="sortTable(2)">Email<span class="glyphicon glyphicon-sort sort-icon"></th>
+                <th onclick="sortTable(3)">Telefone<span class="glyphicon glyphicon-sort sort-icon"></th>
             </tr></thead>
             <tbody>
             <?php

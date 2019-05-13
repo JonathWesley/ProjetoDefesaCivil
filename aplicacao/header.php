@@ -61,17 +61,17 @@
         </div>
         </div>
 
+        <?php if($_SESSION['nivel_acesso'] == 1){ ?>
         <div class="container">
         <div class="jumbotron">
             <h4 class="text-center">Usuários</h4>
-            <ul class="menu-ul">
-                <?php if($_SESSION['nivel_acesso'] == 1){ ?>
+            <ul class="menu-ul">    
                 <li><a href="?pagina=cadastrarUsuario">Cadastrar</a></li>
-                <?php } ?>
-                <li><a href="?pagina=consultarUsuario&n=0">Consultar</a></li>
+                <li><a href="?pagina=consultarUsuario&n=0">Consultar</a></li>      
             </ul>
         </div>
         </div>
+        <?php } ?>
     </div>
 
     <div id="conteudo" class="container">

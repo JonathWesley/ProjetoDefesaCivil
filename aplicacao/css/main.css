@@ -187,3 +187,8 @@ div h4{
     position: relative;
     top: -30px;
 }
+
+.sort-icon{
+    font-size: 10px;
+    float: right;
+}

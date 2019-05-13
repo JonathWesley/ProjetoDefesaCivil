@@ -92,21 +92,19 @@
                 <input name="agente_apoio_1" type="text" class="form-control">
             </div>
             <?php if(isset($_GET['agente_apoio_1'])){ ?>
-                    <span class="alertErro">
-                        Agente não encontrado ou informado incorretamente.
-                    </span>
-                <?php } ?>
-            <div>
+                <span class="alertErro">
+                    Agente não encontrado ou informado incorretamente.
+                </span>
+            <?php } ?>
             <div>
                 Agente de apoio 2:
                 <input name="agente_apoio_2" type="text" class="form-control">
             </div>
             <?php if(isset($_GET['agente_apoio_2'])){ ?>
-                    <span class="alertErro">
-                        Agente não encontrado ou informado incorretamente.
-                    </span>
-                <?php } ?>
-            <div>
+                <span class="alertErro">
+                    Agente não encontrado ou informado incorretamente.
+                </span>
+            <?php } ?>
         </div>
         <div class="box">
             Ocorrência retorno: <span style="color:red;">*</span>
@@ -125,11 +123,10 @@
                 <input id="ocorr_referencia" name="ocorr_referencia" type="text" class="form-control">
             </div>
             <?php if(isset($_GET['ocorr_referencia'])){ ?>
-                    <span class="alertErro">
-                        Referencia incorreta.
-                    </span>
-                <?php } ?>
-            <div>
+                <span class="alertErro">
+                    Referencia incorreta.
+                </span>
+            <?php } ?>
             <div>
                 Data de lançamento: <span style="color:red;">*</span>
                 <input name="data_lancamento" type="date" placeholder="DD/MM/YYYY" class="form-control" required>
@@ -144,7 +141,6 @@
                         Data de lançamento não pode ser maior que a data da ocorrência.
                     </span>
                 <?php } ?>
-            <div>
             <div>
                 Data de ocorrência: <span style="color:red;">*</span>
                 <input name="data_ocorrencia" type="date" placeholder="DD/MM/YYYY" class="form-control" required>
@@ -427,8 +423,8 @@
                                 <input id="cpf_pessoa" name="cpf_pessoa" type="text" class="form-control">
                             </div>
                             <div class="form-group">
-                                Passaporte:
-                                <input id="pass_pessoa" name="pass_pessoa" type="text" class="form-control">
+                                Outros documentos:
+                                <input id="outros_documentos" name="outros_documentos" type="text" class="form-control">
                             </div>
                             <div class="form-group">
                                 Telefone: 
@@ -467,10 +463,10 @@
         var email_pessoa = $("#email_pessoa").val();
         var telefone_pessoa = $("#telefone_pessoa").val();
         var cpf_pessoa = $("#cpf_pessoa").val();
-        var pass_pessoa = $("#pass_pessoa").val();
+        var outros_documentos = $("#outros_documentos").val();
         
         $.post("processa_cadastrar_pessoa.php", { nome_pessoa: nome_pessoa, email_pessoa: email_pessoa,
-            telefone_pessoa: telefone_pessoa, cpf_pessoa: cpf_pessoa, pass_pessoa:pass_pessoa },
+            telefone_pessoa: telefone_pessoa, cpf_pessoa: cpf_pessoa, outros_documentos:outros_documentos },
         function(data) {
          //$('#results').html(data);
          //$('#myForm')[0].reset();
