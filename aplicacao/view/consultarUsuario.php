@@ -29,6 +29,7 @@
         <div class="box">
             <table id="tabela" class="table table-striped table-bordered" style="width:100%">
             <thead><tr>
+                <th></th>
                 <th onclick="sortTable(0)">ID<span class="glyphicon glyphicon-sort sort-icon"></th>
                 <th onclick="sortTable(1)">Nome<span class="glyphicon glyphicon-sort sort-icon"></th>
                 <th onclick="sortTable(2)">Email<span class="glyphicon glyphicon-sort sort-icon"></th>
@@ -38,7 +39,8 @@
             <?php
                 $i = 0;
                 while($linha = pg_fetch_array($consulta_usuarios, $i)){
-                    echo '<tr><td>'.$linha['id_usuario'].'</td>';
+                    echo '<tr><td><a href="index.php?pagina=exibirUsuario&id='.$linha['id_usuario'].'"><span class="glyphicon glyphicon-fullscreen"></span></a></td>';
+                    echo '<td>'.$linha['id_usuario'].'</td>';
                     echo '<td>'.$linha['nome'].'</td>'; 
                     echo '<td>'.$linha['email'].'</td>';
                     echo '<td>('.substr($linha['telefone'],0,2).')'.substr($linha['telefone'],2,5).'-'.substr($linha['telefone'],7).'</td></tr>';

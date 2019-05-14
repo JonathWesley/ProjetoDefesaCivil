@@ -2,24 +2,36 @@
 session_start();
 include 'database.php';
 
-if($_SESSION['login']){
-    if(isset($_GET['pagina'])){
+if(isset($_GET['pagina'])){
+    if($_SESSION['login']){
         $pagina = $_GET['pagina'];
     }else{
-        $pagina = 'home';
+        $pagina = 'esqueceuSenha';
     }
 }else{
     $pagina = 'login';
 }
 
-$nomePagina = '';
-switch($pagina){
-    case 'cadastrarOcorrencia': $nomePagina = 'Cadastrar Ocorrencia'; break; 
-    case 'consultarOcorrencia': $nomePagina = 'Consultar Ocorrencia'; break; 
-    case 'cadastrarUsuario': $nomePagina = 'Cadastrar Usuario'; break; 
-    case 'consultarUsuario': $nomePagina = 'Consultar Usuario'; break; 
-    case 'perfil': $nomePagina = 'Perfil'; break;
-    default: $nomePagina = 'Home'; break;
+// {
+//     if(isset($_GET['pagina'])){
+        
+//     }else{
+//         $pagina = 'home';
+//     }
+// }
+
+if($_SESSION['login']){
+    $nomePagina = '';
+    switch($pagina){
+        case 'cadastrarOcorrencia': $nomePagina = 'Cadastrar Ocorrencia'; break; 
+        case 'consultarOcorrencia': $nomePagina = 'Consultar Ocorrencia'; break; 
+        case 'cadastrarUsuario': $nomePagina = 'Cadastrar Usuario'; break; 
+        case 'consultarUsuario': $nomePagina = 'Consultar Usuario'; break; 
+        case 'perfil': $nomePagina = 'Perfil'; break;
+        case 'exibirOcorrencia' : $nomePagina = 'Exibir Ocorrencia'; break;
+        case 'exibirUsuario' : $nomePagina = 'Exibir Usuario'; break;
+        default: $nomePagina = 'Home'; break;
+    }
 }
 
 if($pagina != 'login' && $pagina != 'esqueceuSenha'){
@@ -40,15 +52,33 @@ if($pagina != 'login' && $pagina != 'esqueceuSenha'){
     include 'header.php';
 }
 
-switch($pagina){
-    case 'esqueceuSenha': include 'view/esqueceuSenha.php'; break;
-    case 'home': include 'view/home.php'; break; 
-    case 'cadastrarOcorrencia': include 'view/cadastrarOcorrencia.php'; break; 
-    case 'consultarOcorrencia': include 'view/consultarOcorrencia.php'; break; 
-    case 'cadastrarUsuario': include 'view/cadastrarUsuario.php'; break; 
-    case 'consultarUsuario': include 'view/consultarUsuario.php'; break; 
-    case 'perfil': include 'view/perfil.php'; break;
-    default: include 'view/login.php'; break;
+if($_SESSION['nivel_acesso'] == 1){
+    switch($pagina){
+        case 'esqueceuSenha': include 'view/esqueceuSenha.php'; break;
+        case 'cadastrarOcorrencia': include 'view/cadastrarOcorrencia.php'; break; 
+        case 'consultarOcorrencia': include 'view/consultarOcorrencia.php'; break; 
+        case 'cadastrarUsuario': include 'view/cadastrarUsuario.php'; break; 
+        case 'consultarUsuario': include 'view/consultarUsuario.php'; break; 
+        case 'perfil': include 'view/perfil.php'; break;
+        case 'exibirOcorrencia': include 'view/exibirOcorrencia.php'; break;
+        case 'exibirUsuario': include 'view/exibirUsuario.php'; break;
+        default: include 'view/home.php'; break;
+    }
+}else if($_SESSION['nivel_acesso'] == 2){
+    switch($pagina){
+        case 'esqueceuSenha': include 'view/esqueceuSenha.php'; break;
+        case 'consultarOcorrencia': include 'view/consultarOcorrencia.php'; break; 
+        case 'perfil': include 'view/perfil.php'; break;
+        case 'exibirOcorrencia': include 'view/exibirOcorrencia.php'; break;
+        case 'exibirUsuario': include 'view/exibirUsuario.php'; break;
+        default: include 'view/home.php'; break;
+    }
+}else{
+    switch($pagina){
+        case 'esqueceuSenha': include 'view/esqueceuSenha.php'; break;
+        default: include 'view/login.php'; break;
+    }
 }
+
 
 include 'footer.php';

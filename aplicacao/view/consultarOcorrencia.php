@@ -51,7 +51,7 @@
     <div class="box">
         <table id="tabela" class="table table-striped table-bordered" style="width:100%">
             <thead><tr>
-                <th><span class="glyphicon glyphicon-fullscreen"></span></th>
+                <th><!--<span class="glyphicon glyphicon-fullscreen"></span>--></th>
                 <th onclick="sortTable(0)">ID<span class="glyphicon glyphicon-sort sort-icon"></span></th>
                 <th onclick="sortTable(1)">Cobrade<span class="glyphicon glyphicon-sort sort-icon"></span></th>
                 <th onclick="sortTable(2)">Prioridade<span class="glyphicon glyphicon-sort sort-icon"></span></th>
@@ -63,7 +63,7 @@
                 $i = 0;
                 while($linha = pg_fetch_array($consulta_ocorrencias, $i)){
                     $data = date("d-m-Y", strtotime($linha['data_ocorrencia']));
-                    echo '<tr><td onclick="expandeOcorrencia('.$linha['id_ocorrencia'].')"><span class="glyphicon glyphicon-fullscreen"></span></td>';
+                    echo '<tr><td><a href="index.php?pagina=exibirOcorrencia&id='.$linha['id_ocorrencia'].'"><span class="glyphicon glyphicon-fullscreen"></span></a></td>';
                     echo '<td>'.$linha['id_ocorrencia'].'</td>';
                     echo '<td>'.$linha['subgrupo'].'</td>'; 
                     echo '<td>'.$linha['ocorr_prioridade'].'</td>';
@@ -87,7 +87,6 @@
                         $estilo = 'class="active"';
                 ?>
                 <li <?php echo $estilo; ?> ><a href="index.php?pagina=consultarOcorrencia&n=<?php echo $i; ?>"><?php echo $i+1; ?></a></li>
-                
                 <li>
                 <?php } ?>
                 <a href="index.php?pagina=consultarOcorrencia&n=<?php echo $numero_de_paginas-1 ?>">

@@ -45,7 +45,7 @@
     </div>
     </div>
     <div class="text-center smalll">
-        <a href="?pagina=esqueceuSenha"><u>Esqueceu a senha?</u></a>
+        <a href="index.php?pagina=esqueceuSenha"><u>Esqueceu a senha?</u></a>
     </div>
 
     <!---->
