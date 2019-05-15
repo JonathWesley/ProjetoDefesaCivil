@@ -1,7 +1,7 @@
 <?php
     include 'database.php';
     
-    $pesquisa_ocorrencia = intval($_POST['pesquisa_ocorrencia']);
+    $pesquisa_ocorrencia = addslashes($_POST['pesquisa_ocorrencia']);
 
     $items_por_pagina = 6;
     $pagina = intval($_GET['n']);
@@ -37,6 +37,9 @@
         ORDER BY data_ocorrencia DESC
         LIMIT $items_por_pagina OFFSET $offset") or die(preg_last_error());
     }
+
+    if($numero_total <= 0)
+        $numero_total = 1;
 
     $numero_de_paginas = ceil($numero_total / $items_por_pagina);
 ?>

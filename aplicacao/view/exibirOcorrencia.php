@@ -53,7 +53,7 @@
 <div class="container positioning">
 <div class="jumbotron campo_cadastro">
     <div class="box">
-        <p>Endereços</p>
+        <p>Endereços<button id="editEnderecoBtn" class="glyphicon glyphicon-pencil btn btn-sm"></button></p>
         <nav>
             <span>Endereço principal: <?php echo $linhaOcorrencia['ocorr_endereco_principal']; ?></span>
         </nav>
@@ -78,7 +78,7 @@
     </div>
 
     <div class="box">
-        <p>Agentes</p>
+        <p>Agentes<button id="editAgentesBtn" class="glyphicon glyphicon-pencil btn btn-sm"></button></p>
         <nav>
             <span>Agente principal: <?php echo $linhaAgentePrincipal['nome']; ?></span>
         </nav>
@@ -91,7 +91,7 @@
     </div>
 
     <div class="box">
-        <p>Ocorrencia</p>
+        <p>Ocorrencia<button id="editOcorrenciaBtn" class="glyphicon glyphicon-pencil btn btn-sm"></button></p>
         <nav>
             <span>Ocorrência retorno: <?php echo ($linhaOcorrencia['ocorr_retorno'] == t) ? 'Sim' : 'Não'; ?></span>
         </nav>
@@ -123,7 +123,7 @@
     </div>
 
     <div class="box">
-        <p>Atentidos</p>
+        <p>Atentidos<button id="editAtendidosBtn" class="glyphicon glyphicon-pencil btn btn-sm"></button></p>
         <nav>
             <span>Pessoa atendida 1: <?php echo $linhaPessoa1['nome']; ?></span>
         </nav>
@@ -133,7 +133,7 @@
     </div>
 
     <div class="box">
-        <p>Tipo</p>
+        <p>Tipo<button id="editTipoBtn" class="glyphicon glyphicon-pencil btn btn-sm"></button></p>
         <nav>
             <span>Cobrade: <?php echo $linhaCobrade['subgrupo']; ?></span>
         </nav>
@@ -146,7 +146,7 @@
     </div>
 
     <div class="box">
-        <p>Status</p>
+        <p>Status<button id="editStatusEdit" class="glyphicon glyphicon-pencil btn btn-sm"></button></p>
         <nav>
             <span>Prioridade: <?php echo $linhaOcorrencia['ocorr_prioridade']; ?></span>
         </nav>

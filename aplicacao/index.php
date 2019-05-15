@@ -2,23 +2,14 @@
 session_start();
 include 'database.php';
 
-if(isset($_GET['pagina'])){
-    if($_SESSION['login']){
-        $pagina = $_GET['pagina'];
-    }else{
-        $pagina = 'esqueceuSenha';
-    }
+if($_SESSION['login']){
+    $pagina = $_GET['pagina'];
 }else{
-    $pagina = 'login';
+    if($_GET['pagina'] == 'esqueceuSenha')
+        $pagina = 'esqueceuSenha';
+    else
+        $pagina = 'login';
 }
-
-// {
-//     if(isset($_GET['pagina'])){
-        
-//     }else{
-//         $pagina = 'home';
-//     }
-// }
 
 if($_SESSION['login']){
     $nomePagina = '';

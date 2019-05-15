@@ -3,7 +3,7 @@
     
     $pesquisa_usuario = '';
     if(isset($_POST['pesquisa_usuario']))
-        $pesquisa_usuario = $_POST['pesquisa_usuario'];
+        $pesquisa_usuario = addslashes($_POST['pesquisa_usuario']);
 
     $items_por_pagina = 4;
     $pagina = intval($_GET['n']);
@@ -11,11 +11,13 @@
 
     $consulta_usuarios = pg_query($connection, 
     "SELECT dados_login.id_usuario,dados_login.email,usuario.nome,usuario.telefone FROM dados_login 
-    INNER JOIN usuario ON dados_login.id_usuario = usuario.id_usuario WHERE nome LIKE '%$pesquisa_usuario%'
+    INNER JOIN usuario ON dados_login.id_usuario = usuario.id_usuario WHERE nome LIKE '$pesquisa_usuario%'
     ORDER BY nome
     LIMIT $items_por_pagina OFFSET $offset") or die(preg_last_error());
     
-    $numero_total = pg_num_rows(pg_query($connection, "SELECT id_usuario FROM usuario"));
+    $numero_total = pg_num_rows($consulta_usuarios);
+    if($numero_total <= 0)
+        $numero_total = 1;
     $numero_de_paginas = ceil($numero_total / $items_por_pagina);
 ?>
 <div class="container positioning">
@@ -48,8 +50,8 @@
                 }
             ?>
             <tbody>
-            <table>
-            <nav aria-label="Page navigation">
+        <table>
+        <nav aria-label="Page navigation">
             <ul class="pagination">
                 <li>
                 <a href="index.php?pagina=consultarUsuario&n=0">
@@ -62,16 +64,14 @@
                         $estilo = 'class="active"';
                 ?>
                 <li <?php echo $estilo; ?> ><a href="index.php?pagina=consultarUsuario&n=<?php echo $i; ?>"><?php echo $i+1; ?></a></li>
-                
                 <li>
                 <?php } ?>
                 <a href="index.php?pagina=consultarUsuario&n=<?php echo $numero_de_paginas-1 ?>">
                     <span>Fim</span>
                 </a>
-                
                 </li>
             </ul>
-            </nav>
-        </div>
+        </nav>
     </div>
+</div>
 </div>
