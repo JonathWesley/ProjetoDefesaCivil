@@ -10,14 +10,16 @@
 
     if(isset($_POST['pesquisa_ocorrencia']) && $pesquisa_ocorrencia != null){
         $consulta_ocorrencias = pg_query($connection, 
-        "SELECT ocorrencia.id_ocorrencia,ocorrencia.ocorr_prioridade,ocorrencia.data_ocorrencia,usuario.nome,cobrade.subgrupo
+        "SELECT ocorrencia.id_ocorrencia,ocorrencia.ocorr_prioridade, TO_CHAR(ocorrencia.data_ocorrencia, 'DD/MM/YYYY') as data_ocorrencia,
+        usuario.nome,cobrade.subgrupo
         FROM ocorrencia INNER JOIN usuario ON ocorrencia.agente_principal = usuario.id_usuario 
         INNER JOIN cobrade ON ocorrencia.ocorr_cobrade = cobrade.codigo
         WHERE CAST(id_ocorrencia AS TEXT) LIKE '$pesquisa_ocorrencia%'") or die(preg_last_error());
         $numero_total = pg_num_rows($consulta_ocorrencias);
     
         $consulta_ocorrencias = pg_query($connection, 
-        "SELECT ocorrencia.id_ocorrencia,ocorrencia.ocorr_prioridade,ocorrencia.data_ocorrencia,usuario.nome,cobrade.subgrupo
+        "SELECT ocorrencia.id_ocorrencia,ocorrencia.ocorr_prioridade, TO_CHAR(ocorrencia.data_ocorrencia, 'DD/MM/YYYY') as data_ocorrencia,
+        usuario.nome,cobrade.subgrupo
         FROM ocorrencia INNER JOIN usuario ON ocorrencia.agente_principal = usuario.id_usuario 
         INNER JOIN cobrade ON ocorrencia.ocorr_cobrade = cobrade.codigo
         WHERE CAST(id_ocorrencia AS TEXT) LIKE '$pesquisa_ocorrencia%'
@@ -25,13 +27,15 @@
         LIMIT $items_por_pagina OFFSET $offset") or die(preg_last_error());
     }else{
         $consulta_ocorrencias = pg_query($connection, 
-        "SELECT ocorrencia.id_ocorrencia,ocorrencia.ocorr_prioridade,ocorrencia.data_ocorrencia,usuario.nome,cobrade.subgrupo
+        "SELECT ocorrencia.id_ocorrencia,ocorrencia.ocorr_prioridade, TO_CHAR(ocorrencia.data_ocorrencia, 'DD/MM/YYYY') as data_ocorrencia,
+        usuario.nome,cobrade.subgrupo
         FROM ocorrencia INNER JOIN usuario ON ocorrencia.agente_principal = usuario.id_usuario 
         INNER JOIN cobrade ON ocorrencia.ocorr_cobrade = cobrade.codigo") or die(preg_last_error());
         $numero_total = pg_num_rows($consulta_ocorrencias);
 
         $consulta_ocorrencias = pg_query($connection, 
-        "SELECT ocorrencia.id_ocorrencia,ocorrencia.ocorr_prioridade,ocorrencia.data_ocorrencia,usuario.nome,cobrade.subgrupo
+        "SELECT ocorrencia.id_ocorrencia,ocorrencia.ocorr_prioridade, TO_CHAR(ocorrencia.data_ocorrencia, 'DD/MM/YYYY') as data_ocorrencia,
+        usuario.nome,cobrade.subgrupo
         FROM ocorrencia INNER JOIN usuario ON ocorrencia.agente_principal = usuario.id_usuario 
         INNER JOIN cobrade ON ocorrencia.ocorr_cobrade = cobrade.codigo
         ORDER BY data_ocorrencia DESC
@@ -65,13 +69,12 @@
             <?php
                 $i = 0;
                 while($linha = pg_fetch_array($consulta_ocorrencias, $i)){
-                    $data = date("d-m-Y", strtotime($linha['data_ocorrencia']));
                     echo '<tr><td><a href="index.php?pagina=exibirOcorrencia&id='.$linha['id_ocorrencia'].'"><span class="glyphicon glyphicon-fullscreen"></span></a></td>';
                     echo '<td>'.$linha['id_ocorrencia'].'</td>';
                     echo '<td>'.$linha['subgrupo'].'</td>'; 
                     echo '<td>'.$linha['ocorr_prioridade'].'</td>';
                     echo '<td>'.$linha['nome'].'</td>';
-                    echo '<td>'.substr($data,0,2).'/'.substr($data,3,2).'/'.substr($data,-4).'</td></tr>';
+                    echo '<td>'.$linha['data_ocorrencia'].'</td></tr>';
                     $i += 1;
                 }
             ?>

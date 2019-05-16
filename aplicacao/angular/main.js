@@ -10,14 +10,43 @@ angular.module("myApp", []).controller("myCtrl", function($scope){
     $scope.tipo = '0';
     $scope.subtipo = '0';
 
-    //jQuerry
-    // $('#ocorr_retorno').change(function () {
-    //     if($('#ocorr_retorno').val == true) {
-    //         $('#ocorr_referencia').attr('required');
-    //     } else {
-    //         $('#ocorr_referencia').removeAttr('required');
-    //     }
-    // });
+    
+    $("#editEnderecoBtn").click(function(){
+        $("#logradouro").replaceWith($('<input id="logradouro" name="logradouro" type="text" class="form-control" value="'+$('#logradouro').html()+'">'));
+        $("#numero").replaceWith($('<input id="numero" name="numero" type="text" class="form-control" value="'+$('#numero').html()+'">'));
+        $('#referencia').replaceWith($('<input id="referencia" name="referencia" type="text" class="form-control" value="'+$('#referencia').html()+'">'));
+        $('#latitude').replaceWith($('<input id="latitude" name="latitude" type="text" class="form-control" value="'+$('#latitude').html()+'">'));
+        $('#longitude').replaceWith($('<input id="longitude" name="longitude" type="text" class="form-control" value="'+$('#longitude').html()+'">'));
+        $('#editEnderecoBtn').replaceWith($('<button id="editEnderecoBtn" type="button" class="btn btn-default btn-sm" onclick="salva()">Salvar</button>'));
+    });
+
+    $("#editAgentesBtn").click(function(){
+        $("#agente_principal").replaceWith($('<input id="agente_principal" name="agente_principal" type="text" class="form-control" value="'+$('#agente_principal').html()+'">'));
+        $("#agente_apoio_1").replaceWith($('<input id="agente_apoio_1" name="agente_apoio_1" type="text" class="form-control" value="'+$('#agente_apoio_1').html()+'">'));
+        $('#agente_apoio_2').replaceWith($('<input id="agente_apoio_2" name="agente_apoio_2" type="text" class="form-control" value="'+$('#agente_apoio_2').html()+'">'));
+        $('#editAgentesBtn').replaceWith($('<button id="editAgentesBtn" type="button" class="btn btn-default btn-sm" onclick="salva()">Salvar</button>'));
+    });
+
+    $("#editOcorrenciaBtn").click(function(){
+        $("#").replaceWith($('<input id="" name="" type="text" class="form-control" value="'+$('#').html()+'">'));
+        $('#editOcorrenciaBtn').replaceWith($('<button id="editOcorrenciaBtn" type="button" class="btn btn-default btn-sm" onclick="salva()">Salvar</button>'));
+    });
+
+    $("#editAtendidosBtn").click(function(){
+        $("#").replaceWith($('<input id="" name="" type="text" class="form-control" value="'+$('#').html()+'">'));
+        $('#editAtendidosBtn').replaceWith($('<button id="editAtendidosBtn" type="button" class="btn btn-default btn-sm" onclick="salva()">Salvar</button>'));
+    });
+
+    $("#editTipoBtn").click(function(){
+        $("#").replaceWith($('<input id="" name="" type="text" class="form-control" value="'+$('#').html()+'">'));
+        $('#editTipoBtn').replaceWith($('<button id="editTipoBtn" type="button" class="btn btn-default btn-sm" onclick="salva()">Salvar</button>'));
+    });
+
+    $("#editStatusEdit").click(function(){
+        $("#").replaceWith($('<input id="" name="" type="text" class="form-control" value="'+$('#').html()+'">'));
+        $('#editStatusEdit').replaceWith($('<button id="editStatusEdit" type="button" class="btn btn-default btn-sm" onclick="salva()">Salvar</button>'));
+    });
+
     $("#cep").focusout(function(){
         $(this).val().replace('-', '');
         $.ajax({

@@ -55,24 +55,24 @@
     <div class="box">
         <p>Endereços<button id="editEnderecoBtn" class="glyphicon glyphicon-pencil btn btn-sm"></button></p>
         <nav>
-            <span>Endereço principal: <?php echo $linhaOcorrencia['ocorr_endereco_principal']; ?></span>
+            <span>Endereço principal: </span><span><?php echo $linhaOcorrencia['ocorr_endereco_principal']; ?></span>
         </nav>
         <?php if($linhaOcorrencia['ocorr_endereco_principal'] == "Logradouro"){ ?>
             <nav>
-                <span>Logradouro: <?php echo $linhaLogradouro['logradouro']; ?></span>
+                <span>Logradouro: </span><span id="logradouro"><?php echo $linhaLogradouro['logradouro'];?></span>
             </nav>
             <nav>
-                <span>Endereço numeral: <?php echo $linhaLogradouro['numero']; ?></span>
+                <span>Endereço numeral: </span><span id="numero" ><?php echo $linhaLogradouro['numero']; ?></span>
             </nav>
             <nav>
-                <span>Endereço referência: <?php echo $linhaLogradouro['referencia']; ?></span>
+                <span>Endereço referência: </span><span id="referencia" ><?php echo $linhaLogradouro['referencia']; ?></span>
             </nav>
         <?php }else{ ?>
             <nav>
-                <span>Latitude: <?php echo $linhaOcorrencia['ocorr_coordenada_latitude']; ?></span>
+                <span>Latitude: </span><span id="latitude" ><?php echo $linhaOcorrencia['ocorr_coordenada_latitude']; ?></span>
             </nav>
             <nav>
-                <span>Longitude: <?php echo $linhaOcorrencia['ocorr_coordenada_longitude']; ?></span>
+                <span>Longitude: </span><span id="longitude" ><?php echo $linhaOcorrencia['ocorr_coordenada_longitude']; ?></span>
             </nav>
         <?php } ?>
     </div>
@@ -80,13 +80,13 @@
     <div class="box">
         <p>Agentes<button id="editAgentesBtn" class="glyphicon glyphicon-pencil btn btn-sm"></button></p>
         <nav>
-            <span>Agente principal: <?php echo $linhaAgentePrincipal['nome']; ?></span>
+            <span>Agente principal: </span><span id="agente_principal" ><?php echo $linhaAgentePrincipal['nome']; ?></span>
         </nav>
         <nav>
-            <span>Agente de apoio 1: <?php echo $linhaAgente1['nome']; ?></span>
+            <span>Agente de apoio 1: </span><span id="agente_apoio_1" ><?php echo $linhaAgente1['nome']; ?></span>
         </nav>
         <nav>
-            <span>Agente de apoio 2: <?php echo $linhaAgente2['nome']; ?></span>
+            <span>Agente de apoio 2: </span><span id="agente_apoio_2" ><?php echo $linhaAgente2['nome']; ?></span>
         </nav>
     </div>
 
