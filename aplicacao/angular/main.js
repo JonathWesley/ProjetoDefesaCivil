@@ -28,7 +28,11 @@ angular.module("myApp", []).controller("myCtrl", function($scope){
     });
 
     $("#editOcorrenciaBtn").click(function(){
-        $("#").replaceWith($('<input id="" name="" type="text" class="form-control" value="'+$('#').html()+'">'));
+        $("#ocorr_referencia").replaceWith($('<input id="ocorr_referencia" name="ocorr_referencia" type="text" class="form-control" value="'+$('#ocorr_referencia').html()+'">'));
+        //$("#data_lancamento").replaceWith($('<input id="data_lancamento" name="data_lancamento" type="date" class="form-control" value="'+$('#data_lancamento').val()+'">'));
+        //$("#data_ocorrencia").replaceWith($('<input id="data_ocorrencia" name="data_ocorrencia" type="date" class="form-control" value="'+$('#data_ocorrencia').val()+'">'));
+        $("#ocorr_descricao").replaceWith($('<input id="ocorr_descricao" name="ocorr_descricao" type="text" class="form-control" value="'+$('#ocorr_descricao').html()+'">'));
+        $("#ocorr_origem").replaceWith($('<input id="ocorr_origem" name="ocorr_origem" type="text" class="form-control" value="'+$('#ocorr_origem').html()+'">'));
         $('#editOcorrenciaBtn').replaceWith($('<button id="editOcorrenciaBtn" type="button" class="btn btn-default btn-sm" onclick="salva()">Salvar</button>'));
     });
 

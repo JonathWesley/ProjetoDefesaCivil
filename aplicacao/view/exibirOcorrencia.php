@@ -93,71 +93,71 @@
     <div class="box">
         <p>Ocorrencia<button id="editOcorrenciaBtn" class="glyphicon glyphicon-pencil btn btn-sm"></button></p>
         <nav>
-            <span>Ocorrência retorno: <?php echo ($linhaOcorrencia['ocorr_retorno'] == t) ? 'Sim' : 'Não'; ?></span>
+            <span>Ocorrência retorno: </span><span id="ocorr_retorno"><?php echo ($linhaOcorrencia['ocorr_retorno'] == t) ? 'Sim' : 'Não'; ?></span>
         </nav>
         <nav>
-            <span>Código de referência: <?php echo $linhaOcorrencia['ocorr_referencia']; ?></span>
+            <span>Código de referência: </span><span id="ocorr_referencia"><?php echo $linhaOcorrencia['ocorr_referencia']; ?></span>
         </nav>
         <nav>
-            <span>Data de lançamento: 
-                <?php 
-                    $data = date("d-m-Y", strtotime($linhaOcorrencia['data_lancamento'])); 
-                    echo substr($data,0,2).'/'.substr($data,3,2).'/'.substr($data,-4);
-                ?>
+            <span>Data de lançamento: </span><span id="data_lancamento" value="<?php echo $linhaOcorrencia['data_lancamento'];?>">
+            <?php 
+                $data = date("d-m-Y", strtotime($linhaOcorrencia['data_lancamento'])); 
+                echo substr($data,0,2).'/'.substr($data,3,2).'/'.substr($data,-4);
+            ?>
             </span>
         </nav>
         <nav>
-            <span>Data de ocorrência:
-                <?php 
-                    $data = date("d-m-Y", strtotime($linhaOcorrencia['data_ocorrencia'])); 
-                    echo substr($data,0,2).'/'.substr($data,3,2).'/'.substr($data,-4);
-                ?>
+            <span>Data de ocorrência: </span><span id="data_ocorrencia" value="<?php echo $linhaOcorrencia['data_ocorrencia']; ?>">
+            <?php 
+                $data = date("d-m-Y", strtotime($linhaOcorrencia['data_ocorrencia'])); 
+                echo substr($data,0,2).'/'.substr($data,3,2).'/'.substr($data,-4);
+            ?>
             </span>
         </nav>
         <nav>
-            <span>Descrição: <?php echo $linhaOcorrencia['ocorr_descricao']; ?></span>
+            <span>Descrição: </span><span id="ocorr_descricao"><?php echo $linhaOcorrencia['ocorr_descricao']; ?></span>
         </nav>
         <nav>
-            <span>Origem: <?php echo $linhaOcorrencia['ocorr_origem']; ?></span>
+            <span>Origem: </span><span id="ocorr_origem"><?php echo $linhaOcorrencia['ocorr_origem']; ?></span>
         </nav>
     </div>
 
     <div class="box">
         <p>Atentidos<button id="editAtendidosBtn" class="glyphicon glyphicon-pencil btn btn-sm"></button></p>
         <nav>
-            <span>Pessoa atendida 1: <?php echo $linhaPessoa1['nome']; ?></span>
+            <span>Pessoa atendida 1: </span><span id="atendido_1"><?php echo $linhaPessoa1['nome']; ?></span>
         </nav>
         <nav>
-            <span>Pessoa atendida 2: <?php echo $linhaPessoa2['nome']; ?></span>
+            <span>Pessoa atendida 2: </span><span id="atendido_2"><?php echo $linhaPessoa2['nome']; ?></span>
         </nav>
     </div>
 
     <div class="box">
         <p>Tipo<button id="editTipoBtn" class="glyphicon glyphicon-pencil btn btn-sm"></button></p>
         <nav>
-            <span>Cobrade: <?php echo $linhaCobrade['subgrupo']; ?></span>
+            <span>Cobrade: </span><span id="ocorr_cobrade"><?php echo $linhaCobrade['subgrupo']; ?></span>
         </nav>
         <nav>
-            <span>Natureza da ocorrência: <?php echo $linhaOcorrencia['ocorr_natureza']; ?></span>
+            <span>Natureza da ocorrência: </span><span id="ocorr_natureza"><?php echo $linhaOcorrencia['ocorr_natureza']; ?></span>
         </nav>
         <nav>
-            <span>Possui fotos: <?php echo ($linhaOcorrencia['ocorr_fotos'] == t) ? 'Sim':'Não'; ?></span>
+            <span>Possui fotos: </span><span id="fotos"><?php echo ($linhaOcorrencia['ocorr_fotos'] == t) ? 'Sim':'Não'; ?></span>
         </nav>
     </div>
 
     <div class="box">
         <p>Status<button id="editStatusEdit" class="glyphicon glyphicon-pencil btn btn-sm"></button></p>
         <nav>
-            <span>Prioridade: <?php echo $linhaOcorrencia['ocorr_prioridade']; ?></span>
+            <span>Prioridade: </span><span id="ocorr_prioridade"><?php echo $linhaOcorrencia['ocorr_prioridade']; ?></span>
         </nav>
         <nav>
-            <span>Analisado: <?php echo ($linhaOcorrencia['ocorr_analisado'] == t) ? 'Sim':'Não'; ?></span>
+            <span>Analisado: </span><span id="ocorr_analisado"><?php echo ($linhaOcorrencia['ocorr_analisado'] == t) ? 'Sim':'Não'; ?></span>
         </nav>
         <nav>
-            <span>Congelado: <?php echo ($linhaOcorrencia['ocorr_congelado']== t) ? 'Sim':'Não'; ?></span>
+            <span>Congelado: </span><span id="ocorr_congelado"><?php echo ($linhaOcorrencia['ocorr_congelado']== t) ? 'Sim':'Não'; ?></span>
         </nav>
         <nav>
-            <span>Encerrado: <?php echo ($linhaOcorrencia['ocorr_encerrado']== t) ? 'Sim':'Não'; ?></span>
+            <span>Encerrado: </span><span id="ocorr_encerrado"><?php echo ($linhaOcorrencia['ocorr_encerrado']== t) ? 'Sim':'Não'; ?></span>
         </nav>
     </div>
 </div>
