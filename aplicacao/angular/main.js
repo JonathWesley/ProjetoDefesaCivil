@@ -3,7 +3,6 @@ angular.module("myApp", []).controller("myCtrl", function($scope){
     $scope.endereco = "R. Pardal, 111 - Ariribá, Balneário Camboriú - SC";
     $scope.pesquisa = "";
     $scope.retorno = false;
-    $scope.sel_endereco = "Coordenada";
     $scope.categoria = '0';
     $scope.grupo = '0';
     $scope.subgrupo = '0';
@@ -12,6 +11,10 @@ angular.module("myApp", []).controller("myCtrl", function($scope){
 
     
     $("#editEnderecoBtn").click(function(){
+        if($("#coordenada_principal").html() == "Coordenada")
+            $("#coordenada_principal").replaceWith($('<label for="endereco_principal"></label><select id="endereco_principal" name="endereco_principal" class="form-control" ng-model="sel_endereco" required><option value="Coordenada">Coordenada</option><option value="Logradouro">Logradouro</option></select>'));
+        else
+            $("#coordenada_principal").replaceWith($('<label for="endereco_principal"></label><select id="endereco_principal" name="endereco_principal" class="form-control" ng-model="sel_endereco" required><option value="Logradouro">Logradouro</option><option value="Coordenada">Coordenada</option></select>'));
         $("#logradouro").replaceWith($('<input id="logradouro" name="logradouro" type="text" class="form-control" value="'+$('#logradouro').html()+'">'));
         $("#numero").replaceWith($('<input id="numero" name="numero" type="text" class="form-control" value="'+$('#numero').html()+'">'));
         $('#referencia').replaceWith($('<input id="referencia" name="referencia" type="text" class="form-control" value="'+$('#referencia').html()+'">'));
@@ -37,12 +40,14 @@ angular.module("myApp", []).controller("myCtrl", function($scope){
     });
 
     $("#editAtendidosBtn").click(function(){
-        $("#").replaceWith($('<input id="" name="" type="text" class="form-control" value="'+$('#').html()+'">'));
+        $("#atendido_1").replaceWith($('<input id="atendido_1" name="atendido_1" type="text" class="form-control" value="'+$('#atendido_1').html()+'">'));
+        $("#atendido_2").replaceWith($('<input id="atendido_2" name="atendido_2" type="text" class="form-control" value="'+$('#atendido_2').html()+'">'));
         $('#editAtendidosBtn').replaceWith($('<button id="editAtendidosBtn" type="button" class="btn btn-default btn-sm" onclick="salva()">Salvar</button>'));
     });
 
     $("#editTipoBtn").click(function(){
-        $("#").replaceWith($('<input id="" name="" type="text" class="form-control" value="'+$('#').html()+'">'));
+        $("#ocorr_cobrade").replaceWith($('<input id="ocorr_cobrade" name="ocorr_cobrade" type="text" class="form-control" value="'+$('#ocorr_cobrade').html()+'">'));
+        $("#ocorr_natureza").replaceWith($('<input id="ocorr_natureza" name="ocorr_natureza" type="text" class="form-control" value="'+$('#ocorr_natureza').html()+'">'));
         $('#editTipoBtn').replaceWith($('<button id="editTipoBtn" type="button" class="btn btn-default btn-sm" onclick="salva()">Salvar</button>'));
     });
 

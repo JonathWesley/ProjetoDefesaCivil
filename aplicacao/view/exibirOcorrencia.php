@@ -55,9 +55,9 @@
     <div class="box">
         <p>Endereços<button id="editEnderecoBtn" class="glyphicon glyphicon-pencil btn btn-sm"></button></p>
         <nav>
-            <span>Endereço principal: </span><span><?php echo $linhaOcorrencia['ocorr_endereco_principal']; ?></span>
+            Endereço principal: <span id="coordenada_principal" ng-model="sel_endereco" ng-init="sel_endereco='<?php echo $linhaOcorrencia['ocorr_endereco_principal']; ?>'"><?php echo $linhaOcorrencia['ocorr_endereco_principal']; ?></span>
         </nav>
-        <?php if($linhaOcorrencia['ocorr_endereco_principal'] == "Logradouro"){ ?>
+        <div ng-show="sel_endereco == 'Logradouro'">
             <nav>
                 <span>Logradouro: </span><span id="logradouro"><?php echo $linhaLogradouro['logradouro'];?></span>
             </nav>
@@ -67,14 +67,15 @@
             <nav>
                 <span>Endereço referência: </span><span id="referencia" ><?php echo $linhaLogradouro['referencia']; ?></span>
             </nav>
-        <?php }else{ ?>
+        </div>
+        <div ng-show="sel_endereco == 'Coordenada'">
             <nav>
                 <span>Latitude: </span><span id="latitude" ><?php echo $linhaOcorrencia['ocorr_coordenada_latitude']; ?></span>
             </nav>
             <nav>
                 <span>Longitude: </span><span id="longitude" ><?php echo $linhaOcorrencia['ocorr_coordenada_longitude']; ?></span>
             </nav>
-        <?php } ?>
+        </div>
     </div>
 
     <div class="box">

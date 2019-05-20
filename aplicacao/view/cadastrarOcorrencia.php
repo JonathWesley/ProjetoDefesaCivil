@@ -15,7 +15,7 @@
             <div>
                 Endereço principal: <span style="color:red;">*</span>
                 <label for="endereco_principal"></label>
-                <select name="endereco_principal" class="form-control" ng-model="sel_endereco" required>
+                <select name="endereco_principal" class="form-control" ng-model="sel_endereco" ng-init="sel_endereco='Coordenada'" required>
                     <option value="Coordenada">Coordenada</option>
                     <option value="Logradouro">Logradouro</option>
                 </select>
