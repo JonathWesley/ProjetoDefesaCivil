@@ -443,37 +443,29 @@
             </div>
         </div>
     </div>
-
     <script>
-    var input = document.getElementById("submitFormData");
-
-    // Execute a function when the user releases a key on the keyboard
-    input.addEventListener("keydown", function(event) {
-    // Number 13 is the "Enter" key on the keyboard
-    if (event.keyCode === 13) {
-        // Cancel the default action, if needed
-        event.preventDefault();
-        // Trigger the button element with a click
-        document.getElementById("submitFormData").click();
-    }
-    });
-
-    function SubmitFormData() {
-        var nome_pessoa = $("#nome_pessoa").val();
-        var email_pessoa = $("#email_pessoa").val();
-        var telefone_pessoa = $("#telefone_pessoa").val();
-        var cpf_pessoa = $("#cpf_pessoa").val();
-        var outros_documentos = $("#outros_documentos").val();
-        
-        $.post("processa_cadastrar_pessoa.php", { nome_pessoa: nome_pessoa, email_pessoa: email_pessoa,
-            telefone_pessoa: telefone_pessoa, cpf_pessoa: cpf_pessoa, outros_documentos:outros_documentos },
-        function(data) {
-         //$('#results').html(data);
-         //$('#myForm')[0].reset();
+        //POST pessoa
+        var input = document.getElementById("submitFormData");
+        // Execute a function when the user releases a key on the keyboard
+        input.addEventListener("keydown", function(event) {
+        // Number 13 is the "Enter" key on the keyboard
+        if (event.keyCode === 13) {
+            // Cancel the default action, if needed
+            event.preventDefault();
+            // Trigger the button element with a click
+            document.getElementById("submitFormData").click();
+        }
         });
-    }
+        function SubmitFormData() {
+            var nome_pessoa = $("#nome_pessoa").val();
+            var email_pessoa = $("#email_pessoa").val();
+            var telefone_pessoa = $("#telefone_pessoa").val();
+            var cpf_pessoa = $("#cpf_pessoa").val();
+            var outros_documentos = $("#outros_documentos").val();
+                
+            $.post("processa_cadastrar_pessoa.php", { nome_pessoa: nome_pessoa, email_pessoa: email_pessoa,
+                telefone_pessoa: telefone_pessoa, cpf_pessoa: cpf_pessoa, outros_documentos:outros_documentos });
+        }
     </script>
-
-
 </div>
 </div>

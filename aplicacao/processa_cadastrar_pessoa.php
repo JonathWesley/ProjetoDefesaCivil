@@ -47,8 +47,6 @@ function validaCelular($telefone){
 
     $erros = '';
 
-    
-
     if($nome != null){
         //validacao dos campos
         if(!preg_match("/^([a-zA-Z' ]+)$/",$nome)) //aceita apenas letras e espaço em branco
@@ -70,5 +68,5 @@ function validaCelular($telefone){
         // if(!$result)
 		//     echo 'Erro: '.pg_last_error();
 	    // else
-		//     header('location:index.php?pagina=cadastrarOcorrencia');
+		     header('location:index.php?pagina=perfil');
     }

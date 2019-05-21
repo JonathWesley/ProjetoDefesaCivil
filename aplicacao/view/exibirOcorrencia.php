@@ -52,55 +52,54 @@
 
 <div class="container positioning">
 <div class="jumbotron campo_cadastro">
+    <form method="post">
     <div class="box">
-        <p>Endereços<button id="editEnderecoBtn" class="glyphicon glyphicon-pencil btn btn-sm"></button></p>
+        <p>Endereços</p>
         <nav>
             Endereço principal: <span id="coordenada_principal" ng-model="sel_endereco" ng-init="sel_endereco='<?php echo $linhaOcorrencia['ocorr_endereco_principal']; ?>'"><?php echo $linhaOcorrencia['ocorr_endereco_principal']; ?></span>
         </nav>
         <div ng-show="sel_endereco == 'Logradouro'">
             <nav>
-                <span>Logradouro: </span><span id="logradouro"><?php echo $linhaLogradouro['logradouro'];?></span>
+                Logradouro: <span id="logradouro"><?php echo $linhaLogradouro['logradouro'];?></span>
             </nav>
             <nav>
-                <span>Endereço numeral: </span><span id="numero" ><?php echo $linhaLogradouro['numero']; ?></span>
+                Endereço numeral: <span id="numero" ><?php echo $linhaLogradouro['numero']; ?></span>
             </nav>
             <nav>
-                <span>Endereço referência: </span><span id="referencia" ><?php echo $linhaLogradouro['referencia']; ?></span>
+                Endereço referência: <span id="referencia" ><?php echo $linhaLogradouro['referencia']; ?></span>
             </nav>
         </div>
         <div ng-show="sel_endereco == 'Coordenada'">
             <nav>
-                <span>Latitude: </span><span id="latitude" ><?php echo $linhaOcorrencia['ocorr_coordenada_latitude']; ?></span>
+                Latitude: <span id="latitude" ><?php echo $linhaOcorrencia['ocorr_coordenada_latitude']; ?></span>
             </nav>
             <nav>
-                <span>Longitude: </span><span id="longitude" ><?php echo $linhaOcorrencia['ocorr_coordenada_longitude']; ?></span>
+                Longitude: <span id="longitude" ><?php echo $linhaOcorrencia['ocorr_coordenada_longitude']; ?></span>
             </nav>
         </div>
     </div>
-
     <div class="box">
-        <p>Agentes<button id="editAgentesBtn" class="glyphicon glyphicon-pencil btn btn-sm"></button></p>
+        <p>Agentes</p>
         <nav>
-            <span>Agente principal: </span><span id="agente_principal" ><?php echo $linhaAgentePrincipal['nome']; ?></span>
+            Agente principal: <span id="agente_principal" ><?php echo $linhaAgentePrincipal['nome']; ?></span>
         </nav>
         <nav>
-            <span>Agente de apoio 1: </span><span id="agente_apoio_1" ><?php echo $linhaAgente1['nome']; ?></span>
+            Agente de apoio 1: <span id="agente_apoio_1" ><?php echo $linhaAgente1['nome']; ?></span>
         </nav>
         <nav>
-            <span>Agente de apoio 2: </span><span id="agente_apoio_2" ><?php echo $linhaAgente2['nome']; ?></span>
+            Agente de apoio 2: <span id="agente_apoio_2" ><?php echo $linhaAgente2['nome']; ?></span>
         </nav>
     </div>
-
     <div class="box">
-        <p>Ocorrencia<button id="editOcorrenciaBtn" class="glyphicon glyphicon-pencil btn btn-sm"></button></p>
+        <p>Ocorrencia</p>
         <nav>
-            <span>Ocorrência retorno: </span><span id="ocorr_retorno"><?php echo ($linhaOcorrencia['ocorr_retorno'] == t) ? 'Sim' : 'Não'; ?></span>
+            Ocorrência retorno: <span id="ocorr_retorno"><?php echo ($linhaOcorrencia['ocorr_retorno'] == t) ? 'Sim' : 'Não'; ?></span>
         </nav>
         <nav>
-            <span>Código de referência: </span><span id="ocorr_referencia"><?php echo $linhaOcorrencia['ocorr_referencia']; ?></span>
+            Código de referência: <span id="ocorr_referencia"><?php echo $linhaOcorrencia['ocorr_referencia']; ?></span>
         </nav>
         <nav>
-            <span>Data de lançamento: </span><span id="data_lancamento" value="<?php echo $linhaOcorrencia['data_lancamento'];?>">
+            Data de lançamento: <span id="data_lancamento" value="<?php echo $linhaOcorrencia['data_lancamento'];?>">
             <?php 
                 $data = date("d-m-Y", strtotime($linhaOcorrencia['data_lancamento'])); 
                 echo substr($data,0,2).'/'.substr($data,3,2).'/'.substr($data,-4);
@@ -108,7 +107,7 @@
             </span>
         </nav>
         <nav>
-            <span>Data de ocorrência: </span><span id="data_ocorrencia" value="<?php echo $linhaOcorrencia['data_ocorrencia']; ?>">
+            Data de ocorrência: <span id="data_ocorrencia" value="<?php echo $linhaOcorrencia['data_ocorrencia']; ?>">
             <?php 
                 $data = date("d-m-Y", strtotime($linhaOcorrencia['data_ocorrencia'])); 
                 echo substr($data,0,2).'/'.substr($data,3,2).'/'.substr($data,-4);
@@ -116,50 +115,59 @@
             </span>
         </nav>
         <nav>
-            <span>Descrição: </span><span id="ocorr_descricao"><?php echo $linhaOcorrencia['ocorr_descricao']; ?></span>
+            Descrição: <span id="ocorr_descricao"><?php echo $linhaOcorrencia['ocorr_descricao']; ?></span>
         </nav>
         <nav>
-            <span>Origem: </span><span id="ocorr_origem"><?php echo $linhaOcorrencia['ocorr_origem']; ?></span>
+            Origem: <span id="ocorr_origem"><?php echo $linhaOcorrencia['ocorr_origem']; ?></span>
         </nav>
     </div>
 
     <div class="box">
-        <p>Atentidos<button id="editAtendidosBtn" class="glyphicon glyphicon-pencil btn btn-sm"></button></p>
+        <p>Atentidos</p>
         <nav>
-            <span>Pessoa atendida 1: </span><span id="atendido_1"><?php echo $linhaPessoa1['nome']; ?></span>
+            Pessoa atendida 1: <span id="atendido_1"><?php echo $linhaPessoa1['nome']; ?></span>
         </nav>
         <nav>
-            <span>Pessoa atendida 2: </span><span id="atendido_2"><?php echo $linhaPessoa2['nome']; ?></span>
-        </nav>
-    </div>
-
-    <div class="box">
-        <p>Tipo<button id="editTipoBtn" class="glyphicon glyphicon-pencil btn btn-sm"></button></p>
-        <nav>
-            <span>Cobrade: </span><span id="ocorr_cobrade"><?php echo $linhaCobrade['subgrupo']; ?></span>
-        </nav>
-        <nav>
-            <span>Natureza da ocorrência: </span><span id="ocorr_natureza"><?php echo $linhaOcorrencia['ocorr_natureza']; ?></span>
-        </nav>
-        <nav>
-            <span>Possui fotos: </span><span id="fotos"><?php echo ($linhaOcorrencia['ocorr_fotos'] == t) ? 'Sim':'Não'; ?></span>
+            Pessoa atendida 2: <span id="atendido_2"><?php echo $linhaPessoa2['nome']; ?></span>
         </nav>
     </div>
 
     <div class="box">
-        <p>Status<button id="editStatusEdit" class="glyphicon glyphicon-pencil btn btn-sm"></button></p>
+        <p>Tipo</p>
         <nav>
-            <span>Prioridade: </span><span id="ocorr_prioridade"><?php echo $linhaOcorrencia['ocorr_prioridade']; ?></span>
+            Cobrade: <span id="ocorr_cobrade"><?php echo $linhaCobrade['subgrupo']; ?></span>
         </nav>
         <nav>
-            <span>Analisado: </span><span id="ocorr_analisado"><?php echo ($linhaOcorrencia['ocorr_analisado'] == t) ? 'Sim':'Não'; ?></span>
+            Natureza da ocorrência: <span id="ocorr_natureza"><?php echo $linhaOcorrencia['ocorr_natureza']; ?></span>
         </nav>
         <nav>
-            <span>Congelado: </span><span id="ocorr_congelado"><?php echo ($linhaOcorrencia['ocorr_congelado']== t) ? 'Sim':'Não'; ?></span>
-        </nav>
-        <nav>
-            <span>Encerrado: </span><span id="ocorr_encerrado"><?php echo ($linhaOcorrencia['ocorr_encerrado']== t) ? 'Sim':'Não'; ?></span>
+            Possui fotos: <span id="fotos"><?php echo ($linhaOcorrencia['ocorr_fotos'] == t) ? 'Sim':'Não'; ?></span>
         </nav>
     </div>
+    <div class="box">
+        <p>Status</p>
+        <nav>
+            Prioridade: <span id="ocorr_prioridade"><?php echo $linhaOcorrencia['ocorr_prioridade']; ?></span>
+        </nav>
+        <nav>
+            Analisado: <span id="ocorr_analisado"><?php echo ($linhaOcorrencia['ocorr_analisado'] == t) ? 'Sim':'Não'; ?></span>
+        </nav>
+        <nav>
+            Congelado: <span id="ocorr_congelado"><?php echo ($linhaOcorrencia['ocorr_congelado']== t) ? 'Sim':'Não'; ?></span>
+        </nav>
+        <nav>
+            Encerrado: <span id="ocorr_encerrado"><?php echo ($linhaOcorrencia['ocorr_encerrado']== t) ? 'Sim':'Não'; ?></span>
+        </nav>
+    </div>
+        <button type="button" id="editOcorrencia" onclick="editarOcorrencia()" class="btn btn-default btn-md">Editar</button>
+    </form>
+    <script>
+        //POST editar ocorrencia
+        function editarOcorrencia(){
+            var ocorr_prioridade = $("#ocorr_prioridade").html();
+            $.redirect('view/editarOcorrencia.php', {'arg1': 'value1', 'arg2': 'value2'});
+            alert(ocorr_prioridade);
+        }
+    </script>
 </div>
 </div>
