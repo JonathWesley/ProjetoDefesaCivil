@@ -21,6 +21,7 @@ if($_SESSION['login']){
         case 'perfil': $nomePagina = 'Perfil'; break;
         case 'exibirOcorrencia' : $nomePagina = 'Exibir Ocorrencia'; break;
         case 'exibirUsuario' : $nomePagina = 'Exibir Usuario'; break;
+        case 'editarOcorrencia' : $nomePagina = 'Exibir Ocorrencia'; break;
         default: $nomePagina = 'Home'; break;
     }
 }
@@ -53,6 +54,7 @@ if($_SESSION['nivel_acesso'] == 1){
         case 'perfil': include 'view/perfil.php'; break;
         case 'exibirOcorrencia': include 'view/exibirOcorrencia.php'; break;
         case 'exibirUsuario': include 'view/exibirUsuario.php'; break;
+        case 'editarOcorrencia' : include 'view/editarOcorrencia.php'; break;
         default: include 'view/home.php'; break;
     }
 }else if($_SESSION['nivel_acesso'] == 2){
@@ -62,6 +64,7 @@ if($_SESSION['nivel_acesso'] == 1){
         case 'perfil': include 'view/perfil.php'; break;
         case 'exibirOcorrencia': include 'view/exibirOcorrencia.php'; break;
         case 'exibirUsuario': include 'view/exibirUsuario.php'; break;
+        case 'editarOcorrencia' : include 'view/editarOcorrencia.php'; break;
         default: include 'view/home.php'; break;
     }
 }else{

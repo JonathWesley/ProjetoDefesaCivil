@@ -52,7 +52,6 @@
 
 <div class="container positioning">
 <div class="jumbotron campo_cadastro">
-    <form method="post">
     <div class="box">
         <p>Endereços</p>
         <nav>
@@ -159,15 +158,32 @@
             Encerrado: <span id="ocorr_encerrado"><?php echo ($linhaOcorrencia['ocorr_encerrado']== t) ? 'Sim':'Não'; ?></span>
         </nav>
     </div>
-        <button type="button" id="editOcorrencia" onclick="editarOcorrencia()" class="btn btn-default btn-md">Editar</button>
+    <form action="index.php?pagina=editarOcorrencia" method="post">
+        <input name="id_ocorrencia" type="hidden" value="<?php echo $id_ocorrencia; ?>">
+        <input name="endereco_principal" type="hidden" value="<?php echo $linhaOcorrencia['ocorr_endereco_principal']; ?>">
+        <input name="logradouro" type="hidden" value="<?php echo $linhaLogradouro['logradouro']; ?>">
+        <input name="numero" type="hidden" value="<?php echo $linhaLogradouro['numero'] ?>">
+        <input name="referencia" type="hidden" value="<?php echo $linhaLogradouro['referencia']; ?>">
+        <input name="latitude" type="hidden" value="<?php echo $linhaOcorrencia['ocorr_coordenada_latitude']; ?>">
+        <input name="longitude" type="hidden" value="<?php echo $linhaOcorrencia['ocorr_coordenada_longitude']; ?>">
+        <input name="agente_principal" type="hidden" value="<?php echo $linhaAgentePrincipal['nome']; ?>">
+        <input name="agente_apoio1" type="hidden" value="<?php echo $linhaAgente1['nome']; ?>">
+        <input name="agente_apoio2" type="hidden" value="<?php echo $linhaAgente2['nome']; ?>">
+        <input name="ocorr_retorno" type="hidden" value="<?php echo $linhaOcorrencia['ocorr_retorno']; ?>">
+        <input name="ocorr_referencia" type="hidden" value="<?php echo $linhaOcorrencia['ocorr_referencia']; ?>">
+        <input name="data_lancamento" type="hidden" value="<?php echo $linhaOcorrencia['data_lancamento']; ?>">
+        <input name="data_ocorrencia" type="hidden" value="<?php echo $linhaOcorrencia['data_ocorrencia']; ?>">
+        <input name="ocorr_descricao" type="hidden" value="<?php echo $linhaOcorrencia['ocorr_descricao']; ?>">
+        <input name="ocorr_origem" type="hidden" value="<?php echo $linhaOcorrencia['ocorr_origem']; ?>">
+        <input name="pessoa1" type="hidden" value="<?php echo $linhaPessoa1['nome']; ?>">
+        <input name="pessoa2" type="hidden" value="<?php echo $linhaPessoa2['nome']; ?>">
+        <input name="ocorr_cobrade" type="hidden" value="<?php echo $linhaCobrade['codigo']; ?>">
+        <input name="possui_foto" type="hidden" value="<?php echo $linhaOcorrencia['ocorr_fotos']; ?>">
+        <input name="prioridade" type="hidden" value="<?php echo $linhaOcorrencia['ocorr_prioridade']; ?>">
+        <input name="analisado" type="hidden" value="<?php echo $linhaOcorrencia['ocorr_analisado']; ?>">
+        <input name="congelado" type="hidden" value="<?php echo $linhaOcorrencia['ocorr_congelado']; ?>">
+        <input name="encerrado" type="hidden" value="<?php echo $linhaOcorrencia['ocorr_encerrado']; ?>">
+        <input type="submit" class="btn btn-default btn-md" value="Editar">
     </form>
-    <script>
-        //POST editar ocorrencia
-        function editarOcorrencia(){
-            var ocorr_prioridade = $("#ocorr_prioridade").html();
-            $.redirect('view/editarOcorrencia.php', {'arg1': 'value1', 'arg2': 'value2'});
-            alert(ocorr_prioridade);
-        }
-    </script>
 </div>
 </div>
