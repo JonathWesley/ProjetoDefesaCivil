@@ -11,7 +11,7 @@
     if(isset($_POST['pesquisa_ocorrencia']) && $pesquisa_ocorrencia != null){
         $consulta_ocorrencias = pg_query($connection, 
         "SELECT ocorrencia.id_ocorrencia,ocorrencia.ocorr_prioridade, TO_CHAR(ocorrencia.data_ocorrencia, 'DD/MM/YYYY') as data_ocorrencia,
-        usuario.nome,cobrade.subgrupo
+        usuario.nome as nome_usuario,cobrade.subgrupo
         FROM ocorrencia INNER JOIN usuario ON ocorrencia.agente_principal = usuario.id_usuario 
         INNER JOIN cobrade ON ocorrencia.ocorr_cobrade = cobrade.codigo
         WHERE CAST(id_ocorrencia AS TEXT) LIKE '$pesquisa_ocorrencia%'") or die(preg_last_error());
@@ -19,11 +19,16 @@
     
         $consulta_ocorrencias = pg_query($connection, 
         "SELECT ocorrencia.id_ocorrencia,ocorrencia.ocorr_prioridade, TO_CHAR(ocorrencia.data_ocorrencia, 'DD/MM/YYYY') as data_ocorrencia,
-        usuario.nome,cobrade.subgrupo
-        FROM ocorrencia INNER JOIN usuario ON ocorrencia.agente_principal = usuario.id_usuario 
+        usuario.nome,cobrade.subgrupo, pessoa.nome as nome_pessoa
+        FROM ocorrencia 
+        INNER JOIN usuario ON ocorrencia.agente_principal = usuario.id_usuario 
         INNER JOIN cobrade ON ocorrencia.ocorr_cobrade = cobrade.codigo
+        LEFT JOIN pessoa ON ocorrencia.atendido_1 = pessoa.id_pessoa
         WHERE CAST(id_ocorrencia AS TEXT) LIKE '$pesquisa_ocorrencia%'
-        ORDER BY data_ocorrencia DESC
+        ORDER BY 
+        CASE WHEN (ocorrencia.ocorr_prioridade = 'Alta') THEN 1 
+        WHEN (ocorrencia.ocorr_prioridade = 'Média') THEN 2 
+        WHEN (ocorrencia.ocorr_prioridade = 'Baixa') THEN 3 END 
         LIMIT $items_por_pagina OFFSET $offset") or die(preg_last_error());
     }else{
         $consulta_ocorrencias = pg_query($connection, 
@@ -35,10 +40,15 @@
 
         $consulta_ocorrencias = pg_query($connection, 
         "SELECT ocorrencia.id_ocorrencia,ocorrencia.ocorr_prioridade, TO_CHAR(ocorrencia.data_ocorrencia, 'DD/MM/YYYY') as data_ocorrencia,
-        usuario.nome,cobrade.subgrupo
-        FROM ocorrencia INNER JOIN usuario ON ocorrencia.agente_principal = usuario.id_usuario 
+        usuario.nome,cobrade.subgrupo, pessoa.nome as nome_pessoa
+        FROM ocorrencia 
+        INNER JOIN usuario ON ocorrencia.agente_principal = usuario.id_usuario 
         INNER JOIN cobrade ON ocorrencia.ocorr_cobrade = cobrade.codigo
-        ORDER BY data_ocorrencia DESC
+        LEFT JOIN pessoa ON ocorrencia.atendido_1 = pessoa.id_pessoa
+        ORDER BY 
+        CASE WHEN (ocorrencia.ocorr_prioridade = 'Alta') THEN 1 
+        WHEN (ocorrencia.ocorr_prioridade = 'Média') THEN 2 
+        WHEN (ocorrencia.ocorr_prioridade = 'Baixa') THEN 3 END 
         LIMIT $items_por_pagina OFFSET $offset") or die(preg_last_error());
     }
 
@@ -59,20 +69,25 @@
         <table id="tabela" class="table table-striped table-bordered" style="width:100%">
             <thead><tr>
                 <th><!--<span class="glyphicon glyphicon-fullscreen"></span>--></th>
-                <th onclick="sortTable(0)">ID<span class="glyphicon glyphicon-sort sort-icon"></span></th>
-                <th onclick="sortTable(1)">Cobrade<span class="glyphicon glyphicon-sort sort-icon"></span></th>
-                <th onclick="sortTable(2)">Prioridade<span class="glyphicon glyphicon-sort sort-icon"></span></th>
-                <th onclick="sortTable(3)">Agente<span class="glyphicon glyphicon-sort sort-icon"></span></th>
-                <th onclick="sortTable(4)">Data<span class="glyphicon glyphicon-sort sort-icon"></span></th>
+                <th onclick="sortTable(0)">Cobrade<span class="glyphicon glyphicon-sort sort-icon"></span></th>
+                <th onclick="sortTable(1)">Atendido<span class="glyphicon glyphicon-sort sort-icon"></span></th>
+                <th onclick="sortTable(2)">Agente<span class="glyphicon glyphicon-sort sort-icon"></span></th>
+                <th onclick="sortTable(3)">Data<span class="glyphicon glyphicon-sort sort-icon"></span></th>
             </tr></thead>
             <tbody>
             <?php
                 $i = 0;
                 while($linha = pg_fetch_array($consulta_ocorrencias, $i)){
-                    echo '<tr><td><a href="index.php?pagina=exibirOcorrencia&id='.$linha['id_ocorrencia'].'"><span class="glyphicon glyphicon-fullscreen"></span></a></td>';
-                    echo '<td>'.$linha['id_ocorrencia'].'</td>';
-                    echo '<td>'.$linha['subgrupo'].'</td>'; 
-                    echo '<td>'.$linha['ocorr_prioridade'].'</td>';
+                    echo '<tr style="background-color:';
+                    if($linha['ocorr_prioridade'] == "Alta")
+                        echo '#ff5050;">';
+                    else if($linha['ocorr_prioridade'] == "Média")
+                        echo '#fff050;">';
+                    else
+                        echo '#88ff50;">';
+                    echo '<td><a href="index.php?pagina=exibirOcorrencia&id='.$linha['id_ocorrencia'].'"><span class="glyphicon glyphicon-fullscreen"></span></a></td>';
+                    echo '<td>'.$linha['subgrupo'].'</td>';
+                    echo '<td>'.$linha['nome_pessoa'].'</td>';
                     echo '<td>'.$linha['nome'].'</td>';
                     echo '<td>'.$linha['data_ocorrencia'].'</td></tr>';
                     $i += 1;

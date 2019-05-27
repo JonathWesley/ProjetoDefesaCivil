@@ -24,8 +24,6 @@ angular.module("myApp", []).controller("myCtrl", function($scope){
             }
         });	
     });
-
-    
 });
 
 //ordenar tabela de ocorrencias

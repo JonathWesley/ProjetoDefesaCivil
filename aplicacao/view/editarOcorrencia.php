@@ -1,18 +1,8 @@
-<?php
-
-$id = $_POST['id_ocorrencia'];
-
-?>
-
 <div class="container positioning">
 <div class="jumbotron campo_cadastro">
-    <form method="post" action="processa_cadastrar_ocorrencia.php">
+    <form method="post" action="processa_editar_ocorrencia.php">
+        <input name="id_ocorrencia" type="hidden" value="<?php echo $_POST['id_ocorrencia']; ?>">
         <div class="box">
-            <?php if(isset($_GET['sucesso'])){ ?>
-            <div class="alert alert-success" role="alert">
-                Ocorrencia alterada com sucesso.
-            </div>
-            <?php } ?>
             <?php if(isset($_GET['erroDB'])){ ?>
             <div class="alert alert-danger" role="alert">
                 Falha ao alterar ocorrencia.
@@ -170,7 +160,7 @@ $id = $_POST['id_ocorrencia'];
             <div>
                 Pessoa atendida 1:
                 <br>
-                <input name="pessoa_atendida_1" type="text" class="form-control inline" value="<?php if(isset($_POST['nome_pessoa'])){echo "a".$_POST['nome_pessoa'];} ?>">
+                <input name="pessoa_atendida_1" type="text" class="form-control inline" value="<?php if(isset($_POST['nome_pessoa'])){echo $_POST['nome_pessoa'];} ?>">
                 <button type="button" class="btn-default btn-small inline" data-toggle="modal" data-target="#pessoasModal"><span class="glyphicon glyphicon-plus"></span></button>
             </div>
             <?php if(isset($_GET['pessoa_atendida_1'])){ ?>
@@ -409,16 +399,20 @@ $id = $_POST['id_ocorrencia'];
             <?php }else{ ?>
                 <p>Status</p>
                 <nav>
-                    Prioridade: <span id="ocorr_prioridade"><?php echo $_POST['prioridade']; ?></span>
+                    <input type="hidden" name="prioridade" value="<?php echo $_POST['prioridade']; ?>">
+                    Prioridade: <span><?php echo $_POST['prioridade']; ?></span>
                 </nav>
                 <nav>
-                    Analisado: <span id="ocorr_analisado"><?php echo ($_POST['analisado'] == t) ? 'Sim':'Não'; ?></span>
+                    <input type="hidden" name="analisado" value="<?php echo ($_POST['analisado'] == t) ? "true":"false"; ?>">
+                    Analisado: <span><?php echo ($_POST['analisado'] == t) ? 'Sim':'Não'; ?></span>
                 </nav>
                 <nav>
-                    Congelado: <span id="ocorr_congelado"><?php echo ($_POST['congelado']== t) ? 'Sim':'Não'; ?></span>
+                    <input type="hidden" name="congelado" value="<?php echo ($_POST['congelado'] == t) ? "true":"false";  ?>">
+                    Congelado: <span><?php echo ($_POST['congelado']== t) ? 'Sim':'Não'; ?></span>
                 </nav>
                 <nav>
-                    Encerrado: <span id="ocorr_encerrado"><?php echo ($_POST['encerrado']== t) ? 'Sim':'Não'; ?></span>
+                    <input type="hidden" name="encerrado" value="<?php echo ($_POST['encerrado'] == t) ? "true":"false";  ?>">
+                    Encerrado: <span><?php echo ($_POST['encerrado']== t) ? 'Sim':'Não'; ?></span>
                 </nav>
             <?php } ?>
             <br>

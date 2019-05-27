@@ -28,7 +28,7 @@
             <div ng-show="sel_endereco == 'Coordenada'">
                 <div>
                     Longitude: <span style="color:red;">*</span>
-                    <input name="longitude" type="text" class="form-control">
+                    <input name="longitude" type="text" class="form-control" value="<?php echo $_COOKIE['longitude']; ?>">
                 </div>
                 <?php if(isset($_GET['longitude'])){ ?>
                     <span class="alertErro">
@@ -37,7 +37,7 @@
                 <?php } ?>
                 <div>
                     Latitude: <span style="color:red;">*</span>
-                    <input name="latitude" type="text" class="form-control">
+                    <input name="latitude" type="text" class="form-control" value="<?php echo $_COOKIE['latitude']; ?>">
                 </div>
                 <?php if(isset($_GET['latitude'])){ ?>
                     <span class="alertErro">
@@ -164,7 +164,7 @@
             <div>
                 Pessoa atendida 1:
                 <br>
-                <input name="pessoa_atendida_1" type="text" class="form-control inline" value="<?php if(isset($_POST['nome_pessoa'])){echo "a".$_POST['nome_pessoa'];} ?>">
+                <input name="pessoa_atendida_1" id="pessoa_atendida_1" type="text" class="form-control inline">
                 <button type="button" class="btn-default btn-small inline" data-toggle="modal" data-target="#pessoasModal"><span class="glyphicon glyphicon-plus"></span></button>
             </div>
             <?php if(isset($_GET['pessoa_atendida_1'])){ ?>
@@ -175,7 +175,7 @@
             <div>
                 Pessoa atendida 2:
                 <br>
-                <input name="pessoa_atendida_2" type="text" class="form-control inline">
+                <input name="pessoa_atendida_2" type="text" class="form-control">
             </div>
             <?php if(isset($_GET['pessoa_atendida_2'])){ ?>
                 <span class="alertErro">
@@ -462,9 +462,11 @@
             var telefone_pessoa = $("#telefone_pessoa").val();
             var cpf_pessoa = $("#cpf_pessoa").val();
             var outros_documentos = $("#outros_documentos").val();
-                
+
+            document.getElementById("pessoa_atendida_1").value = nome_pessoa;
+            
             $.post("processa_cadastrar_pessoa.php", { nome_pessoa: nome_pessoa, email_pessoa: email_pessoa,
-                telefone_pessoa: telefone_pessoa, cpf_pessoa: cpf_pessoa, outros_documentos:outros_documentos });
+                telefone_pessoa: telefone_pessoa, cpf_pessoa: cpf_pessoa, outros_documentos:outros_documentos, nome_salvar: nome_pessoa });
         }
     </script>
 </div>

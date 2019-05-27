@@ -52,6 +52,11 @@
 
 <div class="container positioning">
 <div class="jumbotron campo_cadastro">
+    <?php if(isset($_GET['sucesso'])){ ?>
+            <div class="alert alert-success" role="alert">
+                Ocorrencia alterada com sucesso.
+            </div>
+    <?php } ?>
     <div class="box">
         <p>Endereços</p>
         <nav>
