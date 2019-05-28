@@ -2,34 +2,38 @@
     include 'database.php';
     
     $pesquisa_ocorrencia = addslashes($_POST['pesquisa_ocorrencia']);
+    $pesquisa_filtro = addslashes($_POST['pesquisa_filtro']);
 
-    $items_por_pagina = 6;
+    $items_por_pagina = 7;
     $pagina = intval($_GET['n']);
     $offset = $pagina * $items_por_pagina;
     $numero_total = 1;
 
     if(isset($_POST['pesquisa_ocorrencia']) && $pesquisa_ocorrencia != null){
-        $consulta_ocorrencias = pg_query($connection, 
-        "SELECT ocorrencia.id_ocorrencia,ocorrencia.ocorr_prioridade, TO_CHAR(ocorrencia.data_ocorrencia, 'DD/MM/YYYY') as data_ocorrencia,
-        usuario.nome as nome_usuario,cobrade.subgrupo
-        FROM ocorrencia INNER JOIN usuario ON ocorrencia.agente_principal = usuario.id_usuario 
+        $query = "SELECT ocorrencia.id_ocorrencia,ocorrencia.ocorr_prioridade, 
+        TO_CHAR(ocorrencia.data_ocorrencia, 'DD/MM/YYYY') as data_ocorrencia,
+        usuario.nome, cobrade.subgrupo, pessoa.nome as nome_pessoa
+        FROM ocorrencia 
+        INNER JOIN usuario ON ocorrencia.agente_principal = usuario.id_usuario
         INNER JOIN cobrade ON ocorrencia.ocorr_cobrade = cobrade.codigo
-        WHERE CAST(id_ocorrencia AS TEXT) LIKE '$pesquisa_ocorrencia%'") or die(preg_last_error());
+        LEFT JOIN pessoa ON ocorrencia.atendido_1 = pessoa.id_pessoa";
+        
+        if($pesquisa_filtro == 'data_ocorrencia'){
+            $query = $query." WHERE ocorrencia.data_ocorrencia >= TO_CHAR($pesquisa_ocorrencia, 'YYYY-MM-DD')";
+        }else{
+            $query = $query." WHERE $pesquisa_filtro ILIKE '$pesquisa_ocorrencia%'";
+        }
+
+        $consulta_ocorrencias = pg_query($connection, $query);// or die(preg_last_error());
         $numero_total = pg_num_rows($consulta_ocorrencias);
     
-        $consulta_ocorrencias = pg_query($connection, 
-        "SELECT ocorrencia.id_ocorrencia,ocorrencia.ocorr_prioridade, TO_CHAR(ocorrencia.data_ocorrencia, 'DD/MM/YYYY') as data_ocorrencia,
-        usuario.nome,cobrade.subgrupo, pessoa.nome as nome_pessoa
-        FROM ocorrencia 
-        INNER JOIN usuario ON ocorrencia.agente_principal = usuario.id_usuario 
-        INNER JOIN cobrade ON ocorrencia.ocorr_cobrade = cobrade.codigo
-        LEFT JOIN pessoa ON ocorrencia.atendido_1 = pessoa.id_pessoa
-        WHERE CAST(id_ocorrencia AS TEXT) LIKE '$pesquisa_ocorrencia%'
-        ORDER BY 
+        $consulta_ocorrencias = pg_query($connection, $query." ORDER BY
         CASE WHEN (ocorrencia.ocorr_prioridade = 'Alta') THEN 1 
         WHEN (ocorrencia.ocorr_prioridade = 'Média') THEN 2 
         WHEN (ocorrencia.ocorr_prioridade = 'Baixa') THEN 3 END 
-        LIMIT $items_por_pagina OFFSET $offset") or die(preg_last_error());
+        LIMIT $items_por_pagina OFFSET $offset");// or die(preg_last_error());
+
+        echo '<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>'.pg_last_error();
     }else{
         $consulta_ocorrencias = pg_query($connection, 
         "SELECT ocorrencia.id_ocorrencia,ocorrencia.ocorr_prioridade, TO_CHAR(ocorrencia.data_ocorrencia, 'DD/MM/YYYY') as data_ocorrencia,
@@ -62,6 +66,19 @@
     <div class="box">
         <form class="input-group" method="post" action="index.php?pagina=consultarOcorrencia&n=0">
             <input type="text" class="form-control" name="pesquisa_ocorrencia" placeholder="Pesquisa" value="<?php echo $_POST['pesquisa_ocorrencia']; ?>">
+            <br>
+            <nav>
+                <label class="radio-inline">
+                    <input type="radio" ng-model="pesquisa_filtro" value="cobrade.subgrupo" name="pesquisa_filtro"
+                    ng-init="pesquisa_filtro='<?php if(!isset($_POST['pesquisa_filtro'])){echo 'cobrade.subgrupo';}else{echo $_POST['pesquisa_filtro'];}?>'">Cobrade
+                </label>
+                <label class="radio-inline">
+                    <input type="radio" ng-model="pesquisa_filtro" value="TO_CHAR(data_ocorrencia :: DATE, 'dd/mm/yyyy');" name="pesquisa_filtro">Data
+                </label>
+                <label class="radio-inline">
+                    <input type="radio" ng-model="pesquisa_filtro" value="usuario.nome" name="pesquisa_filtro">Agente
+                </label>
+            </nav>
             <span class="input-group-addon"><i class="glyphicon glyphicon-search"></i></span>
         </form>
     </div>
@@ -118,4 +135,4 @@
         </nav>
     </div>
 </div>
-</div>
+</div>  
