@@ -51,6 +51,16 @@
     <div class="side-menu">
         <div class="container">
         <div class="jumbotron">
+            <h4 class="text-center">Chamados</h4>
+            <ul class="menu-ul">
+                <li><a href="?pagina=cadastrarChamado">Cadastrar</a></li>
+                <li><a href="?pagina=consultarChamado&n=0">Consultar</a></li>
+            </ul>
+        </div>
+        </div>
+
+        <div class="container">
+        <div class="jumbotron">
             <h4 class="text-center">Ocorrências</h4>
             <ul class="menu-ul">
                 <?php if($_SESSION['nivel_acesso'] == 1){ ?>

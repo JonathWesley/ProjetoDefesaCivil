@@ -2,7 +2,7 @@
     include 'database.php';
     
     $pesquisa_ocorrencia = addslashes($_POST['pesquisa_ocorrencia']);
-    $pesquisa_filtro = addslashes($_POST['pesquisa_filtro']);
+    $pesquisa_filtro = $_POST['pesquisa_filtro'];
 
     $items_por_pagina = 7;
     $pagina = intval($_GET['n']);
@@ -19,7 +19,7 @@
         LEFT JOIN pessoa ON ocorrencia.atendido_1 = pessoa.id_pessoa";
         
         if($pesquisa_filtro == 'data_ocorrencia'){
-            $query = $query." WHERE ocorrencia.data_ocorrencia >= TO_CHAR($pesquisa_ocorrencia, 'YYYY-MM-DD')";
+            $query = $query." WHERE TO_CHAR(ocorrencia.data_ocorrencia, 'DD/MM/YYYY') >= '$pesquisa_ocorrencia'";
         }else{
             $query = $query." WHERE $pesquisa_filtro ILIKE '$pesquisa_ocorrencia%'";
         }
@@ -73,7 +73,7 @@
                     ng-init="pesquisa_filtro='<?php if(!isset($_POST['pesquisa_filtro'])){echo 'cobrade.subgrupo';}else{echo $_POST['pesquisa_filtro'];}?>'">Cobrade
                 </label>
                 <label class="radio-inline">
-                    <input type="radio" ng-model="pesquisa_filtro" value="TO_CHAR(data_ocorrencia :: DATE, 'dd/mm/yyyy');" name="pesquisa_filtro">Data
+                    <input type="radio" ng-model="pesquisa_filtro" value="data_ocorrencia" name="pesquisa_filtro">Data
                 </label>
                 <label class="radio-inline">
                     <input type="radio" ng-model="pesquisa_filtro" value="usuario.nome" name="pesquisa_filtro">Agente
