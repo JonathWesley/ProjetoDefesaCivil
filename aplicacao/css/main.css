@@ -1,7 +1,10 @@
 body{
     background-color: #ffe;
+    padding: 0px;
+    margin: 0px;
 }
 
+/* pagina login */
 .img-box{
     position: absolute;
     top: 0px;
@@ -34,6 +37,41 @@ body{
     width: 50%;
 }
 
+/* header */
+.navegation{
+    position: relative;
+    top: 20px;
+    right: 10px;
+    font-size: 14px;
+    padding: 0px 0px 0px 10px;
+}
+
+.img-perfil{
+    width: 30px;
+    padding: 0px;
+    margin: 0px;
+}
+
+.navbar-brand {
+    padding: 5px 15px;
+    height: 20px;
+    line-height: 20px;
+    width: 100%;
+}
+
+.dropdown-item{
+    display: block;
+}
+
+.positioning{
+    position: absolute;
+    top: 100px;
+    left: 300px;
+    width: 60%;
+    padding: 0px;
+}
+
+/* geral */
 .input-group{
     padding: 10px;
     width: 100%;
@@ -50,65 +88,6 @@ body{
 .smalll{
     position: relative;
     top: 175px;
-}
-
-footer{
-    position: relative;
-    bottom: 0px;
-}
-
-.footer{
-    display: inline;
-    padding: 0px 300px 0px 0px;
-    position: relative;
-    top: 80px;
-}
-
-.navegation{
-    position: relative;
-    top: -11px;
-    left: 15px;
-    font-size: 14px;
-    padding: 0px 0px 0px 10px;
-}
-
-.side-menu{
-    position: absolute;
-    top: 100px;
-    left: 20px;
-    width: 230px;
-    padding: 15px 0px 0px 0px;
-    background-color: #ccc;
-    border-radius: 10px;
-}
-
-.side-menu .jumbotron{
-    width: 200px;
-
-}
-
-div h4{
-    position: relative;
-    top: -40px;
-}
-
-.menu-ul{
-    position: relative;
-    top: -25px;
-    left: -70px;
-    list-style-type: none;
-}
-
-.img-perfil{
-    width: 50px;
-}
-
-.positioning{
-    position: absolute;
-    top: 100px;
-    left: 300px;
-    width: 60%;
-    padding: 0px;
 }
 
 .campo_cadastro{
@@ -131,25 +110,12 @@ div h4{
     padding: 10px 0px 10px 0px;
 }
 
-.cobrade{
-    position: relative;
-    left: 50px;
-}
-
 .inline{
     display: inline-block;
 }
 
 .form-control{
     width: 70%;
-}
-
-.btn-default1{
-    width: 30%;
-}
-
-.edit{
-    float: right;
 }
 
 .btn-sm{
@@ -161,26 +127,9 @@ div h4{
     margin: 0px;
 }
 
-.char-count{
-    color:#ccc;
-    font-size:12px;
-    position: relative;
-    bottom:20px;
-    left:390px;
-}
-
 .alertErro{
     color:#f22a1f;
     font-size:14px;
-}
-
-.navbar-nav > li > a, .navbar-brand {
-    padding-top:10px !important; padding-bottom:10px;
-    height: 70px;
-}
-
-.navbar {
-    min-height:70px;
 }
 
 .box-search{
@@ -191,4 +140,39 @@ div h4{
 .sort-icon{
     font-size: 10px;
     float: right;
+}
+
+/* especificos */
+.cobrade{
+    position: relative;
+    left: 50px;
+}
+
+.btn-default1{
+    width: 30%;
+}
+
+.edit{
+    float: right;
+}
+
+.char-count{
+    color:#ccc;
+    font-size:12px;
+    position: relative;
+    bottom:20px;
+    left:390px;
+}
+
+/* footer */
+footer{
+    position: relative;
+    bottom: 0px;
+}
+
+.footer{
+    display: inline;
+    padding: 0px 300px 0px 0px;
+    position: relative;
+    top: 80px;
 }
