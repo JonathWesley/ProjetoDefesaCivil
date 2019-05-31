@@ -64,6 +64,7 @@ if($_SESSION['nivel_acesso'] == 1){
 }else if($_SESSION['nivel_acesso'] == 2){
     switch($pagina){
         case 'esqueceuSenha': include 'view/esqueceuSenha.php'; break;
+        case 'cadastrarOcorrencia': include 'view/cadastrarOcorrencia.php'; break; 
         case 'consultarOcorrencia': include 'view/consultarOcorrencia.php'; break; 
         case 'perfil': include 'view/perfil.php'; break;
         case 'exibirOcorrencia': include 'view/exibirOcorrencia.php'; break;

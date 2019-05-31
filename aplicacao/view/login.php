@@ -14,11 +14,7 @@
 <body>
     <div ng-app="myApp" ng-controller="myCtrl">
     <header>
-        <div class="container img-box">
-        <div class="jumbotron">
-            <img src="images/logo.jpg" alt="DefesaCivil" class="img-rounded corner-img">
-        </div>
-        </div>
+        <img src="images/logo.jpg" alt="DefesaCivil" class="img-rounded corner-img">
         <h1 class="text-center page-title">Defesa Civil</h1>
     </header>
     
