@@ -1,5 +1,14 @@
 body{
+    padding: 0px;
+    margin: 0px;
     background-color: #ffe;
+}
+
+/* ajustes pra telas pequenas */
+@media all and (max-width: 600px){
+    .corner-img { display: none; }
+    .page-title { left: 0px; font-size: 20px; }
+    .footer{ display: block; padding: 0px 0px 0px 0px; }
 }
 
 /* login */
@@ -11,19 +20,31 @@ body{
 }
 
 .corner-img{
-    width: 100%;
+    position: relative;
+    left: 10%;
+    width: 10%;
+    border-style: solid;
+    border-width: 5px;
+    border-color: gray;
 }
 
 .page-title{
+    position: relative;
+    left: 28%;
     font-size: 60px;
     color: gray;
 }
 
 .login-box{
     position: relative;
-    top: 200px;
+    top: 60px;
     float: center;
     width: 50%;
+}
+
+.esqueceuSenha{
+    position: relative;
+    left: 40%;
 }
 
 /* header */
@@ -32,34 +53,8 @@ body{
 }
 
 /* geral */
-.input-group{
-    padding: 10px;
-    width: 100%;
-}
-
-.btn{
-    position: relative;
-    left: 45%;
-    top: 10px;
-    font-size: 15px;
-    padding: 10px;
-}
-
-.smalll{
-    position: relative;
-    top: 175px;
-}
-
-div h4{
-    position: relative;
-    top: -40px;
-}
-
 .positioning{
-    position: absolute;
-    top: 100px;
-    left: 300px;
-    width: 60%;
+    width: 70%;
     padding: 0px;
 }
 
@@ -83,12 +78,30 @@ div h4{
     padding: 10px 0px 10px 0px;
 }
 
-.inline{
-    display: inline-block;
+.input-group{
+    padding: 10px;
+    width: 100%;
 }
 
 .form-control{
     width: 70%;
+}
+
+.btn{
+    position: relative;
+    left: 45%;
+    top: 10px;
+    font-size: 15px;
+    padding: 10px;
+}
+
+div h4{
+    position: relative;
+    top: -40px;
+}
+
+.inline{
+    display: inline-block;
 }
 
 .alertErro{
@@ -129,7 +142,7 @@ div h4{
     font-size:12px;
     position: relative;
     bottom:20px;
-    left:390px;
+    left:62%;
 }
 
 .sort-icon{
@@ -138,14 +151,9 @@ div h4{
 }
 
 /* footer */
-footer{
-    position: relative;
-    bottom: 0px;
-}
-
 .footer{
     display: inline;
     padding: 0px 300px 0px 0px;
     position: relative;
-    top: 80px;
+    top: 100px;
 }

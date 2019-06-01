@@ -65,6 +65,7 @@
 <div class="jumbotron campo_cadastro">
     <div class="box">
         <form class="input-group" method="post" action="index.php?pagina=consultarOcorrencia&n=0">
+            <span class="input-group-addon"><i class="glyphicon glyphicon-search"></i></span>
             <input type="text" class="form-control" name="pesquisa_ocorrencia" placeholder="Pesquisa" value="<?php echo $_POST['pesquisa_ocorrencia']; ?>">
             <br>
             <nav>
@@ -79,7 +80,6 @@
                     <input type="radio" ng-model="pesquisa_filtro" value="usuario.nome" name="pesquisa_filtro">Agente
                 </label>
             </nav>
-            <span class="input-group-addon"><i class="glyphicon glyphicon-search"></i></span>
         </form>
     </div>
     <div class="box">
