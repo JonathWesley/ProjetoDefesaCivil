@@ -1,8 +1,7 @@
 <div class="container positioning">
 <div class="jumbotron campo_cadastro">
     <form method="post" action="processa_cadastrar_ocorrencia.php">
-        <div class="box">
-            <?php if(isset($_GET['sucesso'])){ ?>
+        <?php if(isset($_GET['sucesso'])){ ?>
             <div class="alert alert-success" role="alert">
                 Ocorrencia cadastrada com sucesso.
             </div>
@@ -11,7 +10,14 @@
             <div class="alert alert-danger" role="alert">
                 Falha ao cadastrar ocorrencia.
             </div>
-            <?php } ?>
+        <?php } ?>
+        <div class="box">
+            <div>
+                Número do chamado:
+                <input name="chamado_id" type="text" class="form-control">
+            </div>
+        </div>
+        <div class="box">
             <div>
                 Endereço principal: <span style="color:red;">*</span>
                 <label for="endereco_principal"></label>
@@ -335,7 +341,7 @@
             <br>
             <div>
                 Descricao cobrade: <span style="color:red;" ng-show="categoria == 3">*</span>
-                <textarea id="natureza" name="natureza" class="form-control" cols="30" rows="2" maxlength = "100" ng-disabled="categoria != 3"></textarea>
+                <textarea id="natureza" name="cobrade_descricao" class="form-control" cols="30" rows="2" maxlength = "100" ng-disabled="categoria != 3"></textarea>
             </div>
             Possui fotos:
             <br>
@@ -350,7 +356,7 @@
             <br>
             <div>
                 Fotos:
-                <button type="button" class="btn btn-default btn-sm inline">Carregar fotos</button>
+                <input type="file" accept="image/png, image/jpeg">
             </div>
         </div>
         <div class="box">

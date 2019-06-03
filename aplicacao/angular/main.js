@@ -11,6 +11,7 @@ angular.module("myApp", []).controller("myCtrl", function($scope){
 
     $("#cep").focusout(function(){
         $(this).val().replace('-', '');
+        $(this).val().replace('.', '');
         $.ajax({
             url: 'https://viacep.com.br/ws/'+$(this).val()+'/json/unicode/',
             dataType: 'json',

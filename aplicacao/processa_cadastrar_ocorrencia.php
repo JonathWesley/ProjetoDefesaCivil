@@ -6,6 +6,9 @@ include 'database.php';
 $endereco_principal = addslashes($_POST['endereco_principal']);
 $longitude = addslashes($_POST['longitude']);
 $latitude = addslashes($_POST['latitude']);
+$cep = addslashes($_POST['cep']);
+$cidade = addslashes($_POST['cidade']);
+$bairro = addslashes($_POST['bairro']);
 $logradouro = addslashes($_POST['logradouro']);
 $numero = addslashes($_POST['complemento']);
 $referencia = addslashes($_POST['referencia']);
@@ -25,7 +28,7 @@ $cobrade_grupo = $_POST['cobrade_grupo'];
 $cobrade_subgrupo = $_POST['cobrade_subgrupo'];
 $cobrade_tipo = $_POST['cobrade_tipo'];
 $cobrade_subtipo = $_POST['cobrade_subtipo'];
-$natureza = addslashes($_POST['natureza']);
+$cobrade_descricao = addslashes($_POST['cobrade_descricao']);
 $possui_fotos = addslashes($_POST['possui_fotos']);
 $prioridade = addslashes($_POST['prioridade']);
 $analisado = addslashes($_POST['analisado']);
@@ -57,11 +60,12 @@ if($endereco_principal != "Logradouro" && $endereco_principal != "Coordenada")
 //seleciona o endereço no BD, caso ele nao exista entao cria um novo
 $logradouro_id = 'null';
 if($endereco_principal == "Logradouro"){
+	$cep = str_replace("-","",$cep);
 	$result = pg_query($connection, "SELECT * FROM endereco_logradouro
 									WHERE logradouro = '$logradouro' AND numero = '$numero'");
 	if(pg_num_rows($result) == 0){
-		$result = pg_query($connection, "INSERT INTO endereco_logradouro(logradouro,numero,referencia)
-										VALUES ('$logradouro','$numero','$referencia')");
+		$result = pg_query($connection, "INSERT INTO endereco_logradouro(cep,cidade,bairro,logradouro,numero,referencia)
+										VALUES ('$cep','$cidade','$bairro','$logradouro','$numero','$referencia')");
 		if(!$result)
 			$erros = $erros.'&logradouro';
 		$result = pg_query($connection, "SELECT * FROM endereco_logradouro
@@ -188,17 +192,17 @@ if(strlen($erros) > 0){
 			(ocorr_endereco_principal,ocorr_coordenada_latitude,ocorr_coordenada_longitude,
 			ocorr_logradouro_id,agente_principal,agente_apoio_1,agente_apoio_2,ocorr_retorno,
 			ocorr_referencia,data_lancamento,data_ocorrencia,ocorr_descricao,ocorr_origem,
-			atendido_1,atendido_2,ocorr_cobrade,ocorr_natureza,ocorr_fotos,ocorr_prioridade,
+			atendido_1,atendido_2,ocorr_cobrade,cobrade_descricao,ocorr_fotos,ocorr_prioridade,
 			ocorr_analisado,ocorr_congelado,ocorr_encerrado)
 			VALUES
 			('$endereco_principal',$latitude,$longitude,$logradouro_id,$agente_principal,
 			$agente_apoio_1,$agente_apoio_2,$ocorr_retorno,$ocorr_referencia,'$data_lancamento',
 			'$data_ocorrencia','$descricao','$ocorr_origem',$pessoa_atendida_1,$pessoa_atendida_2,
-			'$cobrade','$natureza',$possui_fotos,'$prioridade',$analisado,$congelado,$encerrado)";
+			'$cobrade','$cobrade_descricao',$possui_fotos,'$prioridade',$analisado,$congelado,$encerrado)";
 
 	$result = pg_query($connection, $query);
 	if(!$result){
-		//echo .pg_last_error();
+		//echo pg_last_error();
 		header('location:index.php?pagina=cadastrarOcorrencia&erroDB');
 	}else{
 		header('location:index.php?pagina=cadastrarOcorrencia&sucesso');
