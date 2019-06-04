@@ -3,6 +3,7 @@
 include 'database.php'; 
 
 //recebe dados do $_POST
+$chamado_id = addslashes($_POST['chamado_id']);
 $endereco_principal = addslashes($_POST['endereco_principal']);
 $longitude = addslashes($_POST['longitude']);
 $latitude = addslashes($_POST['latitude']);
@@ -189,13 +190,13 @@ if(strlen($erros) > 0){
 }else{
 	//insere a ocorrencia no banco de dados
 	$query = "INSERT INTO ocorrencia 
-			(ocorr_endereco_principal,ocorr_coordenada_latitude,ocorr_coordenada_longitude,
+			(chamado_id,ocorr_endereco_principal,ocorr_coordenada_latitude,ocorr_coordenada_longitude,
 			ocorr_logradouro_id,agente_principal,agente_apoio_1,agente_apoio_2,ocorr_retorno,
 			ocorr_referencia,data_lancamento,data_ocorrencia,ocorr_descricao,ocorr_origem,
 			atendido_1,atendido_2,ocorr_cobrade,cobrade_descricao,ocorr_fotos,ocorr_prioridade,
 			ocorr_analisado,ocorr_congelado,ocorr_encerrado)
 			VALUES
-			('$endereco_principal',$latitude,$longitude,$logradouro_id,$agente_principal,
+			($chamado_id,'$endereco_principal',$latitude,$longitude,$logradouro_id,$agente_principal,
 			$agente_apoio_1,$agente_apoio_2,$ocorr_retorno,$ocorr_referencia,'$data_lancamento',
 			'$data_ocorrencia','$descricao','$ocorr_origem',$pessoa_atendida_1,$pessoa_atendida_2,
 			'$cobrade','$cobrade_descricao',$possui_fotos,'$prioridade',$analisado,$congelado,$encerrado)";

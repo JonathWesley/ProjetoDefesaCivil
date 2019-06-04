@@ -66,7 +66,7 @@
                     </span>
                 <?php } ?>
                 <div>
-                    Número:
+                    Número: <span style="color:red;">*</span>
                     <input id="complemento" name="complemento" type="text" class="form-control">
                 </div>
                 <div>

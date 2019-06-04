@@ -7,7 +7,6 @@ $data = addslashes($_POST['data_chamado']);
 $hora = addslashes($_POST['horario_chamado']);
 $origem = addslashes($_POST['origem_chamado']);
 $nome = addslashes($_POST['nome_chamado']);
-$telefone = addslashes($_POST['telefone_chamado']);
 $endereco_principal = addslashes($_POST['endereco_principal']);
 $longitude = addslashes($_POST['longitude']);
 $latitude = addslashes($_POST['latitude']);
@@ -17,9 +16,13 @@ $bairro = addslashes($_POST['bairro']);
 $logradouro = addslashes($_POST['logradouro']);
 $numero = addslashes($_POST['complemento']);
 $referencia = addslashes($_POST['referencia']);
-$descricao = addslashes($_POST['descricao_chamado']);
+$descricao = addslashes($_POST['descricao']);
 
 $erros='';
+
+//garante que o valor do endereço seja apenas igual a Logradouro ou Coordenada
+if($endereco_principal != "Logradouro" && $endereco_principal != "Coordenada")
+	$erros = $erros.'&endereco_principal';
 
 $logradouro_id = 'null';
 if($endereco_principal == "Logradouro"){
@@ -48,6 +51,27 @@ if($endereco_principal == "Logradouro"){
 		$erros = $erros.'&latitude';
 }
 
+$pessoa_atendida = 0;
+if(strlen($nome) > 0){ //se a pessoa foi informada, busca a mesma no BD 
+	$result = pg_query($connection, "SELECT * FROM pessoa WHERE nome = '$nome'");
+	if($result){
+		if(pg_num_rows($result) == 0){ //pessoa nao encontrada
+			$erros = $erros.'&nome';
+		}else{  //pessoa encontrada, seleciona o id da mesma
+			$linha = pg_fetch_array($result, 0);
+			$pessoa_atendida = $linha['id_pessoa'];
+		}
+	}else //erro no acesso ao BD
+		$erros = $erros.'&nome';
+}else //pessoa nao foi informada
+	$erros = $erros.'&nome';
+
+//valida as datas cadastradas
+date_default_timezone_set('America/Sao_Paulo');
+$dataAtual = date('Y-m-d');
+if($data > $dataAtual)
+	$erros = $erros.'&data';
+
 $timestamp = $data.' '.$hora.':00';
 
 if(strlen($erros) > 0){
@@ -57,9 +81,9 @@ if(strlen($erros) > 0){
 }else{
 	//insere a ocorrencia no banco de dados
 	$query = "INSERT INTO chamado 
-			(data_hora,origem,nome,telefone,chamado_logradouro_id)
+			(data_hora,origem,pessoa,chamado_logradouro_id,descricao,endereco_principal,latitude,longitude)
 			VALUES
-			('$timestamp','$origem','$nome','$telefone',$logradouro_id)";
+			('$timestamp','$origem',$pessoa_atendida,$logradouro_id,'$descricao','$endereco_principal',$latitude,$longitude)";
 
 	$result = pg_query($connection, $query);
 	if(!$result){
