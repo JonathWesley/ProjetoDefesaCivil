@@ -24,8 +24,8 @@
     <div class="jumbotron campo_cadastro">
         <div class="box">
             <form class="input-group" method="post" action="index.php?pagina=consultarUsuario&n=0">
-                <input type="text" class="form-control" name="pesquisa_usuario" placeholder="Pesquisa" value="<?php echo $_POST['pesquisa_usuario']; ?>">
                 <span class="input-group-addon"><i class="glyphicon glyphicon-search"></i></span>
+                <input type="text" class="form-control" name="pesquisa_usuario" placeholder="Pesquisa" value="<?php echo $_POST['pesquisa_usuario']; ?>">
             </form>
         </div>
         <div class="box">
@@ -40,6 +40,8 @@
             <tbody>
             <?php
                 $i = 0;
+                if(pg_fetch_array($consulta_usuarios, $i) == 0)
+                    echo '<tr><td colspan="5" class="text-center">Nenhum usuário encontrado</td></tr>';
                 while($linha = pg_fetch_array($consulta_usuarios, $i)){
                     echo '<tr><td><a href="index.php?pagina=exibirUsuario&id='.$linha['id_usuario'].'"><span class="glyphicon glyphicon-fullscreen"></span></a></td>';
                     echo '<td>'.$linha['id_usuario'].'</td>';

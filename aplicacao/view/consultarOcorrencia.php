@@ -2,7 +2,7 @@
     include 'database.php';
     
     $pesquisa_ocorrencia = addslashes($_POST['pesquisa_ocorrencia']);
-    $pesquisa_filtro = $_POST['pesquisa_filtro'];
+    $pesquisa_filtro = $_POST['filtro'];
 
     $items_por_pagina = 7;
     $pagina = intval($_GET['n']);
@@ -24,6 +24,9 @@
             $query = $query." WHERE $pesquisa_filtro ILIKE '$pesquisa_ocorrencia%'";
         }
 
+        if($_POST['finalizado'] != true)
+            $query = $query." AND ocorrencia.ativo = true";
+
         $consulta_ocorrencias = pg_query($connection, $query) or die(preg_last_error());
         $numero_total = pg_num_rows($consulta_ocorrencias);
     
@@ -34,25 +37,26 @@
         LIMIT $items_por_pagina OFFSET $offset") or die(preg_last_error());
 
     }else{
-        $consulta_ocorrencias = pg_query($connection, 
-        "SELECT ocorrencia.id_ocorrencia,ocorrencia.ocorr_prioridade, TO_CHAR(ocorrencia.data_ocorrencia, 'DD/MM/YYYY') as data_ocorrencia,
-        usuario.nome,cobrade.subgrupo
-        FROM ocorrencia INNER JOIN usuario ON ocorrencia.agente_principal = usuario.id_usuario 
-        INNER JOIN cobrade ON ocorrencia.ocorr_cobrade = cobrade.codigo") or die(preg_last_error());
-        $numero_total = pg_num_rows($consulta_ocorrencias);
-
-        $consulta_ocorrencias = pg_query($connection, 
-        "SELECT ocorrencia.id_ocorrencia,ocorrencia.ocorr_prioridade, TO_CHAR(ocorrencia.data_ocorrencia, 'DD/MM/YYYY') as data_ocorrencia,
+        $query = "SELECT ocorrencia.id_ocorrencia,ocorrencia.ocorr_prioridade, TO_CHAR(ocorrencia.data_ocorrencia, 'DD/MM/YYYY') as data_ocorrencia,
         usuario.nome,cobrade.subgrupo, pessoa.nome as nome_pessoa
         FROM ocorrencia 
         INNER JOIN usuario ON ocorrencia.agente_principal = usuario.id_usuario 
         INNER JOIN cobrade ON ocorrencia.ocorr_cobrade = cobrade.codigo
-        LEFT JOIN pessoa ON ocorrencia.atendido_1 = pessoa.id_pessoa
-        ORDER BY 
+        LEFT JOIN pessoa ON ocorrencia.atendido_1 = pessoa.id_pessoa";
+
+        if($_POST['finalizado'] != true)
+            $query = $query." WHERE ocorrencia.ativo = true";
+
+        $consulta_ocorrencias = pg_query($connection, $query) or die(preg_last_error());
+        $numero_total = pg_num_rows($consulta_ocorrencias);
+
+        $query = $query." ORDER BY 
         CASE WHEN (ocorrencia.ocorr_prioridade = 'Alta') THEN 1 
         WHEN (ocorrencia.ocorr_prioridade = 'Média') THEN 2 
         WHEN (ocorrencia.ocorr_prioridade = 'Baixa') THEN 3 END 
-        LIMIT $items_por_pagina OFFSET $offset") or die(preg_last_error());
+        LIMIT $items_por_pagina OFFSET $offset";
+
+        $consulta_ocorrencias = pg_query($connection, $query) or die(preg_last_error());
     }
 
     if($numero_total <= 0)
@@ -64,21 +68,16 @@
 <div class="jumbotron campo_cadastro">
     <div class="box">
         <form class="input-group" method="post" action="index.php?pagina=consultarOcorrencia&n=0">
-            <span class="input-group-addon"><i class="glyphicon glyphicon-search"></i></span>
             <input type="text" class="form-control" name="pesquisa_ocorrencia" placeholder="Pesquisa" value="<?php echo $_POST['pesquisa_ocorrencia']; ?>">
-            <br>
-            <nav>
-                <label class="radio-inline">
-                    <input type="radio" ng-model="pesquisa_filtro" value="cobrade.subgrupo" name="pesquisa_filtro"
-                    ng-init="pesquisa_filtro='<?php if(!isset($_POST['pesquisa_filtro'])){echo 'cobrade.subgrupo';}else{echo $_POST['pesquisa_filtro'];}?>'">Cobrade
-                </label>
-                <label class="radio-inline">
-                    <input type="radio" ng-model="pesquisa_filtro" value="data_ocorrencia" name="pesquisa_filtro">Data
-                </label>
-                <label class="radio-inline">
-                    <input type="radio" ng-model="pesquisa_filtro" value="usuario.nome" name="pesquisa_filtro">Agente
-                </label>
-            </nav>
+            <span>Filtrar por: </span>
+            <select name="filtro" onchange="this.form.submit()" ng-model="sel_filtro" ng-init="sel_filtro='<?php if(isset($_POST['filtro'])){echo $_POST['filtro'];}else{echo 'cobrade.subgrupo';} ?>'">
+                <option value="cobrade.subgrupo">Cobrade</option>
+                <option value="pessoa.nome">Atendido</option>
+                <option value="usuario.nome">Agente</option>
+                <option value="data_ocorrencia">Data</option>
+            </select>
+            <span style="margin-left: 20px;">Mostrar chamados finalizados: </span>
+            <input name="finalizado" onchange="this.form.submit()" value="true" type="checkbox" <?php if($_POST['finalizado']==true)echo 'checked'; ?>>
         </form>
     </div>
     <div class="box">
@@ -93,6 +92,8 @@
             <tbody>
             <?php
                 $i = 0;
+                if(pg_fetch_array($consulta_ocorrencias, $i) == 0)
+                    echo '<tr><td colspan="5" class="text-center">Nenhuma ocorrência encontrada,</td></tr>';
                 while($linha = pg_fetch_array($consulta_ocorrencias, $i)){
                     echo '<tr style="background-color:';
                     if($linha['ocorr_prioridade'] == "Alta")

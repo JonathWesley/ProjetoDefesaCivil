@@ -14,14 +14,14 @@
         <div class="box">
             <div>
                 Número do chamado:
-                <input name="chamado_id" type="text" class="form-control">
+                <input name="id_chamado" type="text" class="form-control" value="<?php echo $_POST['id_chamado']; ?>">
             </div>
         </div>
         <div class="box">
             <div>
                 Endereço principal: <span style="color:red;">*</span>
                 <label for="endereco_principal"></label>
-                <select name="endereco_principal" class="form-control" ng-model="sel_endereco" ng-init="sel_endereco='Coordenada'" required>
+                <select name="endereco_principal" class="form-control" ng-model="sel_endereco" ng-init="sel_endereco='<?php if(isset($_POST['endereco_principal'])){echo $_POST['endereco_principal'];}else{echo 'Coordenada';} ?>'" required>
                     <option value="Coordenada">Coordenada</option>
                     <option value="Logradouro">Logradouro</option>
                 </select>
@@ -34,7 +34,7 @@
             <div ng-show="sel_endereco == 'Coordenada'">
                 <div>
                     Longitude: <span style="color:red;">*</span>
-                    <input name="longitude" type="text" class="form-control" value="<?php echo $_COOKIE['longitude']; ?>">
+                    <input name="longitude" type="text" class="form-control" value="<?php echo $_POST['longitude']; ?>">
                 </div>
                 <?php if(isset($_GET['longitude'])){ ?>
                     <span class="alertErro">
@@ -43,7 +43,7 @@
                 <?php } ?>
                 <div>
                     Latitude: <span style="color:red;">*</span>
-                    <input name="latitude" type="text" class="form-control" value="<?php echo $_COOKIE['latitude']; ?>">
+                    <input name="latitude" type="text" class="form-control" value="<?php echo $_POST['latitude']; ?>">
                 </div>
                 <?php if(isset($_GET['latitude'])){ ?>
                     <span class="alertErro">
@@ -54,11 +54,11 @@
             <div ng-show="sel_endereco == 'Logradouro'">
                 <div>
                     CEP:
-                    <input id="cep" name="cep" type="text" class="form-control" ng-model="cep">
+                    <input id="cep" name="cep" type="text" class="form-control" ng-model="cep" ng-init="cep='<?php echo $_POST['cep']; ?>'">
                 </div>
                 <div>
                     Logradouro: <span style="color:red;">*</span>
-                    <input id="logradouro" name="logradouro" type="text" class="form-control">
+                    <input id="logradouro" name="logradouro" type="text" class="form-control" value="<?php echo $_POST['logradouro']; ?>">
                 </div>
                 <?php if(isset($_GET['logradouro'])){ ?>
                     <span class="alertErro">
@@ -67,19 +67,19 @@
                 <?php } ?>
                 <div>
                     Número: <span style="color:red;">*</span>
-                    <input id="complemento" name="complemento" type="text" class="form-control">
+                    <input id="complemento" name="complemento" type="text" class="form-control" value="<?php echo $_POST['numero']; ?>">
                 </div>
                 <div>
                     Bairro:
-                    <input id="bairro" name="bairro" type="text" class="form-control">
+                    <input id="bairro" name="bairro" type="text" class="form-control" value="<?php echo $_POST['bairro']; ?>">
                 </div>
                 <div>
                     Cidade:
-                    <input id="cidade" name="cidade" type="text" class="form-control">
+                    <input id="cidade" name="cidade" type="text" class="form-control" value="<?php echo $_POST['cidade']; ?>">
                 </div>
                 <div>
                     Referência:
-                    <input name="referencia" type="text" class="form-control">
+                    <input name="referencia" type="text" class="form-control" value="<?php echo $_POST['referencia']; ?>">
                 </div>
             </div>
         </div>
@@ -135,7 +135,7 @@
             <?php } ?>
             <div>
                 Data de lançamento: <span style="color:red;">*</span>
-                <input name="data_lancamento" type="date" placeholder="DD/MM/YYYY" class="form-control" required>
+                <input name="data_lancamento" type="date" class="form-control" required>
             </div>
             <?php if(isset($_GET['data_lancamento'])){ ?>
                 <span class="alertErro">
@@ -149,7 +149,7 @@
                 <?php } ?>
             <div>
                 Data de ocorrência: <span style="color:red;">*</span>
-                <input name="data_ocorrencia" type="date" placeholder="DD/MM/YYYY" class="form-control" required>
+                <input id="data" name="data_ocorrencia" type="date" class="form-control" value="<?php echo $_POST['data_ocorrencia']; ?>" required>
             </div>
             <?php if(isset($_GET['data_ocorrencia'])){ ?>
                 <span class="alertErro">
@@ -158,19 +158,19 @@
             <?php } ?>
             <div>
                 Descrição:
-                <textarea id="descricao" name="descricao" class="form-control" cols="30" rows="2" maxlength = "100" ng-model="descricaoVal"></textarea>
+                <textarea id="descricao" name="descricao" class="form-control" cols="30" rows="2" maxlength = "100" ng-model="descricaoVal" ng-init="descricaoVal='<?php echo $_POST['descricao']; ?>'"></textarea>
                 <span class="char-count">{{descricaoVal.length || 0}}/100</span>
             </div>
             <div>
                 Origem:
-                <input name="ocorr_origem" type="text" class="form-control">
+                <input name="ocorr_origem" type="text" class="form-control" value="<?php echo $_POST['ocorr_origem']; ?>">
             </div>
         </div>
         <div class="box">
             <div>
                 Pessoa atendida 1:
                 <br>
-                <input name="pessoa_atendida_1" id="pessoa_atendida_1" type="text" class="form-control inline">
+                <input name="pessoa_atendida_1" id="pessoa_atendida_1" type="text" class="form-control inline" value="<?php echo $_POST['pessoa_atendida_1']; ?>">
                 <button type="button" class="btn-default btn-small inline" data-toggle="modal" data-target="#pessoasModal"><span class="glyphicon glyphicon-plus"></span></button>
             </div>
             <?php if(isset($_GET['pessoa_atendida_1'])){ ?>

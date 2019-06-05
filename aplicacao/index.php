@@ -24,6 +24,7 @@ if($_SESSION['login']){
         case 'editarOcorrencia' : $nomePagina = 'Exibir Ocorrencia'; break;
         case 'cadastrarChamado' : $nomePagina = 'Cadastrar Chamado'; break;
         case 'consultarChamado' : $nomePagina = 'Consultar Chamado'; break;
+        case 'exibirChamado' : $nomePagina = 'Exibir Chamado'; break;
         default: $nomePagina = 'Home'; break;
     }
 }
@@ -59,6 +60,7 @@ if($_SESSION['nivel_acesso'] == 1){
         case 'editarOcorrencia' : include 'view/editarOcorrencia.php'; break;
         case 'cadastrarChamado' : include 'view/cadastrarChamado.php'; break;
         case 'consultarChamado' : include 'view/consultarChamado.php'; break;
+        case 'exibirChamado' : include 'view/exibirChamado.php'; break;
         default: include 'view/home.php'; break;
     }
 }else if($_SESSION['nivel_acesso'] == 2){
@@ -72,6 +74,7 @@ if($_SESSION['nivel_acesso'] == 1){
         case 'editarOcorrencia' : include 'view/editarOcorrencia.php'; break;
         case 'cadastrarChamado' : include 'view/cadastrarChamado.php'; break;
         case 'consultarChamado' : include 'view/consultarChamado.php'; break;
+        case 'exibirChamado' : include 'view/exibirChamado.php'; break;
         default: include 'view/home.php'; break;
     }
 }else{

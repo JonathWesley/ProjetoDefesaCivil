@@ -3,7 +3,7 @@
 include 'database.php'; 
 
 //recebe dados do $_POST
-$chamado_id = addslashes($_POST['chamado_id']);
+$chamado_id = addslashes($_POST['id_chamado']);
 $endereco_principal = addslashes($_POST['endereco_principal']);
 $longitude = addslashes($_POST['longitude']);
 $latitude = addslashes($_POST['latitude']);
@@ -206,6 +206,15 @@ if(strlen($erros) > 0){
 		//echo pg_last_error();
 		header('location:index.php?pagina=cadastrarOcorrencia&erroDB');
 	}else{
-		header('location:index.php?pagina=cadastrarOcorrencia&sucesso');
+		if($chamado_id != null){
+			$query = "UPDATE chamado SET usado = TRUE WHERE id_chamado = $chamado_id";
+			$result = pg_query($connection, $query);
+			if(!$result){
+				//echo pg_last_error();
+				header('location:index.php?pagina=cadastrarOcorrencia&erroDB');
+			}else
+				header('location:index.php?pagina=cadastrarOcorrencia&sucesso');
+		}else
+			header('location:index.php?pagina=cadastrarOcorrencia&sucesso');
 	}
 }

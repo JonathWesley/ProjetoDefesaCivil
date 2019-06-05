@@ -105,16 +105,14 @@
         <nav>
             Data de lançamento: <span id="data_lancamento" value="<?php echo $linhaOcorrencia['data_lancamento'];?>">
             <?php 
-                $data = date("d-m-Y", strtotime($linhaOcorrencia['data_lancamento'])); 
-                echo substr($data,0,2).'/'.substr($data,3,2).'/'.substr($data,-4);
+                echo date("d/m/Y", strtotime($linhaOcorrencia['data_lancamento']));
             ?>
             </span>
         </nav>
         <nav>
             Data de ocorrência: <span id="data_ocorrencia" value="<?php echo $linhaOcorrencia['data_ocorrencia']; ?>">
             <?php 
-                $data = date("d-m-Y", strtotime($linhaOcorrencia['data_ocorrencia'])); 
-                echo substr($data,0,2).'/'.substr($data,3,2).'/'.substr($data,-4);
+                echo date("d/m/Y", strtotime($linhaOcorrencia['data_ocorrencia']));
             ?>
             </span>
         </nav>
