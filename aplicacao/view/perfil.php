@@ -16,11 +16,11 @@
             echo '<p>Telefone: ('.substr($telefone,0,2).')'.substr($telefone,2,5).'-'.substr($telefone,7).'</p>';
             $nivel_acesso='';
             if($linha['nivel_acesso']==1)
-                $nivel_acesso = 'Administrador';
+                $nivel_acesso = 'Diretor';
             else if($linha['nivel_acesso']==2)
-                $nivel_acesso = 'Usuário 1';
+                $nivel_acesso = 'Coordenador';
             else
-                $nivel_acesso = 'Usuário 2';
+                $nivel_acesso = 'Agente';
             echo '<p>Nivel de acesso: '.$nivel_acesso.'</p>';
         ?>
     </div>

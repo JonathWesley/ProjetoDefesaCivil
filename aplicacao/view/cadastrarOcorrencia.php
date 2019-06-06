@@ -181,7 +181,8 @@
             <div>
                 Pessoa atendida 2:
                 <br>
-                <input name="pessoa_atendida_2" type="text" class="form-control">
+                <input name="pessoa_atendida_2" type="text" class="form-control inline">
+                <button type="button" class="btn-default btn-small inline" data-toggle="modal" data-target="#pessoasModal"><span class="glyphicon glyphicon-plus"></span></button>
             </div>
             <?php if(isset($_GET['pessoa_atendida_2'])){ ?>
                 <span class="alertErro">

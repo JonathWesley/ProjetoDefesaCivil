@@ -46,9 +46,9 @@
                 Nível de acesso: <span style="color:red;">*</span>
                 <label for="sel1"></label>
                 <select name="nivel_acesso" id="sel1" class="form-control">
-                    <option>Usuário 1</option>
-                    <option>Usuário 2</option>
-                    <option>Administrador</option>
+                    <option value="Agente">Agente</option>
+                    <option value="Coordenador">Coordenador</option>
+                    <option value="Diretor">Diretor</option>
                 </select>
             </div>
         </div>
@@ -84,8 +84,7 @@
         </div>
 
         <div class="box">
-            Foto:
-            <button type="button" class="btn btn-default btn-sm">Carregar foto</button>
+            Foto: <input type="file" accept="image/png, image/jpeg">
         </div>
         <input type="submit" class="btn btn-default btn-md" value="Cadastrar">
     </form>

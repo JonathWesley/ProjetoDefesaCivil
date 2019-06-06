@@ -34,6 +34,7 @@
                         <li><a href="?pagina=consultarOcorrencia">Consultar</a></li>
                         </ul>
                     </li>
+                    <?php if($_SESSION['nivel_acesso'] == 1){ ?>
                     <li class="dropdown">
                         <a class="dropdown-toggle" data-toggle="dropdown" href="#">Usuários <span class="caret"></span></a>
                         <ul class="dropdown-menu">
@@ -41,6 +42,7 @@
                         <li><a href="?pagina=consultarUsuario">Consultar</a></li>
                         </ul>
                     </li>
+                    <?php } ?>
                     <li class="dropdown">
                         <a class="dropdown-toggle" data-toggle="dropdown" href="#">
                             <img src="images/logo.jpg" alt="DefesaCivil" class="img-circle img-perfil">

@@ -44,7 +44,7 @@
             <div ng-show="sel_endereco == 'Logradouro'">
                 <div>
                     CEP:
-                    <input id="cep" name="cep" type="text" class="form-control" ng-model="cep">
+                    <input id="cep" name="cep" type="text" class="form-control" ng-model="cep" ng-init="cep='<?php echo $_POST['cep']; ?>'">
                 </div>
                 <div>
                     Logradouro: <span style="color:red;">*</span>
@@ -61,11 +61,11 @@
                 </div>
                 <div>
                     Bairro:
-                    <input id="bairro" name="bairro" type="text" class="form-control">
+                    <input id="bairro" name="bairro" type="text" class="form-control" value="<?php echo $_POST['bairro']; ?>">
                 </div>
                 <div>
                     Cidade:
-                    <input id="cidade" name="cidade" type="text" class="form-control">
+                    <input id="cidade" name="cidade" type="text" class="form-control" value="<?php echo $_POST['cidade']; ?>">
                 </div>
                 <div>
                     Referência:
@@ -148,7 +148,7 @@
             <?php } ?>
             <div>
                 Descrição:
-                <textarea id="descricao" name="descricao" class="form-control" cols="30" rows="2" maxlength = "100" ng-model="descricaoVal" value="<?php echo $_POST['ocorr_descricao']; ?>"></textarea>
+                <textarea id="descricao" name="descricao" class="form-control" cols="30" rows="2" maxlength = "100" ng-model="descricaoVal" ng-init="descricaoVal='<?php echo $_POST['ocorr_descricao']; ?>'"></textarea>
                 <span class="char-count">{{descricaoVal.length || 0}}/100</span>
             </div>
             <div>
@@ -160,7 +160,7 @@
             <div>
                 Pessoa atendida 1:
                 <br>
-                <input name="pessoa_atendida_1" type="text" class="form-control inline" value="<?php if(isset($_POST['nome_pessoa'])){echo $_POST['nome_pessoa'];} ?>">
+                <input id="pessoa_atendida_1" name="pessoa_atendida_1" type="text" class="form-control inline"  value="<?php echo $_POST['pessoa1']; ?>">
                 <button type="button" class="btn-default btn-small inline" data-toggle="modal" data-target="#pessoasModal"><span class="glyphicon glyphicon-plus"></span></button>
             </div>
             <?php if(isset($_GET['pessoa_atendida_1'])){ ?>
@@ -192,9 +192,10 @@
                     <select name="cobrade_categoria" class="form-control" ng-model="categoria" ng-init="categoria='<?php echo substr($_POST['ocorr_cobrade'],0,1); ?>'">
                         <option value="1">Naturais</option>
                         <option value="2">Tecnológicos</option>
+                        <option value="3">Não Listado</option>
                     </select>
-                    Grupo: <span style="color:red;" ng-hide="categoria == 0">*</span><br>
-                    <select name="cobrade_grupo" class="form-control" ng-model="grupo" ng-disabled="categoria == 0" ng-init="grupo='<?php echo substr($_POST['ocorr_cobrade'],1,1); ?>'">
+                    Grupo: <span style="color:red;" ng-hide="categoria == 0 || categoria == 3">*</span><br>
+                    <select name="cobrade_grupo" class="form-control" ng-model="grupo" ng-disabled="categoria == 0 || categoria == 3" ng-init="grupo='<?php echo substr($_POST['ocorr_cobrade'],1,1); ?>'">
                         <option ng-if="categoria==1" value="1">Geológico</option>
                         <option ng-if="categoria==1" value="2">Hidrológico</option>
                         <option ng-if="categoria==1" value="3">Meteorológico</option>
@@ -329,23 +330,23 @@
             </div>
             <br>
             <div>
-                Natureza da ocorrência:
-                <input name="natureza" type="text" class="form-control" value="<?php echo $_POST['ocorr_natureza']; ?>">
+                Descricao cobrade: <span style="color:red;" ng-show="categoria == 3">*</span>
+                <textarea id="natureza" name="cobrade_descricao" class="form-control" cols="30" rows="2" maxlength = "100" ng-disabled="categoria != 3"></textarea>
             </div>
             Possui fotos:
             <br>
             <nav>
                 <label class="radio-inline">
-                    <input type="radio" value="true" name="possui_fotos" <?php echo ($_POST['possui_foto'] == t) ? 'checked':''; ?>>Sim
+                    <input type="radio" value="true" name="possui_fotos">Sim
                 </label>
                 <label class="radio-inline">
-                    <input type="radio" value="false" name="possui_fotos"  <?php echo ($_POST['possui_foto'] == t) ? '':'checked'; ?>>Não
+                    <input type="radio" value="false" name="possui_fotos" checked>Não
                 </label>
             </nav>
             <br>
             <div>
                 Fotos:
-                <button type="button" class="btn btn-default btn-sm inline">Carregar fotos</button>
+                <input type="file" accept="image/png, image/jpeg">
             </div>
         </div>
         <div class="box">
@@ -478,6 +479,8 @@
             var telefone_pessoa = $("#telefone_pessoa").val();
             var cpf_pessoa = $("#cpf_pessoa").val();
             var outros_documentos = $("#outros_documentos").val();
+
+            document.getElementById("pessoa_atendida_1").value = nome_pessoa;
                 
             $.post("processa_cadastrar_pessoa.php", { nome_pessoa: nome_pessoa, email_pessoa: email_pessoa,
                 telefone_pessoa: telefone_pessoa, cpf_pessoa: cpf_pessoa, outros_documentos:outros_documentos });

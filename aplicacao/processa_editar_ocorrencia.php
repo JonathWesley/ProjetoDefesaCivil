@@ -7,6 +7,9 @@ $id_ocorrencia = $_POST['id_ocorrencia'];
 $endereco_principal = addslashes($_POST['endereco_principal']);
 $longitude = addslashes($_POST['longitude']);
 $latitude = addslashes($_POST['latitude']);
+$cep = addslashes($_POST['cep']);
+$cidade = addslashes($_POST['cidade']);
+$bairro = addslashes($_POST['bairro']);
 $logradouro = addslashes($_POST['logradouro']);
 $numero = addslashes($_POST['complemento']);
 $referencia = addslashes($_POST['referencia']);
@@ -61,8 +64,8 @@ if($endereco_principal == "Logradouro"){
 	$result = pg_query($connection, "SELECT * FROM endereco_logradouro
 									WHERE logradouro = '$logradouro' AND numero = '$numero'");
 	if(pg_num_rows($result) == 0){
-		$result = pg_query($connection, "INSERT INTO endereco_logradouro(logradouro,numero,referencia)
-										VALUES ('$logradouro','$numero','$referencia')");
+		$result = pg_query($connection, "INSERT INTO endereco_logradouro(cep,cidade,bairro,logradouro,numero,referencia)
+										VALUES ('$cep','$cidade','$bairro','$logradouro','$numero','$referencia')");
 		if(!$result)
 			$erros = $erros.'&logradouro';
 		$result = pg_query($connection, "SELECT * FROM endereco_logradouro
@@ -192,7 +195,7 @@ if(strlen($erros) > 0){
             ocorr_retorno=$ocorr_retorno,ocorr_referencia=$ocorr_referencia,data_lancamento='$data_lancamento',
             data_ocorrencia='$data_ocorrencia',ocorr_descricao='$descricao',ocorr_origem='$ocorr_origem',
 			atendido_1=$pessoa_atendida_1,atendido_2=$pessoa_atendida_2,ocorr_cobrade='$cobrade',
-            ocorr_natureza='$natureza',ocorr_fotos=$possui_fotos,ocorr_prioridade='$prioridade',
+            cobrade_descricao='$natureza',ocorr_fotos=$possui_fotos,ocorr_prioridade='$prioridade',
 			ocorr_analisado=$analisado,ocorr_congelado=$congelado,ocorr_encerrado=$encerrado 
             WHERE id_ocorrencia = $id_ocorrencia";
 

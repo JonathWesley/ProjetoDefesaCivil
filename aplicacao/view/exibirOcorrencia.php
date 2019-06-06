@@ -164,6 +164,9 @@
     <form action="index.php?pagina=editarOcorrencia" method="post">
         <input name="id_ocorrencia" type="hidden" value="<?php echo $id_ocorrencia; ?>">
         <input name="endereco_principal" type="hidden" value="<?php echo $linhaOcorrencia['ocorr_endereco_principal']; ?>">
+        <input name="cep" type="hidden" value="<?php echo $linhaLogradouro['cep']; ?>">
+        <input name="cidade" type="hidden" value="<?php echo $linhaLogradouro['cidade']; ?>">
+        <input name="bairro" type="hidden" value="<?php echo $linhaLogradouro['bairro']; ?>">
         <input name="logradouro" type="hidden" value="<?php echo $linhaLogradouro['logradouro']; ?>">
         <input name="numero" type="hidden" value="<?php echo $linhaLogradouro['numero'] ?>">
         <input name="referencia" type="hidden" value="<?php echo $linhaLogradouro['referencia']; ?>">

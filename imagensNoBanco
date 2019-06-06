@@ -1,0 +1,25 @@
+$("#input-file").change(function() {
+        var file = this.files[0];
+        var imagefile = file.type;
+        var match= ["image/jpeg","image/png","image/jpg"];
+        if(!((imagefile==match[0]) || (imagefile==match[1]) || (imagefile==match[2]))){
+            alert('Please select a valid image file (JPEG/JPG/PNG).');
+            $("#input-file").val('');
+            return false;
+        }
+
+        fileName.textContent = this.files[0].name;
+    });
+
+if(isset($arquivo))
+		{
+			$extensao = strtolower(substr($arquivo, -4));
+			$nome =  date("Y-m-d H:i:s")."_".$arquivo;
+			$sourcePath = $_FILES['arquivo']['tmp_name'];
+	        $targetPath = "../uploads/".$nome;
+
+			if (move_uploaded_file($sourcePath, $targetPath))
+			{
+				$arquivo = $nome;
+			}	
+		}

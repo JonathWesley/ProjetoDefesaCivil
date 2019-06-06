@@ -89,9 +89,9 @@ if(strlen($erros) > 0){
 	$linha = pg_fetch_array($result, 0);
 	$id = $linha['id_usuario'];
 	$acesso;
-	if($nivel_acesso == 'Administrador'){
+	if($nivel_acesso == 'Diretor'){
 		$acesso = 1;
-	}else if($nivel_acesso == 'Usuário 1'){
+	}else if($nivel_acesso == 'Coordenador'){
 		$acesso = 2;
 	}else{
 		$acesso = 3;
