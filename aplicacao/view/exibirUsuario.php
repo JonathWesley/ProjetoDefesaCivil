@@ -16,6 +16,12 @@
         <p>CPF: <?php echo substr($linha['cpf'],0,3).'.'.substr($linha['cpf'],3,3).'.'.substr($linha['cpf'],6,3).'-'.substr($linha['cpf'],9,2); ?></p>
         <p>Telefone: <?php echo '('.substr($linha['telefone'],0,2).')'.substr($linha['telefone'],2,5).'-'.substr($linha['telefone'],7); ?></p>
         <p>Nivel de acesso: <?php if($linha['nivel_acesso']==1){echo 'Administrador';}else if($linha['nivel_acesso']==2){echo 'Usuário 1';}else{echo 'Usuário 2';} ?></p>
+        <?php ob_start();
+fpassthru($linha['foto']);
+$dat= ob_get_contents();
+ob_end_clean();
+$dat= "data:image/*;base64," . base64_encode($dat);
+echo "<img src='".$dat."'"; ?>
     </div>
     </div>
 </div>

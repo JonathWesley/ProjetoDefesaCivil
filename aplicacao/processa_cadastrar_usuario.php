@@ -46,6 +46,7 @@ $nivel_acesso = addslashes($_POST['nivel_acesso']);
 $email = addslashes($_POST['email_cadastro']);
 $senha = ($_POST['senha_cadastro']);
 $senha_confirma = ($_POST['senha_cadastro_confirma']);
+$foto = $_POST['foto'];
 
 $erros = '';
 
@@ -64,6 +65,10 @@ if(strlen($senha<6 || !preg_match("#[0-9]+#",$senha)) || !preg_match("#[A-Z]+#",
 if($senha != $senha_confirma) //compara as senhas
 	$erro = $erros.'$confirma_senha';
 
+//$file = pg_escape_bytea(file_get_contents($_FILES['foto']['tmp_name']));
+$data = file_get_contents( $_POST['foto'] );
+$escaped = bin2hex( $data );
+	
 //caso ocorra algum erro na validacao, entao volta para a pagina e indica onde esta o erro
 if(strlen($erros) > 0){
 	header('location:index.php?pagina=cadastrarUsuario'.$erros);
@@ -82,7 +87,7 @@ if(strlen($erros) > 0){
 	if(!$result)
 		echo 'Erro: '.pg_last_error();
 
-	$result = pg_query($connection, "SELECT * FROM dados_login WHERE email = '$email'");
+	$result = pg_query($connection, "SELECT id_usuario FROM dados_login WHERE email = '$email'");
 	if(!$result)
 		echo 'Erro: '.pg_last_error();
 
@@ -98,12 +103,11 @@ if(strlen($erros) > 0){
 	}
 
 	$result = pg_query($connection, "INSERT INTO usuario 
-						(id_usuario, nome, cpf, telefone, nivel_acesso) 
-						VALUES ($id, '$nome', '$cpf', '$telefone', $acesso)");
+						(id_usuario, nome, cpf, telefone, nivel_acesso, foto) 
+						VALUES ($id, '$nome', '$cpf', '$telefone', $acesso, decode('{$escaped}' , 'hex'))");
 	if(!$result)
-		header('location:index.php?pagina=cadastrarUsuario&erroDB');
-		//echo 'Erro: '.pg_last_error();
+		//header('location:index.php?pagina=cadastrarUsuario&erroDB');
+		echo 'Erro: '.pg_last_error();
 	else
 		header('location:index.php?pagina=cadastrarUsuario&sucesso');
 }
-

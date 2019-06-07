@@ -84,7 +84,7 @@
         </div>
 
         <div class="box">
-            Foto: <input type="file" accept="image/png, image/jpeg">
+            Foto: <input id="foto" name="foto" type="file" accept="image/png, image/jpeg">
         </div>
         <input type="submit" class="btn btn-default btn-md" value="Cadastrar">
     </form>
