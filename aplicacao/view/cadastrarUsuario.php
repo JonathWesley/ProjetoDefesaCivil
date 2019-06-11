@@ -14,7 +14,7 @@
             <?php } ?>
             <div>
                 Nome completo: <span style="color:red;">*</span>
-                <input name="nome" type="text" class="form-control" ng-model="nome_completo" required>
+                <input id="nome" name="nome" type="text" class="form-control" ng-model="nome_completo" required>
             </div>
             <?php if(isset($_GET['nome'])){ ?>
                 <span class="alertErro">
@@ -23,16 +23,13 @@
             <?php } ?>
             <div>
                 CPF: <span style="color:red;">*</span>
-                <input name="cpf" type="text" class="form-control" maxlength="11" required>
+                <input id="cpf" name="cpf" type="text" class="form-control" maxlength="11" required>
+                <span id="cpfError" class="alertErro none">CPF inválido.</span>
             </div>
-            <?php if(isset($_GET['cpf'])){ ?>
-                <span class="alertErro">
-                    CPF inválido.
-                </span>
-            <?php } ?>
+            
             <div>
                 Telefone: <span style="color:red;">*</span>
-                <input name="telefone" type="text" class="form-control" maxlength="11" required>
+                <input id="telefone" name="telefone" type="text" class="form-control" maxlength="11" required>
             </div>
             <?php if(isset($_GET['telefone'])){ ?>
                 <span class="alertErro">

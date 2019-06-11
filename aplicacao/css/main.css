@@ -114,6 +114,19 @@ div h4{
     top: -30px;
 }
 
+.none{
+    display: none;
+}
+
+.autocomplete{
+    width: 70%;
+}
+
+.autocompleteBtn{
+    border: 1px solid #A5ACB2;
+    width: 100%;
+}
+
 /* especificos */
 .cobrade{
     position: relative;

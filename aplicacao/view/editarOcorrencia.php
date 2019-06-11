@@ -354,7 +354,7 @@
                 <div>
                     Prioridade: <span style="color:red;">*</span>
                     <label for="prioridade"></label>
-                    <select name="prioridade" class="form-control" required ng-model="prioridade" ng-init="prioridade='<?php echo $_POST['prioridade']; ?>'">
+                    <select name="prioridade" class="form-control" onchange="analisar()" required ng-model="prioridade" ng-init="prioridade='<?php echo $_POST['prioridade']; ?>'">
                         <option value="Baixa">Baixa</option>
                         <option value="Média">Média</option>
                         <option value="Alta">Alta</option>
@@ -369,10 +369,10 @@
                 <br>
                 <nav>
                     <label class="radio-inline">
-                        <input type="radio" value="true" name="analisado" <?php echo ($_POST['analisado'] == t) ? 'checked':''; ?>>Sim
+                        <input type="radio" value="true" id="analisado" name="analisado" <?php echo ($_POST['analisado'] == t) ? 'checked':''; ?>>Sim
                     </label>
                     <label class="radio-inline">
-                        <input type="radio" value="false" name="analisado" <?php echo ($_POST['analisado'] == t) ? '':'checked'; ?>>Não
+                        <input type="radio" value="false" id="analisado" name="analisado" <?php echo ($_POST['analisado'] == t) ? '':'checked'; ?>>Não
                     </label>
                 </nav>
                 <br>
@@ -461,6 +461,10 @@
         </div>
     </div>
     <script>
+        function analisar(){
+            $("#analisado").prop('checked', true);
+        }
+
         //POST pessoa
         var input = document.getElementById("submitFormData");
         // Execute a function when the user releases a key on the keyboard

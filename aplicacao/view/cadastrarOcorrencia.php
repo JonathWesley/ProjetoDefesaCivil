@@ -86,7 +86,8 @@
         <div class="box">
             <div>
                 Agente principal: <span style="color:red;">*</span>
-                <input name="agente_principal" type="text" class="form-control" required>
+                <input id="agente_principal" name="agente_principal" type="text" class="form-control" onkeyup="showResult(this.value,this.id)" required>
+                <div class="autocomplete" id="livesearchagente_principal"></div>
             </div>
             <?php if(isset($_GET['agente_principal'])){ ?>
                     <span class="alertErro">
@@ -95,7 +96,8 @@
                 <?php } ?>
             <div>
                 Agente de apoio 1:
-                <input name="agente_apoio_1" type="text" class="form-control">
+                <input id="agente_apoio_1" name="agente_apoio_1" type="text" class="form-control" onkeyup="showResult(this.value,this.id)">
+                <div class="autocomplete" id="livesearchagente_apoio_1"></div>
             </div>
             <?php if(isset($_GET['agente_apoio_1'])){ ?>
                 <span class="alertErro">
@@ -104,7 +106,8 @@
             <?php } ?>
             <div>
                 Agente de apoio 2:
-                <input name="agente_apoio_2" type="text" class="form-control">
+                <input id="agente_apoio_2" name="agente_apoio_2" type="text" class="form-control" onkeyup="showResult(this.value,this.id)">
+                <div class="autocomplete" id="livesearchagente_apoio_2"></div>
             </div>
             <?php if(isset($_GET['agente_apoio_2'])){ ?>
                 <span class="alertErro">
@@ -452,6 +455,40 @@
         </div>
     </div>
     <script>
+        function showResult(str, id_input) {
+            var id = "livesearch"+id_input;
+            if (str.length==0) { 
+                document.getElementById(id).innerHTML="";
+                document.getElementById(id).style.border="0px";
+                return;
+            }
+            if (window.XMLHttpRequest) {
+                // code for IE7+, Firefox, Chrome, Opera, Safari
+                xmlhttp=new XMLHttpRequest();
+            } else {  // code for IE6, IE5
+                xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+            }
+            xmlhttp.onreadystatechange=function() {
+                if (this.readyState==4 && this.status==200) {
+                    document.getElementById(id).innerHTML=this.responseText;
+                    document.getElementById(id).style.border="1px solid #A5ACB2";
+                }
+            }
+            xmlhttp.open("GET","livesearch.php?q="+str+"&id="+id_input,true);
+            xmlhttp.send();
+        }
+
+        function selecionaComplete(value, id_input){
+            var id = "livesearch"+id_input;
+            document.getElementById(id_input).value = value;
+            document.getElementById(id).innerHTML="";
+            document.getElementById(id).style.border="0px";
+        }
+
+        function analisar(){
+            $("#analisado").prop('checked', true);
+        }
+
         //POST pessoa
         var input = document.getElementById("submitFormData");
         // Execute a function when the user releases a key on the keyboard

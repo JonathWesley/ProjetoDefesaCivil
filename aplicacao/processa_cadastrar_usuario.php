@@ -66,8 +66,8 @@ if($senha != $senha_confirma) //compara as senhas
 	$erro = $erros.'$confirma_senha';
 
 //$file = pg_escape_bytea(file_get_contents($_FILES['foto']['tmp_name']));
-$data = file_get_contents( $_POST['foto'] );
-$escaped = bin2hex( $data );
+//$data = file_get_contents( $_POST['foto'] );
+//$escaped = bin2hex( $data );
 	
 //caso ocorra algum erro na validacao, entao volta para a pagina e indica onde esta o erro
 if(strlen($erros) > 0){
@@ -102,12 +102,20 @@ if(strlen($erros) > 0){
 		$acesso = 3;
 	}
 
-	$result = pg_query($connection, "INSERT INTO usuario 
-						(id_usuario, nome, cpf, telefone, nivel_acesso, foto) 
-						VALUES ($id, '$nome', '$cpf', '$telefone', $acesso, decode('{$escaped}' , 'hex'))");
-	if(!$result)
-		//header('location:index.php?pagina=cadastrarUsuario&erroDB');
-		echo 'Erro: '.pg_last_error();
-	else
+	$query = "INSERT INTO usuario (id_usuario, nome, cpf, telefone, nivel_acesso) 
+			  VALUES ($id, '$nome', '$cpf', '$telefone', $acesso)";
+	$result = pg_query($connection, $query);
+	if(!$result){
+		header('location:index.php?pagina=cadastrarUsuario&erroDB');
+		//echo pg_last_error();
+	}else{
+		session_start();
+		$id_criador = $_SESSION['id_usuario'];
+		$data = date('Y-m-d H:i:s');
+		$query = "INSERT INTO log_cadastro_usuario (id_usuario_criador, id_usuario_novo, data_hora) 
+		VALUES ($id_criador, $id, '$data')";
+		$result = pg_query($connection, $query);
+		//echo preg_last_error();
 		header('location:index.php?pagina=cadastrarUsuario&sucesso');
+	}
 }

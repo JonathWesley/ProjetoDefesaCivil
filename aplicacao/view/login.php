@@ -36,6 +36,15 @@
                 <?php 
                     }
                 ?>
+                <?php 
+                    if(isset($_GET['erroBD'])){
+                ?>
+                        <div class="alert alert-danger" role="alert">
+                            Problema ao conectar com o banco de dados.
+                        </div>
+                <?php 
+                    }
+                ?>
                 <input type="submit" value="Entrar" class="btn btn-default btn-md">
             </form>
         </div>
