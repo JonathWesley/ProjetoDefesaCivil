@@ -4,6 +4,7 @@ include 'database.php';
 
 //recebe dados do $_POST
 $id_ocorrencia = $_POST['id_ocorrencia'];
+$chamado_id = $_POST['chamado_id'];
 $endereco_principal = addslashes($_POST['endereco_principal']);
 $longitude = addslashes($_POST['longitude']);
 $latitude = addslashes($_POST['latitude']);
@@ -35,6 +36,8 @@ $prioridade = addslashes($_POST['prioridade']);
 $analisado = addslashes($_POST['analisado']);
 $congelado = addslashes($_POST['congelado']);
 $encerrado = addslashes($_POST['encerrado']);
+session_start();
+$id_criador = $_SESSION['id_usuario'];
 
 //guarda possiveis erros na inserção do usuário
 $erros = '';
@@ -99,7 +102,6 @@ if($ocorr_retorno == "true"){ //caso seja retorno de ocorrencia, verifica se nao
 	$ocorr_referencia = 'null';
 
 //valida as datas cadastradas
-date_default_timezone_set('America/Sao_Paulo');
 $dataAtual = date('Y-m-d');
 if($data_lancamento > $dataAtual)
 	$erros = $erros.'&data_lancamento';
@@ -176,11 +178,13 @@ if(strlen($pessoa_atendida_2) > 0){ //se a pessoa foi informada, busca a mesma n
 }else //pessoa nao foi informada
 	$pessoa_atendida_2 = 'null';
 
-// if($ocorr_referencia == null) //gambiarra
-// 	$ocorr_referencia = 'null';
-
 if($prioridade != "Baixa" && $prioridade != "Média" && $prioridade != "Alta")
 	$erros = $erros.'&prioridade';
+
+if(strlen($chamado_id)==0)
+	$chamado_id = 'null';
+
+$dataAtual = date('Y-m-d H:i:s');
 
 //caso ocorra algum erro na validacao, entao volta para a pagina e indica onde esta o erro
 if(strlen($erros) > 0){
@@ -188,24 +192,26 @@ if(strlen($erros) > 0){
 //caso esteja tudo certo, procede com a inserção no banco de dados
 }else{
 	//insere a ocorrencia no banco de dados
-	$query="UPDATE ocorrencia 
-            SET ocorr_endereco_principal='$endereco_principal',ocorr_coordenada_latitude=$latitude,
-            ocorr_coordenada_longitude=$longitude,ocorr_logradouro_id=$logradouro_id,
-            agente_principal=$agente_principal,agente_apoio_1=$agente_apoio_1,agente_apoio_2=$agente_apoio_2,
-            ocorr_retorno=$ocorr_retorno,ocorr_referencia=$ocorr_referencia,data_lancamento='$data_lancamento',
-            data_ocorrencia='$data_ocorrencia',ocorr_descricao='$descricao',ocorr_origem='$ocorr_origem',
-			atendido_1=$pessoa_atendida_1,atendido_2=$pessoa_atendida_2,ocorr_cobrade='$cobrade',
-            cobrade_descricao='$natureza',ocorr_fotos=$possui_fotos,ocorr_prioridade='$prioridade',
-			ocorr_analisado=$analisado,ocorr_congelado=$congelado,ocorr_encerrado=$encerrado 
-            WHERE id_ocorrencia = $id_ocorrencia";
+	$query = "INSERT INTO ocorrencia 
+			(chamado_id,ocorr_endereco_principal,ocorr_coordenada_latitude,ocorr_coordenada_longitude,
+			ocorr_logradouro_id,agente_principal,agente_apoio_1,agente_apoio_2,data_lancamento,
+			data_ocorrencia,ocorr_descricao,ocorr_origem,atendido_1,atendido_2,ocorr_cobrade,
+			cobrade_descricao,ocorr_fotos,ocorr_prioridade,ocorr_analisado,ocorr_congelado,ocorr_encerrado,
+			usuario_criador,data_alteracao,ocorr_referencia)
+			VALUES
+			($chamado_id,'$endereco_principal',$latitude,$longitude,$logradouro_id,$agente_principal,
+			$agente_apoio_1,$agente_apoio_2,'$data_lancamento',
+			'$data_ocorrencia','$descricao','$ocorr_origem',$pessoa_atendida_1,$pessoa_atendida_2,
+			'$cobrade','$cobrade_descricao',$possui_fotos,'$prioridade',$analisado,$congelado,$encerrado,
+			$id_criador,'$dataAtual',$id_ocorrencia)";
 
 	$result = pg_query($connection, $query);
 	if(!$result){
-        //echo 'analisado: '.$analisado.'<br>';
 		//echo pg_last_error();
 		header('location:index.php?pagina=editarOcorrencia&erroDB');
 	}else{
-		//echo 'analisado: '.$analisado.'<br>';
+		$query = "UPDATE ocorrencia SET ativo = false WHERE id_ocorrencia=$id_ocorrencia";
+		$result = pg_query($connection, $query);
 		//echo pg_last_error();
 		header('location:index.php?pagina=exibirOcorrencia&id='.$id_ocorrencia.'&sucesso');
 	}

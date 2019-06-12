@@ -163,6 +163,7 @@
     </div>
     <form action="index.php?pagina=editarOcorrencia" method="post">
         <input name="id_ocorrencia" type="hidden" value="<?php echo $id_ocorrencia; ?>">
+        <input name="chamado_id" type="hidden" value="<?php echo $linhaOcorrencia['chamado_id']; ?>">
         <input name="endereco_principal" type="hidden" value="<?php echo $linhaOcorrencia['ocorr_endereco_principal']; ?>">
         <input name="cep" type="hidden" value="<?php echo $linhaLogradouro['cep']; ?>">
         <input name="cidade" type="hidden" value="<?php echo $linhaLogradouro['cidade']; ?>">

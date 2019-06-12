@@ -16,8 +16,6 @@ $referencia = addslashes($_POST['referencia']);
 $agente_principal = addslashes($_POST['agente_principal']);
 $agente_apoio_1 = addslashes($_POST['agente_apoio_1']);
 $agente_apoio_2 = addslashes($_POST['agente_apoio_2']);
-$ocorr_retorno = addslashes($_POST['ocorr_retorno']);
-$ocorr_referencia = addslashes($_POST['ocorr_referencia']);
 $data_lancamento = addslashes($_POST['data_lancamento']);
 $data_ocorrencia = addslashes($_POST['data_ocorrencia']);
 $descricao = addslashes($_POST['descricao']);
@@ -35,6 +33,8 @@ $prioridade = addslashes($_POST['prioridade']);
 $analisado = addslashes($_POST['analisado']);
 $congelado = addslashes($_POST['congelado']);
 $encerrado = addslashes($_POST['encerrado']);
+session_start();
+$id_criador = $_SESSION['id_usuario'];
 
 //guarda possiveis erros na inserção do usuário
 $erros = '';
@@ -53,6 +53,9 @@ if(!preg_match("/^[0-5]$/", $cobrade_subtipo))
 $cobrade = $cobrade_categoria.$cobrade_grupo.$cobrade_subgrupo.$cobrade_tipo.$cobrade_subtipo;
 if(strlen($cobrade) > 5 || substr($cobrade, 0, 1) == '0' || substr($cobrade, 1, 2) == '0' || substr($cobrade, 2, 3) == '0')
 	$erros = $erros.'&cobrade';
+
+if($cobrade_categoria == 3)
+	$cobrade = '00000';
 
 //garante que o valor do endereço seja apenas igual a Logradouro ou Coordenada
 if($endereco_principal != "Logradouro" && $endereco_principal != "Coordenada")
@@ -100,7 +103,6 @@ if($ocorr_retorno == "true"){ //caso seja retorno de ocorrencia, verifica se nao
 	$ocorr_referencia = 'null';
 
 //valida as datas cadastradas
-date_default_timezone_set('America/Sao_Paulo');
 $dataAtual = date('Y-m-d');
 if($data_lancamento > $dataAtual)
 	$erros = $erros.'&data_lancamento';
@@ -177,8 +179,10 @@ if(strlen($pessoa_atendida_2) > 0){ //se a pessoa foi informada, busca a mesma n
 }else //pessoa nao foi informada
 	$pessoa_atendida_2 = 'null';
 
-// if($ocorr_referencia == null) //gambiarra
-// 	$ocorr_referencia = 'null';
+if(strlen($chamado_id)==0)
+	$chamado_id = 'null';
+
+$dataAtual = date('Y-m-d H:i:s');
 
 if($prioridade != "Baixa" && $prioridade != "Média" && $prioridade != "Alta")
 	$erros = $erros.'&prioridade';
@@ -191,30 +195,35 @@ if(strlen($erros) > 0){
 	//insere a ocorrencia no banco de dados
 	$query = "INSERT INTO ocorrencia 
 			(chamado_id,ocorr_endereco_principal,ocorr_coordenada_latitude,ocorr_coordenada_longitude,
-			ocorr_logradouro_id,agente_principal,agente_apoio_1,agente_apoio_2,ocorr_retorno,
-			ocorr_referencia,data_lancamento,data_ocorrencia,ocorr_descricao,ocorr_origem,
-			atendido_1,atendido_2,ocorr_cobrade,cobrade_descricao,ocorr_fotos,ocorr_prioridade,
-			ocorr_analisado,ocorr_congelado,ocorr_encerrado)
+			ocorr_logradouro_id,agente_principal,agente_apoio_1,agente_apoio_2,data_lancamento,
+			data_ocorrencia,ocorr_descricao,ocorr_origem,atendido_1,atendido_2,ocorr_cobrade,
+			cobrade_descricao,ocorr_fotos,ocorr_prioridade,ocorr_analisado,ocorr_congelado,ocorr_encerrado,
+			usuario_criador,data_alteracao,ocorr_referencia)
 			VALUES
 			($chamado_id,'$endereco_principal',$latitude,$longitude,$logradouro_id,$agente_principal,
-			$agente_apoio_1,$agente_apoio_2,$ocorr_retorno,$ocorr_referencia,'$data_lancamento',
+			$agente_apoio_1,$agente_apoio_2,'$data_lancamento',
 			'$data_ocorrencia','$descricao','$ocorr_origem',$pessoa_atendida_1,$pessoa_atendida_2,
-			'$cobrade','$cobrade_descricao',$possui_fotos,'$prioridade',$analisado,$congelado,$encerrado)";
+			'$cobrade','$cobrade_descricao',$possui_fotos,'$prioridade',$analisado,$congelado,$encerrado,
+			$id_criador,'$dataAtual',null)";
 
 	$result = pg_query($connection, $query);
 	if(!$result){
 		//echo pg_last_error();
 		header('location:index.php?pagina=cadastrarOcorrencia&erroDB');
 	}else{
-		if($chamado_id != null){
+		if($chamado_id != 'null'){
 			$query = "UPDATE chamado SET usado = TRUE WHERE id_chamado = $chamado_id";
 			$result = pg_query($connection, $query);
 			if(!$result){
 				//echo pg_last_error();
 				header('location:index.php?pagina=cadastrarOcorrencia&erroDB');
-			}else
+			}else{
+				//echo pg_last_error();
 				header('location:index.php?pagina=cadastrarOcorrencia&sucesso');
-		}else
+			}
+		}else{
+			//echo pg_last_error();
 			header('location:index.php?pagina=cadastrarOcorrencia&sucesso');
+		}
 	}
 }

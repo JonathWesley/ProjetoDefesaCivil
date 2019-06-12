@@ -24,8 +24,8 @@
             $query = $query." WHERE $pesquisa_filtro ILIKE '$pesquisa_ocorrencia%'";
         }
 
-        if($_POST['finalizado'] != true)
-            $query = $query." AND ocorrencia.ativo = true";
+        if($_POST['encerrada'] != true)
+            $query = $query." AND ocorrencia.ocorr_encerrado = true";
 
         $consulta_ocorrencias = pg_query($connection, $query) or die(preg_last_error());
         $numero_total = pg_num_rows($consulta_ocorrencias);
@@ -42,10 +42,11 @@
         FROM ocorrencia 
         INNER JOIN usuario ON ocorrencia.agente_principal = usuario.id_usuario 
         INNER JOIN cobrade ON ocorrencia.ocorr_cobrade = cobrade.codigo
-        LEFT JOIN pessoa ON ocorrencia.atendido_1 = pessoa.id_pessoa";
+        LEFT JOIN pessoa ON ocorrencia.atendido_1 = pessoa.id_pessoa 
+        WHERE ocorrencia.ativo = TRUE";
 
-        if($_POST['finalizado'] != true)
-            $query = $query." WHERE ocorrencia.ativo = true";
+        if($_POST['encerrada'] != true)
+            $query = $query." AND ocorrencia.ocorr_encerrado = FALSE";
 
         $consulta_ocorrencias = pg_query($connection, $query) or die(preg_last_error());
         $numero_total = pg_num_rows($consulta_ocorrencias);
@@ -76,8 +77,8 @@
                 <option value="usuario.nome">Agente</option>
                 <option value="data_ocorrencia">Data</option>
             </select>
-            <span style="margin-left: 20px;">Mostrar chamados finalizados: </span>
-            <input name="finalizado" onchange="this.form.submit()" value="true" type="checkbox" <?php if($_POST['finalizado']==true)echo 'checked'; ?>>
+            <span style="margin-left: 20px;">Mostrar ocorrências encerradas: </span>
+            <input name="encerrada" onchange="this.form.submit()" value="true" type="checkbox" <?php if($_POST['encerrada']==true)echo 'checked'; ?>>
         </form>
     </div>
     <div class="box">

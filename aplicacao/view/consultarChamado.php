@@ -12,7 +12,7 @@
     if(isset($_POST['pesquisa_chamado']) && $pesquisa_chamado != null){
         $query = "SELECT chamado.id_chamado,TO_CHAR(chamado.data_hora, 'DD/MM/YYYY') as dataa,
                         chamado.origem,pessoa.nome,chamado.descricao 
-                        FROM chamado INNER JOIN pessoa ON (chamado.pessoa = pessoa.id_pessoa)";
+                        FROM chamado INNER JOIN pessoa ON (chamado.pessoa_id = pessoa.id_pessoa)";
         
         if($pesquisa_filtro == 'data')
             $query = $query." WHERE TO_CHAR(data_hora, 'DD/MM/YYYY') >= '$pesquisa_chamado'";
@@ -29,7 +29,7 @@
     }else{
         $query = "SELECT chamado.id_chamado,TO_CHAR(chamado.data_hora, 'DD/MM/YYYY') as dataa,
         chamado.origem,pessoa.nome,chamado.descricao 
-        FROM chamado INNER JOIN pessoa ON (chamado.pessoa = pessoa.id_pessoa)";
+        FROM chamado INNER JOIN pessoa ON (chamado.pessoa_id = pessoa.id_pessoa)";
         
         if($_POST['finalizado'] != true)
             $query = $query." WHERE chamado.usado = false";
@@ -51,6 +51,7 @@
 
 <div class="container positioning">
 <div class="jumbotron campo_cadastro">
+<?php echo pg_last_error(); ?>
     <div class="box">
         <form class="input-group" method="post" action="index.php?pagina=consultarChamado&n=0">
             <input type="text" class="form-control" name="pesquisa_chamado" placeholder="Pesquisa" value="<?php echo $_POST['pesquisa_chamado']; ?>">

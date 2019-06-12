@@ -2,6 +2,7 @@
 <div class="jumbotron campo_cadastro">
     <form method="post" action="processa_editar_ocorrencia.php">
         <input name="id_ocorrencia" type="hidden" value="<?php echo $_POST['id_ocorrencia']; ?>">
+        <input type="hidden" name="chamado_id"  value="<?php echo $_POST['chamado_id']; ?>">
         <div class="box">
             <?php if(isset($_GET['erroDB'])){ ?>
             <div class="alert alert-danger" role="alert">
@@ -76,7 +77,8 @@
         <div class="box">
             <div>
                 Agente principal: <span style="color:red;">*</span>
-                <input name="agente_principal" type="text" class="form-control" value="<?php echo $_POST['agente_principal']; ?>" required>
+                <input id="agente_principal" name="agente_principal" type="text" class="form-control" value="<?php echo $_POST['agente_principal']; ?>" onkeyup="showResult(this.value,this.id)" required>
+                <div class="autocomplete" id="livesearchagente_principal"></div>
             </div>
             <?php if(isset($_GET['agente_principal'])){ ?>
                     <span class="alertErro">
@@ -85,7 +87,8 @@
                 <?php } ?>
             <div>
                 Agente de apoio 1:
-                <input name="agente_apoio_1" type="text" class="form-control" value="<?php echo $_POST['agente_apoio1']; ?>">
+                <input id="agente_apoio_1" name="agente_apoio_1" type="text" class="form-control" value="<?php echo $_POST['agente_apoio1']; ?>" onkeyup="showResult(this.value,this.id)">
+                <div class="autocomplete" id="livesearchagente_apoio_1"></div>
             </div>
             <?php if(isset($_GET['agente_apoio_1'])){ ?>
                 <span class="alertErro">
@@ -94,7 +97,8 @@
             <?php } ?>
             <div>
                 Agente de apoio 2:
-                <input name="agente_apoio_2" type="text" class="form-control" value="<?php echo $_POST['agente_apoio2']; ?>">
+                <input id="agente_apoio_2" name="agente_apoio_2" type="text" class="form-control" value="<?php echo $_POST['agente_apoio2']; ?>" onkeyup="showResult(this.value,this.id)">
+                <div class="autocomplete" id="livesearchagente_apoio_2"></div>
             </div>
             <?php if(isset($_GET['agente_apoio_2'])){ ?>
                 <span class="alertErro">
@@ -103,26 +107,6 @@
             <?php } ?>
         </div>
         <div class="box">
-            Ocorrência retorno: <span style="color:red;">*</span>
-            <br>
-            <nav>
-                <label class="radio-inline">
-                    <input type="radio" id="ocorr_retorno" ng-model="retorno" ng-init="<?php echo $_POST['ocorr_retorno']; ?>" ng-value="true" value="true" name="ocorr_retorno">Sim
-                </label>
-                <label class="radio-inline">
-                    <input type="radio" ng-model="retorno" ng-value="false" value="false" name="ocorr_retorno">Não
-                </label>
-            </nav>
-            <br>
-            <div ng-switch="retorno">
-                Código de referência: <span style="color:red;" ng-switch-when="true">*</span>
-                <input id="ocorr_referencia" name="ocorr_referencia" type="text" class="form-control" value="<?php echo $_POST['ocorr_referencia']; ?>">
-            </div>
-            <?php if(isset($_GET['ocorr_referencia'])){ ?>
-                <span class="alertErro">
-                    Referencia incorreta.
-                </span>
-            <?php } ?>
             <div>
                 Data de lançamento: <span style="color:red;">*</span>
                 <input name="data_lancamento" type="date" placeholder="DD/MM/YYYY" class="form-control" value="<?php echo $_POST['data_lancamento']; ?>" required>
@@ -160,8 +144,9 @@
             <div>
                 Pessoa atendida 1:
                 <br>
-                <input id="pessoa_atendida_1" name="pessoa_atendida_1" type="text" class="form-control inline"  value="<?php echo $_POST['pessoa1']; ?>">
+                <input id="pessoa_atendida_1" name="pessoa_atendida_1" type="text" class="form-control inline"  value="<?php echo $_POST['pessoa1']; ?>" onkeyup="showResult(this.value,this.id)">
                 <button type="button" class="btn-default btn-small inline" data-toggle="modal" data-target="#pessoasModal"><span class="glyphicon glyphicon-plus"></span></button>
+                <div class="autocomplete" id="livesearchpessoa_atendida_1"></div>
             </div>
             <?php if(isset($_GET['pessoa_atendida_1'])){ ?>
                 <span class="alertErro">
@@ -171,7 +156,8 @@
             <div>
                 Pessoa atendida 2:
                 <br>
-                <input name="pessoa_atendida_2" type="text" class="form-control inline" value="<?php echo $_POST['pessoa2']; ?>">
+                <input id="pessoa_atendida_2" name="pessoa_atendida_2" type="text" class="form-control inline" value="<?php echo $_POST['pessoa2']; ?>" onkeyup="showResult(this.value,this.id)">
+                <div class="autocomplete" id="livesearchpessoa_atendida_2"></div>
             </div>
             <?php if(isset($_GET['pessoa_atendida_2'])){ ?>
                 <span class="alertErro">
@@ -461,6 +447,36 @@
         </div>
     </div>
     <script>
+        function showResult(str, id_input) {
+            var id = "livesearch"+id_input;
+            if (str.length==0) { 
+                document.getElementById(id).innerHTML="";
+                document.getElementById(id).style.border="0px";
+                return;
+            }
+            if (window.XMLHttpRequest) {
+                // code for IE7+, Firefox, Chrome, Opera, Safari
+                xmlhttp=new XMLHttpRequest();
+            } else {  // code for IE6, IE5
+                xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+            }
+            xmlhttp.onreadystatechange=function() {
+                if (this.readyState==4 && this.status==200) {
+                    document.getElementById(id).innerHTML=this.responseText;
+                    document.getElementById(id).style.border="1px solid #A5ACB2";
+                }
+            }
+            xmlhttp.open("GET","livesearch.php?q="+str+"&id="+id_input,true);
+            xmlhttp.send();
+        }
+
+        function selecionaComplete(value, id_input){
+            var id = "livesearch"+id_input;
+            document.getElementById(id_input).value = value;
+            document.getElementById(id).innerHTML="";
+            document.getElementById(id).style.border="0px";
+        }
+
         function analisar(){
             $("#analisado").prop('checked', true);
         }

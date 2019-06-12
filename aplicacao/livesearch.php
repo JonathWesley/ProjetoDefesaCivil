@@ -5,7 +5,12 @@
     $q=$_GET["q"];
     $id_input="'".$_GET['id']."'";
 
-    $query = "SELECT nome from usuario WHERE nome ILIKE '$q%' LIMIT 5";
+    if(substr($_GET['id'],0,1) == "a"){
+        $query = "SELECT nome from usuario WHERE nome ILIKE '$q%' LIMIT 5";
+    }else{
+        $query = "SELECT nome from pessoa WHERE nome ILIKE '$q%' LIMIT 5";
+    }
+
     $result = pg_query($connection, $query);
 
     $hint = "";

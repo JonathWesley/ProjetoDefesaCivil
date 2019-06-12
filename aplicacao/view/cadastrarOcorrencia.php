@@ -116,26 +116,6 @@
             <?php } ?>
         </div>
         <div class="box">
-            Ocorrência retorno: <span style="color:red;">*</span>
-            <br>
-            <nav>
-                <label class="radio-inline">
-                    <input type="radio" id="ocorr_retorno" ng-model="retorno" ng-value="true" value="true" name="ocorr_retorno">Sim
-                </label>
-                <label class="radio-inline">
-                    <input type="radio" ng-model="retorno" ng-value="false" value="false" name="ocorr_retorno">Não
-                </label>
-            </nav>
-            <br>
-            <div ng-switch="retorno">
-                Código de referência: <span style="color:red;" ng-switch-when="true">*</span>
-                <input id="ocorr_referencia" name="ocorr_referencia" type="text" class="form-control">
-            </div>
-            <?php if(isset($_GET['ocorr_referencia'])){ ?>
-                <span class="alertErro">
-                    Referencia incorreta.
-                </span>
-            <?php } ?>
             <div>
                 Data de lançamento: <span style="color:red;">*</span>
                 <input name="data_lancamento" type="date" class="form-control" required>
@@ -173,8 +153,9 @@
             <div>
                 Pessoa atendida 1:
                 <br>
-                <input name="pessoa_atendida_1" id="pessoa_atendida_1" type="text" class="form-control inline" value="<?php echo $_POST['pessoa_atendida_1']; ?>">
+                <input name="pessoa_atendida_1" id="pessoa_atendida_1" type="text" class="form-control inline" value="<?php echo $_POST['pessoa_atendida_1']; ?>" onkeyup="showResult(this.value,this.id)">
                 <button type="button" class="btn-default btn-small inline" data-toggle="modal" data-target="#pessoasModal"><span class="glyphicon glyphicon-plus"></span></button>
+                <div class="autocomplete" id="livesearchpessoa_atendida_1"></div>
             </div>
             <?php if(isset($_GET['pessoa_atendida_1'])){ ?>
                 <span class="alertErro">
@@ -184,8 +165,9 @@
             <div>
                 Pessoa atendida 2:
                 <br>
-                <input name="pessoa_atendida_2" type="text" class="form-control inline">
+                <input name="pessoa_atendida_2" id="pessoa_atendida_2" type="text" class="form-control inline" value="<?php echo $_POST['pessoa_atendida_2']; ?>" onkeyup="showResult(this.value,this.id)">
                 <button type="button" class="btn-default btn-small inline" data-toggle="modal" data-target="#pessoasModal"><span class="glyphicon glyphicon-plus"></span></button>
+                <div class="autocomplete" id="livesearchpessoa_atendida_2"></div>
             </div>
             <?php if(isset($_GET['pessoa_atendida_2'])){ ?>
                 <span class="alertErro">
