@@ -14,7 +14,7 @@
         $linhaLogradouro = pg_fetch_array($result, 0);
     }
 
-    $id_pessoa = $linhaChamado['pessoa'];
+    $id_pessoa = $linhaChamado['pessoa_id'];
     $query = "SELECT nome FROM pessoa WHERE id_pessoa = $id_pessoa";
     $result = pg_query($connection, $query) or die(pg_last_error());
     $linhaPessoa = pg_fetch_array($result, 0);
@@ -22,7 +22,6 @@
 
 <div class="container positioning">
 <div class="jumbotron campo_cadastro">
-<?php echo pg_last_error(); ?>
     <div class="box">
         <p>Endereços</p>
         <nav>

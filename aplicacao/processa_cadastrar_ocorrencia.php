@@ -39,23 +39,26 @@ $id_criador = $_SESSION['id_usuario'];
 //guarda possiveis erros na inserção do usuário
 $erros = '';
 
-//verifica se os valores para formar o codigo do cobrade estao de acordo
-if(!preg_match("/^[0-5]$/", $cobrade_categoria))
-	$cobrade_categoria = 0;
-if(!preg_match("/^[0-5]$/", $cobrade_grupo))
-	$cobrade_grupo = 0;
-if(!preg_match("/^[0-5]$/", $cobrade_subgrupo))
-	$cobrade_subgrupo = 0;
-if(!preg_match("/^[0-5]$/", $cobrade_tipo))
-	$cobrade_tipo = 0;
-if(!preg_match("/^[0-5]$/", $cobrade_subtipo))
-	$cobrade_subtipo = 0;
-$cobrade = $cobrade_categoria.$cobrade_grupo.$cobrade_subgrupo.$cobrade_tipo.$cobrade_subtipo;
-if(strlen($cobrade) > 5 || substr($cobrade, 0, 1) == '0' || substr($cobrade, 1, 2) == '0' || substr($cobrade, 2, 3) == '0')
-	$erros = $erros.'&cobrade';
-
-if($cobrade_categoria == 3)
+if($cobrade_categoria == 0){
 	$cobrade = '00000';
+}else{
+	//verifica se os valores para formar o codigo do cobrade estao de acordo
+	if(!preg_match("/^[0-5]$/", $cobrade_categoria))
+		$cobrade_categoria = 0;
+	if(!preg_match("/^[0-5]$/", $cobrade_grupo))
+		$cobrade_grupo = 0;
+	if(!preg_match("/^[0-5]$/", $cobrade_subgrupo))
+		$cobrade_subgrupo = 0;
+	if(!preg_match("/^[0-5]$/", $cobrade_tipo))
+		$cobrade_tipo = 0;
+	if(!preg_match("/^[0-5]$/", $cobrade_subtipo))
+		$cobrade_subtipo = 0;
+	$cobrade = $cobrade_categoria.$cobrade_grupo.$cobrade_subgrupo.$cobrade_tipo.$cobrade_subtipo;
+	if(strlen($cobrade) > 5 || substr($cobrade, 0, 1) == '0' || substr($cobrade, 1, 2) == '0' || substr($cobrade, 2, 3) == '0')
+		$erros = $erros.'&cobrade';
+}
+
+	
 
 //garante que o valor do endereço seja apenas igual a Logradouro ou Coordenada
 if($endereco_principal != "Logradouro" && $endereco_principal != "Coordenada")

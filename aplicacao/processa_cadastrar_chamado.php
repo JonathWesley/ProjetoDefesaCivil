@@ -81,7 +81,7 @@ if(strlen($erros) > 0){
 }else{
 	//insere a ocorrencia no banco de dados
 	$query = "INSERT INTO chamado 
-			(data_hora,origem,pessoa,chamado_logradouro_id,descricao,endereco_principal,latitude,longitude)
+			(data_hora,origem,pessoa_id,chamado_logradouro_id,descricao,endereco_principal,latitude,longitude)
 			VALUES
 			('$timestamp','$origem',$pessoa_atendida,$logradouro_id,'$descricao','$endereco_principal',$latitude,$longitude)";
 

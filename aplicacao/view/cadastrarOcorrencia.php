@@ -118,7 +118,7 @@
         <div class="box">
             <div>
                 Data de lançamento: <span style="color:red;">*</span>
-                <input name="data_lancamento" type="date" class="form-control" required>
+                <input name="data_lancamento" type="date" class="form-control" value="<?php echo date('Y-m-d');?>" required>
             </div>
             <?php if(isset($_GET['data_lancamento'])){ ?>
                 <span class="alertErro">
@@ -154,8 +154,9 @@
                 Pessoa atendida 1:
                 <br>
                 <input name="pessoa_atendida_1" id="pessoa_atendida_1" type="text" class="form-control inline" value="<?php echo $_POST['pessoa_atendida_1']; ?>" onkeyup="showResult(this.value,this.id)">
-                <button type="button" class="btn-default btn-small inline" data-toggle="modal" data-target="#pessoasModal"><span class="glyphicon glyphicon-plus"></span></button>
+                <button type="button" class="btn-default btn-small inline open-AddBookDialog" data-toggle="modal" data-id="pessoa_atendida_1"><span class="glyphicon glyphicon-plus"></span></button>
                 <div class="autocomplete" id="livesearchpessoa_atendida_1"></div>
+                <div id="resultpessoa_atendida_1"></div>
             </div>
             <?php if(isset($_GET['pessoa_atendida_1'])){ ?>
                 <span class="alertErro">
@@ -166,8 +167,9 @@
                 Pessoa atendida 2:
                 <br>
                 <input name="pessoa_atendida_2" id="pessoa_atendida_2" type="text" class="form-control inline" value="<?php echo $_POST['pessoa_atendida_2']; ?>" onkeyup="showResult(this.value,this.id)">
-                <button type="button" class="btn-default btn-small inline" data-toggle="modal" data-target="#pessoasModal"><span class="glyphicon glyphicon-plus"></span></button>
+                <button type="button" class="btn-default btn-small inline open-AddBookDialog" data-toggle="modal" data-id="pessoa_atendida_2"><span class="glyphicon glyphicon-plus"></span></button>
                 <div class="autocomplete" id="livesearchpessoa_atendida_2"></div>
+                <div id="resultpessoa_atendida_2"></div>
             </div>
             <?php if(isset($_GET['pessoa_atendida_2'])){ ?>
                 <span class="alertErro">
@@ -188,10 +190,10 @@
                     <select name="cobrade_categoria" class="form-control" ng-model="categoria">
                         <option value="1">Naturais</option>
                         <option value="2">Tecnológicos</option>
-                        <option value="3">Não Listado</option>
+                        <option value="0">Não Listado</option>
                     </select>
-                    Grupo: <span style="color:red;" ng-hide="categoria == 0 || categoria == 3">*</span><br>
-                    <select name="cobrade_grupo" class="form-control" ng-model="grupo" ng-disabled="categoria == 0 || categoria == 3">
+                    Grupo: <span style="color:red;" ng-hide="categoria == 0">*</span><br>
+                    <select name="cobrade_grupo" class="form-control" ng-model="grupo" ng-disabled="categoria == 0">
                         <option ng-if="categoria==1" value="1">Geológico</option>
                         <option ng-if="categoria==1" value="2">Hidrológico</option>
                         <option ng-if="categoria==1" value="3">Meteorológico</option>
@@ -326,8 +328,8 @@
             </div>
             <br>
             <div>
-                Descricao cobrade: <span style="color:red;" ng-show="categoria == 3">*</span>
-                <textarea id="natureza" name="cobrade_descricao" class="form-control" cols="30" rows="2" maxlength = "100" ng-disabled="categoria != 3"></textarea>
+                Descricao cobrade: <span style="color:red;" ng-show="categoria == 0">*</span>
+                <textarea id="natureza" name="cobrade_descricao" class="form-control" cols="30" rows="2" maxlength = "100" ng-disabled="categoria != 0" required></textarea>
             </div>
             Possui fotos:
             <br>
@@ -349,7 +351,7 @@
             <div>
                 Prioridade: <span style="color:red;">*</span>
                 <label for="prioridade"></label>
-                <select name="prioridade" class="form-control" required>
+                <select name="prioridade" onchange="analisar()" class="form-control" required>
                     <option value="Baixa">Baixa</option>
                     <option value="Média">Média</option>
                     <option value="Alta">Alta</option>
@@ -364,10 +366,10 @@
             <br>
             <nav>
                 <label class="radio-inline">
-                    <input type="radio" value="true" name="analisado">Sim
+                    <input id="analisado" type="radio" value="true" name="analisado">Sim
                 </label>
                 <label class="radio-inline">
-                    <input type="radio" value="false" name="analisado" checked>Não
+                    <input id="analisado" type="radio" value="false" name="analisado" checked>Não
                 </label>
             </nav>
             <br>
@@ -407,6 +409,7 @@
                 <form method="post">
                     <div class="modal-body">
                         <nav>
+                            <input id="id_pessoa" type="hidden" value="">
                             <div class="form-group">
                                 Nome:
                                 <input id="nome_pessoa" name="nome_pessoa" type="text" class="form-control">
@@ -471,6 +474,12 @@
             $("#analisado").prop('checked', true);
         }
 
+        $(document).on("click", ".open-AddBookDialog", function () {
+            var pessoa_id = $(this).data('id');
+            $(".modal-body #id_pessoa").val( pessoa_id );
+            $('#pessoasModal').modal('show');
+        });
+
         //POST pessoa
         var input = document.getElementById("submitFormData");
         // Execute a function when the user releases a key on the keyboard
@@ -483,17 +492,37 @@
             document.getElementById("submitFormData").click();
         }
         });
+
         function SubmitFormData() {
+            var id_input = $("#id_pessoa").val();
             var nome_pessoa = $("#nome_pessoa").val();
             var email_pessoa = $("#email_pessoa").val();
             var telefone_pessoa = $("#telefone_pessoa").val();
             var cpf_pessoa = $("#cpf_pessoa").val();
             var outros_documentos = $("#outros_documentos").val();
 
-            document.getElementById("pessoa_atendida_1").value = nome_pessoa;
+            var id="result"+id_input;
             
-            $.post("processa_cadastrar_pessoa.php", { nome_pessoa: nome_pessoa, email_pessoa: email_pessoa,
-                telefone_pessoa: telefone_pessoa, cpf_pessoa: cpf_pessoa, outros_documentos:outros_documentos, nome_salvar: nome_pessoa });
+            //$.post("processa_cadastrar_pessoa.php", { nome_pessoa: nome_pessoa, email_pessoa: email_pessoa,
+            //    telefone_pessoa: telefone_pessoa, cpf_pessoa: cpf_pessoa, outros_documentos:outros_documentos, nome_salvar: nome_pessoa });
+            if (window.XMLHttpRequest) {
+                // code for IE7+, Firefox, Chrome, Opera, Safari
+                xmlhttp=new XMLHttpRequest();
+            } else {  // code for IE6, IE5
+                xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+            }
+            xmlhttp.onreadystatechange=function() {
+                if (this.readyState==4 && this.status==200) {
+                    document.getElementById(id).innerHTML=this.responseText;
+                    if(this.responseText == 'Pessoa cadastrado com sucesso'){
+                        document.getElementById(id).style.color="#00FF00";
+                        document.getElementById(id_input).value = nome_pessoa;
+                    }else
+                        document.getElementById(id).style.color="#FF0000";
+                }
+            }
+            xmlhttp.open("GET","processa_cadastrar_pessoa.php?nome_pessoa="+nome_pessoa+"&email_pessoa="+email_pessoa+"&telefone_pessoa="+telefone_pessoa+"&cpf_pessoa="+cpf_pessoa+"&outros_documento="+outros_documentos,true);
+            xmlhttp.send();
         }
     </script>
 </div>

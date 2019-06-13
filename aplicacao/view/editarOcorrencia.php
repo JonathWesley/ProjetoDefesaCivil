@@ -178,10 +178,10 @@
                     <select name="cobrade_categoria" class="form-control" ng-model="categoria" ng-init="categoria='<?php echo substr($_POST['ocorr_cobrade'],0,1); ?>'">
                         <option value="1">Naturais</option>
                         <option value="2">Tecnológicos</option>
-                        <option value="3">Não Listado</option>
+                        <option value="0">Não Listado</option>
                     </select>
-                    Grupo: <span style="color:red;" ng-hide="categoria == 0 || categoria == 3">*</span><br>
-                    <select name="cobrade_grupo" class="form-control" ng-model="grupo" ng-disabled="categoria == 0 || categoria == 3" ng-init="grupo='<?php echo substr($_POST['ocorr_cobrade'],1,1); ?>'">
+                    Grupo: <span style="color:red;" ng-hide="categoria == 0">*</span><br>
+                    <select name="cobrade_grupo" class="form-control" ng-model="grupo" ng-disabled="categoria == 0" ng-init="grupo='<?php echo substr($_POST['ocorr_cobrade'],1,1); ?>'">
                         <option ng-if="categoria==1" value="1">Geológico</option>
                         <option ng-if="categoria==1" value="2">Hidrológico</option>
                         <option ng-if="categoria==1" value="3">Meteorológico</option>
@@ -316,8 +316,8 @@
             </div>
             <br>
             <div>
-                Descricao cobrade: <span style="color:red;" ng-show="categoria == 3">*</span>
-                <textarea id="natureza" name="cobrade_descricao" class="form-control" cols="30" rows="2" maxlength = "100" ng-disabled="categoria != 3"></textarea>
+                Descricao cobrade: <span style="color:red;" ng-show="categoria == 0">*</span>
+                <textarea id="natureza" name="cobrade_descricao" class="form-control" cols="30" rows="2" maxlength = "100" ng-disabled="categoria != 0"  ng-model="cobrade_descricao" ng-init="cobrade_descricao='<?php echo $_POST['cobrade_descricao']; ?>'" required></textarea>
             </div>
             Possui fotos:
             <br>

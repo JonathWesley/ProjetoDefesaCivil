@@ -21,20 +21,20 @@
         if($pesquisa_filtro == 'data_ocorrencia'){
             $query = $query." WHERE TO_CHAR(ocorrencia.data_ocorrencia, 'DD/MM/YYYY') >= '$pesquisa_ocorrencia'";
         }else{
-            $query = $query." WHERE $pesquisa_filtro ILIKE '$pesquisa_ocorrencia%'";
+            $query = $query." WHERE $pesquisa_filtro ILIKE '$pesquisa_ocorrencia%' AND ocorrencia.ativo = TRUE";
         }
 
         if($_POST['encerrada'] != true)
-            $query = $query." AND ocorrencia.ocorr_encerrado = true";
+            $query = $query." AND ocorrencia.ocorr_encerrado = FALSE";
 
-        $consulta_ocorrencias = pg_query($connection, $query) or die(preg_last_error());
+        $consulta_ocorrencias = pg_query($connection, $query) or die(pg_last_error());
         $numero_total = pg_num_rows($consulta_ocorrencias);
     
         $consulta_ocorrencias = pg_query($connection, $query." ORDER BY
         CASE WHEN (ocorrencia.ocorr_prioridade = 'Alta') THEN 1 
         WHEN (ocorrencia.ocorr_prioridade = 'Média') THEN 2 
         WHEN (ocorrencia.ocorr_prioridade = 'Baixa') THEN 3 END 
-        LIMIT $items_por_pagina OFFSET $offset") or die(preg_last_error());
+        LIMIT $items_por_pagina OFFSET $offset") or die(pg_last_error());
 
     }else{
         $query = "SELECT ocorrencia.id_ocorrencia,ocorrencia.ocorr_prioridade, TO_CHAR(ocorrencia.data_ocorrencia, 'DD/MM/YYYY') as data_ocorrencia,
@@ -48,7 +48,7 @@
         if($_POST['encerrada'] != true)
             $query = $query." AND ocorrencia.ocorr_encerrado = FALSE";
 
-        $consulta_ocorrencias = pg_query($connection, $query) or die(preg_last_error());
+        $consulta_ocorrencias = pg_query($connection, $query) or die(pg_last_error());
         $numero_total = pg_num_rows($consulta_ocorrencias);
 
         $query = $query." ORDER BY 
@@ -57,7 +57,7 @@
         WHEN (ocorrencia.ocorr_prioridade = 'Baixa') THEN 3 END 
         LIMIT $items_por_pagina OFFSET $offset";
 
-        $consulta_ocorrencias = pg_query($connection, $query) or die(preg_last_error());
+        $consulta_ocorrencias = pg_query($connection, $query) or die(pg_last_error());
     }
 
     if($numero_total <= 0)
@@ -94,7 +94,7 @@
             <?php
                 $i = 0;
                 if(pg_fetch_array($consulta_ocorrencias, $i) == 0)
-                    echo '<tr><td colspan="5" class="text-center">Nenhuma ocorrência encontrada,</td></tr>';
+                    echo '<tr><td colspan="5" class="text-center">Nenhuma ocorrência encontrada.</td></tr>';
                 while($linha = pg_fetch_array($consulta_ocorrencias, $i)){
                     echo '<tr style="background-color:';
                     if($linha['ocorr_prioridade'] == "Alta")

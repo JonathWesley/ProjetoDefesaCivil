@@ -39,34 +39,35 @@ function validaCelular($telefone){
     }
 }
 
-    $nome = addslashes($_POST['nome_pessoa']);
-    $cpf = addslashes($_POST['cpf_pessoa']);
-    $outros_documentos = addslashes($_POST['outros_documentos']);
-    $telefone = addslashes($_POST['telefone_pessoa']);
-    $email = addslashes($_POST['email_pessoa']);
+    $nome = addslashes($_GET['nome_pessoa']);
+    $cpf = addslashes($_GET['cpf_pessoa']);
+    $outros_documentos = addslashes($_GET['outros_documentos']);
+    $telefone = addslashes($_GET['telefone_pessoa']);
+    $email = addslashes($_GET['email_pessoa']);
 
     $erros = '';
 
     if($nome != null){
         //validacao dos campos
         if(!preg_match("/^([a-zA-Z' ]+)$/",$nome)) //aceita apenas letras e espaço em branco
-            $erros = $erros.'&nome';
+            $erros = $erros.'Nome incorreto<br>';
         if(!validaCPF($cpf) && strlen($cpf) > 0) //envia para a funcao de validacao do cpf
-            $erros = $erros.'&cpf';
+            $erros = $erros.'CPF incorreto<br>';
         if(!validaCelular($telefone) && strlen($telefone) > 0) //envia para a funcao de validacao do telefone
-            $erros = $erros.'&telefone';
+            $erros = $erros.'Telefone incorreto<br>';
         if(!filter_var($email, FILTER_VALIDATE_EMAIL) && strlen($email) > 0) //valida em formato de email
-            $erros = $erros.'&email';
+            $erros = $erros.'Email incorreto<br>';
 
-        if(strlen($erros) > 0){
+        $response = 'Pessoa cadastrado com sucesso';
+        if(strlen($erros) == 0){
             $result = pg_query($connection, 
             "INSERT INTO pessoa (nome,cpf,outros_documentos,telefone,email) 
-            VALUES ('$nome','$cpf','$pass','$telefone','$email')")
-            or die(pg_last_error());
-    
-        }
-        // if(!$result)
-		//     echo 'Erro: '.pg_last_error();
-	    // else
-		     header('location:index.php?pagina=perfil');
-    }
+            VALUES ('$nome','$cpf','$pass','$telefone','$email')") or die(pg_last_error());
+            if(!$result)
+                $response = 'Ocorreu um erro com o banco de dados';//'Erro ao cadastrar pessoa';
+        }else
+            $response = $erros;//'Erro ao cadastrar pessoa';
+    }else
+        $response = 'Pessoa deve possuir um nome';//'Erro ao cadastrar pessoa';
+
+    echo $response;

@@ -97,12 +97,6 @@
     <div class="box">
         <p>Ocorrencia</p>
         <nav>
-            Ocorrência retorno: <span id="ocorr_retorno"><?php echo ($linhaOcorrencia['ocorr_retorno'] == t) ? 'Sim' : 'Não'; ?></span>
-        </nav>
-        <nav>
-            Código de referência: <span id="ocorr_referencia"><?php echo $linhaOcorrencia['ocorr_referencia']; ?></span>
-        </nav>
-        <nav>
             Data de lançamento: <span id="data_lancamento" value="<?php echo $linhaOcorrencia['data_lancamento'];?>">
             <?php 
                 echo date("d/m/Y", strtotime($linhaOcorrencia['data_lancamento']));
@@ -139,9 +133,11 @@
         <nav>
             Cobrade: <span id="ocorr_cobrade"><?php echo $linhaCobrade['subgrupo']; ?></span>
         </nav>
-        <nav>
-            Natureza da ocorrência: <span id="ocorr_natureza"><?php echo $linhaOcorrencia['ocorr_natureza']; ?></span>
-        </nav>
+        <?php if($linhaCobrade['codigo']=='00000'){ ?>
+            <nav>
+                Cobrade descrição: <span id="cobrade_descricao"><?php echo $linhaOcorrencia['cobrade_descricao']; ?></span>
+            </nav>
+        <?php } ?>
         <nav>
             Possui fotos: <span id="fotos"><?php echo ($linhaOcorrencia['ocorr_fotos'] == t) ? 'Sim':'Não'; ?></span>
         </nav>
@@ -176,8 +172,6 @@
         <input name="agente_principal" type="hidden" value="<?php echo $linhaAgentePrincipal['nome']; ?>">
         <input name="agente_apoio1" type="hidden" value="<?php echo $linhaAgente1['nome']; ?>">
         <input name="agente_apoio2" type="hidden" value="<?php echo $linhaAgente2['nome']; ?>">
-        <input name="ocorr_retorno" type="hidden" value="<?php echo $linhaOcorrencia['ocorr_retorno']; ?>">
-        <input name="ocorr_referencia" type="hidden" value="<?php echo $linhaOcorrencia['ocorr_referencia']; ?>">
         <input name="data_lancamento" type="hidden" value="<?php echo $linhaOcorrencia['data_lancamento']; ?>">
         <input name="data_ocorrencia" type="hidden" value="<?php echo $linhaOcorrencia['data_ocorrencia']; ?>">
         <input name="ocorr_descricao" type="hidden" value="<?php echo $linhaOcorrencia['ocorr_descricao']; ?>">
@@ -185,6 +179,7 @@
         <input name="pessoa1" type="hidden" value="<?php echo $linhaPessoa1['nome']; ?>">
         <input name="pessoa2" type="hidden" value="<?php echo $linhaPessoa2['nome']; ?>">
         <input name="ocorr_cobrade" type="hidden" value="<?php echo $linhaCobrade['codigo']; ?>">
+        <input name="cobrade_descricao" type="hidden" value="<?php echo $linhaOcorrencia['cobrade_descricao']; ?>">
         <input name="possui_foto" type="hidden" value="<?php echo $linhaOcorrencia['ocorr_fotos']; ?>">
         <input name="prioridade" type="hidden" value="<?php echo $linhaOcorrencia['ocorr_prioridade']; ?>">
         <input name="analisado" type="hidden" value="<?php echo $linhaOcorrencia['ocorr_analisado']; ?>">
