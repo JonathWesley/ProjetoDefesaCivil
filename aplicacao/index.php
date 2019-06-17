@@ -51,7 +51,7 @@ if($_SESSION['nivel_acesso'] == 1){
     switch($pagina){
         case 'esqueceuSenha': include 'view/esqueceuSenha.php'; break;
         case 'cadastrarOcorrencia': include 'view/cadastrarOcorrencia.php'; break; 
-        case 'consultarOcorrencia': include 'view/consultarOcorrencia.php'; break; 
+        //case 'consultarOcorrencia': include 'view/consultarOcorrencia.php'; break; 
         case 'cadastrarUsuario': include 'view/cadastrarUsuario.php'; break; 
         case 'consultarUsuario': include 'view/consultarUsuario.php'; break; 
         case 'perfil': include 'view/perfil.php'; break;
@@ -61,13 +61,15 @@ if($_SESSION['nivel_acesso'] == 1){
         case 'cadastrarChamado' : include 'view/cadastrarChamado.php'; break;
         case 'consultarChamado' : include 'view/consultarChamado.php'; break;
         case 'exibirChamado' : include 'view/exibirChamado.php'; break;
-        default: include 'view/home.php'; break;
+        case 'exibirPessoa' : include 'view/exibirPessoa.php'; break;
+        case 'editarUsuario' : include 'view/editarUsuario.php'; break;
+        default: include 'view/consultarOcorrencia.php'; break;
     }
 }else if($_SESSION['nivel_acesso'] == 2){
     switch($pagina){
         case 'esqueceuSenha': include 'view/esqueceuSenha.php'; break;
         case 'cadastrarOcorrencia': include 'view/cadastrarOcorrencia.php'; break; 
-        case 'consultarOcorrencia': include 'view/consultarOcorrencia.php'; break; 
+        //case 'consultarOcorrencia': include 'view/consultarOcorrencia.php'; break; 
         case 'perfil': include 'view/perfil.php'; break;
         case 'exibirOcorrencia': include 'view/exibirOcorrencia.php'; break;
         case 'exibirUsuario': include 'view/exibirUsuario.php'; break;
@@ -75,7 +77,9 @@ if($_SESSION['nivel_acesso'] == 1){
         case 'cadastrarChamado' : include 'view/cadastrarChamado.php'; break;
         case 'consultarChamado' : include 'view/consultarChamado.php'; break;
         case 'exibirChamado' : include 'view/exibirChamado.php'; break;
-        default: include 'view/home.php'; break;
+        case 'exibirPessoa' : include 'view/exibirPessoa.php'; break;
+        case 'editarUsuario' : include 'view/editarUsuario.php'; break;
+        default: include 'view/consultarOcorrencia.php'; break;
     }
 }else{
     switch($pagina){

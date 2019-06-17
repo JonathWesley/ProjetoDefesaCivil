@@ -19,6 +19,11 @@
     $result = pg_query($connection, $query) or die(pg_last_error());
     $linhaAgentePrincipal = pg_fetch_array($result, 0);
 
+    $id_usuario_criador = $linhaOcorrencia['usuario_criador'];
+    $query = "SELECT nome FROM usuario WHERE id_usuario = $id_usuario_criador";
+    $result = pg_query($connection, $query) or die(pg_last_error());
+    $linhaUsuarioCriador = pg_fetch_array($result, 0);
+
     if($linhaOcorrencia['agente_apoio_1']){
         $id_agente = $linhaOcorrencia['agente_apoio_1'];
         $query = "SELECT nome FROM usuario WHERE id_usuario = $id_agente";
@@ -85,26 +90,26 @@
     <div class="box">
         <p>Agentes</p>
         <nav>
-            Agente principal: <span id="agente_principal" ><?php echo $linhaAgentePrincipal['nome']; ?></span>
+            Agente principal: <a id="agente_principal" href="?pagina=exibirUsuario&id=<?php echo $linhaOcorrencia['agente_principal']; ?>"><?php echo $linhaAgentePrincipal['nome']; ?></a>
         </nav>
         <nav>
-            Agente de apoio 1: <span id="agente_apoio_1" ><?php echo $linhaAgente1['nome']; ?></span>
+            Agente de apoio 1: <a id="agente_principal" href="?pagina=exibirUsuario&id=<?php echo $linhaOcorrencia['agente_apoio_1']; ?>"><?php echo $linhaAgente1['nome']; ?></a>
         </nav>
         <nav>
-            Agente de apoio 2: <span id="agente_apoio_2" ><?php echo $linhaAgente2['nome']; ?></span>
+            Agente de apoio 2: <a id="agente_principal" href="?pagina=exibirUsuario&id=<?php echo $linhaOcorrencia['agente_apoio_2']; ?>"><?php echo $linhaAgente2['nome']; ?></a>
         </nav>
     </div>
     <div class="box">
         <p>Ocorrencia</p>
         <nav>
-            Data de lançamento: <span id="data_lancamento" value="<?php echo $linhaOcorrencia['data_lancamento'];?>">
+            Data de lançamento: <span id="data_lancamento">
             <?php 
                 echo date("d/m/Y", strtotime($linhaOcorrencia['data_lancamento']));
             ?>
             </span>
         </nav>
         <nav>
-            Data de ocorrência: <span id="data_ocorrencia" value="<?php echo $linhaOcorrencia['data_ocorrencia']; ?>">
+            Data de ocorrência: <span id="data_ocorrencia">
             <?php 
                 echo date("d/m/Y", strtotime($linhaOcorrencia['data_ocorrencia']));
             ?>
@@ -121,10 +126,10 @@
     <div class="box">
         <p>Atentidos</p>
         <nav>
-            Pessoa atendida 1: <span id="atendido_1"><?php echo $linhaPessoa1['nome']; ?></span>
+            Pessoa atendida 1: <a id="atendido_1" href="?pagina=exibirPessoa&id=<?php echo $linhaOcorrencia['atendido_1']; ?>"><?php echo $linhaPessoa1['nome']; ?></a>
         </nav>
         <nav>
-            Pessoa atendida 2: <span id="atendido_2"><?php echo $linhaPessoa2['nome']; ?></span>
+            Pessoa atendida 2: <a id="atendido_2" href="?pagina=exibirPessoa&id=<?php echo $linhaOcorrencia['atendido_2']; ?>"><?php echo $linhaPessoa2['nome']; ?></a>
         </nav>
     </div>
 
@@ -155,6 +160,26 @@
         </nav>
         <nav>
             Encerrado: <span id="ocorr_encerrado"><?php echo ($linhaOcorrencia['ocorr_encerrado']== t) ? 'Sim':'Não'; ?></span>
+        </nav>
+    </div>
+    <div class="box">
+        <p>Informações</p>
+        <nav>
+            Ativa: <span id="ativa"><?php echo ($linhaOcorrencia['ativo']== t) ? 'Sim':'Não'; ?></span>
+        </nav>
+        <nav>
+            Data de alteração: <span id="data_alteracao"><?php echo date("d/m/Y", strtotime($linhaOcorrencia['data_ocorrencia'])); ?></span>
+        </nav>
+        <nav>
+            Usuário que realizou a alteração: <a id="usuario_criador" href="?pagina=exibirUsuario&id=<?php echo $linhaOcorrencia['usuario_criador']; ?>"><?php echo $linhaUsuarioCriador['nome']; ?></a>
+        </nav>
+        <nav>
+            Ocorrência de referência: 
+            <?php if($linhaOcorrencia['ocorr_referencia'] == null){ ?>
+                <span id="ocorr_referencia"><?php echo 'Não possui'; ?></span>
+            <?php }else{ ?>
+                <a id="ocorr_referencia" href="?pagina=exibirOcorrencia&id=<?php echo $linhaOcorrencia['ocorr_referencia']; ?>"><?php echo $linhaOcorrencia['ocorr_referencia']; ?></a>
+            <?php } ?>
         </nav>
     </div>
     <form action="index.php?pagina=editarOcorrencia" method="post">

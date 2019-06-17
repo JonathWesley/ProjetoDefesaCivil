@@ -11,7 +11,7 @@
 
     $consulta_usuarios = pg_query($connection, 
     "SELECT dados_login.id_usuario,dados_login.email,usuario.nome,usuario.telefone FROM dados_login 
-    INNER JOIN usuario ON dados_login.id_usuario = usuario.id_usuario WHERE nome LIKE '$pesquisa_usuario%'
+    INNER JOIN usuario ON dados_login.id_usuario = usuario.id_usuario WHERE nome LIKE '$pesquisa_usuario%' AND ativo = true
     ORDER BY nome
     LIMIT $items_por_pagina OFFSET $offset") or die(preg_last_error());
     

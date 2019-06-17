@@ -34,6 +34,7 @@ if(!$result){ //caso ocorra algum erro na conexao
             $result = pg_query($connection, $query);
 
             //envia para a pagina principal
+            //echo pg_last_error();
             header('location:index.php?pagina=home');
         }else{
             //retorna o erro
