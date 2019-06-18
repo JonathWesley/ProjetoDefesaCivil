@@ -112,8 +112,8 @@ if(strlen($erros) > 0){
 		session_start();
 		$id_criador = $_SESSION['id_usuario'];
 		$data = date('Y-m-d H:i:s');
-		$query = "INSERT INTO log_cadastro_usuario (id_usuario_criador, id_usuario_novo, data_hora) 
-		VALUES ($id_criador, $id, '$data')";
+		$query = "INSERT INTO log_alteracao_usuario (id_usuario_modificador, id_usuario_alterado, data_hora, acao) 
+		VALUES ($id_criador, $id, '$data', 'cadastrar')";
 		$result = pg_query($connection, $query);
 		//echo preg_last_error();
 		header('location:index.php?pagina=cadastrarUsuario&sucesso');

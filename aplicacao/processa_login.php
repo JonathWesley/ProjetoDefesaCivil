@@ -7,7 +7,7 @@ $email = addslashes($_POST['email']);
 $senha = $_POST['senha'];
 
 //seleciona a senha q existe no banco de dados
-$query = "SELECT * FROM dados_login WHERE email = '$email'";
+$query = "SELECT * FROM dados_login WHERE email = '$email' AND ativo = TRUE";
 $result = pg_query($connection, $query);
 
 if(!$result){ //caso ocorra algum erro na conexao

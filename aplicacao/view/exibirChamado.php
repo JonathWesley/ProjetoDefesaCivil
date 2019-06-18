@@ -76,8 +76,8 @@
         <input name="logradouro" type="hidden" value="<?php echo $linhaLogradouro['logradouro']; ?>">
         <input name="numero" type="hidden" value="<?php echo $linhaLogradouro['numero'] ?>">
         <input name="referencia" type="hidden" value="<?php echo $linhaLogradouro['referencia']; ?>">
-        <input name="latitude" type="hidden" value="<?php echo $linhaChamado['ocorr_coordenada_latitude']; ?>">
-        <input name="longitude" type="hidden" value="<?php echo $linhaChamado['ocorr_coordenada_longitude']; ?>">
+        <input name="latitude" type="hidden" value="<?php echo $linhaChamado['latitude']; ?>">
+        <input name="longitude" type="hidden" value="<?php echo $linhaChamado['longitude']; ?>">
         <input name="data_ocorrencia" type="hidden" value="<?php echo date("Y-m-d", strtotime($linhaChamado['data_hora'])); ?>">
         <input name="descricao" type="hidden" value="<?php echo $linhaChamado['descricao']; ?>">
         <input name="ocorr_origem" type="hidden" value="<?php echo $linhaChamado['origem']; ?>">

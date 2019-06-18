@@ -1,16 +1,3 @@
-<?php
-    include 'database.php';
-
-    $id_usuario = $_GET['id'];
-
-    $query = "SELECT usuario.*, dados_login.email 
-              FROM usuario 
-              INNER JOIN dados_login ON (usuario.id_usuario = dados_login.id_usuario) 
-              WHERE usuario.id_usuario = $id_usuario";
-    $result = pg_query($connection, $query);
-    $linha = pg_fetch_array($result, 0);
-?>
-
 <div class="container positioning">
 <div class="jumbotron campo_cadastro">
     <form method="post" action="processa_cadastrar_usuario.php">
