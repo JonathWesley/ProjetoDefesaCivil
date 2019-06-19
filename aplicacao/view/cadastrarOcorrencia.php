@@ -347,6 +347,7 @@
                 <input type="file" accept="image/png, image/jpeg">
             </div>
         </div>
+        <?php if($_SESSION['nivel_acesso'] == 1){ ?>
         <div class="box">
             <div>
                 Prioridade: <span style="color:red;">*</span>
@@ -396,6 +397,7 @@
             </nav>
             <br>
         </div>
+        <?php } ?>
         <input type="submit" class="btn btn-default btn-md" value="Cadastrar">
     </form>
 

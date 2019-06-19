@@ -182,6 +182,7 @@
             <?php } ?>
         </nav>
     </div>
+    <?php if($linhaOcorrencia['ativo']== t){ ?>
     <form action="index.php?pagina=editarOcorrencia" method="post">
         <input name="id_ocorrencia" type="hidden" value="<?php echo $id_ocorrencia; ?>">
         <input name="chamado_id" type="hidden" value="<?php echo $linhaOcorrencia['chamado_id']; ?>">
@@ -212,5 +213,6 @@
         <input name="encerrado" type="hidden" value="<?php echo $linhaOcorrencia['ocorr_encerrado']; ?>">
         <input type="submit" class="btn btn-default btn-md" value="Editar">
     </form>
+    <?php } ?>
 </div>
 </div>

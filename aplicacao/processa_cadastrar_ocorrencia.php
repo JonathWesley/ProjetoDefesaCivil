@@ -36,6 +36,13 @@ $encerrado = addslashes($_POST['encerrado']);
 session_start();
 $id_criador = $_SESSION['id_usuario'];
 
+if($_SESSION['nivel_acesso'] != 1){
+	$prioridade = 'Baixa';
+	$analisado = 'false';
+	$congelado = 'false';
+	$encerrado = 'false';
+}
+
 //guarda possiveis erros na inserção do usuário
 $erros = '';
 
