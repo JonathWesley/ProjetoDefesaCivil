@@ -2,7 +2,6 @@
 include 'database.php';
 
 //funcoes de validacao do preenchimento dos campos
-
 function validaCPF($cpf) {
     // Extrai somente os números
     $cpf = preg_replace( '/[^0-9]/is', '', $cpf );
@@ -83,16 +82,10 @@ if(strlen($erros) > 0){
 	$salt = str_shuffle($salt);
 	$hash = crypt($senha, '$2a$' . $custo . '$' . $salt . '$');
 
-	$result = pg_query($connection, "INSERT INTO dados_login (email, senha) VALUES ('$email', '$hash')");
-	if(!$result)
-		echo 'Erro: '.pg_last_error();
+	$result = pg_query($connection, "INSERT INTO dados_login (email, senha) VALUES ('$email', '$hash') RETURNING id_usuario");
 
-	$result = pg_query($connection, "SELECT id_usuario FROM dados_login WHERE email = '$email'");
-	if(!$result)
-		echo 'Erro: '.pg_last_error();
+	$id = pg_fetch_array($result, 0)['id_usuario'];
 
-	$linha = pg_fetch_array($result, 0);
-	$id = $linha['id_usuario'];
 	$acesso;
 	if($nivel_acesso == 'Diretor'){
 		$acesso = 1;
@@ -102,20 +95,20 @@ if(strlen($erros) > 0){
 		$acesso = 3;
 	}
 
-	$query = "INSERT INTO usuario (id_usuario, nome, cpf, telefone, nivel_acesso) 
-			  VALUES ($id, '$nome', '$cpf', '$telefone', $acesso)";
+	session_start();
+	$id_criador = $_SESSION['id_usuario'];
+	$data = date('Y-m-d H:i:s');
+
+	$query = "BEGIN; 
+			  INSERT INTO usuario (id_usuario, nome, cpf, telefone, nivel_acesso) 
+			  VALUES ($id, '$nome', '$cpf', '$telefone', $acesso);
+			  INSERT INTO log_alteracao_usuario (id_usuario_modificador, id_usuario_alterado, data_hora, acao) 
+			  VALUES ($id_criador, $id, '$data', 'cadastrar');
+			  COMMIT;";
 	$result = pg_query($connection, $query);
 	if(!$result){
 		header('location:index.php?pagina=cadastrarUsuario&erroDB');
 		//echo pg_last_error();
-	}else{
-		session_start();
-		$id_criador = $_SESSION['id_usuario'];
-		$data = date('Y-m-d H:i:s');
-		$query = "INSERT INTO log_alteracao_usuario (id_usuario_modificador, id_usuario_alterado, data_hora, acao) 
-		VALUES ($id_criador, $id, '$data', 'cadastrar')";
-		$result = pg_query($connection, $query);
-		//echo preg_last_error();
+	}else
 		header('location:index.php?pagina=cadastrarUsuario&sucesso');
-	}
 }

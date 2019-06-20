@@ -80,31 +80,26 @@ if(strlen($erros) > 0){
 //caso esteja tudo certo, procede com a inserção no banco de dados
 }else{
 	//insere a ocorrencia no banco de dados
-	$query = "INSERT INTO chamado 
-			(id_chamado, data_hora,origem,pessoa_id,chamado_logradouro_id,descricao,endereco_principal,latitude,longitude)
-			VALUES
-			(DEFAULT, '$timestamp','$origem',$pessoa_atendida,$logradouro_id,'$descricao','$endereco_principal',$latitude,$longitude) 
-			RETURNING id_chamado";
+	session_start();
+	$id_usuario = $_SESSION['id_usuario'];
+	$dataAtual = date('Y-m-d H:i:s');
+
+	$query = "INSERT INTO chamado (data_hora,origem,pessoa_id,chamado_logradouro_id,
+			  descricao,endereco_principal,latitude,longitude)
+			  VALUES ('$timestamp','$origem',$pessoa_atendida,$logradouro_id,'$descricao',
+			  '$endereco_principal',$latitude,$longitude) 
+			  RETURNING id_chamado";
 
 	$result = pg_query($connection, $query);
 	
-	if(!$result){
-		echo pg_last_error();
-		echo 'a'.$result;
-		//header('location:index.php?pagina=cadastrarChamado&erroDB');
-	}else{
-		session_start();
-		$id_usuario = $_SESSION['id_usuario'];
-		$dataAtual = date('Y-m-d H:i:s');
-		$acao = 'cadastrar';
-		$query = "SELECT id_chamado FROM cadastro 
-				  WHERE ";
-
+	if($result){
+		$id_chamado = pg_fetch_array($result, 0)['id_chamado'];
 		$query = "INSERT INTO log_chamado (id_usuario, id_chamado, data_hora, acao)
-				  VALUES ($id_usuario,,'$dataAtual', '$acao')";
-		echo 'b'.$result;
-		echo '<br>c: '.$result['id_chamado'];
-		//header('location:index.php?pagina=cadastrarChamado&sucesso');
+				  VALUES ($id_usuario,$id_chamado,'$dataAtual','cadastrar')";
+
+		$result = pg_query($connection, $query) or die(pg_last_error());
 		
-	}
+		header('location:index.php?pagina=cadastrarChamado&sucesso');
+	}else
+		header('location:index.php?pagina=cadastrarChamado&erroDB');
 }
