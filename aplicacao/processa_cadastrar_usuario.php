@@ -45,7 +45,14 @@ $nivel_acesso = addslashes($_POST['nivel_acesso']);
 $email = addslashes($_POST['email_cadastro']);
 $senha = ($_POST['senha_cadastro']);
 $senha_confirma = ($_POST['senha_cadastro_confirma']);
-$foto = $_POST['foto'];
+
+$fileName = pg_escape_string($_FILES['image']['name']);
+$fileData = pg_escape_string(file_get_contents($_FILES['image']['tmp_name']));
+$fileType = pg_escape_string($_FILES['image']['type']);
+
+if(substr($fileType, 0, 5) == "image"){
+
+}
 
 $erros = '';
 
@@ -100,15 +107,17 @@ if(strlen($erros) > 0){
 	$data = date('Y-m-d H:i:s');
 
 	$query = "BEGIN; 
-			  INSERT INTO usuario (id_usuario, nome, cpf, telefone, nivel_acesso) 
-			  VALUES ($id, '$nome', '$cpf', '$telefone', $acesso);
+			  INSERT INTO usuario (id_usuario, nome, cpf, telefone, nivel_acesso, foto) 
+			  VALUES ($id, '$nome', '$cpf', '$telefone', $acesso, lo_import('$fotoa'));
 			  INSERT INTO log_alteracao_usuario (id_usuario_modificador, id_usuario_alterado, data_hora, acao) 
 			  VALUES ($id_criador, $id, '$data', 'cadastrar');
 			  COMMIT;";
 	$result = pg_query($connection, $query);
 	if(!$result){
-		header('location:index.php?pagina=cadastrarUsuario&erroDB');
-		//echo pg_last_error();
+		//header('location:index.php?pagina=cadastrarUsuario&erroDB');
+		echo $foto.'<br>';
+		echo $fotoa.'<br>';
+		echo pg_last_error();
 	}else
 		header('location:index.php?pagina=cadastrarUsuario&sucesso');
 }

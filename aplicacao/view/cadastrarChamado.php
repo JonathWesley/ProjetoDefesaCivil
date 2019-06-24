@@ -13,12 +13,11 @@
         <?php } ?>
         <div class="box">
             <div>
-                Data: <span style="color:red;">*</span>
-                <input id="data_chamado" name="data_chamado" type="date" class="form-control" required>
-            </div>
-            <div>
-                Horário: <span style="color:red;">*</span>
-                <input type="time" name="horario_chamado" class="form-control" required>
+                <span>Data: <span style="color:red;">*</span></span>
+                <span style="position:relative;left:23%">Horário: <span style="color:red;">*</span></span> 
+                <br>
+                <input id="data_chamado" name="data_chamado" type="date" class="form-control" style="width:30%;display:inline;" required>
+                <input type="time" name="horario_chamado" class="form-control" style="width:30%;display:inline;" required>
             </div>
             <div>
                 Origem: <span style="color:red;">*</span>
@@ -27,7 +26,7 @@
             <div>
                 Pessoa atendida: <span style="color:red;">*</span>
                 <br>
-                <input type="text" id="pessoa_nome" name="nome_chamado" class="form-control inline" onkeyup="showResult(this.value,this.id)" required>
+                <input type="text" id="pessoa_nome" name="nome_chamado" class="form-control inline" style="width:93%;" onkeyup="showResult(this.value,this.id)" required>
                 <button type="button" class="btn-default btn-small inline open-AddBookDialog" data-toggle="modal" data-id="pessoa_nome"><span class="glyphicon glyphicon-plus"></span></button>
                 <div class="autocomplete" id="livesearchpessoa_nome"></div>
                 <div id="resultpessoa_nome"></div>
@@ -36,46 +35,43 @@
         <div class="box">
             <div>
                 Endereço principal: <span style="color:red;">*</span>
+                <br>
                 <label for="endereco_principal"></label>
-                <select name="endereco_principal" class="form-control" ng-model="sel_endereco" ng-init="sel_endereco='Coordenada'" required>
+                <select name="endereco_principal" class="form-control" style="width:30%;display:inline;" ng-model="sel_endereco" ng-init="sel_endereco='Coordenada'" required>
                     <option value="Coordenada">Coordenada</option>
                     <option value="Logradouro">Logradouro</option>
                 </select>
             </div>
             <div ng-show="sel_endereco == 'Coordenada'">
                 <div>
-                    Longitude: <span style="color:red;">*</span>
-                    <input name="longitude" type="text" class="form-control">
-                </div>
-                <div>
-                    Latitude: <span style="color:red;">*</span>
-                    <input name="latitude" type="text" class="form-control">
+                    <span>Longitude: <span style="color:red;">*</span></span> 
+                    <span style="position:relative;left:19%;">Latitude: <span style="color:red;">*</span></span>
+                    <br>
+                    <input name="longitude" type="text" class="form-control" style="width:30%;display:inline;">
+                    <input name="latitude" type="text" class="form-control" style="width:30%;display:inline;">
                 </div>
             </div>
             <div ng-show="sel_endereco == 'Logradouro'">
                 <div>
-                    CEP:
-                    <input id="cep" name="cep" type="text" class="form-control" ng-model="cep">
+                    <span>CEP:</span> 
+                    <span style="position:relative;left:11%">Logradouro: <span style="color:red;">*</span></span> 
+                    <br>
+                    <input id="cep" name="cep" type="text" class="form-control" style="width:15%;display:inline;" ng-model="cep">                
+                    <input id="logradouro" name="logradouro" type="text" class="form-control" style="width:84%;display:inline;">
                 </div>
                 <div>
-                    Logradouro: <span style="color:red;">*</span>
-                    <input id="logradouro" name="logradouro" type="text" class="form-control">
+                    <span>Número: </span> <span style="color:red;">*</span>
+                    <span style="position:relative;left:25%">Bairro: <span style="color:red;">*</span></span> 
+                    <br>
+                    <input id="complemento" name="complemento" type="text" class="form-control" style="width:35%;display:inline;">
+                    <input id="bairro" name="bairro" type="text" class="form-control" style="width:64%;display:inline;">
                 </div>
                 <div>
-                    Número: <span style="color:red;">*</span>
-                    <input id="complemento" name="complemento" type="text" class="form-control">
-                </div>
-                <div>
-                    Bairro:
-                    <input id="bairro" name="bairro" type="text" class="form-control">
-                </div>
-                <div>
-                    Cidade:
-                    <input id="cidade" name="cidade" type="text" class="form-control">
-                </div>
-                <div>
-                    Referência:
-                    <input name="referencia" type="text" class="form-control">
+                    <span>Cidade: </span> <span style="color:red;">*</span>
+                    <span style="position:relative;left:32%">Referência: <span style="color:red;">*</span></span>
+                    <br>
+                    <input id="cidade" name="cidade" type="text" class="form-control" style="width:40%;display:inline;">
+                    <input name="referencia" type="text" class="form-control" style="width:59%;display:inline;">
                 </div>
             </div>
         </div>

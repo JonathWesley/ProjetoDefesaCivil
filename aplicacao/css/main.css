@@ -84,7 +84,7 @@ body{
 }
 
 .form-control{
-    width: 70%;
+    width: 100%;
 }
 
 .btn{
@@ -155,7 +155,7 @@ div h4{
     font-size:12px;
     position: relative;
     bottom:20px;
-    left:62%;
+    left:90%;
 }
 
 .sort-icon{
