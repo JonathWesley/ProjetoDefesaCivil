@@ -46,14 +46,6 @@ $email = addslashes($_POST['email_cadastro']);
 $senha = ($_POST['senha_cadastro']);
 $senha_confirma = ($_POST['senha_cadastro_confirma']);
 
-$fileName = pg_escape_string($_FILES['image']['name']);
-$fileData = pg_escape_string(file_get_contents($_FILES['image']['tmp_name']));
-$fileType = pg_escape_string($_FILES['image']['type']);
-
-if(substr($fileType, 0, 5) == "image"){
-
-}
-
 $erros = '';
 
 //validacao dos campos
@@ -108,7 +100,7 @@ if(strlen($erros) > 0){
 
 	$query = "BEGIN; 
 			  INSERT INTO usuario (id_usuario, nome, cpf, telefone, nivel_acesso, foto) 
-			  VALUES ($id, '$nome', '$cpf', '$telefone', $acesso, lo_import('$fotoa'));
+			  VALUES ($id, '$nome', '$cpf', '$telefone', '$acesso', bytea('/home/jonath/Downloads/Pedobear.png'));
 			  INSERT INTO log_alteracao_usuario (id_usuario_modificador, id_usuario_alterado, data_hora, acao) 
 			  VALUES ($id_criador, $id, '$data', 'cadastrar');
 			  COMMIT;";
