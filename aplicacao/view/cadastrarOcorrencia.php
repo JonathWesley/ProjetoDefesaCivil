@@ -37,8 +37,9 @@
                     <span>Longitude: <span style="color:red;">*</span></span> 
                     <span style="position:relative;left:19%;">Latitude: <span style="color:red;">*</span></span>
                     <br>
-                    <input name="longitude" type="text" class="form-control" style="width:30%;display:inline;" value="<?php echo $_POST['longitude']; ?>">
-                    <input name="latitude" type="text" class="form-control" style="width:30%;display:inline;" value="<?php echo $_POST['latitude']; ?>">
+                    <input id="longitude" name="longitude" type="text" class="form-control" style="width:30%;display:inline;" value="<?php echo $_POST['longitude']; ?>">
+                    <input id="latitude" name="latitude" type="text" class="form-control" style="width:30%;display:inline;" value="<?php echo $_POST['latitude']; ?>">
+                    <button type="button" class="btn-default btn-small inline open-AddBookDialog" data-toggle="modal" data-id="map"><span class="glyphicon glyphicon-map-marker"></span></button>
                 <?php if(isset($_GET['longitude'])){ ?>
                     <span class="alertErro">
                         Longitude informada incorretamente.
@@ -56,8 +57,8 @@
                     <span>CEP:</span> 
                     <span style="position:relative;left:11%">Logradouro: <span style="color:red;">*</span></span> 
                     <br>
-                    <input id="cep" name="cep" type="text" class="form-control" style="width:15%;display:inline;"  ng-model="cep" ng-init="cep='<?php echo $_POST['cep']; ?>'">
-                    <input id="logradouro" name="logradouro" type="text" class="form-control" style="width:84%;display:inline;"  value="<?php echo $_POST['logradouro']; ?>">
+                    <input id="cep" name="cep" type="text" class="form-control" style="width:15%;display:inline;" ng-model="cep" ng-init="cep='<?php echo $_POST['cep']; ?>'">
+                    <input id="logradouro" name="logradouro" type="text" class="form-control" style="width:84%;display:inline;" value="<?php echo $_POST['logradouro']; ?>">
                 </div>
                 <?php if(isset($_GET['logradouro'])){ ?>
                     <span class="alertErro">
@@ -433,6 +434,22 @@
             </div>
         </div>
     </div>
+    <div class="modal fade" id="map" role="dialog">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h5 class="modal-title">Mapa</h5>
+                </div>
+                <div class="modal-body">
+                    <div id="googleMap" style="width:100%;height:400px;"></div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" id="submitFormData" data-dismiss="modal">Confirmar</button>
+                </div>
+            </div>
+        </div>
+    </div>
     <script>
         function showResult(str, id_input) {
             var id = "livesearch"+id_input;
@@ -469,9 +486,13 @@
         }
 
         $(document).on("click", ".open-AddBookDialog", function () {
-            var pessoa_id = $(this).data('id');
-            $(".modal-body #id_pessoa").val( pessoa_id );
-            $('#pessoasModal').modal('show');
+            var element_id = $(this).data('id');
+            if(element_id == 'map'){
+                $('#map').modal('show');  
+            }else{
+                $(".modal-body #id_pessoa").val( element_id );
+                $('#pessoasModal').modal('show');
+            }
         });
 
         //POST pessoa
@@ -518,6 +539,30 @@
             xmlhttp.open("GET","processa_cadastrar_pessoa.php?nome_pessoa="+nome_pessoa+"&email_pessoa="+email_pessoa+"&telefone_pessoa="+telefone_pessoa+"&cpf_pessoa="+cpf_pessoa+"&outros_documento="+outros_documentos,true);
             xmlhttp.send();
         }
+        function myMap() {
+            var myLatLng = {lat: -26.9939744, lng: -48.6542015};
+
+            var mapProp= {
+                center:myLatLng,
+                zoom:15
+            };
+
+            var map = new google.maps.Map(document.getElementById("googleMap"),mapProp);
+
+            var marker = new google.maps.Marker({
+                position: myLatLng,
+                map: map
+            });
+
+            google.maps.event.addListener(map, 'click', function(event) {
+                $("#latitude").val(event.latLng.lat());
+                $("#longitude").val(event.latLng.lng());
+                myLatLng = {lat: event.latLng.lat(), lng: event.latLng.lng()}
+                marker.setPosition(myLatLng);
+            });
+        }
     </script>
 </div>
 </div>
+
+

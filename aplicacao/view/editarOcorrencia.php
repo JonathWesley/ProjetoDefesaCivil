@@ -11,8 +11,9 @@
             <?php } ?>
             <div>
                 Endereço principal: <span style="color:red;">*</span>
+                <br>
                 <label for="endereco_principal"></label>
-                <select name="endereco_principal" class="form-control" ng-model="sel_endereco" ng-init="sel_endereco='<?php echo $_POST['endereco_principal']; ?>'" required>
+                <select name="endereco_principal" class="form-control" style="width:30%;display:inline;" ng-model="sel_endereco" ng-init="sel_endereco='<?php echo $_POST['endereco_principal']; ?>'" required>
                     <option value="Coordenada">Coordenada</option>
                     <option value="Logradouro">Logradouro</option>
                 </select>
@@ -25,17 +26,16 @@
             <div ng-show="sel_endereco == 'Coordenada'">
                 <div>
                     Longitude: <span style="color:red;">*</span>
-                    <input name="longitude" type="text" class="form-control" value="<?php echo $_POST['longitude']; ?>">
+                    <span style="position:relative;left:19%;">Latitude: <span style="color:red;">*</span></span>
+                    <br>
+                    <input name="longitude" type="text" class="form-control" style="width:30%;display:inline;"  value="<?php echo $_POST['longitude']; ?>">
+                    <input name="latitude" type="text" class="form-control" style="width:30%;display:inline;"  value="<?php echo $_POST['latitude']; ?>">
                 </div>
                 <?php if(isset($_GET['longitude'])){ ?>
                     <span class="alertErro">
                         Longitude informada incorretamente.
                     </span>
                 <?php } ?>
-                <div>
-                    Latitude: <span style="color:red;">*</span>
-                    <input name="latitude" type="text" class="form-control" value="<?php echo $_POST['latitude']; ?>">
-                </div>
                 <?php if(isset($_GET['latitude'])){ ?>
                     <span class="alertErro">
                         Latitude informada incorretamente.
@@ -44,12 +44,11 @@
             </div>
             <div ng-show="sel_endereco == 'Logradouro'">
                 <div>
-                    CEP:
-                    <input id="cep" name="cep" type="text" class="form-control" ng-model="cep" ng-init="cep='<?php echo $_POST['cep']; ?>'">
-                </div>
-                <div>
-                    Logradouro: <span style="color:red;">*</span>
-                    <input id="logradouro" name="logradouro" type="text" class="form-control" value="<?php echo $_POST['logradouro']; ?>">
+                    <span>CEP:</span> 
+                    <span style="position:relative;left:11%">Logradouro: <span style="color:red;">*</span></span> 
+                    <br>
+                    <input id="cep" name="cep" type="text" class="form-control" style="width:15%;display:inline;" ng-model="cep" ng-init="cep='<?php echo $_POST['cep']; ?>'">
+                    <input id="logradouro" name="logradouro" type="text" class="form-control" style="width:84%;display:inline;" value="<?php echo $_POST['logradouro']; ?>">
                 </div>
                 <?php if(isset($_GET['logradouro'])){ ?>
                     <span class="alertErro">
@@ -57,20 +56,18 @@
                     </span>
                 <?php } ?>
                 <div>
-                    Número:
-                    <input id="complemento" name="complemento" type="text" class="form-control" value="<?php echo $_POST['numero']; ?>">
+                    <span>Número: </span> <span style="color:red;">*</span>
+                    <span style="position:relative;left:25%">Bairro: <span style="color:red;">*</span></span> 
+                    <br>
+                    <input id="complemento" name="complemento" type="text" class="form-control" style="width:35%;display:inline;" value="<?php echo $_POST['numero']; ?>">
+                    <input id="bairro" name="bairro" type="text" class="form-control" style="width:64%;display:inline;" value="<?php echo $_POST['bairro']; ?>">
                 </div>
                 <div>
-                    Bairro:
-                    <input id="bairro" name="bairro" type="text" class="form-control" value="<?php echo $_POST['bairro']; ?>">
-                </div>
-                <div>
-                    Cidade:
-                    <input id="cidade" name="cidade" type="text" class="form-control" value="<?php echo $_POST['cidade']; ?>">
-                </div>
-                <div>
-                    Referência:
-                    <input name="referencia" type="text" class="form-control" value="<?php echo $_POST['referencia']; ?>">
+                    <span>Cidade: </span> <span style="color:red;">*</span>
+                    <span style="position:relative;left:32%">Referência: <span style="color:red;">*</span></span>
+                    <br>
+                    <input id="cidade" name="cidade" type="text" class="form-control" style="width:40%;display:inline;" value="<?php echo $_POST['cidade']; ?>">
+                    <input name="referencia" type="text" class="form-control" style="width:59%;display:inline;" value="<?php echo $_POST['referencia']; ?>">
                 </div>
             </div>
         </div>
@@ -108,8 +105,11 @@
         </div>
         <div class="box">
             <div>
-                Data de lançamento: <span style="color:red;">*</span>
-                <input name="data_lancamento" type="date" placeholder="DD/MM/YYYY" class="form-control" value="<?php echo $_POST['data_lancamento']; ?>" required>
+                <span>Data de lançamento: <span style="color:red;">*</span></span>
+                <span style="position:relative;left:10%">Data de ocorrência: <span style="color:red;">*</span></span>
+                <br>
+                <input name="data_lancamento" type="date" class="form-control" style="width:30%;display:inline;" value="<?php echo $_POST['data_lancamento']; ?>" required>
+                <input name="data_ocorrencia" type="date" class="form-control" style="width:30%;display:inline;" value="<?php echo $_POST['data_ocorrencia']; ?>" required>
             </div>
             <?php if(isset($_GET['data_lancamento'])){ ?>
                 <span class="alertErro">
@@ -121,10 +121,6 @@
                         Data de lançamento não pode ser maior que a data da ocorrência.
                     </span>
                 <?php } ?>
-            <div>
-                Data de ocorrência: <span style="color:red;">*</span>
-                <input name="data_ocorrencia" type="date" placeholder="DD/MM/YYYY" class="form-control" value="<?php echo $_POST['data_ocorrencia']; ?>" required>
-            </div>
             <?php if(isset($_GET['data_ocorrencia'])){ ?>
                 <span class="alertErro">
                     Data incorreta.
@@ -144,7 +140,7 @@
             <div>
                 Pessoa atendida 1:
                 <br>
-                <input id="pessoa_atendida_1" name="pessoa_atendida_1" type="text" class="form-control inline"  value="<?php echo $_POST['pessoa1']; ?>" onkeyup="showResult(this.value,this.id)">
+                <input id="pessoa_atendida_1" name="pessoa_atendida_1" type="text" class="form-control inline" style="width:93%;" value="<?php echo $_POST['pessoa1']; ?>" onkeyup="showResult(this.value,this.id)">
                 <button type="button" class="btn-default btn-small inline" data-toggle="modal" data-target="#pessoasModal"><span class="glyphicon glyphicon-plus"></span></button>
                 <div class="autocomplete" id="livesearchpessoa_atendida_1"></div>
                 <div id="resultpessoa_atendida_1"></div>
@@ -157,7 +153,7 @@
             <div>
                 Pessoa atendida 2:
                 <br>
-                <input id="pessoa_atendida_2" name="pessoa_atendida_2" type="text" class="form-control inline" value="<?php echo $_POST['pessoa2']; ?>" onkeyup="showResult(this.value,this.id)">
+                <input id="pessoa_atendida_2" name="pessoa_atendida_2" type="text" class="form-control inline" style="width:93%;" value="<?php echo $_POST['pessoa2']; ?>" onkeyup="showResult(this.value,this.id)">
                 <button type="button" class="btn-default btn-small inline open-AddBookDialog" data-toggle="modal" data-id="pessoa_atendida_2"><span class="glyphicon glyphicon-plus"></span></button>
                 <div class="autocomplete" id="livesearchpessoa_atendida_2"></div>
                 <div id="resultpessoa_atendida_2"></div>
@@ -178,13 +174,13 @@
                 <?php } ?>
                 <div class="cobrade">
                     Categoria: <span style="color:red;">*</span><br>
-                    <select name="cobrade_categoria" class="form-control" ng-model="categoria" ng-init="categoria='<?php echo substr($_POST['ocorr_cobrade'],0,1); ?>'">
+                    <select name="cobrade_categoria" class="form-control" style="width:50%;" ng-model="categoria" ng-init="categoria='<?php echo substr($_POST['ocorr_cobrade'],0,1); ?>'">
                         <option value="1">Naturais</option>
                         <option value="2">Tecnológicos</option>
                         <option value="0">Não Listado</option>
                     </select>
                     Grupo: <span style="color:red;" ng-hide="categoria == 0">*</span><br>
-                    <select name="cobrade_grupo" class="form-control" ng-model="grupo" ng-disabled="categoria == 0" ng-init="grupo='<?php echo substr($_POST['ocorr_cobrade'],1,1); ?>'">
+                    <select name="cobrade_grupo" class="form-control" style="width:50%;" ng-model="grupo" ng-disabled="categoria == 0" ng-init="grupo='<?php echo substr($_POST['ocorr_cobrade'],1,1); ?>'">
                         <option ng-if="categoria==1" value="1">Geológico</option>
                         <option ng-if="categoria==1" value="2">Hidrológico</option>
                         <option ng-if="categoria==1" value="3">Meteorológico</option>
@@ -197,7 +193,7 @@
                         <option ng-if="categoria==2" value="5">Desastres relacionados a transporte de passageiros e cargas não perigosas</option>
                     </select>
                     Subgrupo: <span style="color:red;" ng-hide="grupo == 0">*</span><br>
-                    <select name="cobrade_subgrupo" class="form-control" ng-model="subgrupo" ng-disabled="grupo == 0" ng-init="subgrupo='<?php echo substr($_POST['ocorr_cobrade'],2,1); ?>'">
+                    <select name="cobrade_subgrupo" class="form-control" style="width:50%;" ng-model="subgrupo" ng-disabled="grupo == 0" ng-init="subgrupo='<?php echo substr($_POST['ocorr_cobrade'],2,1); ?>'">
                         <option ng-if="grupo==1&&categoria==1" value="1">Terremoto</option>
                         <option ng-if="grupo==1&&categoria==1" value="2">Emanação vulcânica</option>
                         <option ng-if="grupo==1&&categoria==1" value="3">Movimento de massa</option>
@@ -228,7 +224,7 @@
                         <option ng-if="grupo==5&&categoria==2" value="5">Transporte aquaviário</option>
                     </select>
                     Tipo: <span style="color:red;" ng-hide="subgrupo == 0">*</span><br>
-                    <select name="cobrade_tipo" class="form-control" ng-model="tipo" ng-disabled="subgrupo==0" ng-init="tipo='<?php echo substr($_POST['ocorr_cobrade'],3,1); ?>'">
+                    <select name="cobrade_tipo" class="form-control" style="width:50%;" ng-model="tipo" ng-disabled="subgrupo==0" ng-init="tipo='<?php echo substr($_POST['ocorr_cobrade'],3,1); ?>'">
                         <option ng-if="subgrupo==1&&grupo==1&&categoria==1" value="1">Tremor de terra</option>
                         <option ng-if="subgrupo==1&&grupo==1&&categoria==1" value="2">Tsunami</option>
                         <option ng-if="subgrupo==2&&grupo==1&&categoria==1" value="0"></option>
@@ -275,7 +271,7 @@
                         <option ng-if="grupo==5&&categoria==2" value="0"></option>
                     </select>
                     Subtipo: <span style="color:red;" ng-hide="tipo==0 || categoria==2">*</span><br>
-                    <select name="cobrade_subtipo" class="form-control" ng-model="subtipo" ng-disabled="tipo==0 || categoria==2" ng-init="subtipo='<?php echo substr($_POST['ocorr_cobrade'],4,1); ?>'">
+                    <select name="cobrade_subtipo" class="form-control" style="width:50%;" ng-model="subtipo" ng-disabled="tipo==0 || categoria==2" ng-init="subtipo='<?php echo substr($_POST['ocorr_cobrade'],4,1); ?>'">
                         <option ng-if="subgrupo==1&&grupo==1&&categoria==1" value="0"></option>
                         <option ng-if="subgrupo==2&&grupo==1&&categoria==1" value="0"></option>
                         <option ng-if="tipo==1&&subgrupo==3&&grupo==1&&categoria==1" value="1">Blocos</option>
@@ -343,7 +339,7 @@
                 <div>
                     Prioridade: <span style="color:red;">*</span>
                     <label for="prioridade"></label>
-                    <select name="prioridade" class="form-control" onchange="analisar()" required ng-model="prioridade" ng-init="prioridade='<?php echo $_POST['prioridade']; ?>'">
+                    <select name="prioridade" class="form-control" onchange="analisar()" style="width:30%;" required ng-model="prioridade" ng-init="prioridade='<?php echo $_POST['prioridade']; ?>'">
                         <option value="Baixa">Baixa</option>
                         <option value="Média">Média</option>
                         <option value="Alta">Alta</option>
@@ -354,38 +350,34 @@
                         Prioridade informada incorretamente.
                     </span><br>
                 <?php } ?>
-                Analisado: <span style="color:red;">*</span>
+                <span>Analisado: <span style="color:red;">*</span></span>
+                <span style="position:relative;left:14%">Congelado: <span style="color:red;">*</span></span>
+                <span style="position:relative;left:28%">Encerrado: <span style="color:red;">*</span></span>
                 <br>
-                <nav>
+                <div style="display:inline;">
                     <label class="radio-inline">
                         <input type="radio" value="true" id="analisado" name="analisado" <?php echo ($_POST['analisado'] == t) ? 'checked':''; ?>>Sim
                     </label>
                     <label class="radio-inline">
                         <input type="radio" value="false" id="analisado" name="analisado" <?php echo ($_POST['analisado'] == t) ? '':'checked'; ?>>Não
                     </label>
-                </nav>
-                <br>
-                Congelado: <span style="color:red;">*</span>
-                <br>
-                <nav>
+                </div>
+                <div style="display:inline;position:relative;left:10%;">
                     <label class="radio-inline">
                         <input type="radio" value="true" name="congelado" <?php echo ($_POST['congelado'] == t) ? 'checked':''; ?>>Sim
                     </label>
                     <label class="radio-inline">
                         <input type="radio" value="false" name="congelado" <?php echo ($_POST['congelado'] == t) ? '':'checked'; ?>>Não
                     </label>
-                </nav>
-                <br>
-                Encerrado: <span style="color:red;">*</span>
-                <br>
-                <nav>
+                </div>
+                <div style="display:inline;position:relative;left:20%;">
                     <label class="radio-inline">
                         <input type="radio" value="true" name="encerrado" <?php echo ($_POST['encerrado'] == t) ? 'checked':''; ?>>Sim
                     </label>
                     <label class="radio-inline">
                         <input type="radio" value="false" name="encerrado" <?php echo ($_POST['encerrado'] == t) ? '':'checked'; ?>>Não
                     </label>
-                </nav>
+                </div>
             <?php }else{ ?>
                 <p>Status</p>
                 <nav>
