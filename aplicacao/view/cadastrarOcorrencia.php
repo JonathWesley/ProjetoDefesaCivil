@@ -488,7 +488,13 @@
         $(document).on("click", ".open-AddBookDialog", function () {
             var element_id = $(this).data('id');
             if(element_id == 'map'){
-                $('#map').modal('show');  
+                if (navigator.geolocation) {
+                    navigator.geolocation.getCurrentPosition(myMap);
+                    $('#map').modal('show');  
+                } else {
+                    $('#map').modal('show');
+                }
+                
             }else{
                 $(".modal-body #id_pessoa").val( element_id );
                 $('#pessoasModal').modal('show');
@@ -539,8 +545,13 @@
             xmlhttp.open("GET","processa_cadastrar_pessoa.php?nome_pessoa="+nome_pessoa+"&email_pessoa="+email_pessoa+"&telefone_pessoa="+telefone_pessoa+"&cpf_pessoa="+cpf_pessoa+"&outros_documento="+outros_documentos,true);
             xmlhttp.send();
         }
-        function myMap() {
-            var myLatLng = {lat: -26.9939744, lng: -48.6542015};
+
+
+        function myMap(position) {
+            if(position)
+                var myLatLng = {lat: position.coords.latitude, lng: position.coords.longitude};
+            else
+                var myLatLng = {lat: -26.9939744, lng: -48.6542015};
 
             var mapProp= {
                 center:myLatLng,

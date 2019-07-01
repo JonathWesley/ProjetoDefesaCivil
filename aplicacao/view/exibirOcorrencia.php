@@ -85,6 +85,9 @@
             <nav>
                 Longitude: <span id="longitude" ><?php echo $linhaOcorrencia['ocorr_coordenada_longitude']; ?></span>
             </nav>
+            <nav>
+                <button type="button" class="btn-default btn-small inline open-AddBookDialog" data-toggle="modal" data-id="map"><span class="glyphicon glyphicon-map-marker"></span></button>
+            </nav>
         </div>
     </div>
     <div class="box">
@@ -182,6 +185,22 @@
             <?php } ?>
         </nav>
     </div>
+    <div class="modal fade" id="map" role="dialog">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h5 class="modal-title">Mapa</h5>
+                </div>
+                <div class="modal-body">
+                    <div id="googleMap" style="width:100%;height:400px;"></div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" id="submitFormData" data-dismiss="modal">Confirmar</button>
+                </div>
+            </div>
+        </div>
+    </div>
     <?php if($linhaOcorrencia['ativo']== t){ ?>
     <form action="index.php?pagina=editarOcorrencia" method="post">
         <input name="id_ocorrencia" type="hidden" value="<?php echo $id_ocorrencia; ?>">
@@ -214,5 +233,33 @@
         <input type="submit" class="btn btn-default btn-md" value="Editar">
     </form>
     <?php } ?>
+
+    <script>
+        $(document).on("click", ".open-AddBookDialog", function () {
+            var lat = $('#latitude').html();
+            var lng = $('#longitude').html();
+            myMap(parseFloat(lat), parseFloat(lng));
+            $('#map').modal('show');
+        });
+        -48.66979160740965;-26.92771620007775
+        function myMap(lati, lngi) {
+            if(lati)
+                var myLatLng = {lat: lati, lng: lngi};
+            else
+                var myLatLng = {lat: -26.9939744, lng: -48.6542015};
+
+            var mapProp = {
+                center:myLatLng,
+                zoom:15
+            };
+
+            var map = new google.maps.Map(document.getElementById("googleMap"),mapProp);
+
+            var marker = new google.maps.Marker({
+                position: myLatLng,
+                map: map
+            });
+        }
+    </script>
 </div>
 </div>
