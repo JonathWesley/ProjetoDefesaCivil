@@ -445,7 +445,7 @@
                     <div id="googleMap" style="width:100%;height:400px;"></div>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" id="submitFormData" data-dismiss="modal">Confirmar</button>
+                    <button type="button" id="submitFormData" onclick="SubmitFormData()" data-dismiss="modal">Confirmar</button>
                 </div>
             </div>
         </div>

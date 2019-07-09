@@ -14,13 +14,9 @@
             <?php } ?>
             <div>
                 Nome completo: <span style="color:red;">*</span>
-                <input id="nome" name="nome" type="text" class="form-control" ng-model="nome_completo" required>
+                <input id="nome" name="nome" type="text" class="form-control" ng-model="nome_completo" required onchange="verificaNome()">
             </div>
-            <?php if(isset($_GET['nome'])){ ?>
-                <span class="alertErro">
-                    Nome inválido.
-                </span>
-            <?php } ?>
+            <span id="erroNome" class="alertErro hide">Nome inválido.</span>
             <div>
                 <span>CPF: <span style="color:red;">*</span></span>
                 <span style="position:relative;left:29%;">Telefone: <span style="color:red;">*</span></span>

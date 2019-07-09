@@ -82,12 +82,10 @@
             <nav>
                 Latitude: <span id="latitude" ><?php echo $linhaOcorrencia['ocorr_coordenada_latitude']; ?></span>
             </nav>
-            <nav>
+            <nav class="inline">
                 Longitude: <span id="longitude" ><?php echo $linhaOcorrencia['ocorr_coordenada_longitude']; ?></span>
             </nav>
-            <nav>
-                <button type="button" class="btn-default btn-small inline open-AddBookDialog" data-toggle="modal" data-id="map"><span class="glyphicon glyphicon-map-marker"></span></button>
-            </nav>
+            <button type="button" class="btn-default btn-small inline open-AddBookDialog" style="position:relative;left:5%" data-toggle="modal" data-id="map"><span class="glyphicon glyphicon-map-marker"></span></button>
         </div>
     </div>
     <div class="box">
@@ -241,7 +239,7 @@
             myMap(parseFloat(lat), parseFloat(lng));
             $('#map').modal('show');
         });
-        -48.66979160740965;-26.92771620007775
+
         function myMap(lati, lngi) {
             if(lati)
                 var myLatLng = {lat: lati, lng: lngi};

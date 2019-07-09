@@ -104,6 +104,10 @@ div h4{
     display: inline-block;
 }
 
+.hide{
+    display: none;
+}
+
 .alertErro{
     color:#f22a1f;
     font-size:14px;
