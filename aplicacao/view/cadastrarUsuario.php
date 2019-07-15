@@ -1,6 +1,6 @@
 <div class="container positioning">
 <div class="jumbotron campo_cadastro">
-    <form method="post" action="processa_cadastrar_usuario.php" enctype="multipart/form-data">
+    <form method="post" action="processa_cadastrar_usuario.php" enctype="multipart/form-data" onsubmit="return validarFormCadastroUsuario()">
         <div class="box">
             <?php if(isset($_GET['sucesso'])){ ?>
                 <div class="alert alert-success" role="alert">
@@ -14,26 +14,18 @@
             <?php } ?>
             <div>
                 Nome completo: <span style="color:red;">*</span>
-                <input id="nome" name="nome" type="text" class="form-control" ng-model="nome_completo" required onchange="verificaNome()">
+                <input id="nome" name="nome" type="text" class="form-control" ng-model="nome_completo" required onchange="verificaNome(this.value)">
             </div>
             <span id="erroNome" class="alertErro hide">Nome inválido.</span>
             <div>
                 <span>CPF: <span style="color:red;">*</span></span>
                 <span style="position:relative;left:29%;">Telefone: <span style="color:red;">*</span></span>
                 <br>
-                <input id="cpf" name="cpf" type="text" class="form-control" style="width:35%;display:inline;" maxlength="11" required>
-                <input id="telefone" name="telefone" type="text" class="form-control" style="width:35%;display:inline;" maxlength="11" required>
+                <input id="cpf" name="cpf" type="text" class="form-control" style="width:35%;display:inline;" maxlength="11" required onchange="verificaCpf(this.value)">
+                <input id="telefone" name="telefone" type="text" class="form-control" style="width:35%;display:inline;" maxlength="11" required onchange="verificaTelefone(this.value)">
             </div>
-            <?php if(isset($_GET['cpf'])){ ?>
-                <span class="alertErro">
-                    CPF inválido.
-                </span>
-            <?php } ?>
-            <?php if(isset($_GET['telefone'])){ ?>
-                <span class="alertErro">
-                    Telefone inválido.
-                </span>
-            <?php } ?>
+            <span id="erroCpf" class="alertErro hide">CPF inválido.</span>
+            <span id="erroTelefone" class="alertErro hide">Telefone inválido.</span>
         </div>
         <div class="box">
             <div class="form-group">
@@ -49,29 +41,19 @@
         <div class="box">
             <div>
                 Email: <span style="color:red;">*</span>
-                <input name="email_cadastro" type="email" class="form-control" required>
+                <input name="email_cadastro" type="email" class="form-control" required onchange="verificaEmail(this.value)">
             </div>
-            <?php if(isset($_GET['email'])){ ?>
-                <span class="alertErro">
-                    Email inválido.
-                </span>
-            <?php } ?>
+            <span id="erroEmail" class="alertErro hide">Email inválido.</span>
             <div>
                 <span>Senha: <span style="color:red;">*</span></span>
                 <span style="position:relative;left:42%;">Confirmar Senha: <span style="color:red;">*</span></span>
                 <br>
-                <input name="senha_cadastro" type="password" class="form-control" style="width:50%;display:inline;" required>
-                <input name="senha_cadastro_confirma" type="password" class="form-control" style="width:49%;display:inline;" required>
-                <?php if(isset($_GET['senha'])){ ?>
-                    <span class="alertErro">
-                        Senha inválida. Senha deve possuir no mínimo 6 caracteres, 1 letra minuscula, 1 letra maiuscula e 1 número.
-                    </span>
-                <?php } ?>
-                <?php if(isset($_GET['confirma_senha'])){ ?>
-                    <span class="alertErro">
-                        Senhas diferentes.
-                    </span>
-                <?php } ?>
+                <input id="senha" name="senha_cadastro" type="password" class="form-control" style="width:50%;display:inline;" required onchange="verificaSenha(this.value)">
+                <input id="senha_confirma" name="senha_cadastro_confirma" type="password" class="form-control" style="width:49%;display:inline;" required onchange="verificaConfirmaSenha(this.value)">
+                <span id="erroSenha" class="alertErro hide">
+                        Senha inválida (Senha deve possuir no mínimo 6 caracteres, 1 letra minuscula, 1 letra maiuscula e 1 número).
+                </span>
+                <span id="erroConfirmaSenha" class="alertErro hide">Senhas diferentes.</span>
             </div>  
         </div>
         <div class="box">

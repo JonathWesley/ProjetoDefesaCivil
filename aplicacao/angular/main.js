@@ -31,16 +31,95 @@ $("#cep").focusout(function(){
     });	
 });
 
-function verificaNome(){
-    var texto = $("#nome").val();
+function verificaNome(texto){
     if(/^([a-zA-Z' ]+)$/.test(texto))
         $("#erroNome").addClass("hide");
     else
         $("#erroNome").removeClass("hide");
 }
 
-function verificaCpf(){
-    
+function verificaCpf(cpf){
+    var numeros, digitos, soma, i, resultado;
+    var digitos_iguais = true;
+    digitos_iguais = 1;
+    if(cpf.length < 11){
+        $("#erroCpf").removeClass("hide");
+        return;
+    }
+    for(i = 0; i < cpf.length - 1; i++){
+        if (cpf.charAt(i) != cpf.charAt(i + 1)){
+            digitos_iguais = false;
+            break;
+        }
+    }
+    if(!digitos_iguais){
+        numeros = cpf.substring(0,9);
+        digitos = cpf.substring(9);
+        soma = 0;
+        for (i = 10; i > 1; i--){
+            soma += numeros.charAt(10 - i) * i;
+        }
+        resultado = soma % 11 < 2 ? 0 : 11 - soma % 11;
+        if (resultado != digitos.charAt(0)){
+            $("#erroCpf").removeClass("hide");
+            return;
+        }
+        numeros = cpf.substring(0,10);
+        soma = 0;
+        for (i = 11; i > 1; i--){
+            soma += numeros.charAt(11 - i) * i;
+        }
+        resultado = soma % 11 < 2 ? 0 : 11 - soma % 11;
+        if (resultado != digitos.charAt(1)){
+            $("#erroCpf").removeClass("hide");
+            return;
+        }
+        $("#erroCpf").addClass("hide");
+        return;
+    }else{
+        $("#erroCpf").removeClass("hide");
+        return;
+    }
+}
+
+function verificaTelefone(telefone){
+    if(/^[0-9]{11}$/.test(telefone))
+        $("#erroTelefone").addClass("hide");
+    else
+        $("#erroTelefone").removeClass("hide");
+}
+
+function verificaEmail(email){
+    if(/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(email))
+        $("#erroEmail").addClass("hide");
+    else
+        $("#erroEmail").removeClass("hide");
+}
+
+function verificaSenha(senha){
+    if(!/^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.{6,})/.test(senha)){
+        $("#erroSenha").removeClass("hide");
+    }else{
+        $("#erroSenha").addClass("hide");
+    }
+}
+
+function verificaConfirmaSenha(confirmaSenha){
+    senha = $("#senha").val();
+    if(senha != confirmaSenha){
+        $("#erroConfirmaSenha").removeClass("hide");
+    }else{
+        $("#erroConfirmaSenha").addClass("hide");
+    }
+}
+
+function validarFormCadastroUsuario(){
+    if(!$("#erroNome").hasClass("hide") || !$("#erroCpf").hasClass("hide") || !$("#erroTelefone").hasClass("hide")
+        || !$("#erroEmail").hasClass("hide") || !$("#erroSenha").hasClass("hide") || !$("#erroConfirmaSenha").hasClass("hide")){
+        
+        alert("Existe campo(s) infomado(s) incorretamente.");
+        return false;
+    }
 }
 
 //ordenar tabela de ocorrencias
@@ -97,4 +176,85 @@ function sortTable(n) {
             }
         }
     }
+}
+
+function showResult(str, id_input) {
+    var id = "livesearch"+id_input;
+    if (str.length==0) { 
+        document.getElementById(id).innerHTML="";
+        document.getElementById(id).style.border="0px";
+        return;
+    }
+    if (window.XMLHttpRequest) {
+        // code for IE7+, Firefox, Chrome, Opera, Safari
+        xmlhttp=new XMLHttpRequest();
+    } else {  // code for IE6, IE5
+        xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+    }
+    xmlhttp.onreadystatechange=function() {
+        if (this.readyState==4 && this.status==200) {
+            document.getElementById(id).innerHTML=this.responseText;
+            document.getElementById(id).style.border="1px solid #A5ACB2";
+        }
+    }
+    xmlhttp.open("GET","livesearch.php?q="+str+"&id="+id_input,true);
+    xmlhttp.send();
+}
+
+function selecionaComplete(value, id_input){
+    var id = "livesearch"+id_input;
+    document.getElementById(id_input).value = value;
+    document.getElementById(id).innerHTML="";
+    document.getElementById(id).style.border="0px";
+}
+
+$(document).on("click", ".open-AddBookDialog", function () {
+    var pessoa_id = $(this).data('id');
+    $(".modal-body #id_pessoa").val( pessoa_id );
+    $('#pessoasModal').modal('show');
+});
+
+//POST pessoa
+var input = document.getElementById("submitFormData");
+// Execute a function when the user releases a key on the keyboard
+input.addEventListener("keydown", function(event) {
+// Number 13 is the "Enter" key on the keyboard
+if (event.keyCode === 13) {
+    // Cancel the default action, if needed
+    event.preventDefault();
+    // Trigger the button element with a click
+    document.getElementById("submitFormData").click();
+}
+});
+
+function SubmitFormData() {
+    var id_input = $("#id_pessoa").val();
+    var nome_pessoa = $("#nome_pessoa").val();
+    var email_pessoa = $("#email_pessoa").val();
+    var telefone_pessoa = $("#telefone_pessoa").val();
+    var cpf_pessoa = $("#cpf_pessoa").val();
+    var outros_documentos = $("#outros_documentos").val();
+
+    var id="result"+id_input;
+    
+    //$.post("processa_cadastrar_pessoa.php", { nome_pessoa: nome_pessoa, email_pessoa: email_pessoa,
+    //    telefone_pessoa: telefone_pessoa, cpf_pessoa: cpf_pessoa, outros_documentos:outros_documentos, nome_salvar: nome_pessoa });
+    if (window.XMLHttpRequest) {
+        // code for IE7+, Firefox, Chrome, Opera, Safari
+        xmlhttp=new XMLHttpRequest();
+    } else {  // code for IE6, IE5
+        xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+    }
+    xmlhttp.onreadystatechange=function() {
+        if (this.readyState==4 && this.status==200) {
+            document.getElementById(id).innerHTML=this.responseText;
+            if(this.responseText == 'Pessoa cadastrado com sucesso'){
+                document.getElementById(id).style.color="#00FF00";
+                document.getElementById(id_input).value = nome_pessoa;
+            }else
+                document.getElementById(id).style.color="#FF0000";
+        }
+    }
+    xmlhttp.open("GET","processa_cadastrar_pessoa.php?nome_pessoa="+nome_pessoa+"&email_pessoa="+email_pessoa+"&telefone_pessoa="+telefone_pessoa+"&cpf_pessoa="+cpf_pessoa+"&outros_documento="+outros_documentos,true);
+    xmlhttp.send();
 }
