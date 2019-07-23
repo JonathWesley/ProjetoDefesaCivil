@@ -23,9 +23,14 @@
     // Set output to "no suggestion" if no hint was found
     // or to the correct values
     if ($hint=="") {
-    $response="Usuário não encontrado.";
+        if(substr($_GET['id'],0,1) == "a"){
+            $response="Usuário não encontrado.";
+        }else{
+            $response="Pessoa não encontrada.";
+        }
+        
     } else {
-    $response=$hint;
+        $response=$hint;
     }
 
     //output the response

@@ -103,7 +103,7 @@
                         echo '#fff050;">';
                     else
                         echo '#88ff50;">';
-                    echo '<td><a href="index.php?pagina=exibirOcorrencia&id='.$linha['id_ocorrencia'].'"><span class="glyphicon glyphicon-fullscreen"></span></a></td>';
+                    echo '<td class="text-center"><a href="index.php?pagina=exibirOcorrencia&id='.$linha['id_ocorrencia'].'"><span class="glyphicon glyphicon-eye-open"></span></a></td>';
                     echo '<td>'.$linha['subgrupo'].'</td>';
                     echo '<td>'.$linha['nome_pessoa'].'</td>';
                     echo '<td>'.$linha['nome'].'</td>';

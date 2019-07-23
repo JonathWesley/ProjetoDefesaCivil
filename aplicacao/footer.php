@@ -10,7 +10,7 @@
     </div>
     </div>
     <!--<script src="angular/angular.js"></script>-->
-    <script src="angular/main.js"></script>
+    <script src="javascript/main.js"></script>
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAu6rNYe4C_omXFiKMY6DuCk6wgklzLInY&callback=myMap"></script>
 </body>
 </html>

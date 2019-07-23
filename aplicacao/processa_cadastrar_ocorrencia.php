@@ -65,12 +65,6 @@ if($cobrade_categoria == 0){
 		$erros = $erros.'&cobrade';
 }
 
-	
-
-//garante que o valor do endereço seja apenas igual a Logradouro ou Coordenada
-if($endereco_principal != "Logradouro" && $endereco_principal != "Coordenada")
-	$erros = $erros.'&endereco_principal';
-
 //seleciona o endereço no BD, caso ele nao exista entao cria um novo
 $logradouro_id = 'null';
 if($endereco_principal == "Logradouro"){
@@ -92,34 +86,13 @@ if($endereco_principal == "Logradouro"){
 
 	$longitude = 'null';
 	$latitude = 'null';
-}else{ //valida os dados de latitude e longitude
-	if(!preg_match("/^[-+]?\d*\.?\d*$/", $longitude) || strlen($longitude) <= 0)
-		$erros = $erros.'&longitude';
-	if(!preg_match("/^[-+]?\d*\.?\d*$/", $latitude) || strlen($latitude) <= 0)
-		$erros = $erros.'&latitude';
 }
 
-//valida os dados dos agentes
-if(!preg_match("/^([a-zA-Z' ]+)$/",$agente_principal)) //aceita apenas letras e espaço em branco
-	$erros = $erros.'&agente_principal';
-if(!preg_match("/^([a-zA-Z' ]+)$/",$agente_apoio_1) && strlen($agente_apoio_1) > 0) //aceita apenas letras e espaço em branco
-	$erros = $erros.'&agente_apoio_1';
-if(!preg_match("/^([a-zA-Z' ]+)$/",$agente_apoio_2) && strlen($agente_apoio_2) > 0) //aceita apenas letras e espaço em branco
-	$erros = $erros.'&agente_apoio_2';
 if($ocorr_retorno == "true"){ //caso seja retorno de ocorrencia, verifica se nao esta vazio e soh aceita numeros
 	if(!preg_match("/^[0-9]$/", $ocorr_referencia) || strlen($ocorr_referencia) <= 0)
 		$erros = $erros.'&ocorr_referencia';
 }else //caso nao for retorno, seta a variavel como null
 	$ocorr_referencia = 'null';
-
-//valida as datas cadastradas
-$dataAtual = date('Y-m-d');
-if($data_lancamento > $dataAtual)
-	$erros = $erros.'&data_lancamento';
-if($data_ocorrencia > $dataAtual)
-	$erros = $erros.'&data_ocorrencia';
-if($data_ocorrencia > $data_lancamento)
-	$erros = $erros.'&data_ocorrencia_lancamento';
 
 //busca o agente informado no banco de dados
 $result = pg_query($connection, "SELECT * FROM usuario WHERE nome = '$agente_principal'");
@@ -193,9 +166,6 @@ if(strlen($chamado_id)==0)
 	$chamado_id = 'null';
 
 $dataAtual = date('Y-m-d H:i:s');
-
-if($prioridade != "Baixa" && $prioridade != "Média" && $prioridade != "Alta")
-	$erros = $erros.'&prioridade';
 
 //caso ocorra algum erro na validacao, entao volta para a pagina e indica onde esta o erro
 if(strlen($erros) > 0){

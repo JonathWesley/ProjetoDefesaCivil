@@ -1,21 +1,18 @@
 <div class="container positioning">
 <div class="jumbotron campo_cadastro">
-    <form method="post" action="processa_cadastrar_ocorrencia.php">
+    <form method="post" action="processa_cadastrar_ocorrencia.php" onsubmit="return validarFormCadastroOcorrencia()">
         <?php if(isset($_GET['sucesso'])){ ?>
-            <div class="alert alert-success" role="alert">
-                Ocorrencia cadastrada com sucesso.
-            </div>
-            <?php } ?>
-            <?php if(isset($_GET['erroDB'])){ ?>
-            <div class="alert alert-danger" role="alert">
-                Falha ao cadastrar ocorrencia.
-            </div>
+            <span class="alert alert-success" role="alert">Ocorrencia cadastrada com sucesso.</span>
+        <?php } ?>
+        <?php if(isset($_GET['erroDB'])){ ?>
+            <span class="alert alert-danger" role="alert">Falha ao cadastrar ocorrencia.</span>
         <?php } ?>
         <div class="box">
             <div>
                 Número do chamado:
-                <input name="id_chamado" type="text" class="form-control" style="width:25%;" value="<?php echo $_POST['id_chamado']; ?>">
+                <input name="id_chamado" type="text" class="form-control" style="width:25%;" value="<?php echo $_POST['id_chamado']; ?>" onchange="verificaNumeroChamado(this.value)">
             </div>
+            <span id="erroNumeroChamado" class="alertErro hide">Número inválido.</span>
         </div>
         <div class="box">
             <div>
@@ -27,43 +24,28 @@
                     <option value="Logradouro">Logradouro</option>
                 </select>
             </div>
-            <?php if(isset($_GET['endereco_principal'])){ ?>
-                <span class="alertErro">
-                    Opção de endereço desconhecida.
-                </span>
-            <?php } ?>
             <div ng-show="sel_endereco == 'Coordenada'">
                 <div>
                     <span>Longitude: <span style="color:red;">*</span></span> 
                     <span style="position:relative;left:19%;">Latitude: <span style="color:red;">*</span></span>
                     <br>
-                    <input id="longitude" name="longitude" type="text" class="form-control" style="width:30%;display:inline;" value="<?php echo $_POST['longitude']; ?>">
-                    <input id="latitude" name="latitude" type="text" class="form-control" style="width:30%;display:inline;" value="<?php echo $_POST['latitude']; ?>">
+                    <input id="longitude" name="longitude" type="text" class="form-control" style="width:30%;display:inline;" value="<?php echo $_POST['longitude']; ?>" onchange="verificaLatLgn()">
+                    <input id="latitude" name="latitude" type="text" class="form-control" style="width:30%;display:inline;" value="<?php echo $_POST['latitude']; ?>" onchange="verificaLatLgn()">
                     <button type="button" class="btn-default btn-small inline open-AddBookDialog" data-toggle="modal" data-id="map"><span class="glyphicon glyphicon-map-marker"></span></button>
-                <?php if(isset($_GET['longitude'])){ ?>
-                    <span class="alertErro">
-                        Longitude informada incorretamente.
-                    </span>
-                <?php } ?>
                 </div>
-                <?php if(isset($_GET['latitude'])){ ?>
-                    <span class="alertErro">
-                        Latitude informada incorretamente.
-                    </span>
-                <?php } ?>
+                <span id="erroLatLgn" class="alertErro hide">Latitude e/ou Longitude inválida(s).</span>
             </div>
             <div ng-show="sel_endereco == 'Logradouro'">
                 <div>
                     <span>CEP:</span> 
                     <span style="position:relative;left:11%">Logradouro: <span style="color:red;">*</span></span> 
                     <br>
-                    <input id="cep" name="cep" type="text" class="form-control" style="width:15%;display:inline;" ng-model="cep" ng-init="cep='<?php echo $_POST['cep']; ?>'">
+                    <input id="cep" name="cep" type="text" class="form-control" style="width:15%;display:inline;" ng-model="cep" ng-init="cep='<?php echo $_POST['cep']; ?>'" maxlength="8" onchange="verificaCep(this.value)">
                     <input id="logradouro" name="logradouro" type="text" class="form-control" style="width:84%;display:inline;" value="<?php echo $_POST['logradouro']; ?>">
                 </div>
+                <span id="erroCep" class="alertErro hide">CEP inválido.</span>
                 <?php if(isset($_GET['logradouro'])){ ?>
-                    <span class="alertErro">
-                        Logradouro informado incorretamente.
-                    </span>
+                    <span class="alertErro">Erro ao cadastrar logradouro.</span>
                 <?php } ?>
                 <div>
                     <span>Número: </span> <span style="color:red;">*</span>
@@ -88,19 +70,15 @@
                 <div class="autocomplete" id="livesearchagente_principal"></div>
             </div>
             <?php if(isset($_GET['agente_principal'])){ ?>
-                    <span class="alertErro">
-                        Agente não encontrado ou informado incorretamente.
-                    </span>
-                <?php } ?>
+                <span class="alertErro">Agente não encontrado.</span>
+            <?php } ?>
             <div>
                 Agente de apoio 1:
                 <input id="agente_apoio_1" name="agente_apoio_1" type="text" class="form-control" onkeyup="showResult(this.value,this.id)">
                 <div class="autocomplete" id="livesearchagente_apoio_1"></div>
             </div>
             <?php if(isset($_GET['agente_apoio_1'])){ ?>
-                <span class="alertErro">
-                    Agente não encontrado ou informado incorretamente.
-                </span>
+                <span class="alertErro">Agente não encontrado.</span>
             <?php } ?>
             <div>
                 Agente de apoio 2:
@@ -108,9 +86,7 @@
                 <div class="autocomplete" id="livesearchagente_apoio_2"></div>
             </div>
             <?php if(isset($_GET['agente_apoio_2'])){ ?>
-                <span class="alertErro">
-                    Agente não encontrado ou informado incorretamente.
-                </span>
+                <span class="alertErro">Agente não encontrado.</span>
             <?php } ?>
         </div>
         <div class="box">
@@ -118,24 +94,10 @@
                 <span>Data de lançamento: <span style="color:red;">*</span></span>
                 <span style="position:relative;left:10%">Data de ocorrência: <span style="color:red;">*</span></span>
                 <br>
-                <input name="data_lancamento" type="date" class="form-control" style="width:30%;display:inline;" value="<?php echo date('Y-m-d');?>" required>
-                <input id="data" name="data_ocorrencia" type="date" class="form-control" style="width:30%;display:inline;" value="<?php echo $_POST['data_ocorrencia']; ?>" required>
-            <?php if(isset($_GET['data_lancamento'])){ ?>
-                <span class="alertErro">
-                    Data incorreta.
-                </span>
-            <?php } ?>
-            <?php if(isset($_GET['data_ocorrencia_lancamento'])){ ?>
-                    <span class="alertErro">
-                        Data de lançamento não pode ser maior que a data da ocorrência.
-                    </span>
-                <?php } ?>
+                <input id="data_lancamento" name="data_lancamento" type="date" class="form-control" style="width:30%;display:inline;" value="<?php echo date('Y-m-d');?>" max="<?php echo date('Y-m-d'); ?>" required onchange="verificaData()">
+                <input id="data_ocorrencia" name="data_ocorrencia" type="date" class="form-control" style="width:30%;display:inline;" value="<?php echo $_POST['data_ocorrencia']; ?>" max="<?php echo date('Y-m-d'); ?>" required onchange="verificaData()">
             </div>
-            <?php if(isset($_GET['data_ocorrencia'])){ ?>
-                <span class="alertErro">
-                    Data incorreta.
-                </span>
-            <?php } ?>
+            <span id="erroData" class="alertErro hide">Data de lançamento inválida.</span>
             <div>
                 Descrição:
                 <textarea id="descricao" name="descricao" class="form-control" cols="30" rows="2" maxlength = "100" ng-model="descricaoVal" ng-init="descricaoVal='<?php echo $_POST['descricao']; ?>'"></textarea>
@@ -156,9 +118,7 @@
                 <div id="resultpessoa_atendida_1"></div>
             </div>
             <?php if(isset($_GET['pessoa_atendida_1'])){ ?>
-                <span class="alertErro">
-                    Pessoa não encontrada ou informada incorretamente.
-                </span>
+                <span class="alertErro">Pessoa não encontrada, por favor faça um novo cadastro.</span>
             <?php } ?>
             <div>
                 Pessoa atendida 2:
@@ -169,9 +129,7 @@
                 <div id="resultpessoa_atendida_2"></div>
             </div>
             <?php if(isset($_GET['pessoa_atendida_2'])){ ?>
-                <span class="alertErro">
-                    Pessoa não encontrada ou informada incorretamente.
-                </span>
+                <span class="alertErro">Pessoa não encontrada, por favor faça um novo cadastro.</span>
             <?php } ?>
         </div>
         <div class="box">
@@ -332,15 +290,15 @@
             <br>
             <nav>
                 <label class="radio-inline">
-                    <input type="radio" value="true" name="possui_fotos">Sim
+                    <input type="radio" ng-model="fotos" ng-value="true" value="true" name="possui_fotos">Sim
                 </label>
                 <label class="radio-inline">
-                    <input type="radio" value="false" name="possui_fotos" checked>Não
+                    <input type="radio" ng-model="fotos" ng-value="false" value="false" name="possui_fotos" checked>Não
                 </label>
             </nav>
             <br>
             <div>
-                Fotos:
+                Fotos: <span style="color:red;" ng-show="fotos == true">*</span>
                 <input type="file" accept="image/png, image/jpeg">
             </div>
         </div>
@@ -355,11 +313,6 @@
                     <option value="Alta">Alta</option>
                 </select>
             </div>
-            <?php if(isset($_GET['prioridade'])){ ?>
-                <span class="alertErro">
-                    Prioridade informada incorretamente.
-                </span><br>
-            <?php } ?>
             <span>Analisado: <span style="color:red;">*</span></span>
             <span style="position:relative;left:14%">Congelado: <span style="color:red;">*</span></span>
             <span style="position:relative;left:28%">Encerrado: <span style="color:red;">*</span></span>
@@ -407,28 +360,32 @@
                             <input id="id_pessoa" type="hidden" value="">
                             <div class="form-group">
                                 Nome:
-                                <input id="nome_pessoa" name="nome_pessoa" type="text" class="form-control">
+                                <input id="nome_pessoa" name="nome_pessoa" type="text" class="form-control" onchange="verificaNome(this.value)">
                             </div>   
+                            <span id="erroNome" class="alertErro hide">Nome inválido.</span>
                             <div class="form-group">
                                 CPF:
-                                <input id="cpf_pessoa" name="cpf_pessoa" type="text" class="form-control">
+                                <input id="cpf_pessoa" name="cpf_pessoa" type="text" class="form-control" onchange="verificaCpf(this.value)">
                             </div>
+                            <span id="erroCpf" class="alertErro hide">CPF inválido.</span>
                             <div class="form-group">
                                 Outros documentos:
                                 <input id="outros_documentos" name="outros_documentos" type="text" class="form-control">
                             </div>
                             <div class="form-group">
                                 Telefone: 
-                                <input id="telefone_pessoa" name="telefone_pessoa" type="text" class="form-control">
+                                <input id="telefone_pessoa" name="telefone_pessoa" type="text" class="form-control" onchange="verificaTelefone(this.value)">
                             </div>
+                            <span id="erroTelefone" class="alertErro hide">Telefone inválido.</span>
                             <div class="form-group">
                                 Email:
-                                <input id="email_pessoa" name="email_pessoa" type="email" class="form-control">
+                                <input id="email_pessoa" name="email_pessoa" type="email" class="form-control" onchange="verificaEmail(this.value)">
                             </div>
+                            <span id="erroEmail" class="alertErro hide">Email inválido.</span>
                         </nav>
                     </div>
                     <div class="modal-footer">
-                        <button type="button" id="submitFormData" onclick="SubmitFormData()" data-dismiss="modal">Cadastrar</button>
+                        <button type="button" id="submitFormData" onclick="SubmitFormData()">Cadastrar</button>
                     </div>
                 </form>
             </div>
@@ -450,129 +407,6 @@
             </div>
         </div>
     </div>
-    <script>
-        function showResult(str, id_input) {
-            var id = "livesearch"+id_input;
-            if (str.length==0) { 
-                document.getElementById(id).innerHTML="";
-                document.getElementById(id).style.border="0px";
-                return;
-            }
-            if (window.XMLHttpRequest) {
-                // code for IE7+, Firefox, Chrome, Opera, Safari
-                xmlhttp=new XMLHttpRequest();
-            } else {  // code for IE6, IE5
-                xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
-            }
-            xmlhttp.onreadystatechange=function() {
-                if (this.readyState==4 && this.status==200) {
-                    document.getElementById(id).innerHTML=this.responseText;
-                    document.getElementById(id).style.border="1px solid #A5ACB2";
-                }
-            }
-            xmlhttp.open("GET","livesearch.php?q="+str+"&id="+id_input,true);
-            xmlhttp.send();
-        }
-
-        function selecionaComplete(value, id_input){
-            var id = "livesearch"+id_input;
-            document.getElementById(id_input).value = value;
-            document.getElementById(id).innerHTML="";
-            document.getElementById(id).style.border="0px";
-        }
-
-        function analisar(){
-            $("#analisado").prop('checked', true);
-        }
-
-        $(document).on("click", ".open-AddBookDialog", function () {
-            var element_id = $(this).data('id');
-            if(element_id == 'map'){
-                if (navigator.geolocation) {
-                    navigator.geolocation.getCurrentPosition(myMap);
-                    $('#map').modal('show');  
-                } else {
-                    $('#map').modal('show');
-                }
-                
-            }else{
-                $(".modal-body #id_pessoa").val( element_id );
-                $('#pessoasModal').modal('show');
-            }
-        });
-
-        //POST pessoa
-        var input = document.getElementById("submitFormData");
-        // Execute a function when the user releases a key on the keyboard
-        input.addEventListener("keydown", function(event) {
-        // Number 13 is the "Enter" key on the keyboard
-        if (event.keyCode === 13) {
-            // Cancel the default action, if needed
-            event.preventDefault();
-            // Trigger the button element with a click
-            document.getElementById("submitFormData").click();
-        }
-        });
-
-        function SubmitFormData() {
-            var id_input = $("#id_pessoa").val();
-            var nome_pessoa = $("#nome_pessoa").val();
-            var email_pessoa = $("#email_pessoa").val();
-            var telefone_pessoa = $("#telefone_pessoa").val();
-            var cpf_pessoa = $("#cpf_pessoa").val();
-            var outros_documentos = $("#outros_documentos").val();
-
-            var id="result"+id_input;
-            
-            //$.post("processa_cadastrar_pessoa.php", { nome_pessoa: nome_pessoa, email_pessoa: email_pessoa,
-            //    telefone_pessoa: telefone_pessoa, cpf_pessoa: cpf_pessoa, outros_documentos:outros_documentos, nome_salvar: nome_pessoa });
-            if (window.XMLHttpRequest) {
-                // code for IE7+, Firefox, Chrome, Opera, Safari
-                xmlhttp=new XMLHttpRequest();
-            } else {  // code for IE6, IE5
-                xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
-            }
-            xmlhttp.onreadystatechange=function() {
-                if (this.readyState==4 && this.status==200) {
-                    document.getElementById(id).innerHTML=this.responseText;
-                    if(this.responseText == 'Pessoa cadastrado com sucesso'){
-                        document.getElementById(id).style.color="#00FF00";
-                        document.getElementById(id_input).value = nome_pessoa;
-                    }else
-                        document.getElementById(id).style.color="#FF0000";
-                }
-            }
-            xmlhttp.open("GET","processa_cadastrar_pessoa.php?nome_pessoa="+nome_pessoa+"&email_pessoa="+email_pessoa+"&telefone_pessoa="+telefone_pessoa+"&cpf_pessoa="+cpf_pessoa+"&outros_documento="+outros_documentos,true);
-            xmlhttp.send();
-        }
-
-
-        function myMap(position) {
-            if(position)
-                var myLatLng = {lat: position.coords.latitude, lng: position.coords.longitude};
-            else
-                var myLatLng = {lat: -26.9939744, lng: -48.6542015};
-
-            var mapProp= {
-                center:myLatLng,
-                zoom:15
-            };
-
-            var map = new google.maps.Map(document.getElementById("googleMap"),mapProp);
-
-            var marker = new google.maps.Marker({
-                position: myLatLng,
-                map: map
-            });
-
-            google.maps.event.addListener(map, 'click', function(event) {
-                $("#latitude").val(event.latLng.lat());
-                $("#longitude").val(event.latLng.lng());
-                myLatLng = {lat: event.latLng.lat(), lng: event.latLng.lng()}
-                marker.setPosition(myLatLng);
-            });
-        }
-    </script>
 </div>
 </div>
 

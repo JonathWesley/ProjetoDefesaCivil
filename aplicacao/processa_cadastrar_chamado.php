@@ -20,10 +20,6 @@ $descricao = addslashes($_POST['descricao']);
 
 $erros='';
 
-//garante que o valor do endereço seja apenas igual a Logradouro ou Coordenada
-if($endereco_principal != "Logradouro" && $endereco_principal != "Coordenada")
-	$erros = $erros.'&endereco_principal';
-
 $logradouro_id = 'null';
 if($endereco_principal == "Logradouro"){
 	$cep = str_replace("-","",$cep);
@@ -44,11 +40,6 @@ if($endereco_principal == "Logradouro"){
 
 	$longitude = 'null';
 	$latitude = 'null';
-}else{ //valida os dados de latitude e longitude
-	if(!preg_match("/^[-+]?\d*\.?\d*$/", $longitude) || strlen($longitude) <= 0)
-		$erros = $erros.'&longitude';
-	if(!preg_match("/^[-+]?\d*\.?\d*$/", $latitude) || strlen($latitude) <= 0)
-		$erros = $erros.'&latitude';
 }
 
 $pessoa_atendida = 0;
@@ -66,17 +57,11 @@ if(strlen($nome) > 0){ //se a pessoa foi informada, busca a mesma no BD
 }else //pessoa nao foi informada
 	$erros = $erros.'&nome';
 
-//valida as datas cadastradas
-date_default_timezone_set('America/Sao_Paulo');
-$dataAtual = date('Y-m-d');
-if($data > $dataAtual)
-	$erros = $erros.'&data';
-
 $timestamp = $data.' '.$hora.':00';
 
 if(strlen($erros) > 0){
     //echo pg_last_error();
-    header('location:index.php?pagina=cadastrarChamado'.$erros);
+    header('location:index.php?pagina=cadastrarChamado&erroDB'.$erros);
 //caso esteja tudo certo, procede com a inserção no banco de dados
 }else{
 	//insere a ocorrencia no banco de dados

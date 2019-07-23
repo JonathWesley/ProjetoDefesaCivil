@@ -81,7 +81,7 @@
                 if(pg_fetch_array($consulta_chamados, $i) == 0)
                     echo '<tr><td colspan="5" class="text-center">Nenhum chamado encontrado</td></tr>';
                 while($linha = pg_fetch_array($consulta_chamados, $i)){
-                    echo '<tr><td><a href="index.php?pagina=exibirChamado&id='.$linha['id_chamado'].'"><span class="glyphicon glyphicon-fullscreen"></span></a></td>';
+                    echo '<tr><td class="text-center"><a href="index.php?pagina=exibirChamado&id='.$linha['id_chamado'].'"><span class="glyphicon glyphicon-eye-open"></span></a></td>';
                     echo '<td>'.$linha['dataa'].'</td>';
                     echo '<td>'.$linha['origem'].'</td>';
                     echo '<td>'.$linha['nome'].'</td>';

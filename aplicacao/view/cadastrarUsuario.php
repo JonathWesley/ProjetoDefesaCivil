@@ -3,14 +3,10 @@
     <form method="post" action="processa_cadastrar_usuario.php" enctype="multipart/form-data" onsubmit="return validarFormCadastroUsuario()">
         <div class="box">
             <?php if(isset($_GET['sucesso'])){ ?>
-                <div class="alert alert-success" role="alert">
-                    Usuário cadastrado com sucesso.
-                </div>
+                <span class="alert alert-success" role="alert">Usuário cadastrado com sucesso.</span>
             <?php } ?>
             <?php if(isset($_GET['erroDB'])){ ?>
-                <div class="alert alert-danger" role="alert">
-                    Falha ao cadastrar usuário.
-                </div>
+                <span class="alert alert-danger" role="alert">Falha ao cadastrar usuário.</span>
             <?php } ?>
             <div>
                 Nome completo: <span style="color:red;">*</span>
