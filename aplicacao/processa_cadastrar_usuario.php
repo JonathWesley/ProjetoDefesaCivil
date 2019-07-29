@@ -36,8 +36,8 @@ $id_criador = $_SESSION['id_usuario'];
 $data = date('Y-m-d H:i:s');
 
 $query = "BEGIN; 
-		  INSERT INTO usuario (id_usuario, nome, cpf, telefone, nivel_acesso, foto) 
-		  VALUES ($id, '$nome', '$cpf', '$telefone', '$acesso', bytea('/home/jonath/Downloads/Pedobear.png'));
+		  INSERT INTO usuario (id_usuario, nome, cpf, telefone, nivel_acesso) 
+		  VALUES ($id, '$nome', '$cpf', '$telefone', '$acesso');
 		  INSERT INTO log_alteracao_usuario (id_usuario_modificador, id_usuario_alterado, data_hora, acao) 
 		  VALUES ($id_criador, $id, '$data', 'cadastrar');
 		  COMMIT;";

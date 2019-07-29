@@ -2,6 +2,8 @@
 session_start();
 include 'database.php';
 
+echo pg_last_error();
+
 if($_SESSION['login']){
     $pagina = $_GET['pagina'];
 }else{

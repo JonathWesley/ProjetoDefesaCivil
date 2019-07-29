@@ -365,7 +365,7 @@
                             <span id="erroNome" class="alertErro hide">Nome inválido.</span>
                             <div class="form-group">
                                 CPF:
-                                <input id="cpf_pessoa" name="cpf_pessoa" type="text" class="form-control" onchange="verificaCpf(this.value)">
+                                <input id="cpf_pessoa" name="cpf_pessoa" type="text" class="form-control" maxlength="11" onchange="verificaCpf(this.value)">
                             </div>
                             <span id="erroCpf" class="alertErro hide">CPF inválido.</span>
                             <div class="form-group">
@@ -374,7 +374,7 @@
                             </div>
                             <div class="form-group">
                                 Telefone: 
-                                <input id="telefone_pessoa" name="telefone_pessoa" type="text" class="form-control" onchange="verificaTelefone(this.value)">
+                                <input id="telefone_pessoa" name="telefone_pessoa" type="text" class="form-control" maxlength="11" onchange="verificaTelefone(this.value)">
                             </div>
                             <span id="erroTelefone" class="alertErro hide">Telefone inválido.</span>
                             <div class="form-group">
