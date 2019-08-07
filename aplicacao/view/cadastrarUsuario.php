@@ -3,10 +3,10 @@
     <form method="post" action="processa_cadastrar_usuario.php" enctype="multipart/form-data" onsubmit="return validarFormCadastroUsuario()">
         <div class="box">
             <?php if(isset($_GET['sucesso'])){ ?>
-                <span class="alert alert-success" role="alert">Usuário cadastrado com sucesso.</span>
+                <div class="alert alert-success" role="alert">Usuário cadastrado com sucesso.</div>
             <?php } ?>
             <?php if(isset($_GET['erroDB'])){ ?>
-                <span class="alert alert-danger" role="alert">Falha ao cadastrar usuário.</span>
+                <div class="alert alert-danger" role="alert">Falha ao cadastrar usuário.</div>
             <?php } ?>
             <div>
                 Nome completo: <span style="color:red;">*</span>
@@ -53,7 +53,7 @@
             </div>  
         </div>
         <div class="box">
-            Foto: <input id="foto" name="foto" type="file" accept="image/png, image/jpeg" value="Localização do Arquivo..." size="30" maxlength="30">
+            Foto: <input id="foto" name="foto" type="file" accept="image/png, image/jpeg, video/mp4" value="Localização do Arquivo..." size="30" maxlength="30">
         </div>
         <input type="submit" class="btn btn-default btn-md" value="Cadastrar">
     </form>

@@ -27,24 +27,16 @@
                 <div class="input-group">
                     <input type="password" class="form-control" name="senha" placeholder="Senha">
                 </div>
-                <?php 
-                    if(isset($_GET['erro'])){
-                ?>
-                        <div class="alert alert-danger" role="alert">
-                            Email e/ou  senha errados.
-                        </div>
-                <?php 
-                    }
-                ?>
-                <?php 
-                    if(isset($_GET['erroBD'])){
-                ?>
-                        <div class="alert alert-danger" role="alert">
-                            Problema ao conectar com o banco de dados.
-                        </div>
-                <?php 
-                    }
-                ?>
+                <?php if(isset($_GET['erro'])){ ?>
+                    <div class="alert alert-danger" role="alert">
+                        Email e/ou  senha errados.
+                    </div>
+                <?php } ?>
+                <?php if(isset($_GET['erroBD'])){ ?>
+                    <div class="alert alert-danger" role="alert">
+                        Problema ao conectar com o banco de dados.
+                    </div>
+                <?php } ?>
                 <input type="submit" value="Entrar" class="btn btn-default btn-md">
             </form>
         </div>

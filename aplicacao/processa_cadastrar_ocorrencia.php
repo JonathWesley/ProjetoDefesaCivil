@@ -33,8 +33,10 @@ $prioridade = addslashes($_POST['prioridade']);
 $analisado = addslashes($_POST['analisado']);
 $congelado = addslashes($_POST['congelado']);
 $encerrado = addslashes($_POST['encerrado']);
+
 session_start();
 $id_criador = $_SESSION['id_usuario'];
+$dataAtual = date('Y-m-d H:i:s');
 
 if($_SESSION['nivel_acesso'] != 1){
 	$prioridade = 'Baixa';
@@ -73,16 +75,16 @@ if($endereco_principal == "Logradouro"){
 									WHERE logradouro = '$logradouro' AND numero = '$numero'");
 	if(pg_num_rows($result) == 0){
 		$result = pg_query($connection, "INSERT INTO endereco_logradouro(cep,cidade,bairro,logradouro,numero,referencia)
-										VALUES ('$cep','$cidade','$bairro','$logradouro','$numero','$referencia')");
-		if(!$result)
-			$erros = $erros.'&logradouro';
-		$result = pg_query($connection, "SELECT * FROM endereco_logradouro
-										WHERE logradouro = '$logradouro' AND numero = '$numero'");
+										VALUES ('$cep','$cidade','$bairro','$logradouro','$numero','$referencia')
+										RETURNING id_logradouro");
 		if(!$result)
 			$erros = $erros.'&logradouro';
 	}
 	$linha = pg_fetch_array($result, 0);
 	$logradouro_id = $linha['id_logradouro'];
+
+	$result = pg_query($connection, "INSERT INTO log_endereco(id_logradouro, id_usuario, data_hora)
+									VALUES ($logradouro_id, $id_criador, '$dataAtual')");
 
 	$longitude = 'null';
 	$latitude = 'null';
@@ -164,8 +166,6 @@ if(strlen($pessoa_atendida_2) > 0){ //se a pessoa foi informada, busca a mesma n
 
 if(strlen($chamado_id)==0)
 	$chamado_id = 'null';
-
-$dataAtual = date('Y-m-d H:i:s');
 
 //caso ocorra algum erro na validacao, entao volta para a pagina e indica onde esta o erro
 if(strlen($erros) > 0){

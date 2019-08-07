@@ -20,6 +20,10 @@ $descricao = addslashes($_POST['descricao']);
 
 $erros='';
 
+session_start();
+$id_usuario = $_SESSION['id_usuario'];
+$dataAtual = date('Y-m-d H:i:s');
+
 $logradouro_id = 'null';
 if($endereco_principal == "Logradouro"){
 	$cep = str_replace("-","",$cep);
@@ -27,16 +31,16 @@ if($endereco_principal == "Logradouro"){
 									WHERE logradouro = '$logradouro' AND numero = '$numero'");
 	if(pg_num_rows($result) == 0){
 		$result = pg_query($connection, "INSERT INTO endereco_logradouro(cep,cidade,bairro,logradouro,numero,referencia)
-										VALUES ('$cep','$cidade','$bairro','$logradouro','$numero','$referencia')");
-		if(!$result)
-			$erros = $erros.'&logradouro';
-		$result = pg_query($connection, "SELECT * FROM endereco_logradouro
-										WHERE logradouro = '$logradouro' AND numero = '$numero'");
+										VALUES ('$cep','$cidade','$bairro','$logradouro','$numero','$referencia')
+										RETURNING id_logradouro") or die(pg_last_error());
 		if(!$result)
 			$erros = $erros.'&logradouro';
 	}
 	$linha = pg_fetch_array($result, 0);
 	$logradouro_id = $linha['id_logradouro'];
+
+	$result = pg_query($connection, "INSERT INTO log_endereco(id_logradouro, id_usuario, data_hora)
+									VALUES ($logradouro_id, $id_usuario, '$dataAtual')");
 
 	$longitude = 'null';
 	$latitude = 'null';
@@ -65,9 +69,6 @@ if(strlen($erros) > 0){
 //caso esteja tudo certo, procede com a inserção no banco de dados
 }else{
 	//insere a ocorrencia no banco de dados
-	session_start();
-	$id_usuario = $_SESSION['id_usuario'];
-	$dataAtual = date('Y-m-d H:i:s');
 
 	$query = "INSERT INTO chamado (data_hora,origem,pessoa_id,chamado_logradouro_id,
 			  descricao,endereco_principal,latitude,longitude)

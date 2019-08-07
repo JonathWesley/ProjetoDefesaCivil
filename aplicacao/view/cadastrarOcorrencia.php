@@ -2,10 +2,10 @@
 <div class="jumbotron campo_cadastro">
     <form method="post" action="processa_cadastrar_ocorrencia.php" onsubmit="return validarFormCadastroOcorrencia()">
         <?php if(isset($_GET['sucesso'])){ ?>
-            <span class="alert alert-success" role="alert">Ocorrencia cadastrada com sucesso.</span>
+            <div class="alert alert-success" role="alert">Ocorrencia cadastrada com sucesso.</div>
         <?php } ?>
         <?php if(isset($_GET['erroDB'])){ ?>
-            <span class="alert alert-danger" role="alert">Falha ao cadastrar ocorrencia.</span>
+            <div class="alert alert-danger" role="alert">Falha ao cadastrar ocorrencia.</div>
         <?php } ?>
         <div class="box">
             <div>
@@ -31,7 +31,7 @@
                     <br>
                     <input id="longitude" name="longitude" type="text" class="form-control" style="width:30%;display:inline;" value="<?php echo $_POST['longitude']; ?>" onchange="verificaLatLgn()">
                     <input id="latitude" name="latitude" type="text" class="form-control" style="width:30%;display:inline;" value="<?php echo $_POST['latitude']; ?>" onchange="verificaLatLgn()">
-                    <button type="button" class="btn-default btn-small inline open-AddBookDialog" data-toggle="modal" data-id="map"><span class="glyphicon glyphicon-map-marker"></span></button>
+                    <button type="button" class="fa-map-marker-alt inline open-AddBookDialog" data-toggle="modal" data-id="map"><span class="glyphicon glyphicon-map-marker"></span></button>
                 </div>
                 <span id="erroLatLgn" class="alertErro hide">Latitude e/ou Longitude inválida(s).</span>
             </div>

@@ -14,18 +14,14 @@
 <body>
     <div ng-app="myApp" ng-controller="myCtrl">
     <header>
-        <div class="container img-box">
-        <div class="jumbotron">
-            <img src="images/logo.jpg" alt="DefesaCivil" class="img-rounded corner-img">
-        </div>
-        </div>
-        <h1 class="text-center page-title">Defesa Civil</h1>
+        <img src="images/logo.jpg" alt="DefesaCivil" class="img-rounded corner-img">
+        <h1 class="text-center page-title inline">Defesa Civil</h1>
     </header>
         
     <div class="container login-box">
         <div class="jumbotron">
             <h4>Digite seu email:</h4>
-            <form>
+            <form action="processa_esqueceu_senha.php" method="post">
             <div class="input-group">
                 <input id="email" type="text" class="form-control" name="email" placeholder="Email">
             </div>
