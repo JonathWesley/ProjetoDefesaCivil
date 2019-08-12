@@ -1,0 +1,31 @@
+<span>Analisado: <span style="color:red;">*</span></span>
+            <span style="position:relative;left:14%">Congelado: <span style="color:red;">*</span></span>
+            <span style="position:relative;left:28%">Encerrado: <span style="color:red;">*</span></span>
+            <br>
+            <div style="display:inline;">
+                <label class="radio-inline">
+                    <input id="analisado" type="radio" value="true" name="analisado">Sim
+                </label>
+                <label class="radio-inline">
+                    <input id="analisado" type="radio" value="false" name="analisado" checked>Não
+                </label>
+            </div>
+            <div style="display:inline;position:relative;left:10%;">
+                <label class="radio-inline">
+                    <input type="radio" value="true" name="congelado">Sim
+                </label>
+                <label class="radio-inline">
+                    <input type="radio" value="false" name="congelado" checked>Não
+                </label>
+            </div>
+            <div style="display:inline;position:relative;left:20%;">
+                <label class="radio-inline">
+                    <input type="radio" value="true" name="encerrado">Sim
+                </label>
+                <label class="radio-inline">
+                    <input type="radio" value="false" name="encerrado" checked>Não
+                </label>
+            </div>
+            <br>
+        </div>
+        <?php } ?>
