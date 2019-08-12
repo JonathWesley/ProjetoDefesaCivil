@@ -193,9 +193,6 @@
                 <div class="modal-body">
                     <div id="googleMap" style="width:100%;height:400px;"></div>
                 </div>
-                <div class="modal-footer">
-                    <button type="button" id="submitFormData" data-dismiss="modal">Confirmar</button>
-                </div>
             </div>
         </div>
     </div>
@@ -231,33 +228,5 @@
         <input type="submit" class="btn btn-default btn-md" value="Editar">
     </form>
     <?php } ?>
-
-    <script>
-        $(document).on("click", ".open-AddBookDialog", function () {
-            var lat = $('#latitude').html();
-            var lng = $('#longitude').html();
-            myMap(parseFloat(lat), parseFloat(lng));
-            $('#map').modal('show');
-        });
-
-        function myMap(lati, lngi) {
-            if(lati)
-                var myLatLng = {lat: lati, lng: lngi};
-            else
-                var myLatLng = {lat: -26.9939744, lng: -48.6542015};
-
-            var mapProp = {
-                center:myLatLng,
-                zoom:15
-            };
-
-            var map = new google.maps.Map(document.getElementById("googleMap"),mapProp);
-
-            var marker = new google.maps.Marker({
-                position: myLatLng,
-                map: map
-            });
-        }
-    </script>
 </div>
 </div>

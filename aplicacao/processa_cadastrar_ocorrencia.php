@@ -16,7 +16,6 @@ $referencia = addslashes($_POST['referencia']);
 $agente_principal = addslashes($_POST['agente_principal']);
 $agente_apoio_1 = addslashes($_POST['agente_apoio_1']);
 $agente_apoio_2 = addslashes($_POST['agente_apoio_2']);
-$data_lancamento = addslashes($_POST['data_lancamento']);
 $data_ocorrencia = addslashes($_POST['data_ocorrencia']);
 $descricao = addslashes($_POST['descricao']);
 $ocorr_origem = addslashes($_POST['ocorr_origem']);
@@ -37,6 +36,8 @@ $encerrado = addslashes($_POST['encerrado']);
 session_start();
 $id_criador = $_SESSION['id_usuario'];
 $dataAtual = date('Y-m-d H:i:s');
+
+$data_lancamento = $dataAtual;
 
 if($_SESSION['nivel_acesso'] != 1){
 	$prioridade = 'Baixa';

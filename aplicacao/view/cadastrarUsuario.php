@@ -53,7 +53,7 @@
             </div>  
         </div>
         <div class="box">
-            Foto: <input id="foto" name="foto" type="file" accept="image/png, image/jpeg, video/mp4" value="Localização do Arquivo..." size="30" maxlength="30">
+            Foto: <input id="foto" name="foto" type="file" accept="image/png, image/jpeg" value="Localização do Arquivo..." size="30" maxlength="30">
         </div>
         <input type="submit" class="btn btn-default btn-md" value="Cadastrar">
     </form>

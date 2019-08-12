@@ -106,7 +106,7 @@
                         <nav>
                             <input id="id_pessoa" type="hidden" value="">
                             <div class="form-group">
-                                Nome:
+                                Nome: <span style="color:red;">*</span>
                                 <input id="nome_pessoa" name="nome_pessoa" type="text" class="form-control" onchange="verificaNome(this.value)">
                             </div>   
                             <span id="erroNome" class="alertErro hide">Nome inválido.</span>

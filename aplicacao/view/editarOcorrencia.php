@@ -335,21 +335,21 @@
             </div>
         </div>
         <div class="box">
+            <div>
+                Prioridade: <span style="color:red;">*</span>
+                <label for="prioridade"></label>
+                <select name="prioridade" class="form-control" style="width:30%;" required ng-model="prioridade" ng-init="prioridade='<?php echo $_POST['prioridade']; ?>'">
+                    <option value="Baixa">Baixa</option>
+                    <option value="Média">Média</option>
+                    <option value="Alta">Alta</option>
+                </select>
+            </div>
+            <?php if(isset($_GET['prioridade'])){ ?>
+                <span class="alertErro">
+                    Prioridade informada incorretamente.
+                </span><br>
+            <?php } ?>
             <?php if($_SESSION['nivel_acesso'] == 1){ ?>
-                <div>
-                    Prioridade: <span style="color:red;">*</span>
-                    <label for="prioridade"></label>
-                    <select name="prioridade" class="form-control" onchange="analisar()" style="width:30%;" required ng-model="prioridade" ng-init="prioridade='<?php echo $_POST['prioridade']; ?>'">
-                        <option value="Baixa">Baixa</option>
-                        <option value="Média">Média</option>
-                        <option value="Alta">Alta</option>
-                    </select>
-                </div>
-                <?php if(isset($_GET['prioridade'])){ ?>
-                    <span class="alertErro">
-                        Prioridade informada incorretamente.
-                    </span><br>
-                <?php } ?>
                 <span>Analisado: <span style="color:red;">*</span></span>
                 <span style="position:relative;left:14%">Congelado: <span style="color:red;">*</span></span>
                 <span style="position:relative;left:28%">Encerrado: <span style="color:red;">*</span></span>
@@ -380,10 +380,6 @@
                 </div>
             <?php }else{ ?>
                 <p>Status</p>
-                <nav>
-                    <input type="hidden" name="prioridade" value="<?php echo $_POST['prioridade']; ?>">
-                    Prioridade: <span><?php echo $_POST['prioridade']; ?></span>
-                </nav>
                 <nav>
                     <input type="hidden" name="analisado" value="<?php echo ($_POST['analisado'] == t) ? "true":"false"; ?>">
                     Analisado: <span><?php echo ($_POST['analisado'] == t) ? 'Sim':'Não'; ?></span>
@@ -442,90 +438,5 @@
             </div>
         </div>
     </div>
-    <script>
-        function showResult(str, id_input) {
-            var id = "livesearch"+id_input;
-            if (str.length==0) { 
-                document.getElementById(id).innerHTML="";
-                document.getElementById(id).style.border="0px";
-                return;
-            }
-            if (window.XMLHttpRequest) {
-                // code for IE7+, Firefox, Chrome, Opera, Safari
-                xmlhttp=new XMLHttpRequest();
-            } else {  // code for IE6, IE5
-                xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
-            }
-            xmlhttp.onreadystatechange=function() {
-                if (this.readyState==4 && this.status==200) {
-                    document.getElementById(id).innerHTML=this.responseText;
-                    document.getElementById(id).style.border="1px solid #A5ACB2";
-                }
-            }
-            xmlhttp.open("GET","livesearch.php?q="+str+"&id="+id_input,true);
-            xmlhttp.send();
-        }
-
-        function selecionaComplete(value, id_input){
-            var id = "livesearch"+id_input;
-            document.getElementById(id_input).value = value;
-            document.getElementById(id).innerHTML="";
-            document.getElementById(id).style.border="0px";
-        }
-
-        function analisar(){
-            $("#analisado").prop('checked', true);
-        }
-
-        $(document).on("click", ".open-AddBookDialog", function () {
-            var pessoa_id = $(this).data('id');
-            $(".modal-body #id_pessoa").val( pessoa_id );
-            $('#pessoasModal').modal('show');
-        });
-
-        //POST pessoa
-        var input = document.getElementById("submitFormData");
-        // Execute a function when the user releases a key on the keyboard
-        input.addEventListener("keydown", function(event) {
-        // Number 13 is the "Enter" key on the keyboard
-        if (event.keyCode === 13) {
-            // Cancel the default action, if needed
-            event.preventDefault();
-            // Trigger the button element with a click
-            document.getElementById("submitFormData").click();
-        }
-        });
-        function SubmitFormData() {
-            var id_input = $("#id_pessoa").val();
-            var nome_pessoa = $("#nome_pessoa").val();
-            var email_pessoa = $("#email_pessoa").val();
-            var telefone_pessoa = $("#telefone_pessoa").val();
-            var cpf_pessoa = $("#cpf_pessoa").val();
-            var outros_documentos = $("#outros_documentos").val();
-
-            var id="result"+id_input;
-            
-            //$.post("processa_cadastrar_pessoa.php", { nome_pessoa: nome_pessoa, email_pessoa: email_pessoa,
-            //    telefone_pessoa: telefone_pessoa, cpf_pessoa: cpf_pessoa, outros_documentos:outros_documentos, nome_salvar: nome_pessoa });
-            if (window.XMLHttpRequest) {
-                // code for IE7+, Firefox, Chrome, Opera, Safari
-                xmlhttp=new XMLHttpRequest();
-            } else {  // code for IE6, IE5
-                xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
-            }
-            xmlhttp.onreadystatechange=function() {
-                if (this.readyState==4 && this.status==200) {
-                    document.getElementById(id).innerHTML=this.responseText;
-                    if(this.responseText == 'Pessoa cadastrado com sucesso'){
-                        document.getElementById(id).style.color="#00FF00";
-                        document.getElementById(id_input).value = nome_pessoa;
-                    }else
-                        document.getElementById(id).style.color="#FF0000";
-                }
-            }
-            xmlhttp.open("GET","processa_cadastrar_pessoa.php?nome_pessoa="+nome_pessoa+"&email_pessoa="+email_pessoa+"&telefone_pessoa="+telefone_pessoa+"&cpf_pessoa="+cpf_pessoa+"&outros_documento="+outros_documentos,true);
-            xmlhttp.send();
-        }
-    </script>
 </div>
 </div>

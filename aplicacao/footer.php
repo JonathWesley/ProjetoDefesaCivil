@@ -1,8 +1,8 @@
     <footer>
         <div class="container">
             <?php if(!isset($_SESSION['login'])){ ?>
-                <span class="text-left footer">Telefone: {{telefone}}</span>
-                <span class="footer">Endereço: {{endereco}}</span>
+                <span class="text-left footer">Telefone: (47) 3268-3133</span>
+                <span class="footer">Endereço: Alameda dos Estados Policial Luiz Carlos Rosa, 25 - Estados, Balneário Camboriú - SC</span>
             <?php } ?>
         </div>
     </footer>

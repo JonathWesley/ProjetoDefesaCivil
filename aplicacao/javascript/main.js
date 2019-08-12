@@ -1,7 +1,5 @@
 //modulo do angular
 angular.module("myApp", []).controller("myCtrl", function($scope){
-    $scope.telefone = "(47) 3268-3133";
-    $scope.endereco = "R. Pardal, 111 - Ariribá, Balneário Camboriú - SC";
     $scope.pesquisa = "";
     $scope.retorno = false;
     $scope.categoria = '0';
@@ -235,10 +233,6 @@ function sortTable(n) {
     }
 }
 
-function analisar(){
-    $("#analisado").prop('checked', true);
-}
-
 function showResult(str, id_input) {
     var id = "livesearch"+id_input;
     if (str.length==0) { 
@@ -278,7 +272,6 @@ $(document).on("click", ".open-AddBookDialog", function () {
                 } else {
                     $('#map').modal('show');
                 }
-                
             }else{
                 $(".modal-body #id_pessoa").val( element_id );
                 $('#pessoasModal').modal('show');
@@ -337,10 +330,16 @@ function SubmitFormData() {
 }
 
 function myMap(position) {
-    if(position)
-        var myLatLng = {lat: position.coords.latitude, lng: position.coords.longitude};
-    else
-        var myLatLng = {lat: -26.9939744, lng: -48.6542015};
+    if($('#latitude').html()){
+        var latitude = parseInt($('#latitude').html());
+        var longitude = parseInt($('#longitude').html());
+        var myLatLng = {lat: latitude, lng: longitude};
+    }else{
+        if(position)
+            var myLatLng = {lat: position.coords.latitude, lng: position.coords.longitude};
+        else
+            var myLatLng = {lat: -26.9939744, lng: -48.6542015};
+    }
 
     var mapProp= {
         center:myLatLng,
@@ -354,10 +353,12 @@ function myMap(position) {
         map: map
     });
 
-    google.maps.event.addListener(map, 'click', function(event) {
-        $("#latitude").val(event.latLng.lat());
-        $("#longitude").val(event.latLng.lng());
-        myLatLng = {lat: event.latLng.lat(), lng: event.latLng.lng()}
-        marker.setPosition(myLatLng);
-    });
+    if(!$('#latitude').html()){
+        google.maps.event.addListener(map, 'click', function(event) {
+            $("#latitude").val(event.latLng.lat());
+            $("#longitude").val(event.latLng.lng());
+            myLatLng = {lat: event.latLng.lat(), lng: event.latLng.lng()}
+            marker.setPosition(myLatLng);
+        });
+    } 
 }

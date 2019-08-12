@@ -26,12 +26,12 @@
             </div>
             <div ng-show="sel_endereco == 'Coordenada'">
                 <div>
-                    <span>Longitude: <span style="color:red;">*</span></span> 
-                    <span style="position:relative;left:19%;">Latitude: <span style="color:red;">*</span></span>
+                    <span>Latitude: <span style="color:red;">*</span></span> 
+                    <span style="position:relative;left:21%;">Longitude: <span style="color:red;">*</span></span>
                     <br>
-                    <input id="longitude" name="longitude" type="text" class="form-control" style="width:30%;display:inline;" value="<?php echo $_POST['longitude']; ?>" onchange="verificaLatLgn()">
                     <input id="latitude" name="latitude" type="text" class="form-control" style="width:30%;display:inline;" value="<?php echo $_POST['latitude']; ?>" onchange="verificaLatLgn()">
-                    <button type="button" class="fa-map-marker-alt inline open-AddBookDialog" data-toggle="modal" data-id="map"><span class="glyphicon glyphicon-map-marker"></span></button>
+                    <input id="longitude" name="longitude" type="text" class="form-control" style="width:30%;display:inline;" value="<?php echo $_POST['longitude']; ?>" onchange="verificaLatLgn()">
+                    <button type="button" class="btn-default btn-small inline open-AddBookDialog" data-toggle="modal" data-id="map"><span class="glyphicon glyphicon-map-marker"></span></button>
                 </div>
                 <span id="erroLatLgn" class="alertErro hide">Latitude e/ou Longitude inválida(s).</span>
             </div>
@@ -91,10 +91,8 @@
         </div>
         <div class="box">
             <div>
-                <span>Data de lançamento: <span style="color:red;">*</span></span>
-                <span style="position:relative;left:10%">Data de ocorrência: <span style="color:red;">*</span></span>
+                <span>Data de ocorrência: <span style="color:red;">*</span></span>
                 <br>
-                <input id="data_lancamento" name="data_lancamento" type="date" class="form-control" style="width:30%;display:inline;" value="<?php echo date('Y-m-d');?>" max="<?php echo date('Y-m-d'); ?>" required onchange="verificaData()">
                 <input id="data_ocorrencia" name="data_ocorrencia" type="date" class="form-control" style="width:30%;display:inline;" value="<?php echo $_POST['data_ocorrencia']; ?>" max="<?php echo date('Y-m-d'); ?>" required onchange="verificaData()">
             </div>
             <span id="erroData" class="alertErro hide">Data de lançamento inválida.</span>
@@ -104,8 +102,8 @@
                 <span class="char-count">{{descricaoVal.length || 0}}/100</span>
             </div>
             <div>
-                Origem:
-                <input name="ocorr_origem" type="text" class="form-control" value="<?php echo $_POST['ocorr_origem']; ?>">
+                Origem: <span style="color:red;">*</span>
+                <input name="ocorr_origem" type="text" class="form-control" value="<?php echo $_POST['ocorr_origem']; ?>" required>
             </div>
         </div>
         <div class="box">
@@ -302,48 +300,17 @@
                 <input type="file" accept="image/png, image/jpeg">
             </div>
         </div>
-        <?php if($_SESSION['nivel_acesso'] == 1){ ?>
         <div class="box">
             <div>
                 Prioridade: <span style="color:red;">*</span>
                 <label for="prioridade"></label>
-                <select name="prioridade" onchange="analisar()" class="form-control" style="width:30%;" required>
+                <select name="prioridade" class="form-control" style="width:30%;" required>
                     <option value="Baixa">Baixa</option>
                     <option value="Média">Média</option>
                     <option value="Alta">Alta</option>
                 </select>
             </div>
-            <span>Analisado: <span style="color:red;">*</span></span>
-            <span style="position:relative;left:14%">Congelado: <span style="color:red;">*</span></span>
-            <span style="position:relative;left:28%">Encerrado: <span style="color:red;">*</span></span>
-            <br>
-            <div style="display:inline;">
-                <label class="radio-inline">
-                    <input id="analisado" type="radio" value="true" name="analisado">Sim
-                </label>
-                <label class="radio-inline">
-                    <input id="analisado" type="radio" value="false" name="analisado" checked>Não
-                </label>
-            </div>
-            <div style="display:inline;position:relative;left:10%;">
-                <label class="radio-inline">
-                    <input type="radio" value="true" name="congelado">Sim
-                </label>
-                <label class="radio-inline">
-                    <input type="radio" value="false" name="congelado" checked>Não
-                </label>
-            </div>
-            <div style="display:inline;position:relative;left:20%;">
-                <label class="radio-inline">
-                    <input type="radio" value="true" name="encerrado">Sim
-                </label>
-                <label class="radio-inline">
-                    <input type="radio" value="false" name="encerrado" checked>Não
-                </label>
-            </div>
-            <br>
         </div>
-        <?php } ?>
         <input type="submit" class="btn btn-default btn-md" value="Cadastrar">
     </form>
 
@@ -359,7 +326,7 @@
                         <nav>
                             <input id="id_pessoa" type="hidden" value="">
                             <div class="form-group">
-                                Nome:
+                                Nome: <span style="color:red;">*</span>
                                 <input id="nome_pessoa" name="nome_pessoa" type="text" class="form-control" onchange="verificaNome(this.value)">
                             </div>   
                             <span id="erroNome" class="alertErro hide">Nome inválido.</span>
