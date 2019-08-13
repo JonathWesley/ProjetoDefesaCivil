@@ -117,6 +117,9 @@
             </span>
         </nav>
         <nav>
+            Titulo: <span id="ocorr_titulo"><?php echo $linhaOcorrencia['ocorr_titulo']; ?></span>
+        </nav>
+        <nav>
             Descrição: <span id="ocorr_descricao"><?php echo $linhaOcorrencia['ocorr_descricao']; ?></span>
         </nav>
         <nav>
@@ -214,6 +217,7 @@
         <input name="agente_apoio2" type="hidden" value="<?php echo $linhaAgente2['nome']; ?>">
         <input name="data_lancamento" type="hidden" value="<?php echo $linhaOcorrencia['data_lancamento']; ?>">
         <input name="data_ocorrencia" type="hidden" value="<?php echo $linhaOcorrencia['data_ocorrencia']; ?>">
+        <input name="titulo" type="hidden" value="<?php echo $linhaOcorrencia['ocorr_titulo']; ?>">
         <input name="ocorr_descricao" type="hidden" value="<?php echo $linhaOcorrencia['ocorr_descricao']; ?>">
         <input name="ocorr_origem" type="hidden" value="<?php echo $linhaOcorrencia['ocorr_origem']; ?>">
         <input name="pessoa1" type="hidden" value="<?php echo $linhaPessoa1['nome']; ?>">

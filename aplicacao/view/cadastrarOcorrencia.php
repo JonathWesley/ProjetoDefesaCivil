@@ -97,9 +97,13 @@
             </div>
             <span id="erroData" class="alertErro hide">Data de lançamento inválida.</span>
             <div>
+                Título:
+                <textarea id="titulo" name="titulo" class="form-control" cols="30" rows="2" maxlength="120" ng-model="tituloVal" ng-init="tituloVal='<?php echo $_POST['titulo']; ?>'"></textarea>
+                <span class="char-count">{{tituloVal.length || 0}}/100</span>
+            </div>
+            <div>
                 Descrição:
-                <textarea id="descricao" name="descricao" class="form-control" cols="30" rows="2" maxlength = "100" ng-model="descricaoVal" ng-init="descricaoVal='<?php echo $_POST['descricao']; ?>'"></textarea>
-                <span class="char-count">{{descricaoVal.length || 0}}/100</span>
+                <textarea id="descricao" name="descricao" class="form-control" cols="30" rows="5"></textarea>
             </div>
             <div>
                 Origem: <span style="color:red;">*</span>

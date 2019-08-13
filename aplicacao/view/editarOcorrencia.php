@@ -127,9 +127,13 @@
                 </span>
             <?php } ?>
             <div>
+                Titulo:
+                <textarea id="titulo" name="titulo" class="form-control" cols="30" rows="2" maxlength="120" ng-model="tituloVal" ng-init="tituloVal='<?php echo $_POST['titulo']; ?>'"></textarea>
+                <span class="char-count">{{tituloVal.length || 0}}/120</span>
+            </div>
+            <div>
                 Descrição:
-                <textarea id="descricao" name="descricao" class="form-control" cols="30" rows="2" maxlength = "100" ng-model="descricaoVal" ng-init="descricaoVal='<?php echo $_POST['ocorr_descricao']; ?>'"></textarea>
-                <span class="char-count">{{descricaoVal.length || 0}}/100</span>
+                <textarea id="descricao" name="descricao" class="form-control" cols="30" rows="5" maxlength = "100" ng-model="descricaoVal" ng-init="descricaoVal='<?php echo $_POST['ocorr_descricao']; ?>'"></textarea>
             </div>
             <div>
                 Origem:

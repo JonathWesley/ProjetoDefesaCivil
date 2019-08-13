@@ -17,6 +17,7 @@ $agente_principal = addslashes($_POST['agente_principal']);
 $agente_apoio_1 = addslashes($_POST['agente_apoio_1']);
 $agente_apoio_2 = addslashes($_POST['agente_apoio_2']);
 $data_ocorrencia = addslashes($_POST['data_ocorrencia']);
+$titulo = addslashes($_POST['titulo']);
 $descricao = addslashes($_POST['descricao']);
 $ocorr_origem = addslashes($_POST['ocorr_origem']);
 $pessoa_atendida_1 = addslashes($_POST['pessoa_atendida_1']);
@@ -29,9 +30,10 @@ $cobrade_subtipo = $_POST['cobrade_subtipo'];
 $cobrade_descricao = addslashes($_POST['cobrade_descricao']);
 $possui_fotos = addslashes($_POST['possui_fotos']);
 $prioridade = addslashes($_POST['prioridade']);
-$analisado = addslashes($_POST['analisado']);
-$congelado = addslashes($_POST['congelado']);
-$encerrado = addslashes($_POST['encerrado']);
+
+$analisado = 'false';
+$congelado = 'false';
+$encerrado = 'false';
 
 session_start();
 $id_criador = $_SESSION['id_usuario'];
@@ -177,13 +179,13 @@ if(strlen($erros) > 0){
 	$query = "INSERT INTO ocorrencia 
 			(chamado_id,ocorr_endereco_principal,ocorr_coordenada_latitude,ocorr_coordenada_longitude,
 			ocorr_logradouro_id,agente_principal,agente_apoio_1,agente_apoio_2,data_lancamento,
-			data_ocorrencia,ocorr_descricao,ocorr_origem,atendido_1,atendido_2,ocorr_cobrade,
+			data_ocorrencia,ocorr_titulo,ocorr_descricao,ocorr_origem,atendido_1,atendido_2,ocorr_cobrade,
 			cobrade_descricao,ocorr_fotos,ocorr_prioridade,ocorr_analisado,ocorr_congelado,ocorr_encerrado,
 			usuario_criador,data_alteracao,ocorr_referencia)
 			VALUES
 			($chamado_id,'$endereco_principal',$latitude,$longitude,$logradouro_id,$agente_principal,
 			$agente_apoio_1,$agente_apoio_2,'$data_lancamento',
-			'$data_ocorrencia','$descricao','$ocorr_origem',$pessoa_atendida_1,$pessoa_atendida_2,
+			'$data_ocorrencia','$titulo','$descricao','$ocorr_origem',$pessoa_atendida_1,$pessoa_atendida_2,
 			'$cobrade','$cobrade_descricao',$possui_fotos,'$prioridade',$analisado,$congelado,$encerrado,
 			$id_criador,'$dataAtual',null)";
 
@@ -199,7 +201,6 @@ if(strlen($erros) > 0){
 				//echo pg_last_error();
 				header('location:index.php?pagina=cadastrarOcorrencia&erroDB');
 			}else{
-				//echo pg_last_error();
 				header('location:index.php?pagina=cadastrarOcorrencia&sucesso');
 			}
 		}else{
