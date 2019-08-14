@@ -229,7 +229,23 @@
         <input name="analisado" type="hidden" value="<?php echo $linhaOcorrencia['ocorr_analisado']; ?>">
         <input name="congelado" type="hidden" value="<?php echo $linhaOcorrencia['ocorr_congelado']; ?>">
         <input name="encerrado" type="hidden" value="<?php echo $linhaOcorrencia['ocorr_encerrado']; ?>">
-        <input type="submit" class="btn btn-default btn-md" value="Editar">
+
+        <input type="submit" class="btn btn-default btn-md btn-ocorrencia" value="Editar Ocorrencia">
+    </form>
+    <form action="index.php?pagina=cadastrarInterdicao" method="post">
+        <input name="id_ocorrencia" type="hidden" value="<?php echo $id_ocorrencia; ?>">
+        <input name="titulo_ocorrencia" type="hidden" value="<?php echo $linhaOcorrencia['ocorr_titulo']; ?>">
+        <input name="endereco_principal" type="hidden" value="<?php echo $linhaOcorrencia['ocorr_endereco_principal']; ?>">
+        <input name="cep" type="hidden" value="<?php echo $linhaLogradouro['cep']; ?>">
+        <input name="cidade" type="hidden" value="<?php echo $linhaLogradouro['cidade']; ?>">
+        <input name="bairro" type="hidden" value="<?php echo $linhaLogradouro['bairro']; ?>">
+        <input name="logradouro" type="hidden" value="<?php echo $linhaLogradouro['logradouro']; ?>">
+        <input name="numero" type="hidden" value="<?php echo $linhaLogradouro['numero'] ?>">
+        <input name="referencia" type="hidden" value="<?php echo $linhaLogradouro['referencia']; ?>">
+        <input name="latitude" type="hidden" value="<?php echo $linhaOcorrencia['ocorr_coordenada_latitude']; ?>">
+        <input name="longitude" type="hidden" value="<?php echo $linhaOcorrencia['ocorr_coordenada_longitude']; ?>">
+        
+        <input type="submit" class="btn btn-default btn-md btn-ocorrencia" value="Gerar Interdição">
     </form>
     <?php } ?>
 </div>

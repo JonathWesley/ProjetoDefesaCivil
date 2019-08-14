@@ -131,6 +131,17 @@ div h4{
     width: 100%;
 }
 
+.btn-ocorrencia{
+    display: inline;
+    margin: 10px;
+}
+
+.titulo{
+    font-size: 15px;
+    font-weight: bold;
+    margin: 0px 5px 0px 20px;
+}
+
 /* especificos */
 .cobrade{
     position: relative;

@@ -2,7 +2,7 @@
 session_start();
 include 'database.php';
 
-echo pg_last_error();
+//echo pg_last_error();
 
 if($_SESSION['login']){
     $pagina = $_GET['pagina'];
@@ -13,41 +13,8 @@ if($_SESSION['login']){
         $pagina = 'login';
 }
 
-/*if($_SESSION['login']){
-    $nomePagina = '';
-    switch($pagina){
-        case 'cadastrarOcorrencia': $nomePagina = 'Cadastrar Ocorrencia'; break; 
-        case 'consultarOcorrencia': $nomePagina = 'Consultar Ocorrencia'; break; 
-        case 'cadastrarUsuario': $nomePagina = 'Cadastrar Usuario'; break; 
-        case 'consultarUsuario': $nomePagina = 'Consultar Usuario'; break; 
-        case 'perfil': $nomePagina = 'Perfil'; break;
-        case 'exibirOcorrencia' : $nomePagina = 'Exibir Ocorrencia'; break;
-        case 'exibirUsuario' : $nomePagina = 'Exibir Usuario'; break;
-        case 'editarOcorrencia' : $nomePagina = 'Exibir Ocorrencia'; break;
-        case 'cadastrarChamado' : $nomePagina = 'Cadastrar Chamado'; break;
-        case 'consultarChamado' : $nomePagina = 'Consultar Chamado'; break;
-        case 'exibirChamado' : $nomePagina = 'Exibir Chamado'; break;
-        default: $nomePagina = 'Home'; break;
-    }
-}*/
-
-if($pagina != 'login' && $pagina != 'esqueceuSenha'){
-    /*if(isset($_SESSION['navegacao'])){
-        if(array_search($nomePagina, $_SESSION['navegacao']) != false){
-            $i = array_search($nomePagina, $_SESSION['navegacao']);
-            array_splice($_SESSION['navegacao'], $i, 2);
-        }
-        while(sizeof($_SESSION['navegacao']) > 8){
-            array_shift($_SESSION['navegacao']);
-            array_shift($_SESSION['navegacao']);
-        }
-        array_push($_SESSION['navegacao'],$nomePagina,$pagina);
-    }else{
-        $_SESSION['navegacao'] = ['Home','home'];
-    }*/
-
+if($pagina != 'login' && $pagina != 'esqueceuSenha')
     include 'header.php';
-}
 
 if($_SESSION['nivel_acesso'] == 1){
     switch($pagina){
@@ -63,6 +30,7 @@ if($_SESSION['nivel_acesso'] == 1){
         case 'consultarChamado' : include 'view/consultarChamado.php'; break;
         case 'exibirChamado' : include 'view/exibirChamado.php'; break;
         case 'exibirPessoa' : include 'view/exibirPessoa.php'; break;
+        case 'cadastrarInterdicao' : include 'view/cadastrarInterdicao.php'; break;
         default: include 'view/consultarOcorrencia.php'; break;
     }
 }else if($_SESSION['nivel_acesso'] == 2){
@@ -76,6 +44,7 @@ if($_SESSION['nivel_acesso'] == 1){
         case 'consultarChamado' : include 'view/consultarChamado.php'; break;
         case 'exibirChamado' : include 'view/exibirChamado.php'; break;
         case 'exibirPessoa' : include 'view/exibirPessoa.php'; break;
+        case 'cadastrarInterdicao' : include 'view/cadastrarInterdicao.php'; break;
         default: include 'view/consultarOcorrencia.php'; break;
     }
 }else if($_SESSION['nivel_acesso'] == 3){
@@ -89,6 +58,7 @@ if($_SESSION['nivel_acesso'] == 1){
         case 'consultarChamado' : include 'view/consultarChamado.php'; break;
         case 'exibirChamado' : include 'view/exibirChamado.php'; break;
         case 'exibirPessoa' : include 'view/exibirPessoa.php'; break;
+        case 'cadastrarInterdicao' : include 'view/cadastrarInterdicao.php'; break;
         default: include 'view/consultarOcorrencia.php'; break;
     }
 }else{
