@@ -12,6 +12,20 @@
             </div>
         <?php } ?>
         <div class="box">
+            <div class="row cabecalho">
+                <div class="col-sm-6">
+                    <nav class="texto-cabecalho">Estado de Santa Catarina</nav>
+                    <nav class="texto-cabecalho">Prefeitura de Balneário Camboriú</nav>
+                    <nav class="texto-cabecalho">Secretaria de segunrança</nav>
+                    <nav class="texto-cabecalho">Defesa Civil</nav>
+                </div>
+                <div class="col-sm-6">
+                    <img src="images/balneario-camboriu.png" alt="prefeitura-balneario-camboriu" class="img-cabecalho">
+                </div>
+            </div>
+            <h2 class="text-center">Registro de chamado</h2>
+        </div>
+        <div class="box">
             <div>
                 <span>Data: <span style="color:red;">*</span></span>
                 <span style="position:relative;left:23%">Horário: <span style="color:red;">*</span></span> 

@@ -9,6 +9,7 @@ body{
     .corner-img { display: none; }
     .page-title { left: 0px; font-size: 20px; }
     .footer{ display: block; padding: 0px 0px 0px 0px; }
+    .cabecalho { display: none; }
 }
 
 /* login */
@@ -140,6 +141,15 @@ div h4{
     font-size: 15px;
     font-weight: bold;
     margin: 0px 5px 0px 20px;
+}
+
+.texto-cabecalho{
+    font-size: 20px;
+}
+
+.img-cabecalho{
+    float: right;
+    width: 70%;
 }
 
 /* especificos */

@@ -23,7 +23,21 @@
 <div class="container positioning">
 <div class="jumbotron campo_cadastro">
     <div class="box">
-        <p>Endereços</p>
+        <div class="row cabecalho">
+            <div class="col-sm-6">
+                <nav class="texto-cabecalho">Estado de Santa Catarina</nav>
+                <nav class="texto-cabecalho">Prefeitura de Balneário Camboriú</nav>
+                <nav class="texto-cabecalho">Secretaria de segunrança</nav>
+                <nav class="texto-cabecalho">Defesa Civil</nav>
+            </div>
+            <div class="col-sm-6">
+                <img src="images/balneario-camboriu.png" alt="prefeitura-balneario-camboriu" class="img-cabecalho">
+            </div>
+        </div>
+        <h2 class="text-center">Registro de chamado</h2>
+    </div>
+    <div class="box">
+        <p>Endereço</p>
         <nav>
             Endereço principal: <span id="coordenada_principal" ng-model="sel_endereco" ng-init="sel_endereco='<?php echo $linhaChamado['endereco_principal']; ?>'"><?php echo $linhaChamado['endereco_principal']; ?></span>
         </nav>

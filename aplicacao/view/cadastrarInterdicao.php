@@ -15,13 +15,13 @@
             <nav>
             <h3>Dados ocorrência:</h3>
             </nav>
-            <div>
-                <span class="titulo">Nº ocorrência: </span><span><?php echo $_POST['id_ocorrencia']; ?></span>
-                <span class="titulo">Título: </span><span><?php echo $_POST['titulo_ocorrencia']; ?></span>
+            <div class="row">
+                <div class="col-sm-4"><span class="titulo">Nº ocorrência: </span><span><?php echo $_POST['id_ocorrencia']; ?></span></div>
+                <div class="col-sm-8"><span class="titulo">Título: </span><span><?php echo $_POST['titulo_ocorrencia']; ?></span></div>
             </div><hr>
             <div>
                 <span class="titulo">Endereço principal: </span><span ng-model="sel_endereco" ng-init="sel_endereco='<?php echo $_POST['endereco_principal']; ?>'"><?php echo $_POST['endereco_principal']; ?></span>
-                <br><br>
+                <br>
             </div>
             <div ng-show="sel_endereco == 'Coordenada'">
                 <div>
@@ -30,18 +30,17 @@
                     <br>
                     <button type="button" class="btn-default btn-small inline open-AddBookDialog" data-toggle="modal" data-id="map"><span class="glyphicon glyphicon-map-marker"></span></button>
                 </div>
-                <span id="erroLatLgn" class="alertErro hide">Latitude e/ou Longitude inválida(s).</span>
             </div>
             <div ng-show="sel_endereco == 'Logradouro'">
-                <div>
-                    <span class="titulo">CEP: </span><span><?php echo $_POST['cep']; ?></span>
-                    <span class="titulo">Logradouro: </span><span><?php echo $_POST['logradouro']; ?></span>
-                    <span class="titulo">Número: </span><span><?php echo $_POST['numero']; ?></span>
-                </div><br>
-                <div>
-                    <span class="titulo">Bairro: </span><span><?php echo $_POST['bairro']; ?></span> 
-                    <span class="titulo">Cidade: </span><span><?php echo $_POST['cidade']; ?></span>
-                </div><br>
+                <div class="row">
+                    <div class="col-sm-3"><span class="titulo">CEP: </span><span><?php echo $_POST['cep']; ?></span></div>
+                    <div class="col-sm-6"><span class="titulo">Logradouro: </span><span><?php echo $_POST['logradouro']; ?></span></div>
+                    <div class="col-sm-3"><span class="titulo">Número: </span><span><?php echo $_POST['numero']; ?></span></div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-3"><span class="titulo">Bairro: </span><span><?php echo $_POST['bairro']; ?></span> </div>
+                    <div class="col-sm-6"><span class="titulo">Cidade: </span><span><?php echo $_POST['cidade']; ?></span></div>
+                </div>
                 <div>
                     <span class="titulo">Referência: </span><span><?php echo $_POST['referencia']; ?></span>
                 </div><br>
@@ -54,21 +53,42 @@
                 <br>
                 <input id="data" name="data" type="date" class="form-control" style="width:30%;display:inline;" max="<?php echo date('Y-m-d'); ?>" required>
                 <input type="time" name="horario" class="form-control" style="width:30%;display:inline;" required>
-            </div><br>
+            </div>
         </div>
         <div class="box">
             <div>
-                Tipo: <span style="color:red;">*</span>
-                <label for="tipo"></label>
-                <select name="tipo" class="form-control" style="width:30%;" required>
-                    <option value="Parcial">Parcial</option>
-                    <option value="Total">Total</option>
+                Motivo: <span style="color:red;">*</span>
+                <label for="motivo"></label>
+                <select name="motivo" class="form-control" style="width:30%;" required>
+                    <option value="Colapso de edificação">Colapso de edificação</option>
+                    <option value="Incêndio/Explosão">Incêndio/Explosão</option>
+                    <option value="Deslizamento de solo e/ou rocha">Deslizamento de solo e/ou rocha</option>
+                    <option value="Inundação">Inundação</option>
+                    <option value="Outro">Outro</option>
                 </select>
             </div>
             <div>
-                Descrição: <span style="color:red;">*</span>
-                <textarea id="descricao" name="descricao" class="form-control" cols="30" rows="2" maxlength="100" ng-model="descricaoVal" required></textarea>
-                <span class="char-count">{{descricaoVal.length || 0}}/100</span>
+                Descrição da interdição: <span style="color:red;">*</span>
+                <textarea name="descricao_interdicao" class="form-control" cols="30" rows="2" maxlength="120" required></textarea>
+            </div>
+            <div>
+                Danos aparentes: <span style="color:red;">*</span>
+                <textarea name="danos_aparentes" class="form-control" cols="30" rows="2" maxlength="120" required></textarea>
+            </div>
+            <div>
+                Bens afetados: <span style="color:red;">*</span>
+                <span style="position:relative;left:15%">Tipo de interdição: <span style="color:red;">*</span></span>
+                <br>
+                <label for="bens_afetados"></label>
+                <select name="bens_afetados" class="form-control" style="width:30%;display:inline;" required>
+                    <option value="Particular">Particular</option>
+                    <option value="Público">Público</option>
+                </select>
+                <label for="tipo"></label>
+                <select name="tipo" class="form-control" style="width:30%;display:inline;" required>
+                    <option value="Parcial">Parcial</option>
+                    <option value="Total">Total</option>
+                </select>
             </div>
         </div>
         <input type="submit" class="btn btn-default btn-md" value="Cadastrar">

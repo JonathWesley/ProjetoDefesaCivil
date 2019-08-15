@@ -63,20 +63,34 @@
             </div>
     <?php } ?>
     <div class="box">
-        <p>Endereços</p>
-        <nav>
-            Endereço principal: <span id="coordenada_principal" ng-model="sel_endereco" ng-init="sel_endereco='<?php echo $linhaOcorrencia['ocorr_endereco_principal']; ?>'"><?php echo $linhaOcorrencia['ocorr_endereco_principal']; ?></span>
-        </nav>
+        <div class="row cabecalho">
+            <div class="col-sm-6">
+                <nav class="texto-cabecalho">Estado de Santa Catarina</nav>
+                <nav class="texto-cabecalho">Prefeitura de Balneário Camboriú</nav>
+                <nav class="texto-cabecalho">Secretaria de segunrança</nav>
+                <nav class="texto-cabecalho">Defesa Civil</nav>
+            </div>
+            <div class="col-sm-6">
+                <img src="images/balneario-camboriu.png" alt="prefeitura-balneario-camboriu" class="img-cabecalho">
+            </div>
+        </div>
+        <h2 class="text-center">Registro de ocorrência</h2>
+    </div>
+    <div class="box">
+        <h3>Endereço</h3>
+        <hr>
+        <span class="titulo">Endereço principal: </span><span id="coordenada_principal" ng-model="sel_endereco" ng-init="sel_endereco='<?php echo $linhaOcorrencia['ocorr_endereco_principal']; ?>'"><?php echo $linhaOcorrencia['ocorr_endereco_principal']; ?></span>
         <div ng-show="sel_endereco == 'Logradouro'">
-            <nav>
-                Logradouro: <span id="logradouro"><?php echo $linhaLogradouro['logradouro'];?></span>
-            </nav>
-            <nav>
-                Endereço numeral: <span id="numero" ><?php echo $linhaLogradouro['numero']; ?></span>
-            </nav>
-            <nav>
-                Endereço referência: <span id="referencia" ><?php echo $linhaLogradouro['referencia']; ?></span>
-            </nav>
+            <div class="row">
+                <div class="col-sm-3"><span class="titulo">CEP: </span><?php echo $linhaLogradouro['cep']; ?></div>
+                <div class="col-sm-6"><span class="titulo">Logradouro: </span><?php echo $linhaLogradouro['logradouro']; ?></div>
+                <div class="col-sm-3"><span class="titulo">Número: </span><?php echo $linhaLogradouro['numero']; ?></div>
+            </div>
+            <div class="row">
+                <div class="col-sm-3"><span class="titulo">Bairro: </span><?php echo $linhaLogradouro['bairro']; ?></div>
+                <div class="col-sm-6"><span class="titulo">Cidade: </span><?php echo $linhaLogradouro['cidade']; ?></div>
+            </div>
+            <nav><span class="titulo">Referência: </span><?php echo $linhaLogradouro['referencia']; ?></nav><br>
         </div>
         <div ng-show="sel_endereco == 'Coordenada'">
             <nav>
@@ -89,103 +103,86 @@
         </div>
     </div>
     <div class="box">
-        <p>Agentes</p>
-        <nav>
-            Agente principal: <a id="agente_principal" href="?pagina=exibirUsuario&id=<?php echo $linhaOcorrencia['agente_principal']; ?>"><?php echo $linhaAgentePrincipal['nome']; ?></a>
-        </nav>
-        <nav>
-            Agente de apoio 1: <a id="agente_principal" href="?pagina=exibirUsuario&id=<?php echo $linhaOcorrencia['agente_apoio_1']; ?>"><?php echo $linhaAgente1['nome']; ?></a>
-        </nav>
-        <nav>
-            Agente de apoio 2: <a id="agente_principal" href="?pagina=exibirUsuario&id=<?php echo $linhaOcorrencia['agente_apoio_2']; ?>"><?php echo $linhaAgente2['nome']; ?></a>
-        </nav>
-    </div>
-    <div class="box">
-        <p>Ocorrencia</p>
-        <nav>
-            Data de lançamento: <span id="data_lancamento">
-            <?php 
-                echo date("d/m/Y", strtotime($linhaOcorrencia['data_lancamento']));
-            ?>
-            </span>
-        </nav>
-        <nav>
-            Data de ocorrência: <span id="data_ocorrencia">
-            <?php 
-                echo date("d/m/Y", strtotime($linhaOcorrencia['data_ocorrencia']));
-            ?>
-            </span>
-        </nav>
-        <nav>
-            Titulo: <span id="ocorr_titulo"><?php echo $linhaOcorrencia['ocorr_titulo']; ?></span>
-        </nav>
-        <nav>
-            Descrição: <span id="ocorr_descricao"><?php echo $linhaOcorrencia['ocorr_descricao']; ?></span>
-        </nav>
-        <nav>
-            Origem: <span id="ocorr_origem"><?php echo $linhaOcorrencia['ocorr_origem']; ?></span>
-        </nav>
-    </div>
-
-    <div class="box">
-        <p>Atentidos</p>
-        <nav>
-            Pessoa atendida 1: <a id="atendido_1" href="?pagina=exibirPessoa&id=<?php echo $linhaOcorrencia['atendido_1']; ?>"><?php echo $linhaPessoa1['nome']; ?></a>
-        </nav>
-        <nav>
-            Pessoa atendida 2: <a id="atendido_2" href="?pagina=exibirPessoa&id=<?php echo $linhaOcorrencia['atendido_2']; ?>"><?php echo $linhaPessoa2['nome']; ?></a>
-        </nav>
-    </div>
-
-    <div class="box">
-        <p>Tipo</p>
-        <nav>
-            Cobrade: <span id="ocorr_cobrade"><?php echo $linhaCobrade['subgrupo']; ?></span>
-        </nav>
-        <?php if($linhaCobrade['codigo']=='00000'){ ?>
-            <nav>
-                Cobrade descrição: <span id="cobrade_descricao"><?php echo $linhaOcorrencia['cobrade_descricao']; ?></span>
-            </nav>
+        <h3>Agentes</h3>
+        <hr>
+        <span class="titulo">Agente principal: </span><a id="agente_principal" href="?pagina=exibirUsuario&id=<?php echo $linhaOcorrencia['agente_principal']; ?>"><?php echo $linhaAgentePrincipal['nome']; ?></a><br>
+        <?php if($linhaOcorrencia['agente_apoio_1']){ ?>
+            <span class="titulo">Agente de apoio 1: </span><a id="agente_principal" href="?pagina=exibirUsuario&id=<?php echo $linhaOcorrencia['agente_apoio_1']; ?>"><?php echo $linhaAgente1['nome']; ?></a><br>
+        <?php } if($linhaOcorrencia['agente_apoio_2']){ ?>
+            <span class="titulo">Agente de apoio 2: </span><a id="agente_principal" href="?pagina=exibirUsuario&id=<?php echo $linhaOcorrencia['agente_apoio_2']; ?>"><?php echo $linhaAgente2['nome']; ?></a><br>
         <?php } ?>
-        <nav>
-            Possui fotos: <span id="fotos"><?php echo ($linhaOcorrencia['ocorr_fotos'] == t) ? 'Sim':'Não'; ?></span>
-        </nav>
+        <br>
     </div>
     <div class="box">
-        <p>Status</p>
-        <nav>
-            Prioridade: <span id="ocorr_prioridade"><?php echo $linhaOcorrencia['ocorr_prioridade']; ?></span>
-        </nav>
-        <nav>
-            Analisado: <span id="ocorr_analisado"><?php echo ($linhaOcorrencia['ocorr_analisado'] == t) ? 'Sim':'Não'; ?></span>
-        </nav>
-        <nav>
-            Congelado: <span id="ocorr_congelado"><?php echo ($linhaOcorrencia['ocorr_congelado']== t) ? 'Sim':'Não'; ?></span>
-        </nav>
-        <nav>
-            Encerrado: <span id="ocorr_encerrado"><?php echo ($linhaOcorrencia['ocorr_encerrado']== t) ? 'Sim':'Não'; ?></span>
-        </nav>
+        <h3>Ocorrencia</h3>
+        <hr>
+        <div class="row">
+            <div class="col-sm-6">
+                <span class="titulo">Data de lançamento: </span>
+                <span id="data_lancamento">
+                    <?php echo date("d/m/Y", strtotime($linhaOcorrencia['data_lancamento'])); ?>
+                </span>
+            </div>
+            <div class="col-sm-6">
+                <span class="titulo">Data de ocorrência: </span>
+                <span id="data_ocorrencia">
+                    <?php echo date("d/m/Y", strtotime($linhaOcorrencia['data_ocorrencia'])); ?>
+                </span>
+            </div>
+        </div>
+        <span class="titulo">Titulo: </span><span id="ocorr_titulo"><?php echo $linhaOcorrencia['ocorr_titulo']; ?></span><br>
+        <span class="titulo">Origem: </span><span id="ocorr_origem"><?php echo $linhaOcorrencia['ocorr_origem']; ?></span><br>
+        <span class="titulo">Descrição: </span><span id="ocorr_descricao" class="ocorr_descricao"><?php echo $linhaOcorrencia['ocorr_descricao']; ?></span><br>
+        <br>
+    </div>
+
+    <div class="box">
+        <h3>Atentidos</h3>
+        <hr>
+        <?php if(!$linhaOcorrencia['atendido_1'] && !$linhaOcorrencia['atendido_2']){ ?>
+            <span class=titulo>Nenhuma pessoa foi cadastrada</span><br>
+        <?php }else{ ?>
+            <span class="titulo">Pessoa atendida 1: </span><a id="atendido_1" href="?pagina=exibirPessoa&id=<?php echo $linhaOcorrencia['atendido_1']; ?>"><?php echo $linhaPessoa1['nome']; ?></a><br>
+            <?php if($linhaOcorrencia['atendido_2']){ ?>
+                <span class="titulo">Pessoa atendida 2: </span><a id="atendido_2" href="?pagina=exibirPessoa&id=<?php echo $linhaOcorrencia['atendido_2']; ?>"><?php echo $linhaPessoa2['nome']; ?></a><br>
+            <?php } 
+        }?>
+        <br>
+    </div>
+
+    <div class="box">
+        <h3>Tipo</h3>
+        <hr>
+        <span class="titulo">Cobrade: </span><span id="ocorr_cobrade"><?php echo $linhaCobrade['subgrupo']; ?></span><br>
+        <?php if($linhaCobrade['codigo']=='00000'){ ?>
+            <span class="titulo">Cobrade descrição: </span><span id="cobrade_descricao"><?php echo $linhaOcorrencia['cobrade_descricao']; ?></span>
+        <?php } ?>
+        <span class="titulo">Possui fotos: </span><span id="fotos"><?php echo ($linhaOcorrencia['ocorr_fotos'] == t) ? 'Sim':'Não'; ?></span>
     </div>
     <div class="box">
-        <p>Informações</p>
-        <nav>
-            Ativa: <span id="ativa"><?php echo ($linhaOcorrencia['ativo']== t) ? 'Sim':'Não'; ?></span>
-        </nav>
-        <nav>
-            Data de alteração: <span id="data_alteracao"><?php echo date("d/m/Y", strtotime($linhaOcorrencia['data_ocorrencia'])); ?></span>
-        </nav>
-        <nav>
-            Usuário que realizou a alteração: <a id="usuario_criador" href="?pagina=exibirUsuario&id=<?php echo $linhaOcorrencia['usuario_criador']; ?>"><?php echo $linhaUsuarioCriador['nome']; ?></a>
-        </nav>
-        <nav>
-            Ocorrência de referência: 
+        <h3>Status</h3>
+        <hr>
+        <span class="titulo">Prioridade: </span><span id="ocorr_prioridade"><?php echo $linhaOcorrencia['ocorr_prioridade']; ?></span>
+        <span class="titulo">Analisado: </span><span id="ocorr_analisado"><?php echo ($linhaOcorrencia['ocorr_analisado'] == t) ? 'Sim':'Não'; ?></span>
+        <span class="titulo">Congelado: </span><span id="ocorr_congelado"><?php echo ($linhaOcorrencia['ocorr_congelado']== t) ? 'Sim':'Não'; ?></span>
+        <span class="titulo">Encerrado: </span><span id="ocorr_encerrado"><?php echo ($linhaOcorrencia['ocorr_encerrado']== t) ? 'Sim':'Não'; ?></span>
+        <br><br>
+    </div>
+    <div class="box">
+        <h3>Informações</h3>
+        <hr>
+        <span class="titulo">Ativa: </span><span id="ativa"><?php echo ($linhaOcorrencia['ativo']== t) ? 'Sim':'Não'; ?></span><br>
+        <span class="titulo">Data de alteração: </span><span id="data_alteracao"><?php echo date("d/m/Y", strtotime($linhaOcorrencia['data_ocorrencia'])); ?></span><br>
+        <span class="titulo">Usuário que realizou a alteração: </span><a id="usuario_criador" href="?pagina=exibirUsuario&id=<?php echo $linhaOcorrencia['usuario_criador']; ?>"><?php echo $linhaUsuarioCriador['nome']; ?></a><br>
+        <span class="titulo">Ocorrência de referência: </span>
             <?php if($linhaOcorrencia['ocorr_referencia'] == null){ ?>
-                <span id="ocorr_referencia"><?php echo 'Não possui'; ?></span>
+                <span id="ocorr_referencia"><?php echo 'Não possui'; ?></span><br>
             <?php }else{ ?>
-                <a id="ocorr_referencia" href="?pagina=exibirOcorrencia&id=<?php echo $linhaOcorrencia['ocorr_referencia']; ?>"><?php echo $linhaOcorrencia['ocorr_referencia']; ?></a>
+                <a id="ocorr_referencia" href="?pagina=exibirOcorrencia&id=<?php echo $linhaOcorrencia['ocorr_referencia']; ?>"><?php echo $linhaOcorrencia['ocorr_referencia']; ?></a><br>
             <?php } ?>
-        </nav>
+        <br>
     </div>
+
     <div class="modal fade" id="map" role="dialog">
         <div class="modal-dialog modal-lg">
             <div class="modal-content">
@@ -199,54 +196,55 @@
             </div>
         </div>
     </div>
-    <?php if($linhaOcorrencia['ativo']== t){ ?>
-    <form action="index.php?pagina=editarOcorrencia" method="post">
-        <input name="id_ocorrencia" type="hidden" value="<?php echo $id_ocorrencia; ?>">
-        <input name="chamado_id" type="hidden" value="<?php echo $linhaOcorrencia['chamado_id']; ?>">
-        <input name="endereco_principal" type="hidden" value="<?php echo $linhaOcorrencia['ocorr_endereco_principal']; ?>">
-        <input name="cep" type="hidden" value="<?php echo $linhaLogradouro['cep']; ?>">
-        <input name="cidade" type="hidden" value="<?php echo $linhaLogradouro['cidade']; ?>">
-        <input name="bairro" type="hidden" value="<?php echo $linhaLogradouro['bairro']; ?>">
-        <input name="logradouro" type="hidden" value="<?php echo $linhaLogradouro['logradouro']; ?>">
-        <input name="numero" type="hidden" value="<?php echo $linhaLogradouro['numero'] ?>">
-        <input name="referencia" type="hidden" value="<?php echo $linhaLogradouro['referencia']; ?>">
-        <input name="latitude" type="hidden" value="<?php echo $linhaOcorrencia['ocorr_coordenada_latitude']; ?>">
-        <input name="longitude" type="hidden" value="<?php echo $linhaOcorrencia['ocorr_coordenada_longitude']; ?>">
-        <input name="agente_principal" type="hidden" value="<?php echo $linhaAgentePrincipal['nome']; ?>">
-        <input name="agente_apoio1" type="hidden" value="<?php echo $linhaAgente1['nome']; ?>">
-        <input name="agente_apoio2" type="hidden" value="<?php echo $linhaAgente2['nome']; ?>">
-        <input name="data_lancamento" type="hidden" value="<?php echo $linhaOcorrencia['data_lancamento']; ?>">
-        <input name="data_ocorrencia" type="hidden" value="<?php echo $linhaOcorrencia['data_ocorrencia']; ?>">
-        <input name="titulo" type="hidden" value="<?php echo $linhaOcorrencia['ocorr_titulo']; ?>">
-        <input name="ocorr_descricao" type="hidden" value="<?php echo $linhaOcorrencia['ocorr_descricao']; ?>">
-        <input name="ocorr_origem" type="hidden" value="<?php echo $linhaOcorrencia['ocorr_origem']; ?>">
-        <input name="pessoa1" type="hidden" value="<?php echo $linhaPessoa1['nome']; ?>">
-        <input name="pessoa2" type="hidden" value="<?php echo $linhaPessoa2['nome']; ?>">
-        <input name="ocorr_cobrade" type="hidden" value="<?php echo $linhaCobrade['codigo']; ?>">
-        <input name="cobrade_descricao" type="hidden" value="<?php echo $linhaOcorrencia['cobrade_descricao']; ?>">
-        <input name="possui_foto" type="hidden" value="<?php echo $linhaOcorrencia['ocorr_fotos']; ?>">
-        <input name="prioridade" type="hidden" value="<?php echo $linhaOcorrencia['ocorr_prioridade']; ?>">
-        <input name="analisado" type="hidden" value="<?php echo $linhaOcorrencia['ocorr_analisado']; ?>">
-        <input name="congelado" type="hidden" value="<?php echo $linhaOcorrencia['ocorr_congelado']; ?>">
-        <input name="encerrado" type="hidden" value="<?php echo $linhaOcorrencia['ocorr_encerrado']; ?>">
 
-        <input type="submit" class="btn btn-default btn-md btn-ocorrencia" value="Editar Ocorrencia">
-    </form>
-    <form action="index.php?pagina=cadastrarInterdicao" method="post">
-        <input name="id_ocorrencia" type="hidden" value="<?php echo $id_ocorrencia; ?>">
-        <input name="titulo_ocorrencia" type="hidden" value="<?php echo $linhaOcorrencia['ocorr_titulo']; ?>">
-        <input name="endereco_principal" type="hidden" value="<?php echo $linhaOcorrencia['ocorr_endereco_principal']; ?>">
-        <input name="cep" type="hidden" value="<?php echo $linhaLogradouro['cep']; ?>">
-        <input name="cidade" type="hidden" value="<?php echo $linhaLogradouro['cidade']; ?>">
-        <input name="bairro" type="hidden" value="<?php echo $linhaLogradouro['bairro']; ?>">
-        <input name="logradouro" type="hidden" value="<?php echo $linhaLogradouro['logradouro']; ?>">
-        <input name="numero" type="hidden" value="<?php echo $linhaLogradouro['numero'] ?>">
-        <input name="referencia" type="hidden" value="<?php echo $linhaLogradouro['referencia']; ?>">
-        <input name="latitude" type="hidden" value="<?php echo $linhaOcorrencia['ocorr_coordenada_latitude']; ?>">
-        <input name="longitude" type="hidden" value="<?php echo $linhaOcorrencia['ocorr_coordenada_longitude']; ?>">
-        
-        <input type="submit" class="btn btn-default btn-md btn-ocorrencia" value="Gerar Interdição">
-    </form>
+    <?php if($linhaOcorrencia['ativo']== t){ ?>
+        <form action="index.php?pagina=editarOcorrencia" method="post">
+            <input name="id_ocorrencia" type="hidden" value="<?php echo $id_ocorrencia; ?>">
+            <input name="chamado_id" type="hidden" value="<?php echo $linhaOcorrencia['chamado_id']; ?>">
+            <input name="endereco_principal" type="hidden" value="<?php echo $linhaOcorrencia['ocorr_endereco_principal']; ?>">
+            <input name="cep" type="hidden" value="<?php echo $linhaLogradouro['cep']; ?>">
+            <input name="cidade" type="hidden" value="<?php echo $linhaLogradouro['cidade']; ?>">
+            <input name="bairro" type="hidden" value="<?php echo $linhaLogradouro['bairro']; ?>">
+            <input name="logradouro" type="hidden" value="<?php echo $linhaLogradouro['logradouro']; ?>">
+            <input name="numero" type="hidden" value="<?php echo $linhaLogradouro['numero'] ?>">
+            <input name="referencia" type="hidden" value="<?php echo $linhaLogradouro['referencia']; ?>">
+            <input name="latitude" type="hidden" value="<?php echo $linhaOcorrencia['ocorr_coordenada_latitude']; ?>">
+            <input name="longitude" type="hidden" value="<?php echo $linhaOcorrencia['ocorr_coordenada_longitude']; ?>">
+            <input name="agente_principal" type="hidden" value="<?php echo $linhaAgentePrincipal['nome']; ?>">
+            <input name="agente_apoio1" type="hidden" value="<?php echo $linhaAgente1['nome']; ?>">
+            <input name="agente_apoio2" type="hidden" value="<?php echo $linhaAgente2['nome']; ?>">
+            <input name="data_lancamento" type="hidden" value="<?php echo $linhaOcorrencia['data_lancamento']; ?>">
+            <input name="data_ocorrencia" type="hidden" value="<?php echo $linhaOcorrencia['data_ocorrencia']; ?>">
+            <input name="titulo" type="hidden" value="<?php echo $linhaOcorrencia['ocorr_titulo']; ?>">
+            <input name="ocorr_descricao" type="hidden" value="<?php echo $linhaOcorrencia['ocorr_descricao']; ?>">
+            <input name="ocorr_origem" type="hidden" value="<?php echo $linhaOcorrencia['ocorr_origem']; ?>">
+            <input name="pessoa1" type="hidden" value="<?php echo $linhaPessoa1['nome']; ?>">
+            <input name="pessoa2" type="hidden" value="<?php echo $linhaPessoa2['nome']; ?>">
+            <input name="ocorr_cobrade" type="hidden" value="<?php echo $linhaCobrade['codigo']; ?>">
+            <input name="cobrade_descricao" type="hidden" value="<?php echo $linhaOcorrencia['cobrade_descricao']; ?>">
+            <input name="possui_foto" type="hidden" value="<?php echo $linhaOcorrencia['ocorr_fotos']; ?>">
+            <input name="prioridade" type="hidden" value="<?php echo $linhaOcorrencia['ocorr_prioridade']; ?>">
+            <input name="analisado" type="hidden" value="<?php echo $linhaOcorrencia['ocorr_analisado']; ?>">
+            <input name="congelado" type="hidden" value="<?php echo $linhaOcorrencia['ocorr_congelado']; ?>">
+            <input name="encerrado" type="hidden" value="<?php echo $linhaOcorrencia['ocorr_encerrado']; ?>">
+
+            <input type="submit" class="btn btn-default btn-md btn-ocorrencia" value="Editar Ocorrencia">
+        </form>
+        <form action="index.php?pagina=cadastrarInterdicao" method="post">
+            <input name="id_ocorrencia" type="hidden" value="<?php echo $id_ocorrencia; ?>">
+            <input name="titulo_ocorrencia" type="hidden" value="<?php echo $linhaOcorrencia['ocorr_titulo']; ?>">
+            <input name="endereco_principal" type="hidden" value="<?php echo $linhaOcorrencia['ocorr_endereco_principal']; ?>">
+            <input name="cep" type="hidden" value="<?php echo $linhaLogradouro['cep']; ?>">
+            <input name="cidade" type="hidden" value="<?php echo $linhaLogradouro['cidade']; ?>">
+            <input name="bairro" type="hidden" value="<?php echo $linhaLogradouro['bairro']; ?>">
+            <input name="logradouro" type="hidden" value="<?php echo $linhaLogradouro['logradouro']; ?>">
+            <input name="numero" type="hidden" value="<?php echo $linhaLogradouro['numero'] ?>">
+            <input name="referencia" type="hidden" value="<?php echo $linhaLogradouro['referencia']; ?>">
+            <input name="latitude" type="hidden" value="<?php echo $linhaOcorrencia['ocorr_coordenada_latitude']; ?>">
+            <input name="longitude" type="hidden" value="<?php echo $linhaOcorrencia['ocorr_coordenada_longitude']; ?>">
+            
+            <input type="submit" class="btn btn-default btn-md btn-ocorrencia" value="Gerar Interdição">
+        </form>
     <?php } ?>
 </div>
 </div>

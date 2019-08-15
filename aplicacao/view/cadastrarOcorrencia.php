@@ -8,6 +8,20 @@
             <div class="alert alert-danger" role="alert">Falha ao cadastrar ocorrencia.</div>
         <?php } ?>
         <div class="box">
+            <div class="row cabecalho">
+                <div class="col-sm-6">
+                    <nav class="texto-cabecalho">Estado de Santa Catarina</nav>
+                    <nav class="texto-cabecalho">Prefeitura de Balneário Camboriú</nav>
+                    <nav class="texto-cabecalho">Secretaria de segunrança</nav>
+                    <nav class="texto-cabecalho">Defesa Civil</nav>
+                </div>
+                <div class="col-sm-6">
+                    <img src="images/balneario-camboriu.png" alt="prefeitura-balneario-camboriu" class="img-cabecalho">
+                </div>
+            </div>
+            <h2 class="text-center">Registro de ocorrência</h2>
+        </div>
+        <div class="box">
             <div>
                 Número do chamado:
                 <input name="id_chamado" type="text" class="form-control" style="width:25%;" value="<?php echo $_POST['id_chamado']; ?>" onchange="verificaNumeroChamado(this.value)">
