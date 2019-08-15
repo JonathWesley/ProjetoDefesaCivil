@@ -29,7 +29,7 @@
             <span id="erroNumeroChamado" class="alertErro hide">Número inválido.</span>
         </div>
         <div class="box">
-            <div>
+            <!--<div>
                 Endereço principal: <span style="color:red;">*</span>
                 <br>
                 <label for="endereco_principal"></label>
@@ -37,8 +37,8 @@
                     <option value="Coordenada">Coordenada</option>
                     <option value="Logradouro">Logradouro</option>
                 </select>
-            </div>
-            <div ng-show="sel_endereco == 'Coordenada'">
+            </div>-->
+            <div><!--ng-show="sel_endereco == 'Coordenada'">-->
                 <div>
                     <span>Latitude: <span style="color:red;">*</span></span> 
                     <span style="position:relative;left:21%;">Longitude: <span style="color:red;">*</span></span>
@@ -49,7 +49,7 @@
                 </div>
                 <span id="erroLatLgn" class="alertErro hide">Latitude e/ou Longitude inválida(s).</span>
             </div>
-            <div ng-show="sel_endereco == 'Logradouro'">
+            <div><!-- ng-show="sel_endereco == 'Logradouro'">-->
                 <div>
                     <span>CEP:</span> 
                     <span style="position:relative;left:11%">Logradouro: <span style="color:red;">*</span></span> 

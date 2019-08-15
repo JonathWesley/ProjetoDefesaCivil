@@ -135,7 +135,6 @@
         <span class="titulo">Descrição: </span><span id="ocorr_descricao" class="ocorr_descricao"><?php echo $linhaOcorrencia['ocorr_descricao']; ?></span><br>
         <br>
     </div>
-
     <div class="box">
         <h3>Atentidos</h3>
         <hr>
@@ -149,7 +148,6 @@
         }?>
         <br>
     </div>
-
     <div class="box">
         <h3>Tipo</h3>
         <hr>
@@ -182,7 +180,6 @@
             <?php } ?>
         <br>
     </div>
-
     <div class="modal fade" id="map" role="dialog">
         <div class="modal-dialog modal-lg">
             <div class="modal-content">
@@ -196,7 +193,6 @@
             </div>
         </div>
     </div>
-
     <?php if($linhaOcorrencia['ativo']== t){ ?>
         <form action="index.php?pagina=editarOcorrencia" method="post">
             <input name="id_ocorrencia" type="hidden" value="<?php echo $id_ocorrencia; ?>">
