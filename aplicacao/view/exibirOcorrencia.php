@@ -53,6 +53,10 @@
     $query = "SELECT * FROM cobrade WHERE codigo = '$cobrade'";
     $result = pg_query($connection, $query) or die(pg_last_error());
     $linhaCobrade = pg_fetch_array($result, 0);
+
+    $query = "SELECT id_interdicao FROM interdicao WHERE id_ocorrencia = $id_ocorrencia";
+    $result = pg_query($connection, $query) or die(pg_last_error());
+    $id_interdicao = pg_fetch_array($result, 0)['id_interdicao'];
 ?>
 
 <div class="container positioning">
@@ -74,10 +78,10 @@
                 <img src="images/balneario-camboriu.png" alt="prefeitura-balneario-camboriu" class="img-cabecalho">
             </div>
         </div>
-        <h2 class="text-center">Registro de ocorrência</h2>
+        <h3 class="text-center">Registro de ocorrência</h3>
     </div>
     <div class="box">
-        <h3>Endereço</h3>
+        <h4>Endereço</h4>
         <hr>
         <span class="titulo">Endereço principal: </span><span id="coordenada_principal" ng-model="sel_endereco" ng-init="sel_endereco='<?php echo $linhaOcorrencia['ocorr_endereco_principal']; ?>'"><?php echo $linhaOcorrencia['ocorr_endereco_principal']; ?></span>
         <div ng-show="sel_endereco == 'Logradouro'">
@@ -103,7 +107,7 @@
         </div>
     </div>
     <div class="box">
-        <h3>Agentes</h3>
+        <h4>Agentes</h4>
         <hr>
         <span class="titulo">Agente principal: </span><a id="agente_principal" href="?pagina=exibirUsuario&id=<?php echo $linhaOcorrencia['agente_principal']; ?>"><?php echo $linhaAgentePrincipal['nome']; ?></a><br>
         <?php if($linhaOcorrencia['agente_apoio_1']){ ?>
@@ -114,7 +118,7 @@
         <br>
     </div>
     <div class="box">
-        <h3>Ocorrencia</h3>
+        <h4>Ocorrencia</h4>
         <hr>
         <div class="row">
             <div class="col-sm-6">
@@ -136,7 +140,7 @@
         <br>
     </div>
     <div class="box">
-        <h3>Atentidos</h3>
+        <h4>Atentidos</h4>
         <hr>
         <?php if(!$linhaOcorrencia['atendido_1'] && !$linhaOcorrencia['atendido_2']){ ?>
             <span class=titulo>Nenhuma pessoa foi cadastrada</span><br>
@@ -149,7 +153,7 @@
         <br>
     </div>
     <div class="box">
-        <h3>Tipo</h3>
+        <h4>Tipo</h4>
         <hr>
         <span class="titulo">Cobrade: </span><span id="ocorr_cobrade"><?php echo $linhaCobrade['subgrupo']; ?></span><br>
         <?php if($linhaCobrade['codigo']=='00000'){ ?>
@@ -158,7 +162,7 @@
         <span class="titulo">Possui fotos: </span><span id="fotos"><?php echo ($linhaOcorrencia['ocorr_fotos'] == t) ? 'Sim':'Não'; ?></span>
     </div>
     <div class="box">
-        <h3>Status</h3>
+        <h4>Status</h4>
         <hr>
         <span class="titulo">Prioridade: </span><span id="ocorr_prioridade"><?php echo $linhaOcorrencia['ocorr_prioridade']; ?></span>
         <span class="titulo">Analisado: </span><span id="ocorr_analisado"><?php echo ($linhaOcorrencia['ocorr_analisado'] == t) ? 'Sim':'Não'; ?></span>
@@ -167,7 +171,7 @@
         <br><br>
     </div>
     <div class="box">
-        <h3>Informações</h3>
+        <h4>Informações</h4>
         <hr>
         <span class="titulo">Ativa: </span><span id="ativa"><?php echo ($linhaOcorrencia['ativo']== t) ? 'Sim':'Não'; ?></span><br>
         <span class="titulo">Data de alteração: </span><span id="data_alteracao"><?php echo date("d/m/Y", strtotime($linhaOcorrencia['data_ocorrencia'])); ?></span><br>
@@ -223,24 +227,29 @@
             <input name="analisado" type="hidden" value="<?php echo $linhaOcorrencia['ocorr_analisado']; ?>">
             <input name="congelado" type="hidden" value="<?php echo $linhaOcorrencia['ocorr_congelado']; ?>">
             <input name="encerrado" type="hidden" value="<?php echo $linhaOcorrencia['ocorr_encerrado']; ?>">
-
-            <input type="submit" class="btn btn-default btn-md btn-ocorrencia" value="Editar Ocorrencia">
+            <input type="submit" class="btn btn-default btn-md" style="position:relative;left:25%;" value="Editar Ocorrencia">
         </form>
-        <form action="index.php?pagina=cadastrarInterdicao" method="post">
-            <input name="id_ocorrencia" type="hidden" value="<?php echo $id_ocorrencia; ?>">
-            <input name="titulo_ocorrencia" type="hidden" value="<?php echo $linhaOcorrencia['ocorr_titulo']; ?>">
-            <input name="endereco_principal" type="hidden" value="<?php echo $linhaOcorrencia['ocorr_endereco_principal']; ?>">
-            <input name="cep" type="hidden" value="<?php echo $linhaLogradouro['cep']; ?>">
-            <input name="cidade" type="hidden" value="<?php echo $linhaLogradouro['cidade']; ?>">
-            <input name="bairro" type="hidden" value="<?php echo $linhaLogradouro['bairro']; ?>">
-            <input name="logradouro" type="hidden" value="<?php echo $linhaLogradouro['logradouro']; ?>">
-            <input name="numero" type="hidden" value="<?php echo $linhaLogradouro['numero'] ?>">
-            <input name="referencia" type="hidden" value="<?php echo $linhaLogradouro['referencia']; ?>">
-            <input name="latitude" type="hidden" value="<?php echo $linhaOcorrencia['ocorr_coordenada_latitude']; ?>">
-            <input name="longitude" type="hidden" value="<?php echo $linhaOcorrencia['ocorr_coordenada_longitude']; ?>">
-            
-            <input type="submit" class="btn btn-default btn-md btn-ocorrencia" value="Gerar Interdição">
-        </form>
+        <?php if(!$id_interdicao){ ?>
+            <form action="index.php?pagina=cadastrarInterdicao" method="post">
+                <input name="id_ocorrencia" type="hidden" value="<?php echo $id_ocorrencia; ?>">
+                <input name="titulo_ocorrencia" type="hidden" value="<?php echo $linhaOcorrencia['ocorr_titulo']; ?>">
+                <input name="endereco_principal" type="hidden" value="<?php echo $linhaOcorrencia['ocorr_endereco_principal']; ?>">
+                <input name="cep" type="hidden" value="<?php echo $linhaLogradouro['cep']; ?>">
+                <input name="cidade" type="hidden" value="<?php echo $linhaLogradouro['cidade']; ?>">
+                <input name="bairro" type="hidden" value="<?php echo $linhaLogradouro['bairro']; ?>">
+                <input name="logradouro" type="hidden" value="<?php echo $linhaLogradouro['logradouro']; ?>">
+                <input name="numero" type="hidden" value="<?php echo $linhaLogradouro['numero'] ?>">
+                <input name="referencia" type="hidden" value="<?php echo $linhaLogradouro['referencia']; ?>">
+                <input name="latitude" type="hidden" value="<?php echo $linhaOcorrencia['ocorr_coordenada_latitude']; ?>">
+                <input name="longitude" type="hidden" value="<?php echo $linhaOcorrencia['ocorr_coordenada_longitude']; ?>">
+                <input type="submit" class="btn btn-default btn-md" style="position:relative;left:50%;top:-33px;" value="Gerar Interdição">
+            </form>
+        <?php }else{ ?>
+            <form action="index.php?pagina=exibirInterdicao" method="post">
+                <input name="id_interdicao" type="hidden" value="<?php echo $id_interdicao; ?>">
+                <input type="submit" class="btn btn-default btn-md" style="position:relative;left:50%;top:-33px;" value="Verificar Interdição">
+            </form>
+        <?php } ?>
     <?php } ?>
 </div>
 </div>

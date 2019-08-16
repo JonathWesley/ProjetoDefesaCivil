@@ -14,7 +14,7 @@
 <div class="container positioning">
 <div class="jumbotron text-center">
     <div class="box">
-        <h2 class="text-center">Usuário</h2>
+        <h3 class="text-center" style="margin:5px;">Usuário</h3>
     </div>
     <div class="box">
         <div class="row">
@@ -24,13 +24,20 @@
             <div class="col-sm-6">
                 <br><span class="titulo">Nome: </span><?php echo $linha['nome']; ?>
                 <hr>
+                <?php session_start();
+                      if($_SESSION['nivel_acesso'] == 1){ ?>
                 <span class="titulo">CPF: </span><?php echo substr($linha['cpf'],0,3).'.'.substr($linha['cpf'],3,3).'.'.substr($linha['cpf'],6,3).'-'.substr($linha['cpf'],9,2); ?>
                 <hr>
+                <?php } ?>
                 <span class="titulo">Email: </span><?php echo $linha['email']; ?>
                 <br>
                 <span class="titulo">Telefone: </span><?php echo '('.substr($linha['telefone'],0,2).')'.substr($linha['telefone'],2,5).'-'.substr($linha['telefone'],7); ?>
+                <?php session_start();
+                      if($_SESSION['nivel_acesso'] == 1){ ?>
                 <hr>
                 <span class="titulo">Nivel de acesso: </span><?php if($linha['nivel_acesso']==1){echo 'Diretor';}else if($linha['nivel_acesso']==2){echo 'Coordenador';}else{echo 'Agente';} ?>
+                <?php } ?>
+                <br><br>
             </div>
         </div>
     </div>

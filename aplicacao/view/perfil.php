@@ -16,7 +16,7 @@
 <div class="container positioning">
 <div class="jumbotron text-center">
     <div class="box">
-        <h2 class="text-center">Perfil</h2>
+        <h3 class="text-center" style="margin:5px;">Perfil</h3>
     </div>
     <div class="box">
         <div class="row">
@@ -32,7 +32,8 @@
                 <br>
                 <span class="titulo">Telefone: </span><?php echo '('.substr($linha['telefone'],0,2).')'.substr($linha['telefone'],2,5).'-'.substr($linha['telefone'],7); ?>
                 <hr>
-                <span class="titulo">Nivel de acesso: </span><?php if($linha['nivel_acesso']==1){echo 'Diretor';}else if($linha['nivel_acesso']==2){echo 'Coordenador';}else{echo 'Agente';} ?>
+                <span class="titulo">Nivel de acesso: </span><?php if($linha['nivel_acesso']==1){echo 'Diretor';}else if($linha['nivel_acesso']==2){echo 'Coordenador';}else{echo 'Agente';} ?><br>
+                <br>
             </div>
         </div>
     </div>

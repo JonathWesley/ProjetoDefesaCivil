@@ -96,7 +96,7 @@ body{
     padding: 10px;
 }
 
-div h4{
+.email_esqueceu_senha{
     position: relative;
     top: -40px;
 }
@@ -144,12 +144,12 @@ div h4{
 }
 
 .texto-cabecalho{
-    font-size: 20px;
+    font-size: 16px;
 }
 
 .img-cabecalho{
     float: right;
-    width: 70%;
+    width: 60%;
 }
 
 /* especificos */

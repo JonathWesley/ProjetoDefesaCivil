@@ -20,7 +20,7 @@
         
     <div class="container login-box">
         <div class="jumbotron">
-            <h4>Digite seu email:</h4>
+            <h4 class="email_esqueceu_senha">Digite seu email:</h4>
             <form action="processa_esqueceu_senha.php" method="post">
             <div class="input-group">
                 <input id="email" type="text" class="form-control" name="email" placeholder="Email">

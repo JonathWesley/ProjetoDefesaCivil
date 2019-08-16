@@ -2,7 +2,7 @@
 <div class="jumbotron campo_cadastro">
     <form method="post" action="processa_cadastrar_usuario.php" enctype="multipart/form-data" onsubmit="return validarFormCadastroUsuario()">
         <div class="box">
-            <h2 class="text-center">Cadastro de usuário</h2>
+            <h3 class="text-center" style="margin:5px;">Cadastro de usuário</h3>
         </div>
         <div class="box">
             <?php if(isset($_GET['sucesso'])){ ?>

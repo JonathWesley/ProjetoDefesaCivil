@@ -2,12 +2,12 @@
 <div class="jumbotron campo_cadastro">
     <?php if(isset($_GET['sucesso'])){ ?>
         <div class="alert alert-success" role="alert">
-            Chamado cadastrada com sucesso.
+            Interdição cadastrada com sucesso.
         </div>
         <?php } ?>
         <?php if(isset($_GET['erroDB'])){ ?>
         <div class="alert alert-danger" role="alert">
-            Falha ao cadastrar chamado.
+            Falha ao cadastrar interdição.
         </div>
     <?php } ?>
     <div class="box">
@@ -22,11 +22,11 @@
                     <img src="images/balneario-camboriu.png" alt="prefeitura-balneario-camboriu" class="img-cabecalho">
                 </div>
             </div>
-            <h2 class="text-center">Registro de interdição</h2>
+            <h3 class="text-center">Registro de interdição</h3>
         </div>
     <div class="box">
         <nav>
-        <h3>Dados ocorrência:</h3>
+        <h4>Dados ocorrência:</h4>
         </nav>
         <div class="row">
             <div class="col-sm-4"><span class="titulo">Nº ocorrência: </span><span><?php echo $_POST['id_ocorrencia']; ?></span></div>

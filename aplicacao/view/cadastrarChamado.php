@@ -23,7 +23,7 @@
                     <img src="images/balneario-camboriu.png" alt="prefeitura-balneario-camboriu" class="img-cabecalho">
                 </div>
             </div>
-            <h2 class="text-center">Registro de chamado</h2>
+            <h3 class="text-center">Registro de chamado</h3>
         </div>
         <div class="box">
             <div>
