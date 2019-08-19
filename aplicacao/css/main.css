@@ -4,14 +4,6 @@ body{
     background-color: #ffe;
 }
 
-/* ajustes pra telas pequenas */
-@media all and (max-width: 600px){
-    .corner-img { display: none; }
-    .page-title { left: 0px; font-size: 20px; }
-    .footer{ display: block; padding: 0px 0px 0px 0px; }
-    .cabecalho { display: none; }
-}
-
 /* login */
 .img-box{
     position: relative;
@@ -152,6 +144,12 @@ body{
     width: 60%;
 }
 
+.readtextarea{
+    width: 90%;
+    position: relative;
+    left: 5%;
+}
+
 /* especificos */
 .cobrade{
     position: relative;
@@ -188,10 +186,120 @@ body{
     float: right;
 }
 
+.ocorrencias_encerradas{
+    margin-left: 20px;
+}
+
+.endereco-principal{
+    width:30%;
+    display:inline;
+}
+
+.lat-lgn{
+    width:30%;
+    display:inline;
+}
+
+.data{
+    width:30%;
+    display:inline;
+}
+
+.cobrade-sub{
+    width: 50%;
+}
+
+.btn-interdicao{
+    position:relative;
+    left:50%;
+    top:-33px;
+}
+
 /* footer */
 .footer{
     display: inline;
     padding: 0px 150px 0px 0px;
     position: relative;
     top: 100px;
+}
+
+/* ajustes pra telas pequenas */
+@media only screen and (max-width: 1000px){
+    .corner-img{
+        display: none; 
+    }
+    
+    .page-title{
+        font-size: 40px;
+        left: 20%;
+        margin: 0px;
+    }
+
+    .footer{
+        display: block; padding: 0px 0px 0px 0px;
+    
+    }
+
+    .cabecalho{
+        display: none;
+    }
+
+    .esqueceuSenha{
+        left: 30%;
+    }
+    
+    .container{
+        width: 100%;
+        padding: 0px;
+    }
+
+    .jumbotron{
+        width: 100%;
+        padding: 5px;
+    }
+
+    .box{
+        width: 100%;
+        padding: 5px;
+        margin: 0px;
+    }
+
+    .ocorrencias_encerradas{
+        display: block;
+        margin: 0px;
+        padding: 0px;
+    }
+
+    .elimina-tabela{
+        display: none;
+    }
+
+    .endereco-principal{
+        width:50%;
+    }
+
+    .data{
+        width:40%;
+    }
+
+    .cobrade-sub{
+        width: 70%;
+    }
+
+    .btn, .btn-default, .btn-md{
+        left: 35%;
+        margin: 10px;
+    }
+
+    .btn-interdicao{
+        display: block;
+        left: 0%;
+        top: 0%;
+    }
+
+    .btn-interdicao-g{
+        display: block;
+        left: 25%;
+        top: 0%;
+    }
 }

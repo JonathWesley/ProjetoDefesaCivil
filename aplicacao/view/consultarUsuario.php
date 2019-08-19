@@ -32,10 +32,10 @@
             <table id="tabela" class="table table-striped table-bordered" style="width:100%">
             <thead><tr>
                 <th></th>
-                <th onclick="sortTable(0)">ID<span class="glyphicon glyphicon-sort sort-icon"></th>
+                <th onclick="sortTable(0)" class="elimina-tabela">ID<span class="glyphicon glyphicon-sort sort-icon elimina-tabela"></th>
                 <th onclick="sortTable(1)">Nome<span class="glyphicon glyphicon-sort sort-icon"></th>
                 <th onclick="sortTable(2)">Email<span class="glyphicon glyphicon-sort sort-icon"></th>
-                <th onclick="sortTable(3)">Telefone<span class="glyphicon glyphicon-sort sort-icon"></th>
+                <th onclick="sortTable(3)" class="elimina-tabela">Telefone<span class="glyphicon glyphicon-sort sort-icon elimina-tabela"></th>
             </tr></thead>
             <tbody>
             <?php
@@ -44,10 +44,10 @@
                     echo '<tr><td colspan="5" class="text-center">Nenhum usuário encontrado</td></tr>';
                 while($linha = pg_fetch_array($consulta_usuarios, $i)){
                     echo '<tr><td class="text-center"><a href="index.php?pagina=exibirUsuario&id='.$linha['id_usuario'].'"><span class="glyphicon glyphicon-eye-open"></span></a></td>';
-                    echo '<td>'.$linha['id_usuario'].'</td>';
+                    echo '<td class="elimina-tabela">'.$linha['id_usuario'].'</td>';
                     echo '<td>'.$linha['nome'].'</td>'; 
                     echo '<td>'.$linha['email'].'</td>';
-                    echo '<td>('.substr($linha['telefone'],0,2).')'.substr($linha['telefone'],2,5).'-'.substr($linha['telefone'],7).'</td></tr>';
+                    echo '<td class="elimina-tabela">('.substr($linha['telefone'],0,2).')'.substr($linha['telefone'],2,5).'-'.substr($linha['telefone'],7).'</td></tr>';
                     $i += 1;
                 }
             ?>

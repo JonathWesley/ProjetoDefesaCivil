@@ -15,7 +15,7 @@
     <div ng-app="myApp" ng-controller="myCtrl">
     <header>
         <img src="images/logo.jpg" alt="DefesaCivil" class="img-rounded corner-img">
-        <h1 class="text-center page-title inline">Defesa Civil</h1>
+        <span class="page-title">Defesa Civil</span>
     </header>
     
     <div class="container login-box">

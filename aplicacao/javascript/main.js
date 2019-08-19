@@ -331,8 +331,8 @@ function SubmitFormData() {
 
 function myMap(position) {
     if($('#latitude').html()){
-        var latitude = parseInt($('#latitude').html());
-        var longitude = parseInt($('#longitude').html());
+        var latitude = parseFloat($('#latitude').html());
+        var longitude = parseFloat($('#longitude').html());
         var myLatLng = {lat: latitude, lng: longitude};
     }else{
         if(position)

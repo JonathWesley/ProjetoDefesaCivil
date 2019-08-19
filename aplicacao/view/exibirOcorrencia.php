@@ -66,6 +66,11 @@
                 Ocorrencia alterada com sucesso.
             </div>
     <?php } ?>
+    <?php if(isset($_GET['sucessoInterdicao'])){ ?>
+            <div class="alert alert-success" role="alert">
+                Desinterditado com sucesso.
+            </div>
+    <?php } ?>
     <div class="box">
         <div class="row cabecalho">
             <div class="col-sm-6">
@@ -98,10 +103,10 @@
         </div>
         <div ng-show="sel_endereco == 'Coordenada'">
             <nav>
-                Latitude: <span id="latitude" ><?php echo $linhaOcorrencia['ocorr_coordenada_latitude']; ?></span>
+                <span class="titulo">Latitude: </span><span id="latitude" ><?php echo $linhaOcorrencia['ocorr_coordenada_latitude']; ?></span>
             </nav>
             <nav class="inline">
-                Longitude: <span id="longitude" ><?php echo $linhaOcorrencia['ocorr_coordenada_longitude']; ?></span>
+            <span class="titulo">Longitude: </span><span id="longitude" ><?php echo $linhaOcorrencia['ocorr_coordenada_longitude']; ?></span>
             </nav>
             <button type="button" class="btn-default btn-small inline open-AddBookDialog" style="position:relative;left:5%" data-toggle="modal" data-id="map"><span class="glyphicon glyphicon-map-marker"></span></button>
         </div>
@@ -242,13 +247,10 @@
                 <input name="referencia" type="hidden" value="<?php echo $linhaLogradouro['referencia']; ?>">
                 <input name="latitude" type="hidden" value="<?php echo $linhaOcorrencia['ocorr_coordenada_latitude']; ?>">
                 <input name="longitude" type="hidden" value="<?php echo $linhaOcorrencia['ocorr_coordenada_longitude']; ?>">
-                <input type="submit" class="btn btn-default btn-md" style="position:relative;left:50%;top:-33px;" value="Gerar Interdição">
+                <input type="submit" class="btn btn-default btn-md btn-interdicao-g" value="Gerar Interdição">
             </form>
         <?php }else{ ?>
-            <form action="index.php?pagina=exibirInterdicao" method="post">
-                <input name="id_interdicao" type="hidden" value="<?php echo $id_interdicao; ?>">
-                <input type="submit" class="btn btn-default btn-md" style="position:relative;left:50%;top:-33px;" value="Verificar Interdição">
-            </form>
+            <a href="index.php?pagina=exibirInterdicao&id=<?php echo $id_interdicao; ?>" class="btn btn-default btn-md btn-interdicao">Verificar Interdição</a>
         <?php } ?>
     <?php } ?>
 </div>

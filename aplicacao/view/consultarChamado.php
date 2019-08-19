@@ -62,7 +62,7 @@
                 <option value="pessoa.nome">Atendido</option>
                 <option value="chamado.descricao">Descricao</option>
             </select>
-            <span style="margin-left: 20px;">Mostrar chamados finalizados: </span>
+            <span class="ocorrencias_encerradas">Mostrar chamados finalizados: </span>
             <input name="finalizado" onchange="this.form.submit()" value="true" type="checkbox" <?php if($_POST['finalizado']==true)echo 'checked'; ?>>
         </form>
     </div>
@@ -73,7 +73,7 @@
                 <th onclick="sortTable(0)">Data<span class="glyphicon glyphicon-sort sort-icon"></span></th>
                 <th onclick="sortTable(1)">Origem<span class="glyphicon glyphicon-sort sort-icon"></span></th>
                 <th onclick="sortTable(2)">Atendido<span class="glyphicon glyphicon-sort sort-icon"></span></th>
-                <th onclick="sortTable(3)">Descricao<span class="glyphicon glyphicon-sort sort-icon"></span></th>
+                <th onclick="sortTable(3)" class="elimina-tabela">Descricao<span class="glyphicon glyphicon-sort sort-icon elimina-tabela"></span></th>
             </tr></thead>
             <tbody>
             <?php
@@ -85,7 +85,7 @@
                     echo '<td>'.$linha['dataa'].'</td>';
                     echo '<td>'.$linha['origem'].'</td>';
                     echo '<td>'.$linha['nome'].'</td>';
-                    echo '<td>'.$linha['descricao'].'</td></tr>';
+                    echo '<td class="elimina-tabela">'.$linha['descricao'].'</td></tr>';
                     $i += 1;
                 }
             ?>

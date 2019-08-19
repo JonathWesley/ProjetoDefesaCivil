@@ -77,7 +77,7 @@
                 <option value="usuario.nome">Agente</option>
                 <option value="data_ocorrencia">Data</option>
             </select>
-            <span style="margin-left: 20px;">Mostrar ocorrências encerradas: </span>
+            <span class="ocorrencias_encerradas">Mostrar ocorrências encerradas: </span>
             <input name="encerrada" onchange="this.form.submit()" value="true" type="checkbox" <?php if($_POST['encerrada']==true)echo 'checked'; ?>>
         </form>
     </div>
@@ -87,7 +87,7 @@
                 <th><!--<span class="glyphicon glyphicon-fullscreen"></span>--></th>
                 <th onclick="sortTable(0)">Cobrade<span class="glyphicon glyphicon-sort sort-icon"></span></th>
                 <th onclick="sortTable(1)">Atendido<span class="glyphicon glyphicon-sort sort-icon"></span></th>
-                <th onclick="sortTable(2)">Agente<span class="glyphicon glyphicon-sort sort-icon"></span></th>
+                <th onclick="sortTable(2)" class="elimina-tabela">Agente<span class="glyphicon glyphicon-sort sort-icon elimina-tabela"></span></th>
                 <th onclick="sortTable(3)">Data<span class="glyphicon glyphicon-sort sort-icon"></span></th>
             </tr></thead>
             <tbody>
@@ -106,7 +106,7 @@
                     echo '<td class="text-center"><a href="index.php?pagina=exibirOcorrencia&id='.$linha['id_ocorrencia'].'"><span class="glyphicon glyphicon-eye-open"></span></a></td>';
                     echo '<td>'.$linha['subgrupo'].'</td>';
                     echo '<td>'.$linha['nome_pessoa'].'</td>';
-                    echo '<td>'.$linha['nome'].'</td>';
+                    echo '<td class="elimina-tabela">'.$linha['nome'].'</td>';
                     echo '<td>'.$linha['data_ocorrencia'].'</td></tr>';
                     $i += 1;
                 }

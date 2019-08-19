@@ -1,7 +1,7 @@
 <?php
     include 'database.php';
 
-    $id_interdicao = $_POST['id_interdicao'];
+    $id_interdicao = $_GET['id'];
 
     $query = "SELECT interdicao.*,ocorrencia.id_ocorrencia,ocorrencia.ocorr_titulo,ocorrencia.ocorr_endereco_principal,
               ocorrencia.ocorr_coordenada_latitude,ocorrencia.ocorr_coordenada_longitude,endereco_logradouro.* 
@@ -69,15 +69,30 @@
             <h4>Dados interdição:</h4>
         </nav>
         <div>
+            <span class="titulo">Nº interdição: </span><span><?php echo $linha['id_interdicao']; ?></span>
+        </div><hr>
+        <div>
             <span class="titulo">Data e hora: </span>
             <span><?php echo date("d/m/Y H:i", strtotime($linha['data_hora'])); ?></span><br>
             <span class="titulo">Motivo: </span><span><?php echo $linha['motivo']; ?></span><br>
-            <span class="titulo">Descrição da interdição: </span><span><?php echo $linha['descricao_interdicao']; ?></span><br>
-            <span class="titulo">Danos aparentes: </span><span><?php echo $linha['danos_aparentes']; ?></span><br>
+            <span class="titulo">Descrição da interdição: </span><br>
+            <textarea name="descricao" rows="5" readonly class="readtextarea"><?php echo $linha['descricao_interdicao']; ?></textarea><br>
+            <span class="titulo">Danos aparentes: </span><br>
+            <textarea name="descricao" rows="5" readonly class="readtextarea"><?php echo $linha['danos_aparentes']; ?></textarea><br>
             <span class="titulo">Bens afetados: </span><span><?php echo $linha['bens_afetados']; ?></span><br>
             <span class="titulo">Tipo de interdição: </span><span><?php echo $linha['tipo']; ?></span><br>
-            <br>
+        </div><hr>
+        <div>
+            <span class="titulo">Status: </span><span><?php echo ($linha['interdicao_ativa'] == t) ? 'Interditado':'Desisterditado'; ?></span>
         </div>
+        <br>
     </div>
+    <?php if($linha['interdicao_ativa'] == t){ ?>
+        <form action="desinterdicao.php" method="post">
+            <input type="hidden" name="id_ocorrencia" value="<?php echo $linha['id_ocorrencia']; ?>">
+            <input type="hidden" name="id_interdicao" value="<?php echo $linha['id_interdicao']; ?>">
+            <input type="submit" class="btn btn-default btn-md btn-interdicao-g" value="Constatar Desinterdição">
+        </form>
+    <?php } ?>
 </div>
 </div>
