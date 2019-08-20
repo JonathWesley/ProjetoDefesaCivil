@@ -19,13 +19,16 @@
     $timestamp = $data.' '.$hora.':00';
 
     $query = "INSERT INTO interdicao (data_hora, id_ocorrencia, motivo, descricao_interdicao, danos_aparentes, bens_afetados, tipo) 
-              VALUES ('$timestamp', $id_ocorrencia, '$motivo', '$descricao_interdicao', '$danos_aparentes', '$bens_afetados', '$tipo')";
+              VALUES ('$timestamp', $id_ocorrencia, '$motivo', '$descricao_interdicao', '$danos_aparentes', '$bens_afetados', '$tipo')
+              RETURNING id_interdicao";
 
     $result = pg_query($connection, $query);
-        
+
     if($result){
-        header('location:index.php?pagina=cadastrarChamado&sucesso');
+        $id_interdicao = pg_fetch_array($result,0)['id_interdicao'];
+
+        header('location:index.php?pagina=exibirInterdicao&id='.$id_interdicao);
     }else{
         //echo pg_last_error();
-        header('location:index.php?pagina=cadastrarChamado&erroDB');
+        header('location:index.php?pagina=cadastrarInterdicao&erroDB');
     }

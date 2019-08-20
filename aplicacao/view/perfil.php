@@ -20,7 +20,7 @@
     </div>
     <div class="box">
         <div class="row">
-            <div class="col-sm-6">
+            <div class="col-sm-6 text-center">
                 <img src="images/logo.jpg" alt="DefesaCivil" class="img-circle">
             </div>
             <div class="col-sm-6">

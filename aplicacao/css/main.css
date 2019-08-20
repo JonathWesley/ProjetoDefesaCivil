@@ -215,6 +215,12 @@ body{
     top:-33px;
 }
 
+.btn-interdicao-g{
+    position:relative;
+    left:50%;
+    top:-33px;
+}
+
 /* footer */
 .footer{
     display: inline;
@@ -301,5 +307,16 @@ body{
         display: block;
         left: 25%;
         top: 0%;
+    }
+
+    .btn-desinterdicao{
+        display: block;
+        left: 25%;
+        top: 0%;
+    }
+
+    .img-user{
+        position: relative;
+        left: 10%;
     }
 }

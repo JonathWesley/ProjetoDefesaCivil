@@ -106,7 +106,7 @@
                 <span class="titulo">Latitude: </span><span id="latitude" ><?php echo $linhaOcorrencia['ocorr_coordenada_latitude']; ?></span>
             </nav>
             <nav class="inline">
-            <span class="titulo">Longitude: </span><span id="longitude" ><?php echo $linhaOcorrencia['ocorr_coordenada_longitude']; ?></span>
+                <span class="titulo">Longitude: </span><span id="longitude" ><?php echo $linhaOcorrencia['ocorr_coordenada_longitude']; ?></span>
             </nav>
             <button type="button" class="btn-default btn-small inline open-AddBookDialog" style="position:relative;left:5%" data-toggle="modal" data-id="map"><span class="glyphicon glyphicon-map-marker"></span></button>
         </div>
@@ -141,7 +141,8 @@
         </div>
         <span class="titulo">Titulo: </span><span id="ocorr_titulo"><?php echo $linhaOcorrencia['ocorr_titulo']; ?></span><br>
         <span class="titulo">Origem: </span><span id="ocorr_origem"><?php echo $linhaOcorrencia['ocorr_origem']; ?></span><br>
-        <span class="titulo">Descrição: </span><span id="ocorr_descricao" class="ocorr_descricao"><?php echo $linhaOcorrencia['ocorr_descricao']; ?></span><br>
+        <span class="titulo">Descrição: </span><br>
+        <textarea id="ocorr_descricao" rows="5" readonly class="readtextarea"><?php echo $linhaOcorrencia['ocorr_descricao']; ?></textarea><br>
         <br>
     </div>
     <div class="box">

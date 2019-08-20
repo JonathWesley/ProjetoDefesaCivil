@@ -1,11 +1,6 @@
 <div class="container positioning">
 <div class="jumbotron campo_cadastro">
-    <?php if(isset($_GET['sucesso'])){ ?>
-        <div class="alert alert-success" role="alert">
-            Interdição cadastrada com sucesso.
-        </div>
-        <?php } ?>
-        <?php if(isset($_GET['erroDB'])){ ?>
+    <?php if(isset($_GET['erroDB'])){ ?>
         <div class="alert alert-danger" role="alert">
             Falha ao cadastrar interdição.
         </div>
@@ -37,11 +32,13 @@
             <br>
         </div>
         <div ng-show="sel_endereco == 'Coordenada'">
-            <div>
-                <span class="titulo">Latitude: </span><span><?php echo $_POST['latitude']; ?></span>
-                <span class="titulo">Longitude: </span><span><?php echo $_POST['longitude']; ?></span>
-                <br>
-                <button type="button" class="btn-default btn-small inline open-AddBookDialog" data-toggle="modal" data-id="map"><span class="glyphicon glyphicon-map-marker"></span></button>
+            <div class="row">
+                <div class="col-sm-6">
+                    <span class="titulo">Latitude: </span><span><?php echo $_POST['latitude']; ?></span>
+                </div>
+                <div class="col-sm-6">
+                    <span class="titulo">Longitude: </span><span><?php echo $_POST['longitude']; ?></span>
+                </div>
             </div>
         </div>
         <div ng-show="sel_endereco == 'Logradouro'">
@@ -62,19 +59,22 @@
     <form method="post" action="processa_cadastrar_interdicao.php" onsubmit="return validarFormCadastroInterdicao()">
         <div class="box">
             <input type="hidden" name="id_ocorrencia" value="<?php echo $_POST['id_ocorrencia']; ?>">
-            <div>
-                <span>Data: <span style="color:red;">*</span></span>
-                <span style="position:relative;left:23%">Horário: <span style="color:red;">*</span></span> 
-                <br>
-                <input id="data" name="data" type="date" class="form-control" style="width:30%;display:inline;" max="<?php echo date('Y-m-d'); ?>" required>
-                <input type="time" name="horario" class="form-control" style="width:30%;display:inline;" required>
+            <div class="row">
+                <div class="col-sm-4">
+                    <span>Data: <span style="color:red;">*</span></span>
+                    <input id="data" name="data" type="date" class="form-control" max="<?php echo date('Y-m-d'); ?>" required>  
+                </div>
+                <div class="col-sm-4">
+                    <span>Horário: <span style="color:red;">*</span></span> 
+                    <input type="time" name="horario" class="form-control" required>
+                </div>
             </div>
         </div>
         <div class="box">
             <div>
                 Motivo: <span style="color:red;">*</span>
                 <label for="motivo"></label>
-                <select name="motivo" class="form-control" style="width:30%;" required>
+                <select name="motivo" class="form-control endereco-principal" required>
                     <option value="Colapso de edificação">Colapso de edificação</option>
                     <option value="Incêndio/Explosão">Incêndio/Explosão</option>
                     <option value="Deslizamento de solo e/ou rocha">Deslizamento de solo e/ou rocha</option>
@@ -90,20 +90,23 @@
                 Danos aparentes: <span style="color:red;">*</span>
                 <textarea name="danos_aparentes" class="form-control" cols="30" rows="2" maxlength="120" required></textarea>
             </div>
-            <div>
-                Bens afetados: <span style="color:red;">*</span>
-                <span style="position:relative;left:15%">Tipo de interdição: <span style="color:red;">*</span></span>
-                <br>
-                <label for="bens_afetados"></label>
-                <select name="bens_afetados" class="form-control" style="width:30%;display:inline;" required>
-                    <option value="Particular">Particular</option>
-                    <option value="Público">Público</option>
-                </select>
-                <label for="tipo"></label>
-                <select name="tipo" class="form-control" style="width:30%;display:inline;" required>
-                    <option value="Parcial">Parcial</option>
-                    <option value="Total">Total</option>
-                </select>
+            <div class="row">
+                <div class="col-sm-4">
+                    Bens afetados: <span style="color:red;">*</span>
+                    <label for="bens_afetados"></label>
+                    <select name="bens_afetados" class="form-control" required>
+                        <option value="Particular">Particular</option>
+                        <option value="Público">Público</option>
+                    </select>
+                </div>
+                <div class="col-sm-4">
+                    <span>Tipo de interdição: <span style="color:red;">*</span></span>
+                    <label for="tipo"></label>
+                    <select name="tipo" class="form-control" required>
+                        <option value="Parcial">Parcial</option>
+                        <option value="Total">Total</option>
+                    </select>
+                </div>
             </div>
         </div>
         <input type="submit" class="btn btn-default btn-md" value="Cadastrar">

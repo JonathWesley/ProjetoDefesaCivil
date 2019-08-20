@@ -35,50 +35,43 @@
             </div>
         </div>
         <h3 class="text-center">Registro de chamado</h3>
-    </div>
-    <div class="box">
-        <p>Endereço</p>
-        <nav>
-            Endereço principal: <span id="coordenada_principal" ng-model="sel_endereco" ng-init="sel_endereco='<?php echo $linhaChamado['endereco_principal']; ?>'"><?php echo $linhaChamado['endereco_principal']; ?></span>
-        </nav>
+    <hr>
+        <h4>Endereço</h4>
+        <span class="titulo">Endereço principal: </span><span id="coordenada_principal" ng-model="sel_endereco" ng-init="sel_endereco='<?php echo $linhaChamado['endereco_principal']; ?>'"><?php echo $linhaChamado['endereco_principal']; ?></span>
         <div ng-show="sel_endereco == 'Logradouro'">
-            <nav>
-                Logradouro: <span id="logradouro"><?php echo $linhaLogradouro['logradouro'];?></span>
-            </nav>
-            <nav>
-                Endereço numeral: <span id="numero" ><?php echo $linhaLogradouro['numero']; ?></span>
-            </nav>
-            <nav>
-                Endereço referência: <span id="referencia" ><?php echo $linhaLogradouro['referencia']; ?></span>
-            </nav>
+            <div class="row">
+                <div class="col-sm-3"><span class="titulo">CEP: </span><?php echo $linhaLogradouro['cep']; ?></div>
+                <div class="col-sm-6"><span class="titulo">Logradouro: </span><?php echo $linhaLogradouro['logradouro']; ?></div>
+                <div class="col-sm-3"><span class="titulo">Número: </span><?php echo $linhaLogradouro['numero']; ?></div>
+            </div>
+            <div class="row">
+                <div class="col-sm-3"><span class="titulo">Bairro: </span><?php echo $linhaLogradouro['bairro']; ?></div>
+                <div class="col-sm-6"><span class="titulo">Cidade: </span><?php echo $linhaLogradouro['cidade']; ?></div>
+            </div>
+            <nav><span class="titulo">Referência: </span><?php echo $linhaLogradouro['referencia']; ?></nav><br>
         </div>
         <div ng-show="sel_endereco == 'Coordenada'">
             <nav>
-                Latitude: <span id="latitude" ><?php echo $linhaChamado['latitude']; ?></span>
+                <span class="titulo">Latitude: </span><span id="latitude" ><?php echo $linhaChamado['latitude']; ?></span>
             </nav>
-            <nav>
-                Longitude: <span id="longitude" ><?php echo $linhaChamado['longitude']; ?></span>
+            <nav class="inline">
+                <span class="titulo">Longitude: </span><span id="longitude" ><?php echo $linhaChamado['longitude']; ?></span>
             </nav>
+            <button type="button" class="btn-default btn-small inline open-AddBookDialog" style="position:relative;left:5%" data-toggle="modal" data-id="map"><span class="glyphicon glyphicon-map-marker"></span></button>
         </div>
-    </div>
-    <div class="box">
-        <p>Ocorrencia</p>
+    <hr>
+        <h4>Ocorrencia</h4>
         <nav>
-            Data e Hora: <span id="data" value="<?php echo $linhaChamado['data_hora'];?>">
-            <?php echo date("d/m/Y H:i", strtotime($linhaChamado['data_hora'])); ?>
-            </span>
+            <span class="titulo">Data e hora: </span>
+            <span><?php echo date("d/m/Y H:i", strtotime($linhaChamado['data_hora'])); ?></span><br>
+            <span class="titulo">Origem: </span><span id="ocorr_origem"><?php echo $linhaChamado['origem']; ?></span><br>
+            <span class="titulo">Descrição: </span><br>
+            <textarea name="descricao" rows="5" readonly class="readtextarea"><?php echo $linhaChamado['descricao']; ?></textarea><br>
         </nav>
+    <hr>
+        <h4>Atentido</h4>
         <nav>
-            Origem: <span id="ocorr_origem"><?php echo $linhaChamado['origem']; ?></span>
-        </nav>
-        <nav>
-            Descrição: <span id="ocorr_descricao"><?php echo $linhaChamado['descricao']; ?></span>
-        </nav>
-    </div>
-    <div class="box">
-        <p>Atentido</p>
-        <nav>
-            Pessoa atendida: <span id="atendido"><?php echo $linhaPessoa['nome']; ?></span>
+            <span class="titulo">Pessoa atendida: </span><span id="atendido"><?php echo $linhaPessoa['nome']; ?></span>
         </nav>
     </div>
     <form action="index.php?pagina=cadastrarOcorrencia" method="post">
