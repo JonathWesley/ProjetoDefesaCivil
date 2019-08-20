@@ -94,7 +94,7 @@
             <span class="titulo">Tipo de interdição: </span><span><?php echo $linha['tipo']; ?></span><br>
         </div><hr>
         <div>
-            <span class="titulo">Status: </span><span><?php echo ($linha['interdicao_ativa'] == t) ? 'Interditado':'Desisterditado'; ?></span>
+            <span class="titulo">Status: </span><span><?php echo ($linha['interdicao_ativa'] == t) ? 'Interditado':'Desinterditado'; ?></span>
         </div>
         <br>
     </div>

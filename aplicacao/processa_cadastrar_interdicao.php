@@ -21,12 +21,15 @@
     $query = "INSERT INTO interdicao (data_hora, id_ocorrencia, motivo, descricao_interdicao, danos_aparentes, bens_afetados, tipo) 
               VALUES ('$timestamp', $id_ocorrencia, '$motivo', '$descricao_interdicao', '$danos_aparentes', '$bens_afetados', '$tipo')
               RETURNING id_interdicao";
-
     $result = pg_query($connection, $query);
 
     if($result){
         $id_interdicao = pg_fetch_array($result,0)['id_interdicao'];
 
+        $query = "INSERT INTO log_interdicao (data_hora, id_usuario, id_interdicao)
+                  VALUES ('$dataAtual', $id_usuario, $id_interdicao)";
+        $result = pg_query($connection, $query);
+        
         header('location:index.php?pagina=exibirInterdicao&id='.$id_interdicao);
     }else{
         //echo pg_last_error();

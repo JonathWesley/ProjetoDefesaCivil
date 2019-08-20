@@ -139,23 +139,33 @@
                     <div class="modal-body">
                         <nav>
                             <input id="id_pessoa" type="hidden" value="">
-                            <div class="form-group">
-                                Nome: <span style="color:red;">*</span>
-                                <input id="nome_pessoa" name="nome_pessoa" type="text" class="form-control" onchange="verificaNome(this.value)">
+                            <div class="row">
+                                <div class="col-sm-12">
+                                    Nome: <span style="color:red;">*</span>
+                                    <input id="nome_pessoa" name="nome_pessoa" type="text" class="form-control" onchange="verificaNome(this.value)">
+                                </div>
                             </div>   
                             <span id="erroNome" class="alertErro hide">Nome inválido.</span>
-                            <div class="form-group">
-                                CPF:
-                                <input id="cpf_pessoa" name="cpf_pessoa" type="text" class="form-control" maxlength="11" onchange="verificaCpf(this.value)">
+                            <div class="row">
+                                <div class="col-sm-6">
+                                    CPF:
+                                    <input id="cpf_pessoa" name="cpf_pessoa" type="text" class="form-control" maxlength="11" onchange="verificaCpf(this.value)">
+                                    <span id="erroCpf" class="alertErro hide">CPF inválido.</span>
+                                </div>
+                                <div class="col-sm-6">
+                                    Outros documentos:
+                                    <input id="outros_documentos" name="outros_documentos" type="text" class="form-control">
+                                </div>
                             </div>
-                            <span id="erroCpf" class="alertErro hide">CPF inválido.</span>
-                            <div class="form-group">
-                                Outros documentos:
-                                <input id="outros_documentos" name="outros_documentos" type="text" class="form-control">
-                            </div>
-                            <div class="form-group">
-                                Telefone: 
-                                <input id="telefone_pessoa" name="telefone_pessoa" type="text" class="form-control" maxlength="11" onchange="verificaTelefone(this.value)">
+                            <div class="row">
+                                <div class="col-sm-6">
+                                    Celular: 
+                                    <input id="celular_pessoa" name="celular_pessoa" type="text" class="form-control" maxlength="11" onchange="verificaTelefone(this.value)">
+                                </div>
+                                <div class="col-sm-6">
+                                    Telefone: 
+                                    <input id="telefone_pessoa" name="telefone_pessoa" type="text" class="form-control" maxlength="10">
+                                </div>
                             </div>
                             <span id="erroTelefone" class="alertErro hide">Telefone inválido.</span>
                             <div class="form-group">
