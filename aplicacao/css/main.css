@@ -144,6 +144,10 @@ body{
     width: 60%;
 }
 
+.img-perfil-expandida{
+    width: 100%;
+}
+
 .readtextarea{
     width: 90%;
     position: relative;

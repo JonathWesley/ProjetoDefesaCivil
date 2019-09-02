@@ -18,8 +18,8 @@
     </div>
     <div class="box">
         <div class="row">
-            <div class="col-sm-6 text-center">
-                <img src="images/logo.jpg" alt="DefesaCivil" class="img-circle">
+            <div class="col-sm-6">
+                <img src="data:image/png;base64,<?php echo $linha['foto']; ?>" alt="fotoperfil" class="img-circle img-perfil-expandida">
             </div>
             <div class="col-sm-6">
                 <br><span class="titulo">Nome: </span><?php echo $linha['nome']; ?>

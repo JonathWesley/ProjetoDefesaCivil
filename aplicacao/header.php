@@ -1,3 +1,14 @@
+<?php
+    include 'database.php';
+
+    session_start();
+    $id_usuario = $_SESSION['id_usuario'];
+
+    $query = "SELECT foto FROM usuario WHERE id_usuario = $id_usuario";
+    $result = pg_query($connection, $query);
+    $linha = pg_fetch_array($result, 0);
+?>
+
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
@@ -45,7 +56,7 @@
                     <?php } ?>
                     <li class="dropdown">
                         <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-                            <img src="images/logo.jpg" alt="DefesaCivil" class="img-circle img-perfil">
+                            <img src="data:image/png;base64,<?php echo $linha['foto']; ?>" alt="fotoperfil" class="img-circle img-perfil">
                         </a>
                         <ul class="dropdown-menu">
                         <li><a href="?pagina=perfil">Perfil</a></li>
