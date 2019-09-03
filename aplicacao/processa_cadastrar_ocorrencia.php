@@ -31,6 +31,21 @@ $cobrade_descricao = addslashes($_POST['cobrade_descricao']);
 $possui_fotos = addslashes($_POST['possui_fotos']);
 $prioridade = addslashes($_POST['prioridade']);
 
+$base64_array = array();
+
+foreach($_FILES["files"]["tmp_name"] as $key=>$tmp_name){
+    $temp = $_FILES["files"]["tmp_name"][$key];
+        
+    if(empty($temp))
+        break;
+        
+    $binary = file_get_contents($temp);
+    $base64 = base64_encode($binary);
+    array_push($base64_array, $base64);
+}
+
+$pg_array = '{'.join(',',$base64_array).'}';
+
 $analisado = 'false';
 $congelado = 'false';
 $encerrado = 'false';
@@ -181,25 +196,25 @@ if(strlen($erros) > 0){
 			ocorr_logradouro_id,agente_principal,agente_apoio_1,agente_apoio_2,data_lancamento,
 			data_ocorrencia,ocorr_titulo,ocorr_descricao,ocorr_origem,atendido_1,atendido_2,ocorr_cobrade,
 			cobrade_descricao,ocorr_fotos,ocorr_prioridade,ocorr_analisado,ocorr_congelado,ocorr_encerrado,
-			usuario_criador,data_alteracao,ocorr_referencia)
+			usuario_criador,data_alteracao,ocorr_referencia, fotos)
 			VALUES
 			($chamado_id,'$endereco_principal',$latitude,$longitude,$logradouro_id,$agente_principal,
 			$agente_apoio_1,$agente_apoio_2,'$data_lancamento',
 			'$data_ocorrencia','$titulo','$descricao','$ocorr_origem',$pessoa_atendida_1,$pessoa_atendida_2,
 			'$cobrade','$cobrade_descricao',$possui_fotos,'$prioridade',$analisado,$congelado,$encerrado,
-			$id_criador,'$dataAtual',null)";
+			$id_criador,'$dataAtual',null, '$pg_array')";
 
 	$result = pg_query($connection, $query);
 	if(!$result){
-		//echo pg_last_error();
-		header('location:index.php?pagina=cadastrarOcorrencia&erroDB');
+		echo pg_last_error();
+		//header('location:index.php?pagina=cadastrarOcorrencia&erroDB');
 	}else{
 		if($chamado_id != 'null'){
 			$query = "UPDATE chamado SET usado = TRUE WHERE id_chamado = $chamado_id";
 			$result = pg_query($connection, $query);
 			if(!$result){
-				//echo pg_last_error();
-				header('location:index.php?pagina=cadastrarOcorrencia&erroDB');
+				echo pg_last_error();
+				//header('location:index.php?pagina=cadastrarOcorrencia&erroDB');
 			}else{
 				header('location:index.php?pagina=cadastrarOcorrencia&sucesso');
 			}
@@ -208,4 +223,20 @@ if(strlen($erros) > 0){
 			header('location:index.php?pagina=cadastrarOcorrencia&sucesso');
 		}
 	}
+}
+
+function to_pg_array($set) {
+    settype($set, 'array'); // can be called with a scalar or array
+    $result = array();
+    foreach ($set as $t) {
+        if (is_array($t)) {
+            $result[] = to_pg_array($t);
+        } else {
+            $t = str_replace('"', '\\"', $t); // escape double quote
+            if (! is_numeric($t)) // quote only non-numeric values
+                $t = '"' . $t . '"';
+            $result[] = $t;
+        }
+    }
+    return '{' . implode(",", $result) . '}'; // format
 }

@@ -1,6 +1,6 @@
 <div class="container positioning">
 <div class="jumbotron campo_cadastro">
-    <form method="post" action="processa_cadastrar_ocorrencia.php" onsubmit="return validarFormCadastroOcorrencia()">
+    <form method="post" action="processa_cadastrar_ocorrencia.php" enctype="multipart/form-data" onsubmit="return validarFormCadastroOcorrencia()">
         <?php if(isset($_GET['sucesso'])){ ?>
             <div class="alert alert-success" role="alert">Ocorrencia cadastrada com sucesso.</div>
         <?php } ?>
@@ -332,7 +332,7 @@
             <br>
             <div>
                 Fotos: <span style="color:red;" ng-show="fotos == true">*</span>
-                <input type="file" accept="image/png, image/jpeg">
+                <input name="files[]" type="file" multiple="multiple" accept="image/png,image/jpeg">
             </div>
         <hr>
             <div>

@@ -57,6 +57,13 @@
     $query = "SELECT id_interdicao FROM interdicao WHERE id_ocorrencia = $id_ocorrencia";
     $result = pg_query($connection, $query) or die(pg_last_error());
     $id_interdicao = pg_fetch_array($result, 0)['id_interdicao'];
+
+    $string = $linhaOcorrencia['fotos'];
+
+    $string = str_replace('{','',$string);
+    $string = str_replace('}','',$string);
+
+    $fotos = explode(',', $string);
 ?>
 
 <div class="container positioning">
@@ -190,6 +197,40 @@
             <?php } ?>
         <br>
     </div>
+    <?php if($linhaOcorrencia['ocorr_fotos'] == 't'){ ?>
+    <div class="box">
+        <div id="myCarousel" class="carousel slide limite" data-ride="carousel">
+            <!-- Indicators -->
+            <ol class="carousel-indicators">
+                <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+                <?php $i = 1; while($i < sizeof($fotos)){ ?>
+                    <li data-target="#myCarousel" data-slide-to="<?php echo $i; ?>"></li>
+                <?php $i+=1; } ?>
+            </ol>
+            <!-- Wrapper for slides -->
+            <div class="carousel-inner">
+                <div class="item active">
+                    <img src="data:image/png;base64,<?php echo $fotos[0]; ?>" alt="img1" style="width:100%;">
+                </div>
+                <?php $i = 1; while($i < sizeof($fotos)){ ?>
+                    <div class="item">
+                        <img src="data:image/png;base64,<?php echo $fotos[$i]; ?>" alt="img<?php echo $i; ?>" style="width:100%;">
+                    </div>
+                <?php $i+=1; } ?>
+                
+            </div>
+            <!-- Left and right controls -->
+            <a class="left carousel-control" href="#myCarousel" data-slide="prev">
+                <span class="glyphicon glyphicon-chevron-left"></span>
+                <span class="sr-only">Previous</span>
+            </a>
+            <a class="right carousel-control" href="#myCarousel" data-slide="next">
+                <span class="glyphicon glyphicon-chevron-right"></span>
+                <span class="sr-only">Next</span>
+            </a>
+        </div>
+    </div>
+    <?php } ?>
     <div class="modal fade" id="map" role="dialog">
         <div class="modal-dialog modal-lg">
             <div class="modal-content">
