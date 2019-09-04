@@ -269,7 +269,7 @@
             <input name="pessoa2" type="hidden" value="<?php echo $linhaPessoa2['nome']; ?>">
             <input name="ocorr_cobrade" type="hidden" value="<?php echo $linhaCobrade['codigo']; ?>">
             <input name="cobrade_descricao" type="hidden" value="<?php echo $linhaOcorrencia['cobrade_descricao']; ?>">
-            <input name="possui_foto" type="hidden" value="<?php echo $linhaOcorrencia['ocorr_fotos']; ?>">
+            <input name="possui_fotos" type="hidden" value="<?php echo $linhaOcorrencia['ocorr_fotos']; ?>">
             <input name="prioridade" type="hidden" value="<?php echo $linhaOcorrencia['ocorr_prioridade']; ?>">
             <input name="analisado" type="hidden" value="<?php echo $linhaOcorrencia['ocorr_analisado']; ?>">
             <input name="congelado" type="hidden" value="<?php echo $linhaOcorrencia['ocorr_congelado']; ?>">

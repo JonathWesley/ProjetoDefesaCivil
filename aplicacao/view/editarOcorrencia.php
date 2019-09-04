@@ -1,6 +1,6 @@
 <div class="container positioning">
 <div class="jumbotron campo_cadastro">
-    <form method="post" action="processa_editar_ocorrencia.php" onsubmit="return validarFormCadastroOcorrencia()">
+    <form method="post" action="processa_editar_ocorrencia.php" enctype="multipart/form-data">
         <input name="id_ocorrencia" type="hidden" value="<?php echo $_POST['id_ocorrencia']; ?>">
         <input type="hidden" name="chamado_id"  value="<?php echo $_POST['chamado_id']; ?>">
         <div class="box">
@@ -321,20 +321,11 @@
                 Descricao cobrade: <span style="color:red;" ng-show="categoria == 0">*</span>
                 <textarea id="natureza" name="cobrade_descricao" class="form-control" cols="30" rows="2" maxlength = "100" ng-disabled="categoria != 0"  ng-model="cobrade_descricao" ng-init="cobrade_descricao='<?php echo $_POST['cobrade_descricao']; ?>'" required></textarea>
             </div>
-            Possui fotos:
-            <br>
-            <nav>
-                <label class="radio-inline">
-                    <input type="radio" value="true" name="possui_fotos">Sim
-                </label>
-                <label class="radio-inline">
-                    <input type="radio" value="false" name="possui_fotos" checked>Não
-                </label>
-            </nav>
             <br>
             <div>
-                Fotos:
-                <input type="file" accept="image/png, image/jpeg">
+                Adicionar fotos:
+                <input name="possui_fotos" type="hidden" value="<?php echo $_POST['possui_fotos']; ?>">
+                <input name="files[]" type="file" multiple="multiple" accept="image/png,image/jpeg">
             </div>
         <hr>
             <div>

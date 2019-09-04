@@ -134,16 +134,6 @@ function verificaNumeroChamado(numero){
     }
 }
 
-function verificaData(){
-    var d1 = new Date($("#data_lancamento").val());
-    var d2 = new Date($("#data_ocorrencia").val());
-    if(d1 < d2){
-        $("#erroData").removeClass("hide");
-    }else{
-        $("#erroData").addClass("hide");
-    }
-}
-
 function validarFormCadastroUsuario(){
     if(!$("#erroNome").hasClass("hide") || !$("#erroCpf").hasClass("hide") || !$("#erroTelefone").hasClass("hide")
         || !$("#erroEmail").hasClass("hide") || !$("#erroSenha").hasClass("hide") || !$("#erroConfirmaSenha").hasClass("hide")){
@@ -362,24 +352,3 @@ function myMap(position) {
         });
     } 
 }
-
-// Instantiate the Bootstrap carousel
-$('.multi-item-carousel').carousel({
-    interval: false
-  });
-  
-  // for every slide in carousel, copy the next slide's item in the slide.
-  // Do the same for the next, next item.
-  $('.multi-item-carousel .item').each(function(){
-    var next = $(this).next();
-    if (!next.length) {
-      next = $(this).siblings(':first');
-    }
-    next.children(':first-child').clone().appendTo($(this));
-    
-    if (next.next().length>0) {
-      next.next().children(':first-child').clone().appendTo($(this));
-    } else {
-        $(this).siblings(':first').children(':first-child').clone().appendTo($(this));
-    }
-  });

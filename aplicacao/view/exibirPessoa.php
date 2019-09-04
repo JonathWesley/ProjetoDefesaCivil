@@ -20,7 +20,9 @@
         <hr>
         <span class="titulo">Email: </span><?php echo $linhaPessoa['email']; ?>
         <br>
-        <span class="titulo">Telefone: </span><?php echo '('.substr($linhaPessoa['telefone'],0,2).')'.substr($linhaPessoa['telefone'],2,5).'-'.substr($linhaPessoa['telefone'],7); ?>
+        <span class="titulo">Celular: </span><?php echo '('.substr($linhaPessoa['celular'],0,2).')'.substr($linhaPessoa['celular'],2,5).'-'.substr($linhaPessoa['celular'],7); ?>
+        <br>
+        <span class="titulo">Telefone: </span><?php echo '('.substr($linhaPessoa['telefone'],0,2).')'.substr($linhaPessoa['telefone'],2,4).'-'.substr($linhaPessoa['telefone'],6); ?>
         <br><br>
     </div>
 </div>
