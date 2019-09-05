@@ -12,9 +12,8 @@
             <?php } ?>
             <div>
                 Nome completo: <span style="color:red;">*</span>
-                <input id="nome" name="nome" type="text" class="form-control" ng-model="nome_completo" required onchange="verificaNome(this.value)">
+                <input id="nome" name="nome" type="text" class="form-control" ng-model="nome_completo" required pattern="[a-zA-Z\s]+" title="Apenas letras e espaço">
             </div>
-            <span id="erroNome" class="alertErro hide">Nome inválido.</span>
             <div class="row">
                 <div class="col-sm-6">
                     <span>CPF: <span style="color:red;">*</span></span>
@@ -22,9 +21,8 @@
                     <span id="erroCpf" class="alertErro hide">CPF inválido.</span>
                 </div>
                 <div class="col-sm-6">
-                    <span>Telefone: <span style="color:red;">*</span></span>
-                    <input id="telefone" name="telefone" type="text" class="form-control" maxlength="11" required onchange="verificaTelefone(this.value)">
-                    <span id="erroTelefone" class="alertErro hide">Telefone inválido.</span>
+                    <span>Celular: <span style="color:red;">*</span></span>
+                    <input id="telefone" name="telefone" type="text" class="form-control" required pattern="\([0-9]{2}\)[\s][0-9]{4,5}-[0-9]{4}" title="(XX) XXXXX-XXXX">
                 </div>
             </div>
         <hr>
@@ -40,9 +38,8 @@
         <hr>
             <div>
                 Email: <span style="color:red;">*</span>
-                <input name="email_cadastro" type="email" class="form-control" required onchange="verificaEmail(this.value)">
+                <input name="email_cadastro" type="email" class="form-control" required pattern="\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+" title="email@dominio.com">
             </div>
-            <span id="erroEmail" class="alertErro hide">Email inválido.</span>
             <div class="row">
                 <div class="col-sm-6">
                     <span>Senha: <span style="color:red;">*</span></span>

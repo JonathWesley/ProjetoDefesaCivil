@@ -28,12 +28,10 @@ $("#cep").focusout(function(){
     });	
 });
 
-function verificaNome(texto){
-    if(/^([a-zA-Z' ]+)$/.test(texto))
-        $("#erroNome").addClass("hide");
-    else
-        $("#erroNome").removeClass("hide");
-}
+$("#telefone_pessoa").mask("(00) 0000-0000");
+$("#telefone").mask("(00) 00000-0000");
+$("#celular_pessoa").mask("(00) 00000-0000");
+$("#cep").mask("00000-000");
 
 function verificaCpf(cpf){
     var numeros, digitos, soma, i, resultado;
@@ -79,18 +77,18 @@ function verificaCpf(cpf){
     }
 }
 
+function verificaCelular(telefone){
+    if(/\([0-9]{2}\)[\s][0-9]{4,5}-[0-9]{4}/.test(telefone))
+        $("#erroCelular").addClass("hide");
+    else
+        $("#erroCelular").removeClass("hide");
+}
+
 function verificaTelefone(telefone){
-    if(/^[0-9]{11}$/.test(telefone))
+    if(/\([0-9]{2}\)\s[0-9]{4}\-[0-9]{4}/.test(telefone))
         $("#erroTelefone").addClass("hide");
     else
         $("#erroTelefone").removeClass("hide");
-}
-
-function verificaEmail(email){
-    if(/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(email))
-        $("#erroEmail").addClass("hide");
-    else
-        $("#erroEmail").removeClass("hide");
 }
 
 function verificaSenha(senha){
@@ -107,30 +105,6 @@ function verificaConfirmaSenha(confirmaSenha){
         $("#erroConfirmaSenha").removeClass("hide");
     }else{
         $("#erroConfirmaSenha").addClass("hide");
-    }
-}
-
-function verificaLatLgn(){
-    if(!/^[-+]?\d*\.?\d*$/.test($("#latitude").val()) || !/^[-+]?\d*\.?\d*$/.test($("#longitude").val())){
-        $("#erroLatLgn").removeClass("hide");
-    }else{
-        $("#erroLatLgn").addClass("hide");
-    }
-}
-
-function verificaCep(cep){
-    if(!/^[0-9]{8}$/.test(cep)){
-        $("#erroCep").removeClass("hide");
-    }else{
-        $("#erroCep").addClass("hide");
-    }
-}
-
-function verificaNumeroChamado(numero){
-    if(!/^[0-9]+$/.test(numero)){
-        $("#erroNumeroChamado").removeClass("hide");
-    }else{
-        $("#erroNumeroChamado").addClass("hide");
     }
 }
 
