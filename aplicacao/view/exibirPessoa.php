@@ -16,13 +16,13 @@
     <div class="box">
         <br><span class="titulo">Nome: </span><?php echo $linhaPessoa['nome']; ?>
         <hr>
-        <span class="titulo">CPF: </span><?php echo substr($linhaPessoa['cpf'],0,3).'.'.substr($linhaPessoa['cpf'],3,3).'.'.substr($linhaPessoa['cpf'],6,3).'-'.substr($linhaPessoa['cpf'],9,2); ?>
+        <span class="titulo">CPF: </span><?php echo $linhaPessoa['cpf']; ?>
         <hr>
         <span class="titulo">Email: </span><?php echo $linhaPessoa['email']; ?>
         <br>
-        <span class="titulo">Celular: </span><?php echo '('.substr($linhaPessoa['celular'],0,2).')'.substr($linhaPessoa['celular'],2,5).'-'.substr($linhaPessoa['celular'],7); ?>
+        <span class="titulo">Celular: </span><?php echo $linhaPessoa['celular']; ?>
         <br>
-        <span class="titulo">Telefone: </span><?php echo '('.substr($linhaPessoa['telefone'],0,2).')'.substr($linhaPessoa['telefone'],2,4).'-'.substr($linhaPessoa['telefone'],6); ?>
+        <span class="titulo">Telefone: </span><?php echo $linhaPessoa['telefone']; ?>
         <br><br>
     </div>
 </div>

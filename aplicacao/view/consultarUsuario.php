@@ -47,7 +47,7 @@
                     echo '<td class="elimina-tabela">'.$linha['id_usuario'].'</td>';
                     echo '<td>'.$linha['nome'].'</td>'; 
                     echo '<td>'.$linha['email'].'</td>';
-                    echo '<td class="elimina-tabela">('.substr($linha['telefone'],0,2).')'.substr($linha['telefone'],2,5).'-'.substr($linha['telefone'],7).'</td></tr>';
+                    echo '<td class="elimina-tabela">'.$linha['telefone'].'</td></tr>';
                     $i += 1;
                 }
             ?>

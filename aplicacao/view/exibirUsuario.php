@@ -26,12 +26,12 @@
                 <hr>
                 <?php session_start();
                       if($_SESSION['nivel_acesso'] == 1){ ?>
-                <span class="titulo">CPF: </span><?php echo substr($linha['cpf'],0,3).'.'.substr($linha['cpf'],3,3).'.'.substr($linha['cpf'],6,3).'-'.substr($linha['cpf'],9,2); ?>
+                <span class="titulo">CPF: </span><?php echo $linha['cpf']; ?>
                 <hr>
                 <?php } ?>
                 <span class="titulo">Email: </span><?php echo $linha['email']; ?>
                 <br>
-                <span class="titulo">Telefone: </span><?php echo '('.substr($linha['telefone'],0,2).')'.substr($linha['telefone'],2,5).'-'.substr($linha['telefone'],7); ?>
+                <span class="titulo">Telefone: </span><?php echo $linha['telefone']; ?>
                 <?php session_start();
                       if($_SESSION['nivel_acesso'] == 1){ ?>
                 <hr>

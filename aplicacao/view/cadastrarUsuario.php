@@ -17,7 +17,7 @@
             <div class="row">
                 <div class="col-sm-6">
                     <span>CPF: <span style="color:red;">*</span></span>
-                    <input id="cpf" name="cpf" type="text" class="form-control" maxlength="11" required onchange="verificaCpf(this.value)">    
+                    <input id="cpf" name="cpf" type="text" class="form-control" required onchange="verificaCpf(this.value)">    
                     <span id="erroCpf" class="alertErro hide">CPF inválido.</span>
                 </div>
                 <div class="col-sm-6">
@@ -43,7 +43,7 @@
             <div class="row">
                 <div class="col-sm-6">
                     <span>Senha: <span style="color:red;">*</span></span>
-                    <input id="senha" name="senha_cadastro" type="password" class="form-control" required onchange="verificaSenha(this.value)">
+                    <input id="senha" name="senha_cadastro" type="password" class="form-control" required title="Senha deve possuir no mínimo 6 caracteres, 1 letra minuscula, 1 letra maiuscula e 1 número">
                     <span id="erroSenha" class="alertErro hide">
                         Senha inválida (Senha deve possuir no mínimo 6 caracteres, 1 letra minuscula, 1 letra maiuscula e 1 número).
                     </span>
