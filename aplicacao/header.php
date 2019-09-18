@@ -33,6 +33,12 @@
                 </div>
                 <ul class="nav navbar-nav navbar-right">
                     <li class="dropdown">
+                        <a class="dropdown-toggle" data-toggle="dropdown" href="#">teste API's <span class="caret"></span></a>
+                        <ul class="dropdown-menu">
+                        <li><a href="?pagina=visualizarSensores">Sensores</a></li>
+                        </ul>
+                    </li>
+                    <li class="dropdown">
                         <a class="dropdown-toggle" data-toggle="dropdown" href="#">Chamados <span class="caret"></span></a>
                         <ul class="dropdown-menu">
                         <li><a href="?pagina=cadastrarChamado">Cadastrar</a></li>

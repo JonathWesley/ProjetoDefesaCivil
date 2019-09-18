@@ -177,13 +177,13 @@
                 <?php } ?>
                 <div class="cobrade">
                     Categoria: <span style="color:red;">*</span><br>
-                    <select name="cobrade_categoria" class="form-control cobrade-sub" ng-model="categoria">
+                    <select name="cobrade_categoria" class="form-control cobrade-sub" ng-model="categoria" ng-init="categoria='<?php echo $_POST['ocorr_cobrade'][0]; ?>'">
                         <option value="1">Naturais</option>
                         <option value="2">Tecnológicos</option>
                         <option value="0">Não Listado</option>
                     </select>
                     Grupo: <span style="color:red;" ng-hide="categoria == 0">*</span><br>
-                    <select name="cobrade_grupo" class="form-control cobrade-sub" ng-model="grupo" ng-disabled="categoria == 0">
+                    <select name="cobrade_grupo" class="form-control cobrade-sub" ng-model="grupo" ng-disabled="categoria == 0" ng-init="grupo='<?php echo $_POST['ocorr_cobrade'][1]; ?>'">
                         <option ng-if="categoria==1" value="1">Geológico</option>
                         <option ng-if="categoria==1" value="2">Hidrológico</option>
                         <option ng-if="categoria==1" value="3">Meteorológico</option>
@@ -196,7 +196,7 @@
                         <option ng-if="categoria==2" value="5">Desastres relacionados a transporte de passageiros e cargas não perigosas</option>
                     </select>
                     Subgrupo: <span style="color:red;" ng-hide="grupo == 0">*</span><br>
-                    <select name="cobrade_subgrupo" class="form-control cobrade-sub" ng-model="subgrupo" ng-disabled="grupo == 0">
+                    <select name="cobrade_subgrupo" class="form-control cobrade-sub" ng-model="subgrupo" ng-disabled="grupo == 0" ng-init="subgrupo='<?php echo $_POST['ocorr_cobrade'][2]; ?>'">
                         <option ng-if="grupo==1&&categoria==1" value="1">Terremoto</option>
                         <option ng-if="grupo==1&&categoria==1" value="2">Emanação vulcânica</option>
                         <option ng-if="grupo==1&&categoria==1" value="3">Movimento de massa</option>
@@ -227,7 +227,7 @@
                         <option ng-if="grupo==5&&categoria==2" value="5">Transporte aquaviário</option>
                     </select>
                     Tipo: <span style="color:red;" ng-hide="subgrupo == 0">*</span><br>
-                    <select name="cobrade_tipo" class="form-control cobrade-sub" ng-model="tipo" ng-disabled="subgrupo==0">
+                    <select name="cobrade_tipo" class="form-control cobrade-sub" ng-model="tipo" ng-disabled="subgrupo==0" ng-init="tipo='<?php echo $_POST['ocorr_cobrade'][3]; ?>'">
                         <option ng-if="subgrupo==1&&grupo==1&&categoria==1" value="1">Tremor de terra</option>
                         <option ng-if="subgrupo==1&&grupo==1&&categoria==1" value="2">Tsunami</option>
                         <option ng-if="subgrupo==2&&grupo==1&&categoria==1" value="0"></option>
@@ -274,7 +274,7 @@
                         <option ng-if="grupo==5&&categoria==2" value="0"></option>
                     </select>
                     Subtipo: <span style="color:red;" ng-hide="tipo==0 || categoria==2">*</span><br>
-                    <select name="cobrade_subtipo" class="form-control cobrade-sub" ng-model="subtipo" ng-disabled="tipo==0 || categoria==2">
+                    <select name="cobrade_subtipo" class="form-control cobrade-sub" ng-model="subtipo" ng-disabled="tipo==0 || categoria==2" ng-init="subtipo='<?php echo $_POST['ocorr_cobrade'][4]; ?>'">
                         <option ng-if="subgrupo==1&&grupo==1&&categoria==1" value="0"></option>
                         <option ng-if="subgrupo==2&&grupo==1&&categoria==1" value="0"></option>
                         <option ng-if="tipo==1&&subgrupo==3&&grupo==1&&categoria==1" value="1">Blocos</option>

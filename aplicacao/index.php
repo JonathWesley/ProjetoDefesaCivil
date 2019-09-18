@@ -16,7 +16,7 @@ if($_SESSION['login']){
 if($pagina != 'login' && $pagina != 'esqueceuSenha')
     include 'header.php';
 
-if($_SESSION['nivel_acesso'] == 1){
+if($_SESSION['nivel_acesso'] == 1){ //diretor
     switch($pagina){
         case 'esqueceuSenha': include 'view/esqueceuSenha.php'; break;
         case 'cadastrarOcorrencia': include 'view/cadastrarOcorrencia.php'; break;
@@ -32,9 +32,10 @@ if($_SESSION['nivel_acesso'] == 1){
         case 'exibirPessoa' : include 'view/exibirPessoa.php'; break;
         case 'cadastrarInterdicao' : include 'view/cadastrarInterdicao.php'; break;
         case 'exibirInterdicao' : include 'view/exibirInterdicao.php'; break;
+        case 'visualizarSensores' : include 'view/visualizarSensores.php'; break;
         default: include 'view/consultarOcorrencia.php'; break;
     }
-}else if($_SESSION['nivel_acesso'] == 2){
+}else if($_SESSION['nivel_acesso'] == 2){ //coordenador
     switch($pagina){
         case 'esqueceuSenha': include 'view/esqueceuSenha.php'; break;
         case 'cadastrarOcorrencia': include 'view/cadastrarOcorrencia.php'; break;
@@ -47,9 +48,10 @@ if($_SESSION['nivel_acesso'] == 1){
         case 'exibirPessoa' : include 'view/exibirPessoa.php'; break;
         case 'cadastrarInterdicao' : include 'view/cadastrarInterdicao.php'; break;
         case 'exibirInterdicao' : include 'view/exibirInterdicao.php'; break;
+        case 'visualizarSensores' : include 'view/visualizarSensores.php'; break;
         default: include 'view/consultarOcorrencia.php'; break;
     }
-}else if($_SESSION['nivel_acesso'] == 3){
+}else if($_SESSION['nivel_acesso'] == 3){ //agente
     switch($pagina){
         case 'esqueceuSenha': include 'view/esqueceuSenha.php'; break;
         case 'cadastrarOcorrencia': include 'view/cadastrarOcorrencia.php'; break;
@@ -62,6 +64,7 @@ if($_SESSION['nivel_acesso'] == 1){
         case 'exibirPessoa' : include 'view/exibirPessoa.php'; break;
         case 'cadastrarInterdicao' : include 'view/cadastrarInterdicao.php'; break;
         case 'exibirInterdicao' : include 'view/exibirInterdicao.php'; break;
+        case 'visualizarSensores' : include 'view/visualizarSensores.php'; break;
         default: include 'view/consultarOcorrencia.php'; break;
     }
 }else{

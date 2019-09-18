@@ -39,15 +39,18 @@
             </tr></thead>
             <tbody>
             <?php
+                session_start();
                 $i = 0;
-                if(pg_fetch_array($consulta_usuarios, $i) == 0)
+                if(pg_fetch_array($consulta_usuarios, $i) == 1)
                     echo '<tr><td colspan="5" class="text-center">Nenhum usuário encontrado</td></tr>';
                 while($linha = pg_fetch_array($consulta_usuarios, $i)){
-                    echo '<tr><td class="text-center"><a href="index.php?pagina=exibirUsuario&id='.$linha['id_usuario'].'"><span class="glyphicon glyphicon-eye-open"></span></a></td>';
-                    echo '<td class="elimina-tabela">'.$linha['id_usuario'].'</td>';
-                    echo '<td>'.$linha['nome'].'</td>'; 
-                    echo '<td>'.$linha['email'].'</td>';
-                    echo '<td class="elimina-tabela">'.$linha['telefone'].'</td></tr>';
+                    if(strcmp($linha['id_usuario'],$_SESSION['id_usuario']) != 0){
+                        echo '<tr><td class="text-center"><a href="index.php?pagina=exibirUsuario&id='.$linha['id_usuario'].'"><span class="glyphicon glyphicon-eye-open"></span></a></td>';
+                        echo '<td class="elimina-tabela">'.$linha['id_usuario'].'</td>';
+                        echo '<td>'.$linha['nome'].'</td>'; 
+                        echo '<td>'.$linha['email'].'</td>';
+                        echo '<td class="elimina-tabela">'.$linha['telefone'].'</td></tr>';
+                    }
                     $i += 1;
                 }
             ?>

@@ -365,7 +365,7 @@
                             <div class="row">
                                 <div class="col-sm-6">
                                     CPF:
-                                    <input id="cpf_pessoa" name="cpf_pessoa" type="text" class="form-control" maxlength="11" onchange="verificaCpf(this.value)">
+                                    <input id="cpf_pessoa" name="cpf_pessoa" type="text" class="form-control" onchange="verificaCpf(this.value)">
                                     <span id="erroCpf" class="alertErro hide">CPF inválido.</span>
                                 </div>
                                 <div class="col-sm-6">

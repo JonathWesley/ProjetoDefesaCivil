@@ -225,6 +225,19 @@ body{
     top:-33px;
 }
 
+.map-dot{
+    position: absolute;
+    height: 20px;
+    width: 20px;
+    border-radius: 50%;
+}
+
+.map-image{
+    float: center;
+    height: 700px;
+    width: 80%;
+}
+
 /* footer */
 .footer{
     display: inline;

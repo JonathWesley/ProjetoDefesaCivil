@@ -71,7 +71,7 @@
     <hr>
         <h4>Atentido</h4>
         <nav>
-            <span class="titulo">Pessoa atendida: </span><span id="atendido"><?php echo $linhaPessoa['nome']; ?></span>
+            <span class="titulo">Pessoa atendida: </span><a id="atendido" href="?pagina=exibirPessoa&id=<?php echo $linhaChamado['pessoa_id'] ?>"><?php echo $linhaPessoa['nome']; ?></a>
         </nav>
     </div>
     <form action="index.php?pagina=cadastrarOcorrencia" method="post">

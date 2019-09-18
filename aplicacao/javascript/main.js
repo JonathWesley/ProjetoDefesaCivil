@@ -33,6 +33,7 @@ $("#telefone").mask("(00) 00000-0000");
 $("#celular_pessoa").mask("(00) 00000-0000");
 $("#cep").mask("00000-000");
 $("#cpf").mask("000.000.000-00");
+$("#cpf_pessoa").mask("000.000.000-00");
 
 function verificaCpf(cpf){
     cpf = cpf.split(".").join("").replace('-','');
@@ -111,32 +112,16 @@ function verificaConfirmaSenha(confirmaSenha){
 }
 
 function validarFormCadastroUsuario(){
-    if(!$("#erroNome").hasClass("hide") || !$("#erroCpf").hasClass("hide") || !$("#erroTelefone").hasClass("hide")
-        || !$("#erroEmail").hasClass("hide") || !$("#erroSenha").hasClass("hide") || !$("#erroConfirmaSenha").hasClass("hide")){
+    if(!$("#erroCpf").hasClass("hide") || !$("#erroTelefone").hasClass("hide")
+       || !$("#erroSenha").hasClass("hide") || !$("#erroConfirmaSenha").hasClass("hide")){
         
         alert("Existe campo(s) infomado(s) incorretamente.");
         return false;
     }
 }
 
-function validarFormCadastroChamado(){
-    if(!$("#erroLatLgn").hasClass("hide") || !$("#erroCep").hasClass("hide")){
-        alert("Existe campo(s) infomado(s) incorretamente.");
-        return false;
-    }
-}
-
-function validarFormCadastroOcorrencia(){
-    if(!$("#erroLatLgn").hasClass("hide") || !$("#erroCep").hasClass("hide") || !$("#erroNumeroChamado").hasClass("hide") 
-        || !$("#erroData").hasClass("hide")){
-        alert("Existe campo(s) infomado(s) incorretamente.");
-        return false;
-    }
-}
-
 function validarFormCadastroPessoa(){
-    if(!$("#erroNome").hasClass("hide") || !$("#erroCpf").hasClass("hide") || !$("#erroTelefone").hasClass("hide") 
-        || !$("#erroEmail").hasClass("hide")){
+    if(!$("#erroCpf").hasClass("hide") || !$("#erroTelefone").hasClass("hide")){
         alert("Existe campo(s) infomado(s) incorretamente.");
         return false;
     }
@@ -265,6 +250,7 @@ function SubmitFormData() {
     var id_input = $("#id_pessoa").val();
     var nome_pessoa = $("#nome_pessoa").val();
     var email_pessoa = $("#email_pessoa").val();
+    var celular_pessoa = $("#celular_pessoa").val();
     var telefone_pessoa = $("#telefone_pessoa").val();
     var cpf_pessoa = $("#cpf_pessoa").val();
     var outros_documentos = $("#outros_documentos").val();
@@ -289,7 +275,7 @@ function SubmitFormData() {
                 document.getElementById(id).style.color="#FF0000";
         }
     }
-    xmlhttp.open("GET","processa_cadastrar_pessoa.php?nome_pessoa="+nome_pessoa+"&email_pessoa="+email_pessoa+"&telefone_pessoa="+telefone_pessoa+"&cpf_pessoa="+cpf_pessoa+"&outros_documento="+outros_documentos,true);
+    xmlhttp.open("GET","processa_cadastrar_pessoa.php?nome_pessoa="+nome_pessoa+"&email_pessoa="+email_pessoa+"&celular_pessoa="+celular_pessoa+"&telefone_pessoa="+telefone_pessoa+"&cpf_pessoa="+cpf_pessoa+"&outros_documento="+outros_documentos,true);
     xmlhttp.send();
 
     $('#pessoasModal').modal('hide');

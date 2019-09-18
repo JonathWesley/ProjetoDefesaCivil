@@ -23,6 +23,7 @@
                 <div class="col-sm-6">
                     <span>Celular: <span style="color:red;">*</span></span>
                     <input id="telefone" name="telefone" type="text" class="form-control" required pattern="\([0-9]{2}\)[\s][0-9]{4,5}-[0-9]{4}" title="(XX) XXXXX-XXXX">
+                    <span id="erroTelefone" class="alertErro hide">Telefone inválido.</span>
                 </div>
             </div>
         <hr>

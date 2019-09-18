@@ -4,15 +4,15 @@
     $nome = addslashes($_GET['nome_pessoa']);
     $cpf = addslashes($_GET['cpf_pessoa']);
     $outros_documentos = addslashes($_GET['outros_documentos']);
-    $telefone = addslashes($_GET['telefone_pessoa']);
     $celular = addslashes($_GET['celular_pessoa']);
+    $telefone = addslashes($_GET['telefone_pessoa']);
     $email = addslashes($_GET['email_pessoa']);
 
     if($nome != null){
         $response = 'Pessoa cadastrado com sucesso';
         if(strlen($erros) == 0){
-            $query = "INSERT INTO pessoa (nome,cpf,outros_documentos,telefone, celular,email) 
-                      VALUES ('$nome','$cpf','$pass','$telefone', '$celular','$email') RETURNING id_pessoa";
+            $query = "INSERT INTO pessoa (nome,cpf,outros_documentos,telefone,celular,email) 
+                      VALUES ('$nome','$cpf','$outros_documentos','$telefone', '$celular','$email') RETURNING id_pessoa";
             $result = pg_query($connection, $query) or die(pg_last_error());
             if(!$result)
                 $response = 'Ocorreu um erro com o banco de dados';//'Erro ao cadastrar pessoa';

@@ -135,21 +135,21 @@
                     <button type="button" class="close" data-dismiss="modal">&times;</button>
                     <h5 class="modal-title">Cadastrar pessoa</h5>
                 </div>
-                <form method="post">
+                <form name="pessoa" method="post">
                     <div class="modal-body">
                         <nav>
                             <input id="id_pessoa" type="hidden" value="">
                             <div class="row">
                                 <div class="col-sm-12">
                                     Nome: <span style="color:red;">*</span>
-                                    <input id="nome_pessoa" name="nome_pessoa" type="text" class="form-control" onchange="verificaNome(this.value)">
+                                    <input id="nome_pessoa" name="nome_pessoa" type="text" class="form-control">
                                 </div>
                             </div>   
                             <span id="erroNome" class="alertErro hide">Nome inválido.</span>
                             <div class="row">
                                 <div class="col-sm-6">
                                     CPF:
-                                    <input id="cpf_pessoa" name="cpf_pessoa" type="text" class="form-control" maxlength="11" onchange="verificaCpf(this.value)">
+                                    <input id="cpf_pessoa" name="cpf_pessoa" type="text" class="form-control" onchange="verificaCpf(this.value)">
                                     <span id="erroCpf" class="alertErro hide">CPF inválido.</span>
                                 </div>
                                 <div class="col-sm-6">
