@@ -314,3 +314,92 @@ function myMap(position) {
         });
     } 
 }
+
+function getJSON(url, callback) {
+    var xhr = new XMLHttpRequest();
+    xhr.open('GET', url, true);
+    xhr.responseType = 'json';
+    xhr.onload = function() {
+      var status = xhr.status;
+      if (status === 200) {
+        callback(null, xhr.response);
+      } else {
+        callback(status, xhr.response);
+      }
+    };
+    xhr.send();
+};
+
+function ativaJson(){
+    getJSON('http://localhost:3000/?cdestacao=1019&cdvariavel=271.00', function(err, data){
+        var chuvaAlerta = 1;
+        var chuvaPerigo = 3;
+        if(err !== null){
+    
+        }else{
+            $("#nivel_precipitacao1").html(data.recordset[0].Valor);
+            $("#nivel_precipitacao2").html(data.recordset[1].Valor);
+            $("#nivel_precipitacao3").html(data.recordset[2].Valor);
+            //sensor1
+            if(data.recordset[0].Valor <= chuvaAlerta){
+                $("#sensor1").css('background-color','green');
+            }else if(data.recordset[0].Valor > chuvaAlerta && data.recordset[0].Valor < chuvaPerigo){
+                $("#sensor1").css('background-color','orange');
+            }else{
+                $("#sensor1").css('background-color','red');
+            }
+            //sensor2
+            if(data.recordset[1].Valor <= chuvaAlerta){
+                $("#sensor2").css('background-color','green');
+            }else if(data.recordset[1].Valor > chuvaAlerta && data.recordset[0].Valor < chuvaPerigo){
+                $("#sensor2").css('background-color','orange');
+            }else{
+                $("#sensor2").css('background-color','red');
+            }
+            //sensor3
+            if(data.recordset[2].Valor <= chuvaAlerta){
+                $("#sensor3").css('background-color','green');
+            }else if(data.recordset[2].Valor > chuvaAlerta && data.recordset[0].Valor < chuvaPerigo){
+                $("#sensor3").css('background-color','orange');
+            }else{
+                $("#sensor3").css('background-color','red');
+            }
+        }
+    });
+
+    // getJSON('http://localhost:3000/?cdestacao=1019&cdvariavel=192.00', function(err, data){
+    //     var tempAlerta = 1;
+    //     var tempPerigo = 3;
+    //     if(err !== null){
+    
+    //     }else{
+    //         $("#nivel_precipitacao1").html(data.recordset[0].Valor);
+    //         $("#nivel_precipitacao2").html(data.recordset[1].Valor);
+    //         $("#nivel_precipitacao3").html(data.recordset[2].Valor);
+    //         //sensor1
+    //         if(data.recordset[0].Valor <= tempAlerta){
+    //             $("#sensor1").css('background-color','green');
+    //         }else if(data.recordset[0].Valor > tempAlerta && data.recordset[0].Valor < tempPerigo){
+    //             $("#sensor1").css('background-color','orange');
+    //         }else{
+    //             $("#sensor1").css('background-color','red');
+    //         }
+    //         //sensor2
+    //         if(data.recordset[1].Valor <= tempAlerta){
+    //             $("#sensor2").css('background-color','green');
+    //         }else if(data.recordset[1].Valor > tempAlerta && data.recordset[0].Valor < tempPerigo){
+    //             $("#sensor2").css('background-color','orange');
+    //         }else{
+    //             $("#sensor2").css('background-color','red');
+    //         }
+    //         //sensor3
+    //         if(data.recordset[2].Valor <= tempAlerta){
+    //             $("#sensor3").css('background-color','green');
+    //         }else if(data.recordset[2].Valor > tempAlerta && data.recordset[0].Valor < tempPerigo){
+    //             $("#sensor3").css('background-color','orange');
+    //         }else{
+    //             $("#sensor3").css('background-color','red');
+    //         }
+    //     }
+    // });
+}
