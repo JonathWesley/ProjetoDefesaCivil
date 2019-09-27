@@ -332,6 +332,7 @@ function getJSON(url, callback) {
 
 function ativaJson(){
     getJSON('http://localhost:3000/?cdestacao=1019&cdvariavel=271.00', function(err, data){
+        alert('a');
         var chuvaAlerta = 1;
         var chuvaPerigo = 3;
         if(err !== null){

@@ -21,6 +21,4 @@
         </div>
     </div>
     <img src="images/mapaSensores.png" alt="mapa" class="img-thumbnail">
-    <br>
-    <button  onclick="ativaJson()">atualiza</button>
 </div>
