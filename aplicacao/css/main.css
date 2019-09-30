@@ -257,6 +257,44 @@ body{
     padding: 5px;
 }
 
+i{
+    display: inline-block;
+    padding: 3px;
+}
+
+.arrow-up{
+    position: relative;
+    top: 5px;
+    right: 5px;
+    border: solid red;
+    border-width: 0 3px 3px 0;
+    transform: rotate(-135deg);
+    -webkit-transform: rotate(-135deg);
+}
+  
+.arrow-down{
+    position: relative;
+    top: 2px;
+    right: 5px;
+    border: solid green;
+    border-width: 0 3px 3px 0;
+    transform: rotate(45deg);
+    -webkit-transform: rotate(45deg);
+}
+
+.estavel{
+    position: relative;
+    right: 5px; 
+    border: solid blue;
+    border-width: 0 0px 3px 0;
+}
+
+.legenda{
+    font-size: 16px;
+    position: relative;
+    top:5px;
+}
+
 /* footer */
 .footer{
     display: inline;

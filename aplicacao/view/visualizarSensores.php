@@ -1,3 +1,35 @@
+<div class="container positioning">
+<div class="jumbotron campo_cadastro">
+    <div class="row">
+        <div class="col-sm-3">
+            <span class="map-dot" style="background-color:green;"></span>
+            <span class="legenda">Normal</span>
+        </div>
+        <div class="col-sm-3">
+            <span class="map-dot" style="background-color:yellow;"></span>
+            <span class="legenda">Alerta</span>
+        </div>
+        <div class="col-sm-3">
+            <span class="map-dot" style="background-color:red;"></span>
+            <span class="legenda">Emergência</span>
+        </div>
+    </div><hr>
+    <div class="row">
+        <div class="col-sm-3">
+            <i class="arrow-up"></i>
+            <span class="legenda">Nível Subindo</span>
+        </div>
+        <div class="col-sm-3">
+            <i class="arrow-down"></i>
+            <span class="legenda">Nível Descendo</span>
+        </div>
+        <div class="col-sm-3">
+            <i class="estavel"></i>
+            <span class="legenda">Estável</span>
+        </div>
+    </div>
+</div>
+</div>
 <div class="text-center map-image">
     <div class="map-information" style="top:200px;left:200px;">
         <span id="sensor1" class="map-dot"></span>
@@ -22,3 +54,5 @@
     </div>
     <img src="images/mapaSensores.png" alt="mapa" class="img-thumbnail">
 </div>
+
+<button onclick="ativaRepetidor()">att</button>

@@ -332,11 +332,11 @@ function getJSON(url, callback) {
 
 function ativaJson(){
     getJSON('http://localhost:3000/?cdestacao=1019&cdvariavel=271.00', function(err, data){
-        alert('a');
+        alert('iniciou');
         var chuvaAlerta = 1;
         var chuvaPerigo = 3;
         if(err !== null){
-    
+            alert('erro');
         }else{
             $("#nivel_precipitacao1").html(data.recordset[0].Valor);
             $("#nivel_precipitacao2").html(data.recordset[1].Valor);
@@ -368,39 +368,41 @@ function ativaJson(){
         }
     });
 
-    // getJSON('http://localhost:3000/?cdestacao=1019&cdvariavel=192.00', function(err, data){
-    //     var tempAlerta = 1;
-    //     var tempPerigo = 3;
-    //     if(err !== null){
+    /*
+    getJSON('http://localhost:3000/?cdestacao=1019&cdvariavel=192.00', function(err, data){
+        var tempAlerta = 1;
+        var tempPerigo = 3;
+        if(err !== null){
     
-    //     }else{
-    //         $("#nivel_precipitacao1").html(data.recordset[0].Valor);
-    //         $("#nivel_precipitacao2").html(data.recordset[1].Valor);
-    //         $("#nivel_precipitacao3").html(data.recordset[2].Valor);
-    //         //sensor1
-    //         if(data.recordset[0].Valor <= tempAlerta){
-    //             $("#sensor1").css('background-color','green');
-    //         }else if(data.recordset[0].Valor > tempAlerta && data.recordset[0].Valor < tempPerigo){
-    //             $("#sensor1").css('background-color','orange');
-    //         }else{
-    //             $("#sensor1").css('background-color','red');
-    //         }
-    //         //sensor2
-    //         if(data.recordset[1].Valor <= tempAlerta){
-    //             $("#sensor2").css('background-color','green');
-    //         }else if(data.recordset[1].Valor > tempAlerta && data.recordset[0].Valor < tempPerigo){
-    //             $("#sensor2").css('background-color','orange');
-    //         }else{
-    //             $("#sensor2").css('background-color','red');
-    //         }
-    //         //sensor3
-    //         if(data.recordset[2].Valor <= tempAlerta){
-    //             $("#sensor3").css('background-color','green');
-    //         }else if(data.recordset[2].Valor > tempAlerta && data.recordset[0].Valor < tempPerigo){
-    //             $("#sensor3").css('background-color','orange');
-    //         }else{
-    //             $("#sensor3").css('background-color','red');
-    //         }
-    //     }
-    // });
+        }else{
+            $("#nivel_precipitacao1").html(data.recordset[0].Valor);
+            $("#nivel_precipitacao2").html(data.recordset[1].Valor);
+            $("#nivel_precipitacao3").html(data.recordset[2].Valor);
+            //sensor1
+            if(data.recordset[0].Valor <= tempAlerta){
+                $("#sensor1").css('background-color','green');
+            }else if(data.recordset[0].Valor > tempAlerta && data.recordset[0].Valor < tempPerigo){
+                $("#sensor1").css('background-color','orange');
+            }else{
+                $("#sensor1").css('background-color','red');
+            }
+            //sensor2
+            if(data.recordset[1].Valor <= tempAlerta){
+                $("#sensor2").css('background-color','green');
+            }else if(data.recordset[1].Valor > tempAlerta && data.recordset[0].Valor < tempPerigo){
+                $("#sensor2").css('background-color','orange');
+            }else{
+                $("#sensor2").css('background-color','red');
+            }
+            //sensor3
+            if(data.recordset[2].Valor <= tempAlerta){
+                $("#sensor3").css('background-color','green');
+            }else if(data.recordset[2].Valor > tempAlerta && data.recordset[0].Valor < tempPerigo){
+                $("#sensor3").css('background-color','orange');
+            }else{
+                $("#sensor3").css('background-color','red');
+            }
+        }
+    });
+    */
 }
