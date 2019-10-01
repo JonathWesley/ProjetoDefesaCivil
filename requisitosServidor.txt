@@ -1,0 +1,5 @@
+Armazenamento: 50gb
+Memória: ?(minimo de usuarios: 6)
+Processador: ?
+Sistema (SO): ?(posso escolher: algum linux)
+Domínio: defesacivil.bc.sc.gov.br
