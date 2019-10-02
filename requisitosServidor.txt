@@ -1,5 +1,10 @@
 Armazenamento: 50gb
-Memória: ?(minimo de usuarios: 6)
-Processador: ?
-Sistema (SO): ?(posso escolher: algum linux)
+Memória: 2GB-4GB
+Processador: 1CPU 2.6GHz
+Sistema (SO): ubuntu server
 Domínio: defesacivil.bc.sc.gov.br
+
+Requisitos para hospedar a aplicação web:
+PHP 7
+Postgres 11
+
