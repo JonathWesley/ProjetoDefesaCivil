@@ -216,17 +216,17 @@ function selecionaComplete(value, id_input){
 
 $(document).on("click", ".open-AddBookDialog", function () {
     var element_id = $(this).data('id');
-            if(element_id == 'map'){
-                if (navigator.geolocation) {
-                    navigator.geolocation.getCurrentPosition(myMap);
-                    $('#map').modal('show');  
-                } else {
-                    $('#map').modal('show');
-                }
-            }else{
-                $(".modal-body #id_pessoa").val( element_id );
-                $('#pessoasModal').modal('show');
-            }
+    if(element_id == 'map'){
+        if(navigator.geolocation) {
+            navigator.geolocation.getCurrentPosition(myMap);
+            $('#map').modal('show');  
+        }else{
+            $('#map').modal('show');
+        }
+    }else{
+        $(".modal-body #id_pessoa").val( element_id );
+        $('#pessoasModal').modal('show');
+    }
 });
 
 //POST pessoa
@@ -331,78 +331,76 @@ function getJSON(url, callback) {
 };
 
 function ativaJson(){
+    var status1 = 'rgb(24,240,78)'; //1->normal ; 2->alerta ; 3->emergencia
+    var status2 = 'rgb(24,240,78)';
+    var status3 = 'rgb(24,240,78)';
+
+    //requisicao dos niveis de precipitacao
     getJSON('http://localhost:3000/?cdestacao=1019&cdvariavel=271.00', function(err, data){
-        alert('iniciou');
         var chuvaAlerta = 1;
         var chuvaPerigo = 3;
         if(err !== null){
-            alert('erro');
+            alert('Erro ao carregar API - 1ª requisição');
         }else{
-            $("#nivel_precipitacao1").html(data.recordset[0].Valor);
-            $("#nivel_precipitacao2").html(data.recordset[1].Valor);
-            $("#nivel_precipitacao3").html(data.recordset[2].Valor);
+            $("#nivel_precipitacao1").html(data[0].Valor);
+            $("#nivel_precipitacao2").html(data[1].Valor);
+            $("#nivel_precipitacao3").html(data[2].Valor);
             //sensor1
-            if(data.recordset[0].Valor <= chuvaAlerta){
-                $("#sensor1").css('background-color','green');
-            }else if(data.recordset[0].Valor > chuvaAlerta && data.recordset[0].Valor < chuvaPerigo){
-                $("#sensor1").css('background-color','orange');
-            }else{
-                $("#sensor1").css('background-color','red');
+            if(data[0].Valor > chuvaAlerta && data[0].Valor < chuvaPerigo){
+                status1 = 'yellow';
+            }else if(data[0].Valor > chuvaPerigo){
+                status1 = 'red';
             }
             //sensor2
-            if(data.recordset[1].Valor <= chuvaAlerta){
-                $("#sensor2").css('background-color','green');
-            }else if(data.recordset[1].Valor > chuvaAlerta && data.recordset[0].Valor < chuvaPerigo){
-                $("#sensor2").css('background-color','orange');
-            }else{
-                $("#sensor2").css('background-color','red');
+            if(data[1].Valor > chuvaAlerta && data[0].Valor < chuvaPerigo){
+                status2 = 'yellow';
+            }else if(data[1].Valor > chuvaPerigo){
+                status2 = 'red';
             }
             //sensor3
-            if(data.recordset[2].Valor <= chuvaAlerta){
-                $("#sensor3").css('background-color','green');
-            }else if(data.recordset[2].Valor > chuvaAlerta && data.recordset[0].Valor < chuvaPerigo){
-                $("#sensor3").css('background-color','orange');
-            }else{
-                $("#sensor3").css('background-color','red');
+            if(data[2].Valor > chuvaAlerta && data[0].Valor < chuvaPerigo){
+                status3 = 'yellow';
+            }else if(data[2].Valor > chuvaPerigo){
+                status3 = 'red';
             }
         }
     });
 
-    /*
+    //requisicao da temperatura do ar
     getJSON('http://localhost:3000/?cdestacao=1019&cdvariavel=192.00', function(err, data){
         var tempAlerta = 1;
         var tempPerigo = 3;
         if(err !== null){
-    
+            alert('Erro ao carregar API - 2ª requisição');
         }else{
-            $("#nivel_precipitacao1").html(data.recordset[0].Valor);
-            $("#nivel_precipitacao2").html(data.recordset[1].Valor);
-            $("#nivel_precipitacao3").html(data.recordset[2].Valor);
+            $("#temp_ar1").html(data[0].Valor);
+            $("#temp_ar2").html(data[1].Valor);
+            $("#temp_ar3").html(data[2].Valor);
             //sensor1
-            if(data.recordset[0].Valor <= tempAlerta){
-                $("#sensor1").css('background-color','green');
-            }else if(data.recordset[0].Valor > tempAlerta && data.recordset[0].Valor < tempPerigo){
-                $("#sensor1").css('background-color','orange');
-            }else{
-                $("#sensor1").css('background-color','red');
+            if(data[0].Valor > tempAlerta && data.Valor < tempPerigo){
+                if(status1 == 'green')
+                    status1 = 'yellow';
+            }else if(data[0].Valor > tempPerigo){
+                status1 = 'red';
             }
             //sensor2
-            if(data.recordset[1].Valor <= tempAlerta){
-                $("#sensor2").css('background-color','green');
-            }else if(data.recordset[1].Valor > tempAlerta && data.recordset[0].Valor < tempPerigo){
-                $("#sensor2").css('background-color','orange');
-            }else{
-                $("#sensor2").css('background-color','red');
+            if(data[1].Valor > tempAlerta && data[1].Valor < tempPerigo){
+                if(status2 == 'green')
+                    status2 = 'yellow';
+            }else if(data[1].Valor > tempPerigo){
+                status2 = 'red';
             }
             //sensor3
-            if(data.recordset[2].Valor <= tempAlerta){
-                $("#sensor3").css('background-color','green');
-            }else if(data.recordset[2].Valor > tempAlerta && data.recordset[0].Valor < tempPerigo){
-                $("#sensor3").css('background-color','orange');
-            }else{
-                $("#sensor3").css('background-color','red');
+            if(data[2].Valor > tempAlerta && data[2].Valor < tempPerigo){
+                if(status3 == 'green')
+                    status3 = 'yellow';
+            }else if(data[2].Valor > tempPerigo){
+                status3 = 'red';
             }
         }
     });
-    */
+
+    $('#sensor1').css('background-color', status1);
+    $('#sensor2').css('background-color', status2);
+    $("#sensor3").css('background-color', status3);
 }

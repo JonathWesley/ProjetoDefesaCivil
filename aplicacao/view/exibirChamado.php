@@ -71,9 +71,14 @@
     <hr>
         <h4>Atentido</h4>
         <nav>
-            <span class="titulo">Pessoa atendida: </span><a id="atendido" href="?pagina=exibirPessoa&id=<?php echo $linhaChamado['pessoa_id'] ?>"><?php echo $linhaPessoa['nome']; ?></a>
+            <?php if($linhaChamado['pessoa_id'] != NULL){ ?>
+            <span class="titulo">Pessoa atendida: </span><a id="atendido" href="?pagina=exibirPessoa&id=<?php echo $linhaChamado['pessoa_id']; ?>"><?php echo $linhaPessoa['nome']; ?></a>
+            <?php }else{ ?>
+            <span>Nenhuma pessoa cadastrada.</span>
+            <?php } ?>
         </nav>
     </div>
+    <?php if(!$linhaChamado['usado']){ ?>
     <form action="index.php?pagina=cadastrarOcorrencia" method="post">
         <input name="id_chamado" type="hidden" value="<?php echo $id_chamado; ?>">
         <input name="endereco_principal" type="hidden" value="<?php echo $linhaChamado['endereco_principal']; ?>">
@@ -91,5 +96,6 @@
         <input name="pessoa_atendida_1" type="hidden" value="<?php echo $linhaPessoa['nome']; ?>">
         <input type="submit" class="btn btn-default btn-md" value="Gerar Ocorrência">
     </form>
+    <?php } ?>
 </div>
 </div>

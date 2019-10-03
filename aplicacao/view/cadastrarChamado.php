@@ -25,24 +25,22 @@
             </div>
             <h3 class="text-center">Registro de chamado</h3>
         <hr>
-            <div class="row">
-                <div class="col-sm-4">
-                    <span>Data: <span style="color:red;">*</span></span>
-                    <input id="data_chamado" name="data_chamado" type="date" class="form-control" max="<?php echo date('Y-m-d'); ?>" required>
-                </div>
-                <div class="col-sm-4">
-                    <span>Horário: <span style="color:red;">*</span></span>
-                    <input type="time" name="horario_chamado" class="form-control" required>
-                </div>
-            </div>
             <div>
                 Origem: <span style="color:red;">*</span>
                 <input type="text" name="origem_chamado" class="form-control" required>
             </div>
+            <div>
+                Agente principal: <span style="color:red;">*</span>
+                <input id="agente" name="agente" type="text" class="form-control" onkeyup="showResult(this.value,this.id)" required>
+                <div class="autocomplete" id="livesearchagente"></div>
+            </div>
+            <?php if(isset($_GET['agente'])){ ?>
+                <span class="alertErro">Agente não encontrado.</span>
+            <?php } ?>
             <div class="row">
                 <div class="col-sm-10">
-                    Pessoa atendida: <span style="color:red;">*</span>
-                    <input type="text" id="pessoa_nome" name="nome_chamado" class="form-control inline" onkeyup="showResult(this.value,this.id)" required>
+                    Pessoa atendida:
+                    <input type="text" id="pessoa_nome" name="nome_chamado" class="form-control inline" onkeyup="showResult(this.value,this.id)">
                     <div class="autocomplete" id="livesearchpessoa_nome"></div>
                     <div id="resultpessoa_nome"></div>
 
@@ -60,7 +58,7 @@
                 Endereço principal: <span style="color:red;">*</span>
                 <br>
                 <label for="endereco_principal"></label>
-                <select name="endereco_principal" class="form-control endereco-principal" ng-model="sel_endereco" ng-init="sel_endereco='Coordenada'" required>
+                <select name="endereco_principal" class="form-control endereco-principal" ng-model="sel_endereco" ng-init="sel_endereco='Logradouro'" required>
                     <option value="Coordenada">Coordenada</option>
                     <option value="Logradouro">Logradouro</option>
                 </select>
@@ -121,8 +119,8 @@
         <hr>
             <div>
                 Descrição: <span style="color:red;">*</span>
-                <textarea id="descricao" name="descricao" class="form-control" cols="30" rows="2" maxlength="100" ng-model="descricaoVal" required></textarea>
-                <span class="char-count">{{descricaoVal.length || 0}}/100</span>
+                <textarea id="descricao" name="descricao" class="form-control" cols="30" rows="10" maxlength="750" ng-model="descricaoVal" required></textarea>
+                <span class="char-count">{{descricaoVal.length || 0}}/750</span>
             </div>
         </div>
         <input type="submit" class="btn btn-default btn-md" value="Cadastrar">

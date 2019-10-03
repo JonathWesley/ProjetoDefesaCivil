@@ -3,9 +3,8 @@
 include 'database.php';
 
 //recebe dados do $_POST
-$data = addslashes($_POST['data_chamado']);
-$hora = addslashes($_POST['horario_chamado']);
 $origem = addslashes($_POST['origem_chamado']);
+$agente = addslashes($POST['agente']);
 $nome = addslashes($_POST['nome_chamado']);
 $endereco_principal = addslashes($_POST['endereco_principal']);
 $longitude = addslashes($_POST['longitude']);
@@ -61,7 +60,18 @@ if(strlen($nome) > 0){ //se a pessoa foi informada, busca a mesma no BD
 }else //pessoa nao foi informada
 	$erros = $erros.'&nome';
 
-$timestamp = $data.' '.$hora.':00';
+$result = pg_query($connection, "SELECT * FROM usuario WHERE nome = '$agente'");
+if($result){
+	if(pg_num_rows($result) == 0){ //agente nao encontrado
+		$erros = $erros.'&agente';
+	}else{ //agente encontrado, seleciona o id do mesmo
+		$linha = pg_fetch_array($result, 0);
+		$agente = $linha['id_usuario'];
+	}
+}else//retorna erro caso nao consiga acessar o banco de dados
+	$erros = $erros.'&agente';
+
+$timestamp = $dataAtual;
 
 if(strlen($erros) > 0){
     //echo pg_last_error();
@@ -71,9 +81,9 @@ if(strlen($erros) > 0){
 	//insere a ocorrencia no banco de dados
 
 	$query = "INSERT INTO chamado (data_hora,origem,pessoa_id,chamado_logradouro_id,
-			  descricao,endereco_principal,latitude,longitude)
+			  descricao,endereco_principal,latitude,longitude, agente)
 			  VALUES ('$timestamp','$origem',$pessoa_atendida,$logradouro_id,'$descricao',
-			  '$endereco_principal',$latitude,$longitude) 
+			  '$endereco_principal',$latitude,$longitude, '$agente') 
 			  RETURNING id_chamado";
 
 	$result = pg_query($connection, $query);

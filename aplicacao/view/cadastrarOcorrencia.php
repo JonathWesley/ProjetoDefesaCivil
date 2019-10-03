@@ -20,19 +20,22 @@
                 </div>
             </div>
             <h3 class="text-center">Registro de ocorrência</h3>
+        <?php if(isset($_POST['id_chamado'])){ ?>
         <hr>
             <div>
                 Número do chamado:
-                <input name="id_chamado" type="text" class="form-control" style="width:25%;" value="<?php echo $_POST['id_chamado']; ?>" pattern="[0-9]+" title="Apenas números">
+                <input name="id_chamado" type="hidden" class="form-control" style="width:25%;" value="<?php echo $_POST['id_chamado']; ?>" pattern="[0-9]+" title="Apenas números">
+                <span><?php echo $_POST['id_chamado']; ?></span>
             </div>
+            <?php } ?>
         <hr>
             <div>
                 Endereço principal: <span style="color:red;">*</span>
                 <br>
                 <label for="endereco_principal"></label>
-                <select name="endereco_principal" class="form-control endereco-principal" ng-model="sel_endereco" ng-init="sel_endereco='<?php if(isset($_POST['endereco_principal'])){echo $_POST['endereco_principal'];}else{echo 'Coordenada';} ?>'" required>
-                    <option value="Coordenada">Coordenada</option>
+                <select name="endereco_principal" class="form-control endereco-principal" ng-model="sel_endereco" ng-init="sel_endereco='<?php if(isset($_POST['endereco_principal'])){echo $_POST['endereco_principal'];}else{echo 'Logradouro';} ?>'" required>
                     <option value="Logradouro">Logradouro</option>
+                    <option value="Coordenada">Coordenada</option>
                 </select>
             </div>
             <div ng-show="sel_endereco == 'Coordenada'">
@@ -124,7 +127,7 @@
             </div>
             <div>
                 Descrição:
-                <textarea id="descricao" name="descricao" class="form-control" cols="30" rows="5"></textarea>
+                <textarea id="descricao" name="descricao" class="form-control" cols="30" rows="15"></textarea>
             </div>
             <div>
                 Origem: <span style="color:red;">*</span>

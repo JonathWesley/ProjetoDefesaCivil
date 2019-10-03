@@ -276,7 +276,7 @@ i{
     position: relative;
     top: 2px;
     right: 5px;
-    border: solid green;
+    border: solid rgb(24,240,78);
     border-width: 0 3px 3px 0;
     transform: rotate(45deg);
     -webkit-transform: rotate(45deg);
