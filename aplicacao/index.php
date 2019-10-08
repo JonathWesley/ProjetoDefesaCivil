@@ -33,6 +33,7 @@ if($_SESSION['nivel_acesso'] == 1){ //diretor
         case 'cadastrarInterdicao' : include 'view/cadastrarInterdicao.php'; break;
         case 'exibirInterdicao' : include 'view/exibirInterdicao.php'; break;
         case 'visualizarSensores' : include 'view/visualizarSensores.php'; break;
+        case 'monitorarChamado' : include 'view/monitorarChamado.php'; break;
         default: include 'view/consultarOcorrencia.php'; break;
     }
 }else if($_SESSION['nivel_acesso'] == 2){ //coordenador
@@ -49,6 +50,7 @@ if($_SESSION['nivel_acesso'] == 1){ //diretor
         case 'cadastrarInterdicao' : include 'view/cadastrarInterdicao.php'; break;
         case 'exibirInterdicao' : include 'view/exibirInterdicao.php'; break;
         case 'visualizarSensores' : include 'view/visualizarSensores.php'; break;
+        case 'monitorarChamado' : include 'view/monitorarChamado.php'; break;
         default: include 'view/consultarOcorrencia.php'; break;
     }
 }else if($_SESSION['nivel_acesso'] == 3){ //agente
@@ -65,6 +67,7 @@ if($_SESSION['nivel_acesso'] == 1){ //diretor
         case 'cadastrarInterdicao' : include 'view/cadastrarInterdicao.php'; break;
         case 'exibirInterdicao' : include 'view/exibirInterdicao.php'; break;
         case 'visualizarSensores' : include 'view/visualizarSensores.php'; break;
+        case 'monitorarChamado' : include 'view/monitorarChamado.php'; break;
         default: include 'view/consultarOcorrencia.php'; break;
     }
 }else{

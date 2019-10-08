@@ -336,7 +336,7 @@ function ativaJson(){
     var status3 = 'rgb(24,240,78)';
 
     //requisicao dos niveis de precipitacao
-    getJSON('http://localhost:3000/?cdestacao=1019&cdvariavel=271.00', function(err, data){
+    getJSON('http://localhost:3000/?limite=3&cdestacao=1019&cdvariavel=271.00', function(err, data){
         var chuvaAlerta = 1;
         var chuvaPerigo = 3;
         if(err !== null){
@@ -403,4 +403,20 @@ function ativaJson(){
     $('#sensor1').css('background-color', status1);
     $('#sensor2').css('background-color', status2);
     $("#sensor3").css('background-color', status3);
+}
+
+function monitorarChamado() {
+    if(window.XMLHttpRequest){
+        // code for IE7+, Firefox, Chrome, Opera, Safari
+        xmlhttp=new XMLHttpRequest();
+    }else{  // code for IE6, IE5
+        xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+    }
+    xmlhttp.onreadystatechange=function() {
+        if (this.readyState==4 && this.status==200) {
+            document.getElementById('requestChamado').innerHTML=this.responseText;
+        }
+    }
+    xmlhttp.open("GET","requestChamado.php",true);
+    xmlhttp.send();
 }

@@ -122,6 +122,16 @@
                 <textarea id="descricao" name="descricao" class="form-control" cols="30" rows="10" maxlength="750" ng-model="descricaoVal" required></textarea>
                 <span class="char-count">{{descricaoVal.length || 0}}/750</span>
             </div>
+        <hr>
+            <div>
+                Prioridade: <span style="color:red;">*</span>
+                <label for="prioridade"></label>
+                <select name="prioridade" class="form-control" style="width:30%;" required>
+                    <option value="Baixa">Baixa</option>
+                    <option value="Média">Média</option>
+                    <option value="Alta">Alta</option>
+                </select>
+            </div>
         </div>
         <input type="submit" class="btn btn-default btn-md" value="Cadastrar">
     </form>

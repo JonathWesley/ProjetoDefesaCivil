@@ -4,7 +4,7 @@ include 'database.php';
 
 //recebe dados do $_POST
 $origem = addslashes($_POST['origem_chamado']);
-$agente = addslashes($POST['agente']);
+$agente = addslashes($_POST['agente']);
 $nome = addslashes($_POST['nome_chamado']);
 $endereco_principal = addslashes($_POST['endereco_principal']);
 $longitude = addslashes($_POST['longitude']);
@@ -16,6 +16,7 @@ $logradouro = addslashes($_POST['logradouro']);
 $numero = addslashes($_POST['complemento']);
 $referencia = addslashes($_POST['referencia']);
 $descricao = addslashes($_POST['descricao']);
+$prioridade = addslashes($_POST['prioridade']);
 
 $erros='';
 
@@ -45,7 +46,7 @@ if($endereco_principal == "Logradouro"){
 	$latitude = 'null';
 }
 
-$pessoa_atendida = 0;
+$pessoa_atendida = 'null';
 if(strlen($nome) > 0){ //se a pessoa foi informada, busca a mesma no BD 
 	$result = pg_query($connection, "SELECT * FROM pessoa WHERE nome = '$nome'");
 	if($result){
@@ -57,10 +58,9 @@ if(strlen($nome) > 0){ //se a pessoa foi informada, busca a mesma no BD
 		}
 	}else //erro no acesso ao BD
 		$erros = $erros.'&nome';
-}else //pessoa nao foi informada
-	$erros = $erros.'&nome';
+}
 
-$result = pg_query($connection, "SELECT * FROM usuario WHERE nome = '$agente'");
+$result = pg_query($connection, "SELECT id_usuario FROM usuario WHERE nome = '$agente'");
 if($result){
 	if(pg_num_rows($result) == 0){ //agente nao encontrado
 		$erros = $erros.'&agente';
@@ -74,16 +74,16 @@ if($result){
 $timestamp = $dataAtual;
 
 if(strlen($erros) > 0){
-    //echo pg_last_error();
-    header('location:index.php?pagina=cadastrarChamado&erroDB'.$erros);
+    echo pg_last_error();
+    //header('location:index.php?pagina=cadastrarChamado&erroDB'.$erros);
 //caso esteja tudo certo, procede com a inserção no banco de dados
 }else{
 	//insere a ocorrencia no banco de dados
 
 	$query = "INSERT INTO chamado (data_hora,origem,pessoa_id,chamado_logradouro_id,
-			  descricao,endereco_principal,latitude,longitude, agente)
+			  descricao,endereco_principal,latitude,longitude, agente_id, prioridade)
 			  VALUES ('$timestamp','$origem',$pessoa_atendida,$logradouro_id,'$descricao',
-			  '$endereco_principal',$latitude,$longitude, '$agente') 
+			  '$endereco_principal',$latitude,$longitude, $agente, '$prioridade') 
 			  RETURNING id_chamado";
 
 	$result = pg_query($connection, $query);
@@ -97,5 +97,6 @@ if(strlen($erros) > 0){
 		
 		header('location:index.php?pagina=cadastrarChamado&sucesso');
 	}else
-		header('location:index.php?pagina=cadastrarChamado&erroDB');
+		echo pg_last_error();
+		//header('location:index.php?pagina=cadastrarChamado&erroDB');
 }

@@ -26,6 +26,18 @@
 <body>
     <div ng-app="myApp" ng-controller="myCtrl">
     <header>
+    <?php if($_GET['pagina'] == 'monitorarChamado'){ ?>
+        <nav class="navbar navbar-default">
+            <div class="container-fluid">
+                <div class="navbar-header">
+                    <a class="navbar-brand" style="font-size:35px;" href="?pagina=home">Defesa Civil</a>
+                </div>
+                <ul class="nav navbar-nav navbar-right">
+                    <li><a href="?pagina=consultarChamado">Voltar</a></li>
+                </ul>
+            </div>
+        </nav>
+    <?php }else{ ?>
         <nav class="navbar navbar-default">
             <div class="container-fluid">
                 <div class="navbar-header">
@@ -33,9 +45,10 @@
                 </div>
                 <ul class="nav navbar-nav navbar-right">
                     <li class="dropdown">
-                        <a class="dropdown-toggle" data-toggle="dropdown" href="#">teste API's <span class="caret"></span></a>
+                        <a class="dropdown-toggle" data-toggle="dropdown" href="#">Monitoramento <span class="caret"></span></a>
                         <ul class="dropdown-menu">
                         <li><a href="?pagina=visualizarSensores">Sensores</a></li>
+                        <li><a href="?pagina=monitorarChamado">Chamados</a></li>
                         </ul>
                     </li>
                     <li class="dropdown">
@@ -73,6 +86,7 @@
                 </ul>
             </div>
         </nav>
+    <?php } ?>
     </header>
 
     <div id="conteudo" class="container">

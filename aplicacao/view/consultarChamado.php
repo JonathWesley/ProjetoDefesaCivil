@@ -11,7 +11,7 @@
 
     if(isset($_POST['pesquisa_chamado']) && $pesquisa_chamado != null){
         $query = "SELECT chamado.id_chamado,TO_CHAR(chamado.data_hora, 'DD/MM/YYYY') as dataa,
-                        chamado.origem,pessoa.nome,chamado.descricao 
+                        chamado.origem,pessoa.nome,chamado.descricao, chamado.prioridade  
                         FROM chamado INNER JOIN pessoa ON (chamado.pessoa_id = pessoa.id_pessoa)";
         
         if($pesquisa_filtro == 'data')
@@ -28,7 +28,7 @@
         $consulta_chamados = pg_query($connection, $query." LIMIT $items_por_pagina OFFSET $offset") or die(preg_last_error());
     }else{
         $query = "SELECT chamado.id_chamado,TO_CHAR(chamado.data_hora, 'DD/MM/YYYY') as dataa,
-        chamado.origem,pessoa.nome,chamado.descricao 
+        chamado.origem,pessoa.nome,chamado.descricao, chamado.prioridade 
         FROM chamado INNER JOIN pessoa ON (chamado.pessoa_id = pessoa.id_pessoa)";
         
         if($_POST['finalizado'] != true)
@@ -81,7 +81,14 @@
                 if(pg_fetch_array($consulta_chamados, $i) == 0)
                     echo '<tr><td colspan="5" class="text-center">Nenhum chamado encontrado</td></tr>';
                 while($linha = pg_fetch_array($consulta_chamados, $i)){
-                    echo '<tr><td class="text-center"><a href="index.php?pagina=exibirChamado&id='.$linha['id_chamado'].'"><span class="glyphicon glyphicon-eye-open"></span></a></td>';
+                    echo '<tr style="background-color:';
+                    if($linha['prioridade'] == "Alta")
+                        echo '#ff5050;">';
+                    else if($linha['prioridade'] == "Média")
+                        echo '#fff050;">';
+                    else
+                        echo '#88ff50;">';
+                    echo '<td class="text-center"><a href="index.php?pagina=exibirChamado&id='.$linha['id_chamado'].'"><span class="glyphicon glyphicon-eye-open"></span></a></td>';
                     echo '<td>'.$linha['dataa'].'</td>';
                     echo '<td>'.$linha['origem'].'</td>';
                     echo '<td>'.$linha['nome'].'</td>';

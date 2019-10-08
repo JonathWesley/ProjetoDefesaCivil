@@ -52,5 +52,5 @@
             Nível precipitação: <span id="nivel_precipitacao3"></span>
         </div>
     </div>
-    <img src="images/mapaSensores.png" alt="mapa" class="img-thumbnail">
+    <img src="images/mapaSensores.png" alt="mapa" class="img-thumbnail" style="width:87%;">
 </div>
