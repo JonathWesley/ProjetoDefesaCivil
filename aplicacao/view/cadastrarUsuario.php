@@ -44,7 +44,7 @@
             <div class="row">
                 <div class="col-sm-6">
                     <span>Senha: <span style="color:red;">*</span></span>
-                    <input id="senha" name="senha_cadastro" type="password" class="form-control" required title="Senha deve possuir no mínimo 6 caracteres, 1 letra minuscula, 1 letra maiuscula e 1 número">
+                    <input id="senha" name="senha_cadastro" type="password" class="form-control" required title="Senha deve possuir no mínimo 6 caracteres, 1 letra minuscula, 1 letra maiuscula e 1 número" onchange="verificaSenha(this.value)">
                     <span id="erroSenha" class="alertErro hide">
                         Senha inválida (Senha deve possuir no mínimo 6 caracteres, 1 letra minuscula, 1 letra maiuscula e 1 número).
                     </span>

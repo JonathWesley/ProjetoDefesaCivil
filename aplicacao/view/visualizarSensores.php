@@ -30,27 +30,13 @@
     </div>
 </div>
 </div>
-<div class="text-center map-image">
-    <div class="map-information" style="top:200px;left:200px;">
-        <span id="sensor1" class="map-dot"></span>
+<div class="text-center">
+    <img src="images/mapaSensores.png" alt="mapa" class="img-thumbnail img-mapa">
+    <div class="map-information text-left">
+        <span id="sensor" class="map-dot"></span>
         <div class="quadro-informacao">
-            Temperatura do ar: <span id="temp_ar1"></span><br>
-            Nível precipitação: <span id="nivel_precipitacao1"></span>
+            <span>Nível do rio: </span><span id="nivel_rio"></span><i id="nivel_rio_indicacao"></i><br>
+            <span>Nível precipitação: </span><span id="nivel_precipitacao"></span><i id="nivel_precipitacao_indicacao"></i>
         </div>
     </div>
-    <div class="map-information" style="top:200px;left:600px;">
-        <span id="sensor2" class="map-dot"></span>
-        <div class="quadro-informacao">
-            Temperatura do ar: <span id="temp_ar2"></span><br>
-            Nível precipitação: <span id="nivel_precipitacao2"></span>
-        </div>
-    </div>
-    <div class="map-information" style="top:100px;left:200px;">
-        <span id="sensor3" class="map-dot"></span>
-        <div class="quadro-informacao">
-            Temperatura do ar: <span id="temp_ar3"></span><br>
-            Nível precipitação: <span id="nivel_precipitacao3"></span>
-        </div>
-    </div>
-    <img src="images/mapaSensores.png" alt="mapa" class="img-thumbnail" style="width:87%;">
 </div>

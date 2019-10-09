@@ -331,78 +331,57 @@ function getJSON(url, callback) {
 };
 
 function ativaJson(){
-    var status1 = 'rgb(24,240,78)'; //1->normal ; 2->alerta ; 3->emergencia
-    var status2 = 'rgb(24,240,78)';
-    var status3 = 'rgb(24,240,78)';
+    var status = 'rgb(24,240,78)'; //1->normal ; 2->alerta ; 3->emergencia
 
     //requisicao dos niveis de precipitacao
-    getJSON('http://localhost:3000/?limite=3&cdestacao=1019&cdvariavel=271.00', function(err, data){
-        var chuvaAlerta = 1;
-        var chuvaPerigo = 3;
+    getJSON('http://localhost:3000/?limite=2&cdestacao=99018&cdvariavel=9001.00', function(err, data){
+        var rioAlerta = 1;
+        var rioPerigo = 3;
         if(err !== null){
             alert('Erro ao carregar API - 1ª requisição');
         }else{
-            $("#nivel_precipitacao1").html(data[0].Valor);
-            $("#nivel_precipitacao2").html(data[1].Valor);
-            $("#nivel_precipitacao3").html(data[2].Valor);
-            //sensor1
-            if(data[0].Valor > chuvaAlerta && data[0].Valor < chuvaPerigo){
-                status1 = 'yellow';
-            }else if(data[0].Valor > chuvaPerigo){
-                status1 = 'red';
+            $("#nivel_rio").html(data[0].Valor);
+            if(data[0].Valor > rioAlerta && data[0].Valor < rioPerigo){
+                status = 'yellow';
+            }else if(data[0].Valor > rioPerigo){
+                status = 'red';
             }
-            //sensor2
-            if(data[1].Valor > chuvaAlerta && data[0].Valor < chuvaPerigo){
-                status2 = 'yellow';
-            }else if(data[1].Valor > chuvaPerigo){
-                status2 = 'red';
-            }
-            //sensor3
-            if(data[2].Valor > chuvaAlerta && data[0].Valor < chuvaPerigo){
-                status3 = 'yellow';
-            }else if(data[2].Valor > chuvaPerigo){
-                status3 = 'red';
+            
+            if(data[0].Valor < data[1].Valor){
+                $("#nivel_rio_indicacao").addClass("arrow-down");
+            }else if(data[0].Valor > data[1].Valor){
+                $("#nivel_rio_indicacao").addClass("arrow-up");
+            }else{
+                $("#nivel_rio_indicacao").addClass("estavel");
             }
         }
     });
 
     //requisicao da temperatura do ar
-    getJSON('http://localhost:3000/?cdestacao=1019&cdvariavel=192.00', function(err, data){
-        var tempAlerta = 1;
-        var tempPerigo = 3;
+    getJSON('http://localhost:3000/?limite=2&cdestacao=99018&cdvariavel=9002.00', function(err, data){
+        var chuvaAlerta = 1;
+        var chuvaPerigo = 3;
         if(err !== null){
             alert('Erro ao carregar API - 2ª requisição');
         }else{
-            $("#temp_ar1").html(data[0].Valor);
-            $("#temp_ar2").html(data[1].Valor);
-            $("#temp_ar3").html(data[2].Valor);
-            //sensor1
-            if(data[0].Valor > tempAlerta && data.Valor < tempPerigo){
-                if(status1 == 'green')
-                    status1 = 'yellow';
-            }else if(data[0].Valor > tempPerigo){
-                status1 = 'red';
+            $("#nivel_precipitacao").html(data[0].Valor);
+            if(data[0].Valor > chuvaAlerta && data.Valor < chuvaPerigo){
+                if(status == 'green')
+                    status = 'yellow';
+            }else if(data[0].Valor > chuvaPerigo){
+                status = 'red';
             }
-            //sensor2
-            if(data[1].Valor > tempAlerta && data[1].Valor < tempPerigo){
-                if(status2 == 'green')
-                    status2 = 'yellow';
-            }else if(data[1].Valor > tempPerigo){
-                status2 = 'red';
-            }
-            //sensor3
-            if(data[2].Valor > tempAlerta && data[2].Valor < tempPerigo){
-                if(status3 == 'green')
-                    status3 = 'yellow';
-            }else if(data[2].Valor > tempPerigo){
-                status3 = 'red';
+            if(data[0].Valor < data[1].Valor){
+                $("#nivel_precipitacao_indicacao").addClass("arrow-down");
+            }else if(data[0].Valor > data[1].Valor){
+                $("#nivel_precipitacao_indicacao").addClass("arrow-up");
+            }else{
+                $("#nivel_precipitacao_indicacao").addClass("estavel");
             }
         }
     });
 
-    $('#sensor1').css('background-color', status1);
-    $('#sensor2').css('background-color', status2);
-    $("#sensor3").css('background-color', status3);
+    $('#sensor').css('background-color', status);
 }
 
 function monitorarChamado() {

@@ -11,8 +11,8 @@ $query = "SELECT * FROM dados_login WHERE email = '$email' AND ativo = TRUE";
 $result = pg_query($connection, $query);
 
 if(!$result){ //caso ocorra algum erro na conexao
-    echo pg_last_error();
-    //header('location:index.php?erroBD');
+    //echo pg_last_error();
+    header('location:index.php?erroBD');
 }else{
     if(pg_num_rows($result) == 1){ //caso soh exista um registro com o email dado
         $linha = pg_fetch_array($result, 0);
