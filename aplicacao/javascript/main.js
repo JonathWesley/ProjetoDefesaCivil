@@ -128,6 +128,13 @@ function validarFormCadastroPessoa(){
     return true;
 }
 
+function validarFormAlterarSenha(){
+    if(!$("#erroSenha").hasClass("hide") || !$("#erroConfirmaSenha").hasClass("hide")){
+        alert("Existe campo(s) infomado(s) incorretamente.");
+        return false;
+    }
+}
+
 //ordenar tabela de ocorrencias
 function sortTable(n) {
     var table, rows, switching, i, x, y, shouldSwitch, dir, switchcount = 0;
@@ -331,57 +338,155 @@ function getJSON(url, callback) {
 };
 
 function ativaJson(){
-    var status = 'rgb(24,240,78)'; //1->normal ; 2->alerta ; 3->emergencia
+    $('#sensor99018').css('background-color','rgb(24,240,78)');
+    $('#sensor1019').css('background-color','rgb(24,240,78)');
 
-    //requisicao dos niveis de precipitacao
+    //99018
+    //requisicao nivel do rio
     getJSON('http://localhost:3000/?limite=2&cdestacao=99018&cdvariavel=9001.00', function(err, data){
-        var rioAlerta = 1;
-        var rioPerigo = 3;
+        var rioAtencao = 35001;
+        var rioAlerta = 35002;
+        var rioPerigo = 35003;
         if(err !== null){
             alert('Erro ao carregar API - 1ª requisição');
-        }else{
-            $("#nivel_rio").html(data[0].Valor);
-            if(data[0].Valor > rioAlerta && data[0].Valor < rioPerigo){
-                status = 'yellow';
-            }else if(data[0].Valor > rioPerigo){
-                status = 'red';
+        }else{  
+            $("#nivel_rio99018").html(data[0].Valor);
+            if(data[0].Valor >= rioAtencao && data[0].Valor < rioAlerta){
+                if($('#sensor99018').css('background-color') == 'rgb(24, 240, 78)')
+                    $('#sensor99018').css('background-color', 'yellow');
+            }else if(data[0].Valor >= rioAlerta && data[0].Valor < rioPerigo){
+                if($('#sensor99018').css('background-color') == 'rgb(255, 255, 0)' | $('#sensor99018').css('background-color') == 'rgb(24, 240, 78)')
+                    $('#sensor99018').css('background-color', 'orange');
+            }else if(data[0].Valor >= rioPerigo){
+                $('#sensor99018').css('background-color', 'red');
             }
-            
+            $("#nivel_rio99018_indicacao").removeClass();
             if(data[0].Valor < data[1].Valor){
-                $("#nivel_rio_indicacao").addClass("arrow-down");
+                $("#nivel_rio99018_indicacao").addClass("arrow-down");
             }else if(data[0].Valor > data[1].Valor){
-                $("#nivel_rio_indicacao").addClass("arrow-up");
+                $("#nivel_rio99018_indicacao").addClass("arrow-up");
             }else{
-                $("#nivel_rio_indicacao").addClass("estavel");
+                $("#nivel_rio99018_indicacao").addClass("estavel");
             }
         }
     });
 
-    //requisicao da temperatura do ar
+    //requisicao precipitacao 10min
     getJSON('http://localhost:3000/?limite=2&cdestacao=99018&cdvariavel=9002.00', function(err, data){
-        var chuvaAlerta = 1;
-        var chuvaPerigo = 3;
+        var chuvaAtencao = 10;
+        var chuvaAlerta = 30;
+        var chuvaPerigo = 70;
         if(err !== null){
             alert('Erro ao carregar API - 2ª requisição');
         }else{
-            $("#nivel_precipitacao").html(data[0].Valor);
-            if(data[0].Valor > chuvaAlerta && data.Valor < chuvaPerigo){
-                if(status == 'green')
-                    status = 'yellow';
-            }else if(data[0].Valor > chuvaPerigo){
-                status = 'red';
+            $("#nivel_precipitacao99018_10").html(data[0].Valor);
+            if(data[0].Valor >= chuvaAtencao && data.Valor < chuvaAlerta){
+                if($('#sensor99018').css('background-color') == 'rgb(24,240,78)')
+                    $('#sensor99018').css('background-color', 'yellow');
+            }else if(data[0].Valor >= chuvaAlerta && data.Valor < chuvaPerigo){
+                if($('#sensor99018').css('background-color') == 'rgb(24,240,78)' | $('#sensor99018').css('background-color') == 'rgb(255, 255, 0)')
+                    $('#sensor99018').css('background-color', 'orange');
+            }else if(data[0].Valor >= chuvaPerigo){
+                $('#sensor99018').css('background-color', 'red');
             }
+            $("#nivel_precipitacao99018_indicacao_10").removeClass();
             if(data[0].Valor < data[1].Valor){
-                $("#nivel_precipitacao_indicacao").addClass("arrow-down");
+                $("#nivel_precipitacao99018_indicacao_10").addClass("arrow-down");
             }else if(data[0].Valor > data[1].Valor){
-                $("#nivel_precipitacao_indicacao").addClass("arrow-up");
+                $("#nivel_precipitacao99018_indicacao_10").addClass("arrow-up");
             }else{
-                $("#nivel_precipitacao_indicacao").addClass("estavel");
+                $("#nivel_precipitacao99018_indicacao_10").addClass("estavel");
             }
         }
     });
 
-    $('#sensor').css('background-color', status);
+    //1019
+    //requisicao precipitacao 1 hora
+    getJSON('http://localhost:3000/?limite=2&cdestacao=1019&cdvariavel=271.00', function(err, data){
+        var chuvaAlerta = 10;
+        var chuvaAlerta = 30;
+        var chuvaPerigo = 70;
+        if(err !== null){
+            alert('Erro ao carregar API - 3ª requisição');
+        }else{
+            $("#nivel_precipitacao1019_1").html(data[0].Valor);
+            if(data[0].Valor >= chuvaAtencao && data.Valor < chuvaAlerta){
+                if($('#sensor1019').css('background-color') == 'rgb(24,240,78)')
+                    $('#sensor1019').css('background-color', 'yellow');
+            }else if(data[0].Valor >= chuvaAlerta && data.Valor < chuvaPerigo){
+                if($('#sensor1019').css('background-color') == 'rgb(24,240,78)' | $('#sensor99018').css('background-color') == 'rgb(255, 255, 0)')
+                    $('#sensor1019').css('background-color', 'orange');
+            }else if(data[0].Valor >= chuvaPerigo){
+                $('#sensor1019').css('background-color', 'red');
+            }
+            $("#nivel_precipitacao1019_indicacao_1").removeClass();
+            if(data[0].Valor < data[1].Valor){
+                $("#nivel_precipitacao1019_indicacao_1").addClass("arrow-down");
+            }else if(data[0].Valor > data[1].Valor){
+                $("#nivel_precipitacao1019_indicacao_1").addClass("arrow-up");
+            }else{
+                $("#nivel_precipitacao1019_indicacao_1").addClass("estavel");
+            }
+        }
+    });
+
+    //requisicao precipitacao 12 horas
+    getJSON('http://localhost:3000/?limite=2&cdestacao=1019&cdvariavel=271.04', function(err, data){
+        var chuvaAtencao = 10;
+        var chuvaAlerta = 30;
+        var chuvaPerigo = 70;
+        if(err !== null){
+            alert('Erro ao carregar API - 4ª requisição');
+        }else{
+            $("#nivel_precipitacao1019_12").html(data[0].Valor);
+            if(data[0].Valor >= chuvaAtencao && data.Valor < chuvaAlerta){
+                if($('#sensor1019').css('background-color') == 'rgb(24,240,78)')
+                    $('#sensor1019').css('background-color', 'yellow');
+            }else if(data[0].Valor >= chuvaAlerta && data.Valor < chuvaPerigo){
+                if($('#sensor1019').css('background-color') == 'rgb(24,240,78)' | $('#sensor99018').css('background-color') == 'rgb(255, 255, 0)')
+                    $('#sensor1019').css('background-color', 'orange');
+            }else if(data[0].Valor >= chuvaPerigo){
+                $('#sensor1019').css('background-color', 'red');
+            }
+            $("#nivel_precipitacao1019_indicacao_12").removeClass();
+            if(data[0].Valor < data[1].Valor){
+                $("#nivel_precipitacao1019_indicacao_12").addClass("arrow-down");
+            }else if(data[0].Valor > data[1].Valor){
+                $("#nivel_precipitacao1019_indicacao_12").addClass("arrow-up");
+            }else{
+                $("#nivel_precipitacao1019_indicacao_12").addClass("estavel");
+            }
+        }
+    });
+
+    //requisicao temperatura
+    getJSON('http://localhost:3000/?limite=2&cdestacao=1019&cdvariavel=203.01', function(err, data){
+        var tempAtencao = 35
+        var tempAlerta = 40;
+        var tempPerigo = 45;
+        if(err !== null){
+            alert('Erro ao carregar API - 5ª requisição');
+        }else{
+            $("#temperatura1019").html(data[0].Valor);
+            if(data[0].Valor >= tempAlerta && data.Valor < tempPerigo){
+                if($('#sensor1019').css('background-color') == 'rgb(24,240,78)')
+                    $('#sensor1019').css('background-color', 'yellow');
+            }else if(data[0].Valor >= tempAlerta && data.Valor < tempPerigo){
+                if($('#sensor1019').css('background-color') == 'rgb(24,240,78)' | $('#sensor99018').css('background-color') == 'rgb(255, 255, 0)')
+                    $('#sensor1019').css('background-color', 'orange');
+            }else if(data[0].Valor >= tempPerigo){
+                $('#sensor1019').css('background-color', 'red');
+            }
+            $("#temperatura1019_indicacao").removeClass();
+            if(data[0].Valor < data[1].Valor){
+                $("#temperatura1019_indicacao").addClass("arrow-down");
+            }else if(data[0].Valor > data[1].Valor){
+                $("#temperatura1019_indicacao").addClass("arrow-up");
+            }else{
+                $("#temperatura1019_indicacao").addClass("estavel");
+            }
+        }
+    });
 }
 
 function monitorarChamado() {

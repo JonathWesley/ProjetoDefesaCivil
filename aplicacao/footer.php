@@ -14,7 +14,7 @@
     <script>
         if(window.location.href == "http://localhost/aplicacao/index.php?pagina=visualizarSensores"){
             ativaJson();
-            setInterval(function(){ ativaJson(); }, 60000);
+            setInterval(function(){ ativaJson(); }, 3600000);
         }
         if(window.location.href == "http://localhost/aplicacao/index.php?pagina=monitorarChamado"){
             monitorarChamado();
