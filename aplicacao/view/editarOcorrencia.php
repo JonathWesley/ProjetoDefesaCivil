@@ -337,7 +337,7 @@
                     <option value="Alta">Alta</option>
                 </select>
             </div>
-            <?php if($_SESSION['nivel_acesso'] == 1){ ?>
+            <?php if($_SESSION['nivel_acesso'] == 1 || $_SESSION['nivel_acesso'] == 2){ ?>
                 <div class="row">
                     <div class="col-sm-4">
                         <span>Analisado: <span style="color:red;">*</span></span><br>
