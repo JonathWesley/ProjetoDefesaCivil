@@ -403,7 +403,7 @@ function ativaJson(){
     //1019
     //requisicao precipitacao 1 hora
     getJSON('http://localhost:3000/?limite=2&cdestacao=1019&cdvariavel=271.00', function(err, data){
-        var chuvaAlerta = 10;
+        var chuvaAtencao = 10;
         var chuvaAlerta = 30;
         var chuvaPerigo = 70;
         if(err !== null){
@@ -468,7 +468,7 @@ function ativaJson(){
             alert('Erro ao carregar API - 5ª requisição');
         }else{
             $("#temperatura1019").html(data[0].Valor);
-            if(data[0].Valor >= tempAlerta && data.Valor < tempPerigo){
+            if(data[0].Valor >= tempAtencao && data.Valor < tempAlerta){
                 if($('#sensor1019').css('background-color') == 'rgb(24,240,78)')
                     $('#sensor1019').css('background-color', 'yellow');
             }else if(data[0].Valor >= tempAlerta && data.Valor < tempPerigo){
