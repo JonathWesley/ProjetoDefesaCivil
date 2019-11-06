@@ -111,7 +111,7 @@
                         <input id="cidade" name="cidade" type="text" class="form-control">
                     </div>
                     <div class="col-sm-7">
-                        <span>Referência: <span style="color:red;">*</span></span>
+                        <span>Referência: </span>
                         <input name="referencia" type="text" class="form-control">
                     </div>
                 </div>

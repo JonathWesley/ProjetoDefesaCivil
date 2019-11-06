@@ -18,6 +18,11 @@
     $query = "SELECT nome FROM pessoa WHERE id_pessoa = $id_pessoa";
     $result = pg_query($connection, $query) or die(pg_last_error());
     $linhaPessoa = pg_fetch_array($result, 0);
+
+    $id_agente = $linhaChamado['agente_id'];
+    $query = "SELECT nome FROM usuario WHERE id_usuario = $id_agente";
+    $result = pg_query($connection, $query) or die(pg_last_error());
+    $linhaAgente = pg_fetch_array($result, 0);
 ?>
 
 <div class="container positioning">
@@ -78,7 +83,7 @@
             <?php } ?>
         </nav>
     </div>
-    <?php if(!$linhaChamado['usado']){ ?>
+    <?php if($linhaChamado['usado'] == 'f'){ ?>
     <form action="index.php?pagina=cadastrarOcorrencia" method="post">
         <input name="id_chamado" type="hidden" value="<?php echo $id_chamado; ?>">
         <input name="endereco_principal" type="hidden" value="<?php echo $linhaChamado['endereco_principal']; ?>">
@@ -94,6 +99,7 @@
         <input name="descricao" type="hidden" value="<?php echo $linhaChamado['descricao']; ?>">
         <input name="ocorr_origem" type="hidden" value="<?php echo $linhaChamado['origem']; ?>">
         <input name="pessoa_atendida_1" type="hidden" value="<?php echo $linhaPessoa['nome']; ?>">
+        <input name="agente_principal" type="hidden" value="<?php echo $linhaAgente['nome']; ?>">
         <input type="submit" class="btn btn-default btn-md" value="Gerar Ocorrência">
     </form>
     <?php } ?>

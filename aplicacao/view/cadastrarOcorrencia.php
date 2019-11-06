@@ -84,7 +84,7 @@
                         <input id="cidade" name="cidade" type="text" class="form-control" value="<?php echo $_POST['cidade']; ?>">
                     </div>
                     <div class="col-sm-7">
-                        <span>Referência: <span style="color:red;">*</span></span>
+                        <span>Referência: </span>
                         <input name="referencia" type="text" class="form-control" value="<?php echo $_POST['referencia']; ?>">
                     </div>
                 </div>
@@ -92,7 +92,7 @@
         <hr>
             <div>
                 Agente principal: <span style="color:red;">*</span>
-                <input id="agente_principal" name="agente_principal" type="text" class="form-control" onkeyup="showResult(this.value,this.id)" required>
+                <input id="agente_principal" name="agente_principal" type="text" class="form-control" onkeyup="showResult(this.value,this.id)" value="<?php echo $_POST['agente_principal']; ?>" required>
                 <div class="autocomplete" id="livesearchagente_principal"></div>
             </div>
             <?php if(isset($_GET['agente_principal'])){ ?>
@@ -121,13 +121,13 @@
                 <input id="data_ocorrencia" name="data_ocorrencia" type="date" class="form-control data" value="<?php echo $_POST['data_ocorrencia']; ?>" max="<?php echo date('Y-m-d'); ?>" required>
             </div>
             <div>
-                Título:
+                Título: <span style="color:red;">*</span>
                 <textarea id="titulo" name="titulo" class="form-control" cols="30" rows="2" maxlength="120" ng-model="tituloVal" ng-init="tituloVal='<?php echo $_POST['titulo']; ?>'"></textarea>
                 <span class="char-count">{{tituloVal.length || 0}}/100</span>
             </div>
             <div>
                 Descrição:
-                <textarea id="descricao" name="descricao" class="form-control" cols="30" rows="15"></textarea>
+                <textarea id="descricao" name="descricao" class="form-control" cols="30" rows="15"><?php echo $_POST['descricao']; ?></textarea>
             </div>
             <div>
                 Origem: <span style="color:red;">*</span>

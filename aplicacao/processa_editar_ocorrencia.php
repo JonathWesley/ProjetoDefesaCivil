@@ -51,20 +51,35 @@ foreach($_FILES["files"]["tmp_name"] as $key=>$tmp_name){
 	array_push($base64_array, $base64);
 }
 
-if($possui_fotos == t){
-	$possui_fotos = 'true';
-	$pg_array = join(',',$base64_array).'}';
+if(count($base64_array) > 0){
+	if($possui_fotos == t){
+		$possui_fotos = 'true';
+		$pg_array = join(',',$base64_array).'}';
 
-	$query = "SELECT fotos FROM ocorrencia WHERE id_ocorrencia = $id_ocorrencia";
-	$result = pg_query($connection, $query) or die(pg_last_error());
-	$string = pg_fetch_array($result,0)['fotos'];
+		$query = "SELECT fotos FROM ocorrencia WHERE id_ocorrencia = $id_ocorrencia";
+		$result = pg_query($connection, $query) or die(pg_last_error());
+		$string = pg_fetch_array($result,0)['fotos'];
 
-    $string = str_replace('}','',$string);
+		$string = str_replace('}','',$string);
 
-    $pg_array = $string.','.$pg_array;
+		$pg_array = $string.','.$pg_array;
+	}else{
+		$possui_fotos = 'true';
+		$pg_array = '{'.join(',',$base64_array).'}';
+	}
 }else{
-	$possui_fotos = 'true';
-	$pg_array = '{'.join(',',$base64_array).'}';
+	if($possui_fotos == t){
+		$possui_fotos = 'true';
+
+		$query = "SELECT fotos FROM ocorrencia WHERE id_ocorrencia = $id_ocorrencia";
+		$result = pg_query($connection, $query) or die(pg_last_error());
+		$string = pg_fetch_array($result,0)['fotos'];
+		
+		$pg_array = $string;
+	}else{
+		$possui_fotos = 'false';
+		$pg_array = '{'.join(',',$base64_array).'}';
+	}
 }
 
 
@@ -204,16 +219,17 @@ if(strlen($erros) > 0){
 			$agente_apoio_1,$agente_apoio_2,
 			'$data_ocorrencia','$titulo','$descricao','$ocorr_origem',$pessoa_atendida_1,$pessoa_atendida_2,
 			'$cobrade','$cobrade_descricao',$possui_fotos,'$prioridade',$analisado,$congelado,$encerrado,
-			$id_criador,'$dataAtual',$id_ocorrencia,'$pg_array')";
+			$id_criador,'$dataAtual',$id_ocorrencia,'$pg_array') RETURNING id_ocorrencia";
 
 	$result = pg_query($connection, $query);
 	if(!$result){
 		//echo pg_last_error();
 		header('location:index.php?pagina=editarOcorrencia&erroDB');
 	}else{
+		$id_nova_ocorrencia = pg_fetch_array($result, 0)['id_ocorrencia'];
 		$query = "UPDATE ocorrencia SET ativo = false WHERE id_ocorrencia=$id_ocorrencia";
 		$result = pg_query($connection, $query);
 		//echo pg_last_error();
-		header('location:index.php?pagina=exibirOcorrencia&id='.$id_ocorrencia.'&sucesso');
+		header('location:index.php?pagina=exibirOcorrencia&id='.$id_nova_ocorrencia.'&sucesso');
 	}
 }

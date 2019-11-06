@@ -340,10 +340,11 @@ function getJSON(url, callback) {
 function ativaJson(){
     $('#sensor99018').css('background-color','rgb(24,240,78)');
     $('#sensor1019').css('background-color','rgb(24,240,78)');
+    $("body").css("background-color", "rgb(24,240,78)");
 
     //99018
     //requisicao nivel do rio
-    getJSON('http://localhost:3000/?limite=2&cdestacao=99018&cdvariavel=9001.00', function(err, data){
+    getJSON('http://localhost:3000/?limite=2&estacao=99018&variavel=9001.00', function(err, data){
         var rioAtencao = 35001;
         var rioAlerta = 35002;
         var rioPerigo = 35003;
@@ -352,12 +353,17 @@ function ativaJson(){
         }else{  
             $("#nivel_rio99018").html(data[0].Valor);
             if(data[0].Valor >= rioAtencao && data[0].Valor < rioAlerta){
-                if($('#sensor99018').css('background-color') == 'rgb(24, 240, 78)')
+                if($('#sensor99018').css('background-color') == 'rgb(24, 240, 78)'){
+                    $("body").css("background-color", "yellow");
                     $('#sensor99018').css('background-color', 'yellow');
+                }
             }else if(data[0].Valor >= rioAlerta && data[0].Valor < rioPerigo){
-                if($('#sensor99018').css('background-color') == 'rgb(255, 255, 0)' | $('#sensor99018').css('background-color') == 'rgb(24, 240, 78)')
+                if($('#sensor99018').css('background-color') == 'rgb(255, 255, 0)' | $('#sensor99018').css('background-color') == 'rgb(24, 240, 78)'){
+                    $("body").css("background-color", "orange");
                     $('#sensor99018').css('background-color', 'orange');
+                }
             }else if(data[0].Valor >= rioPerigo){
+                $("body").css("background-color", "red");
                 $('#sensor99018').css('background-color', 'red');
             }
             $("#nivel_rio99018_indicacao").removeClass();
@@ -372,7 +378,7 @@ function ativaJson(){
     });
 
     //requisicao precipitacao 10min
-    getJSON('http://localhost:3000/?limite=2&cdestacao=99018&cdvariavel=9002.00', function(err, data){
+    getJSON('http://localhost:3000/?limite=2&estacao=99018&variavel=9002.00', function(err, data){
         var chuvaAtencao = 10;
         var chuvaAlerta = 30;
         var chuvaPerigo = 70;
@@ -381,12 +387,17 @@ function ativaJson(){
         }else{
             $("#nivel_precipitacao99018_10").html(data[0].Valor);
             if(data[0].Valor >= chuvaAtencao && data.Valor < chuvaAlerta){
-                if($('#sensor99018').css('background-color') == 'rgb(24,240,78)')
+                if($('#sensor99018').css('background-color') == 'rgb(24,240,78)'){
+                    $("body").css("background-color", "yellow");
                     $('#sensor99018').css('background-color', 'yellow');
+                }
             }else if(data[0].Valor >= chuvaAlerta && data.Valor < chuvaPerigo){
-                if($('#sensor99018').css('background-color') == 'rgb(24,240,78)' | $('#sensor99018').css('background-color') == 'rgb(255, 255, 0)')
+                if($('#sensor99018').css('background-color') == 'rgb(24,240,78)' | $('#sensor99018').css('background-color') == 'rgb(255, 255, 0)'){
+                    $("body").css("background-color", "orange");
                     $('#sensor99018').css('background-color', 'orange');
+                }
             }else if(data[0].Valor >= chuvaPerigo){
+                $("body").css("background-color", "red");
                 $('#sensor99018').css('background-color', 'red');
             }
             $("#nivel_precipitacao99018_indicacao_10").removeClass();
@@ -402,7 +413,7 @@ function ativaJson(){
 
     //1019
     //requisicao precipitacao 1 hora
-    getJSON('http://localhost:3000/?limite=2&cdestacao=1019&cdvariavel=271.00', function(err, data){
+    getJSON('http://localhost:3000/?limite=2&estacao=1019&variavel=271.00', function(err, data){
         var chuvaAtencao = 10;
         var chuvaAlerta = 30;
         var chuvaPerigo = 70;
@@ -411,12 +422,17 @@ function ativaJson(){
         }else{
             $("#nivel_precipitacao1019_1").html(data[0].Valor);
             if(data[0].Valor >= chuvaAtencao && data.Valor < chuvaAlerta){
-                if($('#sensor1019').css('background-color') == 'rgb(24,240,78)')
+                if($('#sensor1019').css('background-color') == 'rgb(24,240,78)'){
+                    $("body").css("background-color", "yellow");
                     $('#sensor1019').css('background-color', 'yellow');
+                }
             }else if(data[0].Valor >= chuvaAlerta && data.Valor < chuvaPerigo){
-                if($('#sensor1019').css('background-color') == 'rgb(24,240,78)' | $('#sensor99018').css('background-color') == 'rgb(255, 255, 0)')
+                if($('#sensor1019').css('background-color') == 'rgb(24,240,78)' | $('#sensor99018').css('background-color') == 'rgb(255, 255, 0)'){
+                    $("body").css("background-color", "orange");
                     $('#sensor1019').css('background-color', 'orange');
+                }
             }else if(data[0].Valor >= chuvaPerigo){
+                $("body").css("background-color", "red");
                 $('#sensor1019').css('background-color', 'red');
             }
             $("#nivel_precipitacao1019_indicacao_1").removeClass();
@@ -431,7 +447,7 @@ function ativaJson(){
     });
 
     //requisicao precipitacao 12 horas
-    getJSON('http://localhost:3000/?limite=2&cdestacao=1019&cdvariavel=271.04', function(err, data){
+    getJSON('http://localhost:3000/?limite=2&estacao=1019&variavel=271.04', function(err, data){
         var chuvaAtencao = 10;
         var chuvaAlerta = 30;
         var chuvaPerigo = 70;
@@ -440,12 +456,17 @@ function ativaJson(){
         }else{
             $("#nivel_precipitacao1019_12").html(data[0].Valor);
             if(data[0].Valor >= chuvaAtencao && data.Valor < chuvaAlerta){
-                if($('#sensor1019').css('background-color') == 'rgb(24,240,78)')
+                if($('#sensor1019').css('background-color') == 'rgb(24,240,78)'){
+                    $("body").css("background-color", "yellow");
                     $('#sensor1019').css('background-color', 'yellow');
+                }
             }else if(data[0].Valor >= chuvaAlerta && data.Valor < chuvaPerigo){
-                if($('#sensor1019').css('background-color') == 'rgb(24,240,78)' | $('#sensor99018').css('background-color') == 'rgb(255, 255, 0)')
+                if($('#sensor1019').css('background-color') == 'rgb(24,240,78)' | $('#sensor99018').css('background-color') == 'rgb(255, 255, 0)'){
+                    $("body").css("background-color", "orange");
                     $('#sensor1019').css('background-color', 'orange');
+                }
             }else if(data[0].Valor >= chuvaPerigo){
+                $("body").css("background-color", "red");
                 $('#sensor1019').css('background-color', 'red');
             }
             $("#nivel_precipitacao1019_indicacao_12").removeClass();
@@ -460,7 +481,7 @@ function ativaJson(){
     });
 
     //requisicao temperatura
-    getJSON('http://localhost:3000/?limite=2&cdestacao=1019&cdvariavel=203.01', function(err, data){
+    getJSON('http://localhost:3000/?limite=2&estacao=1019&variavel=192', function(err, data){
         var tempAtencao = 35
         var tempAlerta = 40;
         var tempPerigo = 45;
@@ -469,12 +490,17 @@ function ativaJson(){
         }else{
             $("#temperatura1019").html(data[0].Valor);
             if(data[0].Valor >= tempAtencao && data.Valor < tempAlerta){
-                if($('#sensor1019').css('background-color') == 'rgb(24,240,78)')
+                if($('#sensor1019').css('background-color') == 'rgb(24,240,78)'){
+                    $("body").css("background-color", "yellow");
                     $('#sensor1019').css('background-color', 'yellow');
+                }
             }else if(data[0].Valor >= tempAlerta && data.Valor < tempPerigo){
-                if($('#sensor1019').css('background-color') == 'rgb(24,240,78)' | $('#sensor99018').css('background-color') == 'rgb(255, 255, 0)')
+                if($('#sensor1019').css('background-color') == 'rgb(24,240,78)' | $('#sensor99018').css('background-color') == 'rgb(255, 255, 0)'){
+                    $("body").css("background-color", "orange");
                     $('#sensor1019').css('background-color', 'orange');
+                }
             }else if(data[0].Valor >= tempPerigo){
+                $("body").css("background-color", "red");
                 $('#sensor1019').css('background-color', 'red');
             }
             $("#temperatura1019_indicacao").removeClass();
