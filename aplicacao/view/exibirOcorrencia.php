@@ -153,7 +153,7 @@
         <br>
     </div>
     <div class="box">
-        <h4>Atentidos</h4>
+        <h4>Solicitantes</h4>
         <hr>
         <?php if(!$linhaOcorrencia['atendido_1'] && !$linhaOcorrencia['atendido_2']){ ?>
             <span class=titulo>Nenhuma pessoa foi cadastrada</span><br>

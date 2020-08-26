@@ -35,7 +35,7 @@
                 <?php session_start();
                       if($_SESSION['nivel_acesso'] == 1){ ?>
                 <hr>
-                <span class="titulo">Nivel de acesso: </span><?php if($linha['nivel_acesso']==1){echo 'Diretor';}else if($linha['nivel_acesso']==2){echo 'Coordenador';}else{echo 'Agente';} ?>
+                <span class="titulo">Nivel de acesso: </span><?php if($linha['nivel_acesso']==1){echo 'Diretor';}else if($linha['nivel_acesso']==2){echo 'Coordenador';}else if($linha['nivel_acesso']==3){echo 'Agente';}else{echo 'Monitor';} ?>
                 <?php } ?>
                 <br><br>
             </div>

@@ -11,8 +11,11 @@
 
     if(isset($_POST['pesquisa_chamado']) && $pesquisa_chamado != null){
         $query = "SELECT chamado.id_chamado,TO_CHAR(chamado.data_hora, 'DD/MM/YYYY') as dataa,
-                        chamado.origem,pessoa.nome,chamado.descricao, chamado.prioridade  
-                        FROM chamado INNER JOIN pessoa ON (chamado.pessoa_id = pessoa.id_pessoa)";
+                        chamado.origem,pessoa.nome,chamado.descricao, chamado.prioridade, 
+                        chamado.usado, usuario.nome as usuario
+                        FROM chamado 
+                        LEFT JOIN pessoa ON (chamado.pessoa_id = pessoa.id_pessoa) 
+                        INNER JOIN usuario ON (chamado.agente_id = usuario.id_usuario)";
         
         if($pesquisa_filtro == 'data')
             $query = $query." WHERE TO_CHAR(data_hora, 'DD/MM/YYYY') >= '$pesquisa_chamado'";
@@ -28,8 +31,11 @@
         $consulta_chamados = pg_query($connection, $query." LIMIT $items_por_pagina OFFSET $offset") or die(preg_last_error());
     }else{
         $query = "SELECT chamado.id_chamado,TO_CHAR(chamado.data_hora, 'DD/MM/YYYY') as dataa,
-        chamado.origem,pessoa.nome,chamado.descricao, chamado.prioridade 
-        FROM chamado INNER JOIN pessoa ON (chamado.pessoa_id = pessoa.id_pessoa)";
+        chamado.origem,pessoa.nome,chamado.descricao, chamado.prioridade, 
+        chamado.usado, usuario.nome as usuario
+        FROM chamado 
+        LEFT JOIN pessoa ON (chamado.pessoa_id = pessoa.id_pessoa) 
+        INNER JOIN usuario ON (chamado.agente_id = usuario.id_usuario)";
         
         if($_POST['finalizado'] != true)
             $query = $query." WHERE chamado.usado = false";
@@ -59,6 +65,7 @@
             <select name="filtro" onchange="this.form.submit()" ng-model="sel_filtro" ng-init="sel_filtro='<?php if(isset($_POST['filtro'])){echo $_POST['filtro'];}else{echo 'data';} ?>'">
                 <option value="data">Data</option>
                 <option value="chamado.origem">Origem</option>
+                <option value="usuario.nome">Agente</option>
                 <option value="pessoa.nome">Atendido</option>
                 <option value="chamado.descricao">Descricao</option>
             </select>
@@ -72,8 +79,9 @@
                 <th><!--<span class="glyphicon glyphicon-fullscreen"></span>--></th>
                 <th onclick="sortTable(0)">Data<span class="glyphicon glyphicon-sort sort-icon"></span></th>
                 <th onclick="sortTable(1)">Origem<span class="glyphicon glyphicon-sort sort-icon"></span></th>
-                <th onclick="sortTable(2)">Atendido<span class="glyphicon glyphicon-sort sort-icon"></span></th>
-                <th onclick="sortTable(3)" class="elimina-tabela">Descricao<span class="glyphicon glyphicon-sort sort-icon elimina-tabela"></span></th>
+                <th onclick="sortTable(2)">Agente<span class="glyphicon glyphicon-sort sort-icon"></span></th>
+                <th onclick="sortTable(3)">Solicitante<span class="glyphicon glyphicon-sort sort-icon"></span></th>
+                <th onclick="sortTable(4)" class="elimina-tabela">Descricao<span class="glyphicon glyphicon-sort sort-icon elimina-tabela"></span></th>
             </tr></thead>
             <tbody>
             <?php
@@ -82,15 +90,20 @@
                     echo '<tr><td colspan="5" class="text-center">Nenhum chamado encontrado</td></tr>';
                 while($linha = pg_fetch_array($consulta_chamados, $i)){
                     echo '<tr style="background-color:';
-                    if($linha['prioridade'] == "Alta")
-                        echo '#ff5050;">';
-                    else if($linha['prioridade'] == "Média")
-                        echo '#fff050;">';
-                    else
-                        echo '#88ff50;">';
+                    if($linha['usado'] == "t")
+                        echo '#ccc;">';
+                    else{
+                        if($linha['prioridade'] == "Alta")
+                            echo '#ff5050;">';
+                        else if($linha['prioridade'] == "Média")
+                            echo '#fff050;">';
+                        else
+                            echo '#88ff50;">';
+                    }
                     echo '<td class="text-center"><a href="index.php?pagina=exibirChamado&id='.$linha['id_chamado'].'"><span class="glyphicon glyphicon-eye-open"></span></a></td>';
                     echo '<td>'.$linha['dataa'].'</td>';
                     echo '<td>'.$linha['origem'].'</td>';
+                    echo '<td>'.$linha['usuario'].'</td>';
                     echo '<td>'.$linha['nome'].'</td>';
                     echo '<td class="elimina-tabela">'.$linha['descricao'].'</td></tr>';
                     $i += 1;

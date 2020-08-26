@@ -21,23 +21,32 @@
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.10/jquery.mask.js"></script>
     <link rel= "stylesheet" type="text/css" href="css/main.css">
+    <link rel="icon" type="image/png" href="images/icone.png"/>
     <title>Defesa Civil</title>
 </head>
 <body>
     <div ng-app="myApp" ng-controller="myCtrl">
-    <header>
     <?php if($_GET['pagina'] == 'monitorarChamado'){ ?>
+    <header>
         <nav class="navbar navbar-default">
             <div class="container-fluid">
                 <div class="navbar-header">
                     <a class="navbar-brand" style="font-size:35px;" href="?pagina=home">Defesa Civil</a>
                 </div>
-                <ul class="nav navbar-nav navbar-right">
-                    <li><a href="?pagina=consultarChamado">Voltar</a></li>
-                </ul>
+                <?php if($_SESSION['nivel_acesso'] == 4){ ?>
+                    <ul class="nav navbar-nav navbar-right">
+                        <li><a href="logout.php">Sair</a></li>
+                    </ul>
+                <?php }else{ ?>
+                    <ul class="nav navbar-nav navbar-right">
+                        <li><a href="?pagina=consultarChamado">Voltar</a></li>
+                    </ul>
+                <?php } ?>
             </div>
         </nav>
+    </header>
     <?php }else{ ?>
+    <header>
         <nav class="navbar navbar-default">
             <div class="container-fluid">
                 <div class="navbar-header">
@@ -86,7 +95,6 @@
                 </ul>
             </div>
         </nav>
-    <?php } ?>
     </header>
-
     <div id="conteudo" class="container">
+    <?php } ?>

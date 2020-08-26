@@ -31,8 +31,10 @@ if($nivel_acesso == 'Diretor'){
 	$acesso = 1;
 }else if($nivel_acesso == 'Coordenador'){
 	$acesso = 2;
-}else{
+}else if($nivel_acesso == 'Agente'){
 	$acesso = 3;
+}else{
+	$acesso = 4;
 }
 
 session_start();

@@ -12,12 +12,12 @@
             <?php } ?>
             <div>
                 Nome completo: <span style="color:red;">*</span>
-                <input id="nome" name="nome" type="text" class="form-control" ng-model="nome_completo" required pattern="[a-zA-Z\s]+" title="Apenas letras e espaço">
+                <input id="nome" name="nome" type="text" class="form-control" ng-model="nome_completo" required pattern="[a-zA-Z\u00C0-\u00FF\s]+" title="Apenas letras e espaço">
             </div>
             <div class="row">
                 <div class="col-sm-6">
-                    <span>CPF: <span style="color:red;">*</span></span>
-                    <input id="cpf" name="cpf" type="text" class="form-control" required onchange="verificaCpf(this.value)">    
+                    <span>CPF: </span>
+                    <input id="cpf" name="cpf" type="text" class="form-control" onchange="verificaCpf(this.value)">    
                     <span id="erroCpf" class="alertErro hide">CPF inválido.</span>
                 </div>
                 <div class="col-sm-6">
@@ -34,6 +34,7 @@
                     <option value="Agente">Agente</option>
                     <option value="Coordenador">Coordenador</option>
                     <option value="Diretor">Diretor</option>
+                    <option value="Monitor">Monitor</option>
                 </select>
             </div>
         <hr>

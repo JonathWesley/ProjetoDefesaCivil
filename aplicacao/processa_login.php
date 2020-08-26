@@ -35,7 +35,12 @@ if(!$result){ //caso ocorra algum erro na conexao
 
             //envia para a pagina principal
             //echo pg_last_error();
-            header('location:index.php?pagina=home');
+            if($_SESSION['nivel_acesso'] == 4){
+                header('location:index.php?pagina=monitorarChamado');
+            }else{
+                header('location:index.php?pagina=home');
+            }
+            
         }else{
             //retorna o erro
             header('location:index.php?erro');

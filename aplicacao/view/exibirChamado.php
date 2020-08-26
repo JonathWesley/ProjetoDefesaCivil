@@ -15,9 +15,11 @@
     }
 
     $id_pessoa = $linhaChamado['pessoa_id'];
-    $query = "SELECT nome FROM pessoa WHERE id_pessoa = $id_pessoa";
-    $result = pg_query($connection, $query) or die(pg_last_error());
-    $linhaPessoa = pg_fetch_array($result, 0);
+    if($id_pessoa != ""){
+        $query = "SELECT nome FROM pessoa WHERE id_pessoa = $id_pessoa";
+        $result = pg_query($connection, $query) or die(pg_last_error());
+        $linhaPessoa = pg_fetch_array($result, 0);
+    }
 
     $id_agente = $linhaChamado['agente_id'];
     $query = "SELECT nome FROM usuario WHERE id_usuario = $id_agente";
@@ -42,7 +44,7 @@
         <h3 class="text-center">Registro de chamado</h3>
     <hr>
         <h4>Endereço</h4>
-        <span class="titulo">Endereço principal: </span><span id="coordenada_principal" ng-model="sel_endereco" ng-init="sel_endereco='<?php echo $linhaChamado['endereco_principal']; ?>'"><?php echo $linhaChamado['endereco_principal']; ?></span>
+        <span class="titulo hide">Endereço principal: </span><span class="hide" id="coordenada_principal" ng-model="sel_endereco" ng-init="sel_endereco='<?php echo $linhaChamado['endereco_principal']; ?>'"><?php echo $linhaChamado['endereco_principal']; ?></span>
         <div ng-show="sel_endereco == 'Logradouro'">
             <div class="row">
                 <div class="col-sm-3"><span class="titulo">CEP: </span><?php echo $linhaLogradouro['cep']; ?></div>
@@ -50,7 +52,7 @@
                 <div class="col-sm-3"><span class="titulo">Número: </span><?php echo $linhaLogradouro['numero']; ?></div>
             </div>
             <div class="row">
-                <div class="col-sm-3"><span class="titulo">Bairro: </span><?php echo $linhaLogradouro['bairro']; ?></div>
+                <div class="col-sm-6"><span class="titulo">Bairro: </span><?php echo $linhaLogradouro['bairro']; ?></div>
                 <div class="col-sm-6"><span class="titulo">Cidade: </span><?php echo $linhaLogradouro['cidade']; ?></div>
             </div>
             <nav><span class="titulo">Referência: </span><?php echo $linhaLogradouro['referencia']; ?></nav><br>
@@ -74,7 +76,7 @@
             <textarea name="descricao" rows="5" readonly class="readtextarea"><?php echo $linhaChamado['descricao']; ?></textarea><br>
         </nav>
     <hr>
-        <h4>Atentido</h4>
+        <h4>Solicitante</h4>
         <nav>
             <?php if($linhaChamado['pessoa_id'] != NULL){ ?>
             <span class="titulo">Pessoa atendida: </span><a id="atendido" href="?pagina=exibirPessoa&id=<?php echo $linhaChamado['pessoa_id']; ?>"><?php echo $linhaPessoa['nome']; ?></a>

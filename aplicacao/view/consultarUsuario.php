@@ -5,20 +5,23 @@
     if(isset($_POST['pesquisa_usuario']))
         $pesquisa_usuario = addslashes($_POST['pesquisa_usuario']);
 
-    $items_por_pagina = 4;
+    $items_por_pagina = 10;
     $pagina = intval($_GET['n']);
     $offset = $pagina * $items_por_pagina;
+    $numero_total = 1;
 
-    $consulta_usuarios = pg_query($connection, 
-    "SELECT dados_login.id_usuario,dados_login.email,usuario.nome,usuario.telefone FROM dados_login 
+    $consulta_usuarios = pg_query($connection, "SELECT dados_login.id_usuario,dados_login.email,usuario.nome,usuario.telefone FROM dados_login 
     INNER JOIN usuario ON dados_login.id_usuario = usuario.id_usuario WHERE nome LIKE '$pesquisa_usuario%' AND ativo = true
-    ORDER BY nome
-    LIMIT $items_por_pagina OFFSET $offset") or die(preg_last_error());
+    ORDER BY nome") or die(preg_last_error());
     
-    $numero_total = pg_num_rows($consulta_usuarios);
+    $numero_total = pg_num_rows($consulta_usuarios) - 1;
     if($numero_total <= 0)
         $numero_total = 1;
     $numero_de_paginas = ceil($numero_total / $items_por_pagina);
+
+    $consulta_usuarios = pg_query($connection, "SELECT dados_login.id_usuario,dados_login.email,usuario.nome,usuario.telefone FROM dados_login 
+    INNER JOIN usuario ON dados_login.id_usuario = usuario.id_usuario WHERE nome LIKE '$pesquisa_usuario%' AND ativo = true
+    ORDER BY nome LIMIT $items_por_pagina OFFSET $offset") or die(preg_last_error());
 ?>
 <div class="container positioning">
     <div class="jumbotron campo_cadastro">

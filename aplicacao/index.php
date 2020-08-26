@@ -38,7 +38,7 @@ if(isset($_SESSION['nivel_acesso'])){
             case 'alterarSenha' : include 'view/alterarSenha.php'; break;
             default: include 'view/consultarOcorrencia.php'; break;
         }
-    }else{
+    }else if($_SESSION['nivel_acesso'] == 2){
         switch($pagina){
             case 'esqueceuSenha': include 'view/esqueceuSenha.php'; break;
             case 'cadastrarOcorrencia': include 'view/cadastrarOcorrencia.php'; break;
@@ -56,6 +56,26 @@ if(isset($_SESSION['nivel_acesso'])){
             case 'alterarSenha' : include 'view/alterarSenha.php'; break;
             default: include 'view/consultarOcorrencia.php'; break;
         }
+    }else if($_SESSION['nivel_acesso'] == 3){
+        switch($pagina){
+            case 'esqueceuSenha': include 'view/esqueceuSenha.php'; break;
+            case 'cadastrarOcorrencia': include 'view/cadastrarOcorrencia.php'; break;
+            case 'perfil': include 'view/perfil.php'; break;
+            case 'exibirOcorrencia': include 'view/exibirOcorrencia.php'; break;
+            case 'editarOcorrencia' : include 'view/editarOcorrencia.php'; break;
+            case 'cadastrarChamado' : include 'view/cadastrarChamado.php'; break;
+            case 'consultarChamado' : include 'view/consultarChamado.php'; break;
+            case 'exibirChamado' : include 'view/exibirChamado.php'; break;
+            case 'exibirPessoa' : include 'view/exibirPessoa.php'; break;
+            case 'cadastrarInterdicao' : include 'view/cadastrarInterdicao.php'; break;
+            case 'exibirInterdicao' : include 'view/exibirInterdicao.php'; break;
+            case 'visualizarSensores' : include 'view/visualizarSensores.php'; break;
+            case 'monitorarChamado' : include 'view/monitorarChamado.php'; break;
+            case 'alterarSenha' : include 'view/alterarSenha.php'; break;
+            default: include 'view/consultarOcorrencia.php'; break;
+        }
+    }else{
+        include 'view/monitorarChamado.php';
     }
 }else{
     switch($pagina){

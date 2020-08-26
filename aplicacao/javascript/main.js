@@ -18,10 +18,10 @@ $("#cep").focusout(function(){
         url: 'https://viacep.com.br/ws/'+$(this).val()+'/json/unicode/',
         dataType: 'json',
         success: function(resposta){
-            $("#logradouro").val(resposta.logradouro);
-            $("#complemento").val(resposta.complemento);
-            $("#bairro").val(resposta.bairro);
-            $("#cidade").val(resposta.localidade);
+            //$("#logradouro").val(resposta.logradouro);
+            //$("#complemento").val(resposta.complemento);
+            //$("#bairro").val(resposta.bairro);
+            //$("#cidade").val(resposta.localidade);
             //$("#uf").val(resposta.uf);
             //$("#numero").focus();
         }
@@ -36,6 +36,10 @@ $("#cpf").mask("000.000.000-00");
 $("#cpf_pessoa").mask("000.000.000-00");
 
 function verificaCpf(cpf){
+    if (cpf == ""){
+        $("#erroCpf").addClass("hide");
+        return;
+    }
     cpf = cpf.split(".").join("").replace('-','');
     var numeros, digitos, soma, i, resultado;
     var digitos_iguais = true;

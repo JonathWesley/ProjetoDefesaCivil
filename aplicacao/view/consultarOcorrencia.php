@@ -73,7 +73,7 @@
             <span>Filtrar por: </span>
             <select name="filtro" onchange="this.form.submit()" ng-model="sel_filtro" ng-init="sel_filtro='<?php if(isset($_POST['filtro'])){echo $_POST['filtro'];}else{echo 'cobrade.subgrupo';} ?>'">
                 <option value="cobrade.subgrupo">Cobrade</option>
-                <option value="pessoa.nome">Atendido</option>
+                <option value="pessoa.nome">Solicitante</option>
                 <option value="usuario.nome">Agente</option>
                 <option value="data_ocorrencia">Data</option>
             </select>
@@ -86,7 +86,7 @@
             <thead><tr>
                 <th><!--<span class="glyphicon glyphicon-fullscreen"></span>--></th>
                 <th onclick="sortTable(0)">Cobrade<span class="glyphicon glyphicon-sort sort-icon"></span></th>
-                <th onclick="sortTable(1)">Atendido<span class="glyphicon glyphicon-sort sort-icon"></span></th>
+                <th onclick="sortTable(1)">Solicitante<span class="glyphicon glyphicon-sort sort-icon"></span></th>
                 <th onclick="sortTable(2)" class="elimina-tabela">Agente<span class="glyphicon glyphicon-sort sort-icon elimina-tabela"></span></th>
                 <th onclick="sortTable(3)">Data<span class="glyphicon glyphicon-sort sort-icon"></span></th>
             </tr></thead>

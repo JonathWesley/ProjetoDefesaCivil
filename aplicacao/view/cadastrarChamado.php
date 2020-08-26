@@ -29,14 +29,14 @@
                 Origem: <span style="color:red;">*</span>
                 <input type="text" name="origem_chamado" class="form-control" required>
             </div>
-            <div>
+            <!--<div>
                 Agente principal: <span style="color:red;">*</span>
                 <input id="agente" name="agente" type="text" class="form-control" onkeyup="showResult(this.value,this.id)" required>
                 <div class="autocomplete" id="livesearchagente"></div>
-            </div>
-            <?php if(isset($_GET['agente'])){ ?>
-                <span class="alertErro">Agente não encontrado.</span>
-            <?php } ?>
+            </div>-->
+            <?php //if(isset($_GET['agente'])){ ?>
+                <!--<span class="alertErro">Agente não encontrado.</span>-->
+            <?php //} ?>
             <div class="row">
                 <div class="col-sm-10">
                     Pessoa atendida:
@@ -52,6 +52,10 @@
                     <br>
                     <button type="button" class="btn-default btn-small inline open-AddBookDialog" data-toggle="modal" data-id="pessoa_nome"><span class="glyphicon glyphicon-plus"></span></button>
                 </div>
+            </div>
+            <div>
+                Distribuição:
+                <input type="text" name="distribuicao" class="form-control">
             </div>
         <hr>
             <div>
@@ -82,12 +86,42 @@
             </div>
             <div ng-show="sel_endereco == 'Logradouro'">
                 <div class="row">
-                    <div class="col-sm-3">
+                    <div class="col-sm-4">
                         <span>CEP:</span>
                         <input id="cep" name="cep" type="text" class="form-control" ng-model="cep" maxlength="8" onchange="verificaCep(this.value)">
                         <span id="erroCep" class="alertErro hide">CEP inválido.</span>
                     </div>
-                    <div class="col-sm-9">
+                    <div class="col-sm-8">
+                        <span>Cidade: </span> <span style="color:red;">*</span>
+                        <!--<input id="cidade" name="cidade" type="text" class="form-control">-->
+                        <select id="cidade" name="cidade" class="form-control" required>
+                            <option value="Balneário Camboriú">Balneário Camboriú</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-4">
+                        <span>Bairro: <span style="color:red;">*</span></span>
+                        <!--<input id="bairro" name="bairro" type="text" class="form-control">-->
+                        <select id="bairro" name="bairro" class="form-control" required>
+                            <option value="Centro">Centro</option>
+                            <option value="Nações">Nações</option>
+                            <option value="Pioneiros">Pioneiros</option>
+                            <option value="Estados">Estados</option>
+                            <option value="Ariribá">Ariribá</option>
+                            <option value="Praia dos Amores">Praia dos Amores</option>
+                            <option value="Municípios">Municípios</option>
+                            <option value="Vila Real">Vila Real</option>
+                            <option value="Jardim Iate Clube">Jardim Iate Clube</option>
+                            <option value="Várzea do Ranchinho">Várzea do Ranchinho</option>
+                            <option value="Barra">Barra</option>
+                            <option value="Parque Bandeirantes">Parque Bandeirantes</option>
+                            <option value="Nova Esperança">Nova Esperança</option>
+                            <option value="São Judas Tadeu">São Judas Tadeu</option>
+                            <option value="Região das Praias">Região das Praias</option>
+                        </select>
+                    </div>
+                    <div class="col-sm-8">
                         <span>Logradouro: <span style="color:red;">*</span></span>
                         <input id="logradouro" name="logradouro" type="text" class="form-control">
                         <?php if(isset($_GET['logradouro'])){ ?>
@@ -101,16 +135,6 @@
                         <input id="complemento" name="complemento" type="text" class="form-control">
                     </div>
                     <div class="col-sm-8">
-                        <span>Bairro: <span style="color:red;">*</span></span>
-                        <input id="bairro" name="bairro" type="text" class="form-control">
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-sm-5">
-                        <span>Cidade: </span> <span style="color:red;">*</span>
-                        <input id="cidade" name="cidade" type="text" class="form-control">
-                    </div>
-                    <div class="col-sm-7">
                         <span>Referência: </span>
                         <input name="referencia" type="text" class="form-control">
                     </div>

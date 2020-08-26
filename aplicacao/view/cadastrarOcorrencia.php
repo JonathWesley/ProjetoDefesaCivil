@@ -56,13 +56,44 @@
             </div>
             <div ng-show="sel_endereco == 'Logradouro'">
                 <div class="row">
-                    <div class="col-sm-3">
-                        <span>CEP:</span> 
-                        <input id="cep" name="cep" type="text" class="form-control" ng-model="cep" ng-init="cep='<?php echo $_POST['cep']; ?>'" pattern="\d{5}-\d{3}" title="XXXXX-XXX">
+                    <div class="col-sm-4">
+                        <span>CEP:</span>
+                        <input id="cep" name="cep" type="text" class="form-control" ng-model="cep" maxlength="8" onchange="verificaCep(this.value)">
+                        <span id="erroCep" class="alertErro hide">CEP inválido.</span>
                     </div>
-                    <div class="col-sm-9">
+                    <div class="col-sm-8">
+                        <span>Cidade: </span> <span style="color:red;">*</span>
+                        <!--<input id="cidade" name="cidade" type="text" class="form-control">-->
+                        <select id="cidade" name="cidade" class="form-control" required>
+                            <option value="Balneário Camboriú">Balneário Camboriú</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-4">
+                        <span>Bairro: <span style="color:red;">*</span></span>
+                        <!--<input id="bairro" name="bairro" type="text" class="form-control">-->
+                        <select id="bairro" name="bairro" class="form-control" required>
+                            <option value="Centro">Centro</option>
+                            <option value="Nações">Nações</option>
+                            <option value="Pioneiros">Pioneiros</option>
+                            <option value="Estados">Estados</option>
+                            <option value="Ariribá">Ariribá</option>
+                            <option value="Praia dos Amores">Praia dos Amores</option>
+                            <option value="Municípios">Municípios</option>
+                            <option value="Vila Real">Vila Real</option>
+                            <option value="Jardim Iate Clube">Jardim Iate Clube</option>
+                            <option value="Várzea do Ranchinho">Várzea do Ranchinho</option>
+                            <option value="Barra">Barra</option>
+                            <option value="Parque Bandeirantes">Parque Bandeirantes</option>
+                            <option value="Nova Esperança">Nova Esperança</option>
+                            <option value="São Judas Tadeu">São Judas Tadeu</option>
+                            <option value="Região das Praias">Região das Praias</option>
+                        </select>
+                    </div>
+                    <div class="col-sm-8">
                         <span>Logradouro: <span style="color:red;">*</span></span>
-                        <input id="logradouro" name="logradouro" type="text" class="form-control" value="<?php echo $_POST['logradouro']; ?>">
+                        <input id="logradouro" name="logradouro" type="text" class="form-control">
                         <?php if(isset($_GET['logradouro'])){ ?>
                             <span class="alertErro">Erro ao cadastrar logradouro.</span>
                         <?php } ?>
@@ -71,21 +102,11 @@
                 <div class="row">
                     <div class="col-sm-4">
                         <span>Número: </span> <span style="color:red;">*</span>
-                        <input id="complemento" name="complemento" type="text" class="form-control" value="<?php echo $_POST['numero']; ?>">
+                        <input id="complemento" name="complemento" type="text" class="form-control">
                     </div>
                     <div class="col-sm-8">
-                        <span>Bairro: <span style="color:red;">*</span></span>
-                        <input id="bairro" name="bairro" type="text" class="form-control" value="<?php echo $_POST['bairro']; ?>">
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-sm-5">
-                        <span>Cidade: </span> <span style="color:red;">*</span> 
-                        <input id="cidade" name="cidade" type="text" class="form-control" value="<?php echo $_POST['cidade']; ?>">
-                    </div>
-                    <div class="col-sm-7">
                         <span>Referência: </span>
-                        <input name="referencia" type="text" class="form-control" value="<?php echo $_POST['referencia']; ?>">
+                        <input name="referencia" type="text" class="form-control">
                     </div>
                 </div>
             </div>
@@ -118,7 +139,7 @@
             <div>
                 <span>Data de ocorrência: <span style="color:red;">*</span></span>
                 <br>
-                <input id="data_ocorrencia" name="data_ocorrencia" type="date" class="form-control data" value="<?php echo $_POST['data_ocorrencia']; ?>" max="<?php echo date('Y-m-d'); ?>" required>
+                <input id="data_ocorrencia" name="data_ocorrencia" type="date" class="form-control data" value="<?php if($_POST['data_ocorrencia']==""){echo date('m-d-Y');}else{echo $_POST['data_ocorrencia'];} ?>" max="<?php echo date('Y-m-d'); ?>" required>
             </div>
             <div>
                 Título: <span style="color:red;">*</span>

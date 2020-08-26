@@ -35,10 +35,12 @@
             $color = '#fff050';
         }
 
-        $response = $response.'<tr style="background-color:'.$color.';height:100px;"><td>'.$linhaChamado['data_hora'].'</td>';
+        $response = $response.'<tr style="background-color:'.$color.';"><td>'.$linhaChamado['id_chamado'].'</td>';
+        $response = $response.'<td>'.$linhaChamado['data_hora'].'</td>';
         $response = $response.'<td>'.$linhaChamado['origem'].'</td>';
         $response = $response.'<td>'.$nomePessoa.'</td>';
         $response = $response.'<td>'.$linhaAgente['nome'].'</td>';
+        $response = $response.'<td>'.$linhaChamado['distribuicao'].'</td>';
         $response = $response.'<td>'.$linhaLogradouro['logradouro'].'</td>';
         $response = $response.'<td>'.$linhaChamado['descricao'].'</td></tr>';
     
