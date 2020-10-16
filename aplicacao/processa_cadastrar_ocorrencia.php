@@ -13,22 +13,21 @@ $bairro = addslashes($_POST['bairro']);
 $logradouro = addslashes($_POST['logradouro']);
 $numero = addslashes($_POST['complemento']);
 $referencia = addslashes($_POST['referencia']);
-$agente_principal = addslashes($_POST['agente_principal']);
+//$agente_principal = addslashes($_POST['agente_principal']);
 $agente_apoio_1 = addslashes($_POST['agente_apoio_1']);
 $agente_apoio_2 = addslashes($_POST['agente_apoio_2']);
 $data_ocorrencia = addslashes($_POST['data_ocorrencia']);
 $titulo = addslashes($_POST['titulo']);
 $descricao = addslashes($_POST['descricao']);
 $ocorr_origem = addslashes($_POST['ocorr_origem']);
-$pessoa_atendida_1 = addslashes($_POST['pessoa_atendida_1']);
-$pessoa_atendida_2 = addslashes($_POST['pessoa_atendida_2']);
+$nome_pessoa1 = addslashes($_POST['pessoa_atendida_1']);
+$nome_pessoa2 = addslashes($_POST['pessoa_atendida_2']);
 $cobrade_categoria = $_POST['cobrade_categoria'];
 $cobrade_grupo = $_POST['cobrade_grupo'];
 $cobrade_subgrupo = $_POST['cobrade_subgrupo'];
 $cobrade_tipo = $_POST['cobrade_tipo'];
 $cobrade_subtipo = $_POST['cobrade_subtipo'];
-$cobrade_descricao = addslashes($_POST['cobrade_descricao']);
-$possui_fotos = addslashes($_POST['possui_fotos']);
+
 $prioridade = addslashes($_POST['prioridade']);
 
 $base64_array = array();
@@ -45,6 +44,12 @@ foreach($_FILES["files"]["tmp_name"] as $key=>$tmp_name){
 }
 
 $pg_array = '{'.join(',',$base64_array).'}';
+
+if($pg_array == "{}"){
+	$possui_fotos = "false";
+}else{
+	$possui_fotos = "true";
+}
 
 $analisado = 'false';
 $congelado = 'false';
@@ -115,16 +120,16 @@ if($ocorr_retorno == "true"){ //caso seja retorno de ocorrencia, verifica se nao
 	$ocorr_referencia = 'null';
 
 //busca o agente informado no banco de dados
-$result = pg_query($connection, "SELECT * FROM usuario WHERE nome = '$agente_principal'");
-if($result){
-	if(pg_num_rows($result) == 0){ //agente nao encontrado
-		$erros = $erros.'&agente_principal';
-	}else{ //agente encontrado, seleciona o id do mesmo
-		$linha = pg_fetch_array($result, 0);
-		$agente_principal = $linha['id_usuario'];
-	}
-}else//retorna erro caso nao consiga acessar o banco de dados
-	$erros = $erros.'&agente_principal';
+//$result = pg_query($connection, "SELECT * FROM usuario WHERE nome = '$agente_principal'");
+//if($result){
+//	if(pg_num_rows($result) == 0){ //agente nao encontrado
+//		$erros = $erros.'&agente_principal';
+//	}else{ //agente encontrado, seleciona o id do mesmo
+//		$linha = pg_fetch_array($result, 0);
+//		$agente_principal = $linha['id_usuario'];
+//	}
+//}else//retorna erro caso nao consiga acessar o banco de dados
+//	$erros = $erros.'&agente_principal';
 
 if(strlen($agente_apoio_1) > 0 && $agente_apoio_1 != null){ //se o agente foi informado, busca o mesmo no BD
 	$result = pg_query($connection, "SELECT * FROM usuario WHERE nome = '$agente_apoio_1'");
@@ -154,32 +159,32 @@ if(strlen($agente_apoio_2) > 0 && $agente_apoio_2 != null){ //se o agente foi in
 }else //agente nao foi informado
 	$agente_apoio_2 = 'null';
 
-if(strlen($pessoa_atendida_1) > 0){ //se a pessoa foi informada, busca a mesma no BD 
-	$result = pg_query($connection, "SELECT * FROM pessoa WHERE nome = '$pessoa_atendida_1'");
-	if($result){
-		if(pg_num_rows($result) == 0){ //pessoa nao encontrada
-			$erros = $erros.'&pessoa_atendida_1';
-		}else{  //pessoa encontrada, seleciona o id da mesma
-			$linha = pg_fetch_array($result, 0);
-			$pessoa_atendida_1 = $linha['id_pessoa'];
-		}
-	}else //erro no acesso ao BD
-		$erros = $erros.'&pessoa_atendida_1';
-}else //pessoa nao foi informada
+//if(strlen($pessoa_atendida_1) > 0){ //se a pessoa foi informada, busca a mesma no BD 
+//	$result = pg_query($connection, "SELECT * FROM pessoa WHERE nome = '$pessoa_atendida_1'");
+//	if($result){
+//		if(pg_num_rows($result) == 0){ //pessoa nao encontrada
+//			$erros = $erros.'&pessoa_atendida_1';
+//		}else{  //pessoa encontrada, seleciona o id da mesma
+//			$linha = pg_fetch_array($result, 0);
+//			$pessoa_atendida_1 = $linha['id_pessoa'];
+//		}
+//	}else //erro no acesso ao BD
+//		$erros = $erros.'&pessoa_atendida_1';
+//}else //pessoa nao foi informada
 	$pessoa_atendida_1 = 'null';
 
-if(strlen($pessoa_atendida_2) > 0){ //se a pessoa foi informada, busca a mesma no BD
-	$result = pg_query($connection, "SELECT * FROM pessoa WHERE nome = '$pessoa_atendida_2'");
-	if($result){
-		if(pg_num_rows($result) == 0){ //pessoa nao encontrada
-			$erros = $erros.'&pessoa_atendida_2';
-		}else{  //pessoa encontrada, seleciona o id da mesma
-			$linha = pg_fetch_array($result, 0);
-			$pessoa_atendida_2 = $linha['id_pessoa'];
-		}
-	}else //erro no acesso ao BD
-		$erros = $erros.'&pessoa_atendida_2';
-}else //pessoa nao foi informada
+//if(strlen($pessoa_atendida_2) > 0){ //se a pessoa foi informada, busca a mesma no BD
+//	$result = pg_query($connection, "SELECT * FROM pessoa WHERE nome = '$pessoa_atendida_2'");
+//	if($result){
+//		if(pg_num_rows($result) == 0){ //pessoa nao encontrada
+//			$erros = $erros.'&pessoa_atendida_2';
+//		}else{  //pessoa encontrada, seleciona o id da mesma
+//			$linha = pg_fetch_array($result, 0);
+//			$pessoa_atendida_2 = $linha['id_pessoa'];
+//		}
+//	}else //erro no acesso ao BD
+//		$erros = $erros.'&pessoa_atendida_2';
+//}else //pessoa nao foi informada
 	$pessoa_atendida_2 = 'null';
 
 if(strlen($chamado_id)==0)
@@ -195,14 +200,14 @@ if(strlen($erros) > 0){
 			(chamado_id,ocorr_endereco_principal,ocorr_coordenada_latitude,ocorr_coordenada_longitude,
 			ocorr_logradouro_id,agente_principal,agente_apoio_1,agente_apoio_2,
 			data_ocorrencia,ocorr_titulo,ocorr_descricao,ocorr_origem,atendido_1,atendido_2,ocorr_cobrade,
-			cobrade_descricao,ocorr_fotos,ocorr_prioridade,ocorr_analisado,ocorr_congelado,ocorr_encerrado,
-			usuario_criador,data_alteracao,ocorr_referencia, fotos)
+			ocorr_fotos,ocorr_prioridade,ocorr_analisado,ocorr_congelado,ocorr_encerrado,
+			usuario_criador,data_alteracao,ocorr_referencia, fotos, nome_pessoa1, nome_pessoa2)
 			VALUES
-			($chamado_id,'$endereco_principal',$latitude,$longitude,$logradouro_id,$agente_principal,
+			($chamado_id,'$endereco_principal',$latitude,$longitude,$logradouro_id,$id_criador,
 			$agente_apoio_1,$agente_apoio_2,
 			'$data_ocorrencia','$titulo','$descricao','$ocorr_origem',$pessoa_atendida_1,$pessoa_atendida_2,
-			'$cobrade','$cobrade_descricao',$possui_fotos,'$prioridade',$analisado,$congelado,$encerrado,
-			$id_criador,'$dataAtual',null, '$pg_array')";
+			'$cobrade',$possui_fotos,'$prioridade',$analisado,$congelado,$encerrado,
+			$id_criador,'$dataAtual',null, '$pg_array', '$nome_pessoa1', '$nome_pessoa2')";
 
 	$result = pg_query($connection, $query);
 	if(!$result){
@@ -213,8 +218,8 @@ if(strlen($erros) > 0){
 			$query = "UPDATE chamado SET usado = TRUE WHERE id_chamado = $chamado_id";
 			$result = pg_query($connection, $query);
 			if(!$result){
-				echo pg_last_error();
-				//header('location:index.php?pagina=cadastrarOcorrencia&erroDB');
+				//echo pg_last_error();
+				header('location:index.php?pagina=cadastrarOcorrencia&erroDB');
 			}else{
 				header('location:index.php?pagina=cadastrarOcorrencia&sucesso');
 			}

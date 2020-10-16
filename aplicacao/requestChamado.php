@@ -1,7 +1,7 @@
 <?php
     include 'database.php';
 
-    $query = "SELECT * FROM chamado WHERE usado = FALSE LIMIT 5";
+    $query = "SELECT * FROM chamado WHERE usado = FALSE ORDER BY chamado.data_hora DESC LIMIT 5";
     $consultaChamado = pg_query($connection, $query) or die(pg_last_error());
 
     $response = "";

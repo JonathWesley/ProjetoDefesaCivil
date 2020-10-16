@@ -12,11 +12,10 @@
     if(isset($_POST['pesquisa_ocorrencia']) && $pesquisa_ocorrencia != null){
         $query = "SELECT ocorrencia.id_ocorrencia,ocorrencia.ocorr_prioridade, 
         TO_CHAR(ocorrencia.data_ocorrencia, 'DD/MM/YYYY') as data_ocorrencia,
-        usuario.nome, cobrade.subgrupo, pessoa.nome as nome_pessoa
+        usuario.nome, cobrade.subgrupo, ocorrencia.nome_pessoa1 
         FROM ocorrencia 
         INNER JOIN usuario ON ocorrencia.agente_principal = usuario.id_usuario
-        INNER JOIN cobrade ON ocorrencia.ocorr_cobrade = cobrade.codigo
-        LEFT JOIN pessoa ON ocorrencia.atendido_1 = pessoa.id_pessoa";
+        INNER JOIN cobrade ON ocorrencia.ocorr_cobrade = cobrade.codigo";
         
         if($pesquisa_filtro == 'data_ocorrencia'){
             $query = $query." WHERE TO_CHAR(ocorrencia.data_ocorrencia, 'DD/MM/YYYY') >= '$pesquisa_ocorrencia'";
@@ -38,11 +37,10 @@
 
     }else{
         $query = "SELECT ocorrencia.id_ocorrencia,ocorrencia.ocorr_prioridade, TO_CHAR(ocorrencia.data_ocorrencia, 'DD/MM/YYYY') as data_ocorrencia,
-        usuario.nome,cobrade.subgrupo, pessoa.nome as nome_pessoa
+        usuario.nome,cobrade.subgrupo, ocorrencia.nome_pessoa1 
         FROM ocorrencia 
         INNER JOIN usuario ON ocorrencia.agente_principal = usuario.id_usuario 
-        INNER JOIN cobrade ON ocorrencia.ocorr_cobrade = cobrade.codigo
-        LEFT JOIN pessoa ON ocorrencia.atendido_1 = pessoa.id_pessoa 
+        INNER JOIN cobrade ON ocorrencia.ocorr_cobrade = cobrade.codigo 
         WHERE ocorrencia.ativo = TRUE";
 
         if($_POST['encerrada'] != true)
@@ -67,13 +65,14 @@
 ?>
 <div class="container positioning">
 <div class="jumbotron campo_cadastro">
+<h3 class="text-center">Consulta de ocorrências</h3>
     <div class="box">
         <form class="input-group" method="post" action="index.php?pagina=consultarOcorrencia&n=0">
             <input type="text" class="form-control" name="pesquisa_ocorrencia" placeholder="Pesquisa" value="<?php echo $_POST['pesquisa_ocorrencia']; ?>">
             <span>Filtrar por: </span>
             <select name="filtro" onchange="this.form.submit()" ng-model="sel_filtro" ng-init="sel_filtro='<?php if(isset($_POST['filtro'])){echo $_POST['filtro'];}else{echo 'cobrade.subgrupo';} ?>'">
                 <option value="cobrade.subgrupo">Cobrade</option>
-                <option value="pessoa.nome">Solicitante</option>
+                <option value="nome_pessoa1">Solicitante</option>
                 <option value="usuario.nome">Agente</option>
                 <option value="data_ocorrencia">Data</option>
             </select>
@@ -85,10 +84,11 @@
         <table id="tabela" class="table table-striped table-bordered" style="width:100%">
             <thead><tr>
                 <th><!--<span class="glyphicon glyphicon-fullscreen"></span>--></th>
-                <th onclick="sortTable(0)">Cobrade<span class="glyphicon glyphicon-sort sort-icon"></span></th>
-                <th onclick="sortTable(1)">Solicitante<span class="glyphicon glyphicon-sort sort-icon"></span></th>
-                <th onclick="sortTable(2)" class="elimina-tabela">Agente<span class="glyphicon glyphicon-sort sort-icon elimina-tabela"></span></th>
-                <th onclick="sortTable(3)">Data<span class="glyphicon glyphicon-sort sort-icon"></span></th>
+                <th onclick="sortTable(0)">ID<span class="glyphicon glyphicon-sort sort-icon"></span></th>
+                <th onclick="sortTable(1)">Cobrade<span class="glyphicon glyphicon-sort sort-icon"></span></th>
+                <th onclick="sortTable(2)">Solicitante<span class="glyphicon glyphicon-sort sort-icon"></span></th>
+                <th onclick="sortTable(3)" class="elimina-tabela">Agente<span class="glyphicon glyphicon-sort sort-icon elimina-tabela"></span></th>
+                <th onclick="sortTable(4)">Data<span class="glyphicon glyphicon-sort sort-icon"></span></th>
             </tr></thead>
             <tbody>
             <?php
@@ -104,8 +104,9 @@
                     else
                         echo '#88ff50;">';
                     echo '<td class="text-center"><a href="index.php?pagina=exibirOcorrencia&id='.$linha['id_ocorrencia'].'"><span class="glyphicon glyphicon-eye-open"></span></a></td>';
+                    echo '<td>'.$linha['id_ocorrencia'].'</td>';
                     echo '<td>'.$linha['subgrupo'].'</td>';
-                    echo '<td>'.$linha['nome_pessoa'].'</td>';
+                    echo '<td>'.$linha['nome_pessoa1'].'</td>';
                     echo '<td class="elimina-tabela">'.$linha['nome'].'</td>';
                     echo '<td>'.$linha['data_ocorrencia'].'</td></tr>';
                     $i += 1;

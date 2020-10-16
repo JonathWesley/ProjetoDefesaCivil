@@ -11,10 +11,9 @@
 
     if(isset($_POST['pesquisa_chamado']) && $pesquisa_chamado != null){
         $query = "SELECT chamado.id_chamado,TO_CHAR(chamado.data_hora, 'DD/MM/YYYY') as dataa,
-                        chamado.origem,pessoa.nome,chamado.descricao, chamado.prioridade, 
-                        chamado.usado, usuario.nome as usuario
+                        chamado.origem,chamado.descricao, chamado.prioridade, chamado.nome_pessoa, 
+                        chamado.usado, chamado.distribuicao, usuario.nome as usuario
                         FROM chamado 
-                        LEFT JOIN pessoa ON (chamado.pessoa_id = pessoa.id_pessoa) 
                         INNER JOIN usuario ON (chamado.agente_id = usuario.id_usuario)";
         
         if($pesquisa_filtro == 'data')
@@ -31,19 +30,28 @@
         $consulta_chamados = pg_query($connection, $query." LIMIT $items_por_pagina OFFSET $offset") or die(preg_last_error());
     }else{
         $query = "SELECT chamado.id_chamado,TO_CHAR(chamado.data_hora, 'DD/MM/YYYY') as dataa,
-        chamado.origem,pessoa.nome,chamado.descricao, chamado.prioridade, 
-        chamado.usado, usuario.nome as usuario
+        chamado.origem,chamado.descricao, chamado.prioridade, chamado.nome_pessoa, 
+        chamado.usado, chamado.cancelado, usuario.nome as usuario, chamado.distribuicao
         FROM chamado 
-        LEFT JOIN pessoa ON (chamado.pessoa_id = pessoa.id_pessoa) 
         INNER JOIN usuario ON (chamado.agente_id = usuario.id_usuario)";
         
-        if($_POST['finalizado'] != true)
-            $query = $query." WHERE chamado.usado = false";
+        if($_POST['finalizado'] == true){
+            if($_POST['cancelado'] == true)
+                $query = $query." WHERE chamado.usado = true";
+            else
+                $query = $query." WHERE chamado.usado = true AND chamado.cancelado = false";
+        }else{
+            if($_POST['cancelado'] == true)
+                $query = $query." WHERE chamado.usado = true AND chamado.cancelado = true";
+            else
+                $query = $query." WHERE chamado.usado = false";
+        }
+            
 
         $consulta_chamados = pg_query($connection, $query) or die(preg_last_error());
         $numero_total = pg_num_rows($consulta_chamados);
 
-        $query = $query." ORDER BY chamado.data_hora
+        $query = $query." ORDER BY chamado.data_hora DESC
         LIMIT $items_por_pagina OFFSET $offset";
 
         $consulta_chamados = pg_query($connection, $query) or die(preg_last_error());
@@ -57,6 +65,7 @@
 
 <div class="container positioning">
 <div class="jumbotron campo_cadastro">
+<h3 class="text-center">Consulta de chamados</h3>
 <?php echo pg_last_error(); ?>
     <div class="box">
         <form class="input-group" method="post" action="index.php?pagina=consultarChamado&n=0">
@@ -66,22 +75,27 @@
                 <option value="data">Data</option>
                 <option value="chamado.origem">Origem</option>
                 <option value="usuario.nome">Agente</option>
-                <option value="pessoa.nome">Atendido</option>
-                <option value="chamado.descricao">Descricao</option>
+                <option value="chamado.distribuicao">Distribuição</option>
+                <option value="chamado.nome_pessoa">Atendido</option>
+                <option value="chamado.descricao">Descrição</option>
             </select>
-            <span class="ocorrencias_encerradas">Mostrar chamados finalizados: </span>
+            <span class="ocorrencias_encerradas">Encerrados: </span>
             <input name="finalizado" onchange="this.form.submit()" value="true" type="checkbox" <?php if($_POST['finalizado']==true)echo 'checked'; ?>>
+            <span class="ocorrencias_encerradas">Cancelados: </span>
+            <input name="cancelado" onchange="this.form.submit()" value="true" type="checkbox" <?php if($_POST['cancelado']==true)echo 'checked'; ?>>
         </form>
     </div>
     <div class="box">
         <table id="tabela" class="table table-striped table-bordered" style="width:100%">
             <thead><tr>
                 <th><!--<span class="glyphicon glyphicon-fullscreen"></span>--></th>
-                <th onclick="sortTable(0)">Data<span class="glyphicon glyphicon-sort sort-icon"></span></th>
-                <th onclick="sortTable(1)">Origem<span class="glyphicon glyphicon-sort sort-icon"></span></th>
-                <th onclick="sortTable(2)">Agente<span class="glyphicon glyphicon-sort sort-icon"></span></th>
-                <th onclick="sortTable(3)">Solicitante<span class="glyphicon glyphicon-sort sort-icon"></span></th>
-                <th onclick="sortTable(4)" class="elimina-tabela">Descricao<span class="glyphicon glyphicon-sort sort-icon elimina-tabela"></span></th>
+                <th onclick="sortTable(0)">ID<span class="glyphicon glyphicon-sort sort-icon"></span></th>
+                <th onclick="sortTable(1)">Data<span class="glyphicon glyphicon-sort sort-icon"></span></th>
+                <th onclick="sortTable(2)">Origem<span class="glyphicon glyphicon-sort sort-icon"></span></th>
+                <th onclick="sortTable(3)">Agente<span class="glyphicon glyphicon-sort sort-icon"></span></th>
+                <th onclick="sortTable(4)">Distribuição<span class="glyphicon glyphicon-sort sort-icon"></span></th>
+                <th onclick="sortTable(5)">Solicitante<span class="glyphicon glyphicon-sort sort-icon"></span></th>
+                <th onclick="sortTable(6)" class="elimina-tabela">Descrição<span class="glyphicon glyphicon-sort sort-icon elimina-tabela"></span></th>
             </tr></thead>
             <tbody>
             <?php
@@ -89,10 +103,18 @@
                 if(pg_fetch_array($consulta_chamados, $i) == 0)
                     echo '<tr><td colspan="5" class="text-center">Nenhum chamado encontrado</td></tr>';
                 while($linha = pg_fetch_array($consulta_chamados, $i)){
+                    $id_agente = $linha['distribuicao'];
+                    $query = "SELECT nome FROM usuario WHERE id_usuario = $id_agente";
+                    $result = pg_query($connection, $query);
+                    $linhaDistribuicao = pg_fetch_array($result, 0);
+
                     echo '<tr style="background-color:';
-                    if($linha['usado'] == "t")
-                        echo '#ccc;">';
-                    else{
+                    if($linha['usado'] == "t"){
+                        if($linha['cancelado'] == "t")
+                            echo '#FFA07A;">';
+                        else
+                            echo '#8FBC8F;">';
+                    }else{
                         if($linha['prioridade'] == "Alta")
                             echo '#ff5050;">';
                         else if($linha['prioridade'] == "Média")
@@ -101,10 +123,12 @@
                             echo '#88ff50;">';
                     }
                     echo '<td class="text-center"><a href="index.php?pagina=exibirChamado&id='.$linha['id_chamado'].'"><span class="glyphicon glyphicon-eye-open"></span></a></td>';
+                    echo '<td>'.$linha['id_chamado'].'</td>';
                     echo '<td>'.$linha['dataa'].'</td>';
                     echo '<td>'.$linha['origem'].'</td>';
                     echo '<td>'.$linha['usuario'].'</td>';
-                    echo '<td>'.$linha['nome'].'</td>';
+                    echo '<td>'.$linhaDistribuicao['nome'].'</td>';
+                    echo '<td>'.$linha['nome_pessoa'].'</td>';
                     echo '<td class="elimina-tabela">'.$linha['descricao'].'</td></tr>';
                     $i += 1;
                 }

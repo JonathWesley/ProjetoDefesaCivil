@@ -115,6 +115,13 @@ function verificaConfirmaSenha(confirmaSenha){
     }
 }
 
+function validarFormCadastroChamado(){
+    if($("#livesearchagente").html() == "Usuário não encontrado." || $("#livesearchpessoa_nome").html() == "Pessoa não encontrada."){
+        alert("Existe campo(s) infomado(s) incorretamente.");
+        return false;
+    }
+}
+
 function validarFormCadastroUsuario(){
     if(!$("#erroCpf").hasClass("hide") || !$("#erroTelefone").hasClass("hide")
        || !$("#erroSenha").hasClass("hide") || !$("#erroConfirmaSenha").hasClass("hide")){
@@ -234,6 +241,8 @@ $(document).on("click", ".open-AddBookDialog", function () {
         }else{
             $('#map').modal('show');
         }
+    }else if(element_id == 'motivo'){
+        $('#cancelarModal').modal('show');
     }else{
         $(".modal-body #id_pessoa").val( element_id );
         $('#pessoasModal').modal('show');

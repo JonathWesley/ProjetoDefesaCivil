@@ -36,18 +36,18 @@
         $result = pg_query($connection, $query) or die(pg_last_error());
         $linhaAgente2 = pg_fetch_array($result, 0);
     }
-    if($linhaOcorrencia['atendido_1']){
-        $id_pessoa = $linhaOcorrencia['atendido_1'];
-        $query = "SELECT nome FROM pessoa WHERE id_pessoa = $id_pessoa";
-        $result = pg_query($connection, $query) or die(pg_last_error());
-        $linhaPessoa1 = pg_fetch_array($result, 0);
-    }
-    if($linhaOcorrencia['atendido_2']){
-        $id_pessoa = $linhaOcorrencia['atendido_2'];
-        $query = "SELECT nome FROM pessoa WHERE id_pessoa = $id_pessoa";
-        $result = pg_query($connection, $query) or die(pg_last_error());
-        $linhaPessoa2 = pg_fetch_array($result, 0);
-    }
+    //if($linhaOcorrencia['atendido_1']){
+    //    $id_pessoa = $linhaOcorrencia['atendido_1'];
+    //    $query = "SELECT nome FROM pessoa WHERE id_pessoa = $id_pessoa";
+    //    $result = pg_query($connection, $query) or die(pg_last_error());
+    //    $linhaPessoa1 = pg_fetch_array($result, 0);
+    //}
+    //if($linhaOcorrencia['atendido_2']){
+    //    $id_pessoa = $linhaOcorrencia['atendido_2'];
+    //    $query = "SELECT nome FROM pessoa WHERE id_pessoa = $id_pessoa";
+    //    $result = pg_query($connection, $query) or die(pg_last_error());
+    //    $linhaPessoa2 = pg_fetch_array($result, 0);
+    //}
 
     $cobrade = $linhaOcorrencia['ocorr_cobrade'];
     $query = "SELECT * FROM cobrade WHERE codigo = '$cobrade'";
@@ -83,7 +83,7 @@
             <div class="col-sm-6">
                 <nav class="texto-cabecalho">Estado de Santa Catarina</nav>
                 <nav class="texto-cabecalho">Prefeitura de Balneário Camboriú</nav>
-                <nav class="texto-cabecalho">Secretaria de segunrança</nav>
+                <nav class="texto-cabecalho">Secretaria de segurança</nav>
                 <nav class="texto-cabecalho">Defesa Civil</nav>
             </div>
             <div class="col-sm-6">
@@ -132,20 +132,7 @@
     <div class="box">
         <h4>Ocorrencia</h4>
         <hr>
-        <div class="row">
-            <div class="col-sm-6">
-                <span class="titulo">Data de lançamento: </span>
-                <span id="data_lancamento">
-                    <?php echo date("d/m/Y", strtotime($linhaOcorrencia['data_lancamento'])); ?>
-                </span>
-            </div>
-            <div class="col-sm-6">
-                <span class="titulo">Data de ocorrência: </span>
-                <span id="data_ocorrencia">
-                    <?php echo date("d/m/Y", strtotime($linhaOcorrencia['data_ocorrencia'])); ?>
-                </span>
-            </div>
-        </div>
+        <span class="titulo">Data de ocorrência: </span><span id="data_ocorrencia"><?php echo date("d/m/Y", strtotime($linhaOcorrencia['data_ocorrencia'])); ?></span><br>
         <span class="titulo">Titulo: </span><span id="ocorr_titulo"><?php echo $linhaOcorrencia['ocorr_titulo']; ?></span><br>
         <span class="titulo">Origem: </span><span id="ocorr_origem"><?php echo $linhaOcorrencia['ocorr_origem']; ?></span><br>
         <span class="titulo">Descrição: </span><br>
@@ -158,9 +145,11 @@
         <?php if(!$linhaOcorrencia['atendido_1'] && !$linhaOcorrencia['atendido_2']){ ?>
             <span class=titulo>Nenhuma pessoa foi cadastrada</span><br>
         <?php }else{ ?>
-            <span class="titulo">Pessoa atendida 1: </span><a id="atendido_1" href="?pagina=exibirPessoa&id=<?php echo $linhaOcorrencia['atendido_1']; ?>"><?php echo $linhaPessoa1['nome']; ?></a><br>
-            <?php if($linhaOcorrencia['atendido_2']){ ?>
-                <span class="titulo">Pessoa atendida 2: </span><a id="atendido_2" href="?pagina=exibirPessoa&id=<?php echo $linhaOcorrencia['atendido_2']; ?>"><?php echo $linhaPessoa2['nome']; ?></a><br>
+            <span class="titulo">Solicitante 1: </span><span><?php echo $linhaOcorrencia['nome_pessoa1']; ?></span>
+            <!--<a id="atendido_1" href="?pagina=exibirPessoa&id=<?php //echo $linhaOcorrencia['atendido_1']; ?>"><?php //echo $linhaPessoa1['nome']; ?></a><br>-->
+            <?php if($linhaOcorrencia['nome_pessoa2'] != ""){ ?>
+                <span class="titulo">Solicitante 2: </span><span><?php echo $linhaOcorrencia['nome_pessoa2']; ?></span>
+                <!--<a id="atendido_2" href="?pagina=exibirPessoa&id=<?php //echo $linhaOcorrencia['atendido_2']; ?>"><?php //echo $linhaPessoa2['nome']; ?></a><br>-->
             <?php } 
         }?>
         <br>
@@ -169,9 +158,6 @@
         <h4>Tipo</h4>
         <hr>
         <span class="titulo">Cobrade: </span><span id="ocorr_cobrade"><?php echo $linhaCobrade['subgrupo']; ?></span><br>
-        <?php if($linhaCobrade['codigo']=='00000'){ ?>
-            <span class="titulo">Cobrade descrição: </span><span id="cobrade_descricao"><?php echo $linhaOcorrencia['cobrade_descricao']; ?></span>
-        <?php } ?>
         <span class="titulo">Possui fotos: </span><span id="fotos"><?php echo ($linhaOcorrencia['ocorr_fotos'] == t) ? 'Sim':'Não'; ?></span>
     </div>
     <div class="box">

@@ -26,7 +26,7 @@
                 <div class="col-sm-6">
                     <nav class="texto-cabecalho">Estado de Santa Catarina</nav>
                     <nav class="texto-cabecalho">Prefeitura de Balneário Camboriú</nav>
-                    <nav class="texto-cabecalho">Secretaria de segunrança</nav>
+                    <nav class="texto-cabecalho">Secretaria de segurança</nav>
                     <nav class="texto-cabecalho">Defesa Civil</nav>
                 </div>
                 <div class="col-sm-6">

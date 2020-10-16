@@ -1,3 +1,18 @@
+<?php
+    include 'database.php';
+
+    session_start();
+    $id = $_SESSION['id_usuario'];
+            
+    $query = "SELECT nome FROM usuario WHERE id_usuario = $id";
+    $consulta_login = pg_query($connection, $query) or die(pg_last_error());
+
+    $usuario_principal = pg_fetch_array($consulta_login, 0);
+
+    $query = "SELECT id_usuario, nome FROM usuario";
+    $consulta_usuarios = pg_query($connection, $query) or die(pg_last_error());
+?>
+
 <div class="container positioning">
 <div class="jumbotron campo_cadastro">
     <form method="post" action="processa_cadastrar_chamado.php" onsubmit="return validarFormCadastroChamado()">
@@ -16,7 +31,7 @@
                 <div class="col-sm-6">
                     <nav class="texto-cabecalho">Estado de Santa Catarina</nav>
                     <nav class="texto-cabecalho">Prefeitura de Balneário Camboriú</nav>
-                    <nav class="texto-cabecalho">Secretaria de segunrança</nav>
+                    <nav class="texto-cabecalho">Secretaria de segurança</nav>
                     <nav class="texto-cabecalho">Defesa Civil</nav>
                 </div>
                 <div class="col-sm-6">
@@ -25,6 +40,10 @@
             </div>
             <h3 class="text-center">Registro de chamado</h3>
         <hr>
+            <div>
+                <span style="font-weight: bold;">Agente Principal: </span><?php echo $usuario_principal['nome']; ?>
+                <br>
+            </div>
             <div>
                 Origem: <span style="color:red;">*</span>
                 <input type="text" name="origem_chamado" class="form-control" required>
@@ -38,26 +57,38 @@
                 <!--<span class="alertErro">Agente não encontrado.</span>-->
             <?php //} ?>
             <div class="row">
-                <div class="col-sm-10">
-                    Pessoa atendida:
-                    <input type="text" id="pessoa_nome" name="nome_chamado" class="form-control inline" onkeyup="showResult(this.value,this.id)">
+                <div class="col-sm-12">
+                    Solicitante:
+                    <input type="text" id="pessoa_nome" name="nome_chamado" class="form-control inline"><!-- onkeyup="showResult(this.value,this.id)">
                     <div class="autocomplete" id="livesearchpessoa_nome"></div>
                     <div id="resultpessoa_nome"></div>
 
-                    <?php if(isset($_GET['nome'])){ ?>
+                    <?php //if(isset($_GET['nome'])){ ?>
                         <span class="alertErro">Pessoa não encontrada, por favor faça um novo cadastro.</span>
-                    <?php } ?>
+                    <?php //} ?> -->
                 </div>
-                <div class="col-sm-2">
+                <!--<div class="col-sm-2">
                     <br>
                     <button type="button" class="btn-default btn-small inline open-AddBookDialog" data-toggle="modal" data-id="pessoa_nome"><span class="glyphicon glyphicon-plus"></span></button>
-                </div>
+                </div>-->
             </div>
             <div>
-                Distribuição:
-                <input type="text" name="distribuicao" class="form-control">
-            </div>
-        <hr>
+                Distribuir para:
+                <select id="distribuicao" name="distribuicao" class="form-control" style="width: 50%" required>
+                    <?php
+                        session_start();
+                        $i = 0;
+                        if(pg_fetch_array($consulta_usuarios, $i) == 1)
+                            echo '<tr><td colspan="5" class="text-center">Nenhum usuário encontrado</td></tr>';
+                        while($linha = pg_fetch_array($consulta_usuarios, $i)){
+                            if(strcmp($linha['id_usuario'],$_SESSION['id_usuario']) != 0){
+                                echo '<option value='.$linha['id_usuario'].'>'.$linha['nome'].'</option>'; 
+                            }
+                            $i += 1;
+                        }
+                    ?>
+                </select>
+            <hr>
             <div>
                 Endereço principal: <span style="color:red;">*</span>
                 <br>
@@ -143,7 +174,7 @@
         <hr>
             <div>
                 Descrição: <span style="color:red;">*</span>
-                <textarea id="descricao" name="descricao" class="form-control" cols="30" rows="10" maxlength="750" ng-model="descricaoVal" required></textarea>
+                <textarea id="descricao" name="descricao" class="form-control" cols="30" rows="3" maxlength="750" ng-model="descricaoVal" required></textarea>
                 <span class="char-count">{{descricaoVal.length || 0}}/750</span>
             </div>
         <hr>
